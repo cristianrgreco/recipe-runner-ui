@@ -131,8 +131,6 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
         }
     ];
 
-    const speakCompletedStep = description => speechSynthesis.speak(new SpeechSynthesisUtterance(`${description}`));
-
     return (
         <div>
             <div>
@@ -144,7 +142,6 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
                        setTimeout(() => {
                            setSteps(nextSteps(step));
                            setCompletedSteps(completedSteps => [...completedSteps, step]);
-                           speakCompletedStep(step.alarm.description);
                        }, step.alarm.duration);
                    }}>
                     <i className="material-icons left">timer</i>Start timer
