@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Switch, Route, useParams} from "react-router-dom";
 import {RECIPES} from "./data";
 import RecipePreview from "./RecipePreview";
@@ -10,7 +10,7 @@ export default function Recipe() {
     const recipe = RECIPES.find(aRecipe => aRecipe.id === recipeId);
 
     return (
-        <div>
+        <Fragment>
             <h1 className="header">{recipe.name}</h1>
             <Switch>
                 <Route path="/recipes/:recipeId/start">
@@ -20,6 +20,6 @@ export default function Recipe() {
                     <RecipePreview recipe={recipe}/>
                 </Route>
             </Switch>
-        </div>
+        </Fragment>
     );
 }

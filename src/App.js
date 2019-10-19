@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from "./Nav";
 import Home from "./Home";
+import CreateRecipe from "./CreateRecipe";
 import Recipes from "./Recipes";
 import Recipe from "./Recipe";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -14,6 +15,9 @@ export default function App() {
                     <Home/>
                 </Route>
                 <Switch>
+                    <Route path="/create-recipe">
+                        <CreateRecipe/>
+                    </Route>
                     <Route path="/recipes/:recipeId">
                         <Recipe/>
                     </Route>

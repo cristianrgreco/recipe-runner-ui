@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -20,7 +20,7 @@ export default function RecipeRunner({recipe}) {
     const getTimerForStep = step => timers.find(timer => timer.name === step.instruction);
 
     return (
-        <div>
+        <Fragment>
             <h3 className="header">Method</h3>
             {steps.length > 0 && (
                 <ul className="collection">
@@ -56,24 +56,24 @@ export default function RecipeRunner({recipe}) {
                     ))}
                 </ul>)
             }
-        </div>
+        </Fragment>
     );
 }
 
 function NoAlarmAndCompleted({step}) {
     return (
-        <div>
+        <Fragment>
             <span className="badge green white-text lighten-2">DONE</span>
             <div className="grey-text" style={{textDecoration: "line-through"}}>
                 {step.instruction}
             </div>
-        </div>
+        </Fragment>
     );
 }
 
 function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
     return (
-        <div>
+        <Fragment>
             <div>{step.instruction}</div>
             <p className="caption"/>
             <a className="waves-effect waves-light red lighten-2 btn"
@@ -83,7 +83,7 @@ function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
                }}>
                 <i className="material-icons left">check</i>Done
             </a>
-        </div>
+        </Fragment>
     );
 }
 
@@ -104,22 +104,22 @@ function AlarmAndInProgress({step, timer}) {
     };
 
     return (
-        <div>
+        <Fragment>
             {timer.duration === 0
                 ? (
-                    <div>
+                    <Fragment>
                         <span className="badge green white-text lighten-2">DONE</span>
                         <div className="grey-text" style={{textDecoration: "line-through"}}>
                             {step.instruction}
                         </div>
-                    </div>
+                    </Fragment>
                 ) : (
-                    <div>
+                    <Fragment>
                         <span className="badge orange white-text lighten-2">{formatTime(timer.duration)}</span>
                         <div>{step.instruction}</div>
-                    </div>
+                    </Fragment>
                 )}
-        </div>
+        </Fragment>
     );
 }
 
@@ -132,21 +132,19 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
     ];
 
     return (
-        <div>
-            <div>
-                <div>{step.instruction}</div>
-                <p className="caption"/>
-                <a className="waves-effect waves-light red lighten-2 btn"
-                   onClick={() => {
-                       setTimers(addTimer(timers, step));
-                       setTimeout(() => {
-                           setSteps(nextSteps(step));
-                           setCompletedSteps(completedSteps => [...completedSteps, step]);
-                       }, step.alarm.duration);
-                   }}>
-                    <i className="material-icons left">timer</i>Start timer
-                </a>
-            </div>
-        </div>
+        <Fragment>
+            <div>{step.instruction}</div>
+            <p className="caption"/>
+            <a className="waves-effect waves-light red lighten-2 btn"
+               onClick={() => {
+                   setTimers(addTimer(timers, step));
+                   setTimeout(() => {
+                       setSteps(nextSteps(step));
+                       setCompletedSteps(completedSteps => [...completedSteps, step]);
+                   }, step.alarm.duration);
+               }}>
+                <i className="material-icons left">timer</i>Start timer
+            </a>
+        </Fragment>
     );
 }

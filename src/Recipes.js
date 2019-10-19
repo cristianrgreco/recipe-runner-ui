@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {RECIPES} from "./data";
 
@@ -12,7 +12,7 @@ export default function Recipes() {
     });
 
     return (
-        <div>
+        <Fragment>
             <h1 className="header">Recipe List</h1>
             <p className="caption">
                 Select a recipe from the list below.
@@ -24,7 +24,7 @@ export default function Recipes() {
                             <li key={recipe.name} className="collection-item avatar red lighten-2">
                                 <Link to={`/recipes/${recipe.id}`} className="white-text">
                                     <img src={recipe.image} alt="" className="circle"/>
-                                    <span className="title">{recipe.name}</span>
+                                    <strong><span className="title">{recipe.name}</span></strong>
                                     <p>
                                         Serves {recipe.serves} people
                                         <br/>
@@ -37,6 +37,6 @@ export default function Recipes() {
                     </ul>
                 </div>
             )}
-        </div>
+        </Fragment>
     );
 }
