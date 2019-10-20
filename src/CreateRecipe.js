@@ -45,7 +45,7 @@ export default function () {
                     <Method method={method} setMethod={setMethod}/>
                 </div>
                 <div className="section">
-                    <div className="btn-large red lighten-2" onClick={save}>
+                    <div className="btn-large red lighten-2 right" onClick={save}>
                         <i className="material-icons left">save</i>
                         <span>Save</span>
                     </div>
