@@ -8,7 +8,7 @@ export default function Nav() {
         setDomContentLoaded(true);
 
         document.addEventListener('DOMContentLoaded', () => {
-            var elems = document.querySelectorAll('.sidenav');
+            const elems = document.querySelectorAll('.sidenav');
             window.M.Sidenav.init(elems);
         });
     }
