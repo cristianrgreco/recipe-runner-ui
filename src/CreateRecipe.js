@@ -1,5 +1,4 @@
 import React, {Fragment, createRef, useState} from 'react';
-import Header from "./components/Header";
 
 export default function () {
     const [imageSrc, setImageSrc] = useState(undefined);
@@ -9,7 +8,7 @@ export default function () {
 
     return (
         <Fragment>
-            <Header>Create Recipe</Header>
+            <h1 className="header">Create Recipe</h1>
             <form className="col s12">
                 <div className="row">
                     <Name/>
