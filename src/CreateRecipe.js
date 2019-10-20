@@ -172,12 +172,21 @@ function Method({method, setMethod}) {
 }
 
 function MethodItem({method, setMethod, i = 0}) {
-    const inputRef = createRef();
+    const instructionInputRef = createRef();
+    const timerInputRef = createRef();
 
     const add = () => {
-        const instruction = inputRef.current.value;
-        inputRef.current.value = "";
-        method.push({instruction, next: []});
+        const instruction = instructionInputRef.current.value;
+        instructionInputRef.current.value = "";
+
+        const timer = Number(timerInputRef.current.value);
+        timerInputRef.current.value = "";
+
+        const methodItem = timer !== 0
+            ? {instruction, alarm: {duration: timer}, next: []}
+            : {instruction, next: []};
+
+        method.push(methodItem);
         setMethod(currentMethod => [...currentMethod]);
     };
 
@@ -205,8 +214,12 @@ function MethodItem({method, setMethod, i = 0}) {
                 )}
             </div>
             <div className="input-field col s12">
-                <input id={`method-${i}`} type="text" className="validate" ref={inputRef}/>
+                <input id={`method-${i}`} type="text" className="validate" ref={instructionInputRef}/>
                 <label htmlFor={`method-${i}`}>Method</label>
+            </div>
+            <div className="input-field col s12">
+                <input id={`timer-${i}`} type="number" className="validate" ref={timerInputRef} placeholder={0}/>
+                <label htmlFor={`timer-${i}`}>Timer (seconds)</label>
                 <div className="btn red lighten-2" onClick={add}>
                     <span>Add</span>
                 </div>
