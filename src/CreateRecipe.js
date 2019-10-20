@@ -1,20 +1,36 @@
 import React, {Fragment, createRef, useState} from 'react';
+import {RECIPES} from "./data";
 
 export default function () {
+    const [name, setName] = useState("");
+    const [serves, setServes] = useState(0);
     const [imageSrc, setImageSrc] = useState(undefined);
     const [equipment, setEquipment] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState([]);
+
+    const recipe = {
+        id: `${Math.ceil(Math.random() * 1000000)}`,
+        image: imageSrc,
+        name,
+        duration: 0,
+        serves,
+        equipment,
+        ingredients,
+        method
+    };
+
+    const save = () => RECIPES.push(recipe);
 
     return (
         <Fragment>
             <h1 className="header">Create Recipe</h1>
             <form className="col s12">
                 <div className="row">
-                    <Name/>
+                    <Name name={name} setName={setName}/>
                 </div>
                 <div className="row">
-                    <Serves/>
+                    <Serves serves={serves} setServes={setServes}/>
                 </div>
                 <div className="row">
                     <Image imageSrc={imageSrc} setImageSrc={setImageSrc}/>
@@ -28,24 +44,34 @@ export default function () {
                 <div className="section">
                     <Method method={method} setMethod={setMethod}/>
                 </div>
+                <div className="section">
+                    <div className="btn-large red lighten-2" onClick={save}>
+                        <i className="material-icons left">save</i>
+                        <span>Save</span>
+                    </div>
+                </div>
             </form>
         </Fragment>
     );
 }
 
-function Name() {
+function Name({name, setName}) {
+    const onChange = e => setName(e.target.value);
+
     return (
         <div className="input-field col s12">
-            <input id="name" type="text" className="validate" autoFocus={true}/>
+            <input id="name" type="text" className="validate" autoFocus={true} value={name} onChange={onChange}/>
             <label htmlFor="name">Name</label>
         </div>
     );
 }
 
-function Serves() {
+function Serves({serves, setServes}) {
+    const onChange = e => setServes(Number(e.target.value));
+
     return (
         <div className="input-field col s12">
-            <input id="serves" type="number" className="validate"/>
+            <input id="serves" type="number" className="validate" onChange={onChange}/>
             <label htmlFor="serves">Serves</label>
         </div>
     );
@@ -54,7 +80,7 @@ function Serves() {
 function Image({imageSrc, setImageSrc}) {
     const inputRef = createRef();
 
-    const onImageChange = () => {
+    const onChange = () => {
         setImageSrc(URL.createObjectURL(inputRef.current.files[0]));
     };
 
@@ -63,7 +89,7 @@ function Image({imageSrc, setImageSrc}) {
             <div className="file-field input-field col s12">
                 <div className="btn red lighten-2">
                     <span>Image</span>
-                    <input type="file" ref={inputRef} onChange={onImageChange}/>
+                    <input type="file" ref={inputRef} onChange={onChange}/>
                 </div>
                 <div className="file-path-wrapper">
                     <input className="file-path validate" id="image" type="text"/>

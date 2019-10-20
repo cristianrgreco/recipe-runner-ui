@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from "./Nav";
+import Footer from "./Footer";
 import Home from "./Home";
 import CreateRecipe from "./CreateRecipe";
 import Recipes from "./Recipes";
@@ -26,6 +27,7 @@ export default function App() {
                     </Route>
                 </Switch>
             </div>
+            <Footer/>
         </Router>
     );
 }
