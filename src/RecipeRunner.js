@@ -1,5 +1,4 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import beepMp3 from './res/beep.mp3';
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -15,13 +14,26 @@ export default function RecipeRunner({recipe}) {
         }
     });
 
-    const nextSteps = completedStep => steps => [...(completedStep.next || []), ...steps];
-    const isStepCompleted = step => completedSteps.length > 0 && completedSteps.some(completedStep => completedStep.instruction === step.instruction);
-    const isTimerSetForStep = step => timers.some(timer => timer.name === step.instruction);
-    const getTimerForStep = step => timers.find(timer => timer.name === step.instruction);
+    const nextSteps = completedStep => steps => {
+        return [...(completedStep.next || []), ...steps];
+    };
+
+    const isStepCompleted = step => {
+        return completedSteps.length > 0
+            && completedSteps.some(completedStep => completedStep.instruction === step.instruction);
+    };
+
+    const isTimerSetForStep = step => {
+        return timers.some(timer => timer.name === step.instruction);
+    };
+
+    const getTimerForStep = step => {
+        return timers.find(timer => timer.name === step.instruction);
+    };
 
     return (
         <Fragment>
+            <audio id="audio" src="/audio/beep.mp3" autoPlay={false}/>
             <h3 className="header">Method</h3>
             {steps.length > 0 && (
                 <ul className="collection">
@@ -133,13 +145,15 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
     ];
 
     const alertOnCompletion = () => {
-        window.M.toast({html: step.alarm.description});
+        window.M.toast({
+            html: step.alarm.description,
+            displayLength: 10000
+        });
         document.querySelector("#audio").play();
     };
 
     return (
         <Fragment>
-            <audio id="audio" src={beepMp3} autoPlay={false}/>
             <div>{step.instruction}</div>
             <p className="caption"/>
             <a className="waves-effect waves-light red lighten-2 btn"

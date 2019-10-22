@@ -66,7 +66,7 @@ function Name({name, setName}) {
     );
 }
 
-function Serves({serves, setServes}) {
+function Serves({setServes}) {
     const onChange = e => setServes(Number(e.target.value));
 
     return (
