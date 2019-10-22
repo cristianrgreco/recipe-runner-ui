@@ -1,4 +1,5 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
+import beepMp3 from './res/beep.mp3';
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -131,8 +132,14 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
         }
     ];
 
+    const alertOnCompletion = () => {
+        window.M.toast({html: step.alarm.description});
+        document.querySelector("#audio").play();
+    };
+
     return (
         <Fragment>
+            <audio id="audio" src={beepMp3} autoPlay={false}/>
             <div>{step.instruction}</div>
             <p className="caption"/>
             <a className="waves-effect waves-light red lighten-2 btn"
@@ -141,6 +148,7 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
                    setTimeout(() => {
                        setSteps(nextSteps(step));
                        setCompletedSteps(completedSteps => [...completedSteps, step]);
+                       alertOnCompletion();
                    }, step.alarm.duration);
                }}>
                 <i className="material-icons left">timer</i>Start timer

@@ -200,6 +200,7 @@ function Method({method, setMethod}) {
 function MethodItem({method, setMethod, i = 0}) {
     const instructionInputRef = createRef();
     const timerInputRef = createRef();
+    const timerDescriptionInputRef = createRef();
 
     const add = () => {
         const instruction = instructionInputRef.current.value;
@@ -208,8 +209,11 @@ function MethodItem({method, setMethod, i = 0}) {
         const timer = Number(timerInputRef.current.value);
         timerInputRef.current.value = "";
 
+        const timerDescription = Number(timerDescriptionInputRef.current.value);
+        timerDescriptionInputRef.current.value = "";
+
         const methodItem = timer !== 0
-            ? {instruction, alarm: {duration: timer}, next: []}
+            ? {instruction, alarm: {duration: timer, description: timerDescription}, next: []}
             : {instruction, next: []};
 
         method.push(methodItem);
@@ -243,9 +247,15 @@ function MethodItem({method, setMethod, i = 0}) {
                 <input id={`method-${i}`} type="text" className="validate" ref={instructionInputRef}/>
                 <label htmlFor={`method-${i}`}>Method</label>
             </div>
-            <div className="input-field col s12">
+            <div className="input-field col s6">
                 <input id={`timer-${i}`} type="number" className="validate" ref={timerInputRef} placeholder={0}/>
                 <label htmlFor={`timer-${i}`}>Timer (seconds)</label>
+            </div>
+            <div className="input-field col s6">
+                <input id={`timer-description-${i}`} type="text" className="validate" ref={timerDescriptionInputRef}/>
+                <label htmlFor={`timer-description-${i}`}>Description</label>
+            </div>
+            <div className="col s12">
                 <div className="btn red lighten-2" onClick={add}>
                     <span>Add</span>
                 </div>
