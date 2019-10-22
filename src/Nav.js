@@ -14,7 +14,7 @@ export default function Nav() {
     }
 
     return (
-        <Fragment>
+        <header>
             <nav>
                 <div className="nav-wrapper">
                     <div className="container">
@@ -31,7 +31,7 @@ export default function Nav() {
             <ul id="mobile" className="sidenav">
                 <NavLinks/>
             </ul>
-        </Fragment>
+        </header>
     );
 }
 

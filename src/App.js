@@ -11,22 +11,27 @@ export default function App() {
     return (
         <Router>
             <Nav/>
-            <div className="container">
-                <Route exact path="/">
-                    <Home/>
-                </Route>
-                <Switch>
-                    <Route path="/create-recipe">
-                        <CreateRecipe/>
+            <main>
+                <div className="container">
+                    <Route exact path="/">
+                        <Home/>
                     </Route>
-                    <Route path="/recipes/:recipeId">
-                        <Recipe/>
-                    </Route>
-                    <Route path="/recipes">
-                        <Recipes/>
-                    </Route>
-                </Switch>
-            </div>
+                    <Switch>
+                        <Route path="/create-recipe">
+                            <CreateRecipe/>
+                        </Route>
+                        <Route path="/recipes/:recipeId">
+                            <Recipe/>
+                        </Route>
+                        <Route path="/recipes">
+                            <Recipes/>
+                        </Route>
+                    </Switch>
+                </div>
+                <div className="section"/>
+                <div className="section"/>
+                <div className="section"/>
+            </main>
             <Footer/>
         </Router>
     );
