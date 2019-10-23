@@ -1,4 +1,5 @@
 import React, {Fragment, createRef, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import {RECIPES} from "./data";
 
 export default function () {
@@ -8,6 +9,7 @@ export default function () {
     const [equipment, setEquipment] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState([]);
+    const history = useHistory();
 
     const recipe = {
         id: `${Math.ceil(Math.random() * 1000000)}`,
@@ -20,7 +22,10 @@ export default function () {
         method
     };
 
-    const save = () => RECIPES.push(recipe);
+    const save = () => {
+        RECIPES.push(recipe);
+        history.push(`/recipes/${recipe.id}`);
+    };
 
     return (
         <Fragment>
@@ -209,7 +214,7 @@ function MethodItem({method, setMethod, i = 0}) {
         const timer = Number(timerInputRef.current.value) * 1000;
         timerInputRef.current.value = "";
 
-        const timerDescription = Number(timerDescriptionInputRef.current.value);
+        const timerDescription = timerDescriptionInputRef.current.value;
         timerDescriptionInputRef.current.value = "";
 
         const methodItem = timer !== 0

@@ -6,7 +6,7 @@ export default function RecipePreview({recipe}) {
         <Fragment>
             <div className="row">
                 <div className="col s12 m6 no-padding">
-                    <img src={`/img/${recipe.image}`} className="responsive-img"/>
+                    <img src={`${recipe.image}`} className="responsive-img"/>
                 </div>
             </div>
             <div className="section">

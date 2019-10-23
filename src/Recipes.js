@@ -23,7 +23,7 @@ export default function Recipes() {
                         {recipes.map(recipe => (
                             <li key={recipe.name} className="collection-item avatar red lighten-2">
                                 <Link to={`/recipes/${recipe.id}`} className="white-text">
-                                    <img src={`/img/${recipe.image}`} alt="" className="circle"/>
+                                    <img src={`${recipe.image}`} alt="" className="circle"/>
                                     <strong><span className="title">{recipe.name}</span></strong>
                                     <p>
                                         Serves {recipe.serves} people

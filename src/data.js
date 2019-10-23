@@ -1,6 +1,6 @@
 export const RECIPES = [{
     id: "1",
-    image: "recipe.jpg",
+    image: "/img/recipe.jpg",
     name: "Sausage Linguini",
     duration: 60000,
     serves: 4,
