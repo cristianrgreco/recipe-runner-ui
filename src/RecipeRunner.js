@@ -23,12 +23,16 @@ export default function RecipeRunner({recipe}) {
             && completedSteps.some(completedStep => completedStep.instruction === step.instruction);
     };
 
+    const getTimerForStep = step => {
+        return timers.find(timer => timer.name === step.instruction);
+    };
+
     const isTimerSetForStep = step => {
         return timers.some(timer => timer.name === step.instruction);
     };
 
-    const getTimerForStep = step => {
-        return timers.find(timer => timer.name === step.instruction);
+    const isTimerCompleteForStep = step => {
+        return getTimerForStep(step).duration === 0;
     };
 
     return (
@@ -41,7 +45,7 @@ export default function RecipeRunner({recipe}) {
                         <li key={step.instruction} className="collection-item">
                             <div className="section">
                                 {step.alarm === undefined && isStepCompleted(step) && (
-                                    <NoAlarmAndCompleted step={step}/>
+                                    <NoAlarmAndComplete step={step}/>
                                 )}
                                 {step.alarm === undefined && !isStepCompleted(step) && (
                                     <NoAlarmAndInProgress
@@ -50,19 +54,24 @@ export default function RecipeRunner({recipe}) {
                                         setCompletedSteps={setCompletedSteps}
                                         nextSteps={nextSteps}/>
                                 )}
-                                {step.alarm !== undefined && isTimerSetForStep(step) && (
+                                {step.alarm !== undefined && !isTimerSetForStep(step) && (
+                                    <AlarmAndReady
+                                        step={step}
+                                        timers={timers}
+                                        setTimers={setTimers}/>
+                                )}
+                                {step.alarm !== undefined && isTimerSetForStep(step) && !isTimerCompleteForStep(step) && (
                                     <AlarmAndInProgress
                                         step={step}
                                         timer={getTimerForStep(step)}/>
                                 )}
-                                {step.alarm !== undefined && !isTimerSetForStep(step) && (
-                                    <AlarmAndNotInProgress
+                                {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
+                                    <AlarmAndComplete
                                         step={step}
                                         setSteps={setSteps}
-                                        timers={timers}
-                                        setTimers={setTimers}
                                         setCompletedSteps={setCompletedSteps}
-                                        nextSteps={nextSteps}/>
+                                        nextSteps={nextSteps}
+                                    />
                                 )}
                             </div>
                         </li>
@@ -73,7 +82,7 @@ export default function RecipeRunner({recipe}) {
     );
 }
 
-function NoAlarmAndCompleted({step}) {
+function NoAlarmAndComplete({step}) {
     return (
         <Fragment>
             <span className="badge green white-text lighten-2">DONE</span>
@@ -100,6 +109,31 @@ function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
     );
 }
 
+function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
+    const alertOnCompletion = () => {
+        window.M.toast({
+            html: step.alarm.description,
+            displayLength: 10000
+        });
+        document.querySelector("#audio").play();
+    };
+
+    useEffect(() => {
+        setSteps(nextSteps(step));
+        setCompletedSteps(completedSteps => [...completedSteps, step]);
+        alertOnCompletion();
+    }, []);
+
+    return (
+        <Fragment>
+            <span className="badge green white-text lighten-2">DONE</span>
+            <div className="grey-text" style={{textDecoration: "line-through"}}>
+                {step.instruction}
+            </div>
+        </Fragment>
+    );
+}
+
 function AlarmAndInProgress({step, timer}) {
     const formatTime = ms => {
         if (ms <= 0) {
@@ -118,25 +152,13 @@ function AlarmAndInProgress({step, timer}) {
 
     return (
         <Fragment>
-            {timer.duration === 0
-                ? (
-                    <Fragment>
-                        <span className="badge green white-text lighten-2">DONE</span>
-                        <div className="grey-text" style={{textDecoration: "line-through"}}>
-                            {step.instruction}
-                        </div>
-                    </Fragment>
-                ) : (
-                    <Fragment>
-                        <span className="badge orange white-text lighten-2">{formatTime(timer.duration)}</span>
-                        <div>{step.instruction}</div>
-                    </Fragment>
-                )}
+            <span className="badge orange white-text lighten-2">{formatTime(timer.duration)}</span>
+            <div>{step.instruction}</div>
         </Fragment>
     );
 }
 
-function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedSteps, nextSteps}) {
+function AlarmAndReady({step, setTimers, timers}) {
     const addTimer = (timers, step) => [
         ...timers, {
             name: step.instruction,
@@ -144,27 +166,12 @@ function AlarmAndNotInProgress({step, setTimers, timers, setSteps, setCompletedS
         }
     ];
 
-    const alertOnCompletion = () => {
-        window.M.toast({
-            html: step.alarm.description,
-            displayLength: 10000
-        });
-        document.querySelector("#audio").play();
-    };
-
     return (
         <Fragment>
             <div>{step.instruction}</div>
             <p className="caption"/>
             <a className="waves-effect waves-light red lighten-2 btn"
-               onClick={() => {
-                   setTimers(addTimer(timers, step));
-                   setTimeout(() => {
-                       setSteps(nextSteps(step));
-                       setCompletedSteps(completedSteps => [...completedSteps, step]);
-                       alertOnCompletion();
-                   }, step.alarm.duration);
-               }}>
+               onClick={() => setTimers(addTimer(timers, step))}>
                 <i className="material-icons left">timer</i>Start timer
             </a>
         </Fragment>
