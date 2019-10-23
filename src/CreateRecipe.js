@@ -206,7 +206,7 @@ function MethodItem({method, setMethod, i = 0}) {
         const instruction = instructionInputRef.current.value;
         instructionInputRef.current.value = "";
 
-        const timer = Number(timerInputRef.current.value);
+        const timer = Number(timerInputRef.current.value) * 1000;
         timerInputRef.current.value = "";
 
         const timerDescription = Number(timerDescriptionInputRef.current.value);
