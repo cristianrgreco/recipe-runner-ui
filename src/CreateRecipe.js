@@ -129,15 +129,20 @@ function Equipment({equipment, setEquipment}) {
                         <ul className="collection">
                             {equipment.map(item => (
                                 <li key={item} className="collection-item">
-                                    <span>{item}</span>
-                                    <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
-                                        <i className="material-icons">delete</i>
+                                    <div className="valign-wrapper" style={{display: 'flex'}}>
+                                        <span style={{flex: '1'}}>{item}</span>
+                                        <div className="btn-floating red lighten-2" style={{justifySelf: 'flex-end'}}
+                                             onClick={() => remove(item)}>
+                                            <i className="material-icons">delete</i>
+                                        </div>
                                     </div>
                                 </li>
                             ))}
                         </ul>
                     )}
                 </div>
+            </div>
+            <div className="row">
                 <div className="input-field col s12">
                     <input id="equipment" type="text" className="validate" ref={inputRef}/>
                     <label htmlFor="equipment">Equipment</label>
@@ -172,15 +177,19 @@ function Ingredients({ingredients, setIngredients}) {
                         <ul className="collection">
                             {ingredients.map(item => (
                                 <li key={item} className="collection-item">
-                                    <span>{item}</span>
-                                    <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
-                                        <i className="material-icons">delete</i>
+                                    <div className="valign-wrapper" style={{display: 'flex'}}>
+                                        <span style={{flex: '1'}}>{item}</span>
+                                        <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
+                                            <i className="material-icons">delete</i>
+                                        </div>
                                     </div>
                                 </li>
                             ))}
                         </ul>
                     )}
                 </div>
+            </div>
+            <div className="row">
                 <div className="input-field col s12">
                     <input id="ingredients" type="text" className="validate" ref={inputRef}/>
                     <label htmlFor="ingredients">Ingredients</label>
@@ -232,39 +241,46 @@ function MethodItem({method, setMethod, i = 0}) {
     };
 
     return (
-        <div className="row">
-            <div className="col s12">
-                {method.length > 0 && (
-                    <ul className="collection">
-                        {method.map((item, j) => (
-                            <li key={item.instruction} className="collection-item">
-                                <span>{item.instruction}</span>
-                                <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
-                                    <i className="material-icons">delete</i>
-                                </div>
-                                <MethodItem method={item.next} setMethod={setMethod} i={(i + 1 * j + 1) + 1}/>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-            <div className="input-field col s12">
-                <input id={`method-${i}`} type="text" className="validate" ref={instructionInputRef}/>
-                <label htmlFor={`method-${i}`}>Method</label>
-            </div>
-            <div className="input-field col s6">
-                <input id={`timer-${i}`} type="number" className="validate" ref={timerInputRef} placeholder={0}/>
-                <label htmlFor={`timer-${i}`}>Timer (seconds)</label>
-            </div>
-            <div className="input-field col s6">
-                <input id={`timer-description-${i}`} type="text" className="validate" ref={timerDescriptionInputRef}/>
-                <label htmlFor={`timer-description-${i}`}>Description</label>
-            </div>
-            <div className="col s12">
-                <div className="btn red lighten-2" onClick={add}>
-                    <span>Add</span>
+        <Fragment>
+            <div className="row">
+                <div className="col s12">
+                    {method.length > 0 && (
+                        <ul className="collection">
+                            {method.map((item, j) => (
+                                <li key={item.instruction} className="collection-item">
+                                    <div className="valign-wrapper" style={{display: 'flex'}}>
+                                        <span style={{flex: '1'}}>{item.instruction}</span>
+                                        <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
+                                            <i className="material-icons">delete</i>
+                                        </div>
+                                    </div>
+                                    <MethodItem method={item.next} setMethod={setMethod} i={(i + 1 * j + 1) + 1}/>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
-        </div>
+            <div className="row">
+                <div className="input-field col s12">
+                    <input id={`method-${i}`} type="text" className="validate" ref={instructionInputRef}/>
+                    <label htmlFor={`method-${i}`}>Method</label>
+                </div>
+                <div className="input-field col s6">
+                    <input id={`timer-${i}`} type="number" className="validate" ref={timerInputRef} placeholder={0}/>
+                    <label htmlFor={`timer-${i}`}>Timer (seconds)</label>
+                </div>
+                <div className="input-field col s6">
+                    <input id={`timer-description-${i}`} type="text" className="validate"
+                           ref={timerDescriptionInputRef}/>
+                    <label htmlFor={`timer-description-${i}`}>Description</label>
+                </div>
+                <div className="col s12">
+                    <div className="btn red lighten-2" onClick={add}>
+                        <span>Add</span>
+                    </div>
+                </div>
+            </div>
+        </Fragment>
     );
 }
