@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
+import {formatTime} from "./time";
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -135,21 +136,6 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 }
 
 function AlarmAndInProgress({step, timer}) {
-    const formatTime = ms => {
-        if (ms <= 0) {
-            return "0";
-        }
-
-        const seconds = ms / 1000;
-        const minutes = Math.floor(seconds / 60);
-
-        if (minutes > 0) {
-            return `${minutes}m ${seconds - minutes * 60}s`;
-        } else {
-            return `${seconds}s`
-        }
-    };
-
     return (
         <Fragment>
             <span className="badge orange white-text lighten-2">{formatTime(timer.duration)}</span>

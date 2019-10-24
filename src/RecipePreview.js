@@ -1,9 +1,20 @@
 import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
+import {formatTime} from "./time";
 
 export default function RecipePreview({recipe}) {
     return (
         <Fragment>
+            <div className="row">
+                <div className="col">
+                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>person</i>
+                    <span style={{verticalAlign: 'bottom'}}>{recipe.serves}</span>
+                </div>
+                <div className="col">
+                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>timer</i>
+                    <span style={{verticalAlign: 'bottom'}}>{formatTime(recipe.duration)}</span>
+                </div>
+            </div>
             <div className="row">
                 <div className="col s12 m6 no-padding">
                     <img src={`${recipe.image}`} className="responsive-img"/>
