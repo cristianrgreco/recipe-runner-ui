@@ -1,6 +1,7 @@
 import React, {Fragment, createRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {RECIPES} from "./data";
+import {methodDuration} from "./duration";
 
 export default function () {
     const [name, setName] = useState("");
@@ -15,7 +16,7 @@ export default function () {
         id: `${Math.ceil(Math.random() * 1000000)}`,
         image: imageSrc,
         name,
-        duration: 0,
+        duration: methodDuration(method),
         serves,
         equipment,
         ingredients,
