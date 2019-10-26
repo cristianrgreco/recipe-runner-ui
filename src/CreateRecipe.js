@@ -235,7 +235,6 @@ function MethodItem({method, setMethod, i = 0}) {
     };
 
     const remove = itemToRemove => {
-        debugger;
         const index = method.findIndex(item => item === itemToRemove);
         method.splice(index, 1);
         setMethod(currentMethod => [...currentMethod]);
