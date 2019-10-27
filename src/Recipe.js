@@ -9,7 +9,7 @@ export default function Recipe() {
     const {recipeId} = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/recipes/${recipeId}`).then(response => setRecipe(response.data));
+        axios.get(`http://${process.env.REACT_APP_SERVER}/recipes/${recipeId}`).then(response => setRecipe(response.data));
     }, []);
 
     return (
