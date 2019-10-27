@@ -1,15 +1,18 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
-import {RECIPES} from "./data";
+import axios from 'axios';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
 
-    const fetchRecipes = () => new Promise(resolve => setTimeout(() => resolve(RECIPES), 250));
+    const fetchRecipes = async () => {
+        const response = await axios.get('http://localhost:8000/recipes');
+        return response.data;
+    };
 
     useEffect(() => {
         fetchRecipes().then(recipes => setRecipes(recipes));
-    });
+    }, []);
 
     return (
         <Fragment>
