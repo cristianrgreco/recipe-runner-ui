@@ -20,18 +20,22 @@ export default function RecipePreview({recipe}) {
                     <img src={`http://localhost:8000/public/${recipe.image}`} className="responsive-img"/>
                 </div>
             </div>
+            {recipe.equipment.length > 0 && (
+                <div className="section">
+                    <h3 className="header">Equipment</h3>
+                    <ul className="collection">
+                        {recipe.equipment.map(item =>
+                            <li key={item} className="collection-item">
+                                <label>
+                                    <input type="checkbox"/>
+                                    <span>{item}</span>
+                                </label>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            )}
             <div className="section">
-                <h3 className="header">Equipment</h3>
-                <ul className="collection">
-                    {recipe.equipment.map(item =>
-                        <li key={item} className="collection-item">
-                            <label>
-                                <input type="checkbox"/>
-                                <span>{item}</span>
-                            </label>
-                        </li>
-                    )}
-                </ul>
                 <h3 className="header">Ingredients</h3>
                 <ul className="collection">
                     {recipe.ingredients.map(ingredient =>
