@@ -1,20 +1,18 @@
 import React, {Fragment, createRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {RECIPES} from "./data";
+import axios from 'axios';
 import {methodDuration} from "./duration";
 
 export default function () {
     const [name, setName] = useState("");
     const [serves, setServes] = useState(0);
-    const [imageSrc, setImageSrc] = useState(undefined);
+    const [image, setImage] = useState(undefined);
     const [equipment, setEquipment] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState([]);
     const history = useHistory();
 
     const recipe = {
-        id: `${Math.ceil(Math.random() * 1000000)}`,
-        image: imageSrc,
         name,
         duration: methodDuration(method),
         serves,
@@ -23,9 +21,18 @@ export default function () {
         method
     };
 
-    const save = () => {
-        RECIPES.push(recipe);
-        history.push(`/recipes/${recipe.id}`);
+    const save = async () => {
+        const formData = new FormData();
+        formData.append('image', image);
+        formData.append('recipe', JSON.stringify(recipe));
+
+        const response = await axios.post(
+            'http://localhost:8000/recipes',
+            formData,
+            {headers: {'content-type': 'multipart/form-data'}}
+        );
+
+        history.push(response.headers.location);
     };
 
     return (
@@ -39,7 +46,7 @@ export default function () {
                     <Serves serves={serves} setServes={setServes}/>
                 </div>
                 <div className="row">
-                    <Image imageSrc={imageSrc} setImageSrc={setImageSrc}/>
+                    <Image image={image} setImage={setImage}/>
                 </div>
                 <div className="section">
                     <Equipment equipment={equipment} setEquipment={setEquipment}/>
@@ -83,11 +90,11 @@ function Serves({setServes}) {
     );
 }
 
-function Image({imageSrc, setImageSrc}) {
+function Image({image, setImage}) {
     const inputRef = createRef();
 
     const onChange = () => {
-        setImageSrc(URL.createObjectURL(inputRef.current.files[0]));
+        setImage(inputRef.current.files[0]);
     };
 
     return (
@@ -102,7 +109,7 @@ function Image({imageSrc, setImageSrc}) {
                 </div>
             </div>
             <div className="col s12 m6">
-                {imageSrc !== undefined && <img src={imageSrc} className="responsive-img"/>}
+                {image !== undefined && <img src={URL.createObjectURL(image)} className="responsive-img"/>}
             </div>
         </Fragment>
     );

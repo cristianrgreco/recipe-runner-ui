@@ -1,25 +1,32 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {Switch, Route, useParams} from "react-router-dom";
-import {RECIPES} from "./data";
+import axios from 'axios';
 import RecipePreview from "./RecipePreview";
 import RecipeRunner from "./RecipeRunner";
 
 export default function Recipe() {
+    const [recipe, setRecipe] = useState(undefined);
     const {recipeId} = useParams();
 
-    const recipe = RECIPES.find(aRecipe => aRecipe.id === recipeId);
+    useEffect(() => {
+        axios.get(`http://localhost:8000/recipes/${recipeId}`).then(response => setRecipe(response.data));
+    }, []);
 
     return (
         <Fragment>
-            <h1 className="header">{recipe.name}</h1>
-            <Switch>
-                <Route path="/recipes/:recipeId/start">
-                    <RecipeRunner recipe={recipe}/>
-                </Route>
-                <Route path="/recipes/:recipeId">
-                    <RecipePreview recipe={recipe}/>
-                </Route>
-            </Switch>
+            {recipe && (
+                <Fragment>
+                    <h1 className="header">{recipe.name}</h1>
+                    <Switch>
+                        <Route path="/recipes/:recipeId/start">
+                            <RecipeRunner recipe={recipe}/>
+                        </Route>
+                        <Route path="/recipes/:recipeId">
+                            <RecipePreview recipe={recipe}/>
+                        </Route>
+                    </Switch>
+                </Fragment>
+            )}
         </Fragment>
     );
 }
