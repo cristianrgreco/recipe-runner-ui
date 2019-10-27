@@ -39,46 +39,57 @@ export default function RecipeRunner({recipe}) {
     return (
         <Fragment>
             <audio id="audio" src="/audio/beep.mp3" autoPlay={false}/>
-            <h3 className="header">Method</h3>
-            {steps.length > 0 && (
-                <ul className="collection">
-                    {steps.map(step => (
-                        <li key={step.instruction} className="collection-item">
-                            <div className="section">
-                                {step.alarm === undefined && isStepCompleted(step) && (
-                                    <NoAlarmAndComplete step={step}/>
-                                )}
-                                {step.alarm === undefined && !isStepCompleted(step) && (
-                                    <NoAlarmAndInProgress
-                                        step={step}
-                                        setSteps={setSteps}
-                                        setCompletedSteps={setCompletedSteps}
-                                        nextSteps={nextSteps}/>
-                                )}
-                                {step.alarm !== undefined && !isTimerSetForStep(step) && (
-                                    <AlarmAndReady
-                                        step={step}
-                                        timers={timers}
-                                        setTimers={setTimers}/>
-                                )}
-                                {step.alarm !== undefined && isTimerSetForStep(step) && !isTimerCompleteForStep(step) && (
-                                    <AlarmAndInProgress
-                                        step={step}
-                                        timer={getTimerForStep(step)}/>
-                                )}
-                                {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
-                                    <AlarmAndComplete
-                                        step={step}
-                                        setSteps={setSteps}
-                                        setCompletedSteps={setCompletedSteps}
-                                        nextSteps={nextSteps}
-                                    />
-                                )}
-                            </div>
-                        </li>
-                    ))}
-                </ul>)
-            }
+            <div className="row">
+                <div className="col">
+                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>person</i>
+                    <span style={{verticalAlign: 'bottom'}}>{recipe.serves}</span>
+                </div>
+                <div className="col">
+                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>timer</i>
+                    <span style={{verticalAlign: 'bottom'}}>{formatTime(recipe.duration)}</span>
+                </div>
+            </div>
+            <div className="section">
+                {steps.length > 0 && (
+                    <ul className="collection">
+                        {steps.map(step => (
+                            <li key={step.instruction} className="collection-item">
+                                <div className="section">
+                                    {step.alarm === undefined && isStepCompleted(step) && (
+                                        <NoAlarmAndComplete step={step}/>
+                                    )}
+                                    {step.alarm === undefined && !isStepCompleted(step) && (
+                                        <NoAlarmAndInProgress
+                                            step={step}
+                                            setSteps={setSteps}
+                                            setCompletedSteps={setCompletedSteps}
+                                            nextSteps={nextSteps}/>
+                                    )}
+                                    {step.alarm !== undefined && !isTimerSetForStep(step) && (
+                                        <AlarmAndReady
+                                            step={step}
+                                            timers={timers}
+                                            setTimers={setTimers}/>
+                                    )}
+                                    {step.alarm !== undefined && isTimerSetForStep(step) && !isTimerCompleteForStep(step) && (
+                                        <AlarmAndInProgress
+                                            step={step}
+                                            timer={getTimerForStep(step)}/>
+                                    )}
+                                    {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
+                                        <AlarmAndComplete
+                                            step={step}
+                                            setSteps={setSteps}
+                                            setCompletedSteps={setCompletedSteps}
+                                            nextSteps={nextSteps}
+                                        />
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>)
+                }
+            </div>
         </Fragment>
     );
 }

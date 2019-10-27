@@ -49,7 +49,7 @@ export default function RecipePreview({recipe}) {
                 </ul>
             </div>
             <div className="section">
-                <Link to={`/recipes/${recipe.id}/start`} className="waves-effect waves-light red lighten-2 btn-large">
+                <Link to={`/recipes/${recipe._id}/start`} className="waves-effect waves-light red lighten-2 btn-large">
                     <i className="material-icons left">sentiment_very_satisfied</i>
                     I'm ready!
                 </Link>

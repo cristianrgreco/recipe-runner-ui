@@ -1,6 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import {formatTime} from "./time";
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -31,7 +32,7 @@ export default function Recipes() {
                                     <p>
                                         Serves {recipe.serves} people
                                         <br/>
-                                        Takes {Math.ceil(recipe.duration / 60 / 60)} minutes
+                                        Takes {formatTime(recipe.duration)}
                                     </p>
                                     <i className="secondary-content white-text material-icons left">arrow_forward</i>
                                 </Link>
