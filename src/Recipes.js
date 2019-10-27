@@ -17,10 +17,7 @@ export default function Recipes() {
 
     return (
         <Fragment>
-            <h1 className="header">Recipe List</h1>
-            <p className="caption">
-                Select a recipe from the list below.
-            </p>
+            <h1 className="header">Recipes</h1>
             {recipes.length > 0 && (
                 <div className="section">
                     <ul className="collection">

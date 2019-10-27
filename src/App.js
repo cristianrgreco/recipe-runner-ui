@@ -32,7 +32,7 @@ export default function App() {
                 <div className="section"/>
                 <div className="section"/>
             </main>
-            <Footer/>
+            {/*<Footer/>*/}
         </Router>
     );
 }
