@@ -27,7 +27,7 @@ export default function () {
         formData.append('recipe', JSON.stringify(recipe));
 
         const response = await axios.post(
-            `http://${process.env.REACT_APP_SERVER}/recipes`,
+            `${process.env.REACT_APP_SERVER_URL}/recipes`,
             formData,
             {headers: {'content-type': 'multipart/form-data'}}
         );

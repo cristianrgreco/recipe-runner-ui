@@ -7,7 +7,7 @@ export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
 
     const fetchRecipes = async () => {
-        const response = await axios.get(`http://${process.env.REACT_APP_SERVER}/recipes`);
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/recipes`);
         return response.data;
     };
 
@@ -24,7 +24,7 @@ export default function Recipes() {
                         {recipes.map(recipe => (
                             <li key={recipe.name} className="collection-item avatar red lighten-2">
                                 <Link to={`/recipes/${recipe._id}`} className="white-text">
-                                    <img src={`http://${process.env.REACT_APP_SERVER}/public/${recipe.image}`} alt="" className="circle"/>
+                                    <img src={`${process.env.REACT_APP_SERVER_URL}/public/${recipe.image}`} alt="" className="circle"/>
                                     <strong><span className="title">{recipe.name}</span></strong>
                                     <p>
                                         Serves {recipe.serves} people
