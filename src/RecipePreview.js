@@ -17,7 +17,7 @@ export default function RecipePreview({recipe}) {
             </div>
             <div className="row">
                 <div className="col s12 m6 no-padding">
-                    <img src={`${process.env.REACT_APP_SERVER_URL}/public/${recipe.image}`} className="responsive-img"/>
+                    <img src={recipe.image} className="responsive-img"/>
                 </div>
             </div>
             {recipe.equipment.length > 0 && (
