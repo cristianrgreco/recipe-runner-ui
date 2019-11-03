@@ -127,7 +127,12 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
             html: step.alarm.description,
             displayLength: 10000
         });
+
         document.querySelector("#audio").play();
+
+        if (navigator.vibrate) {
+            navigator.vibrate(500);
+        }
     };
 
     useEffect(() => {
