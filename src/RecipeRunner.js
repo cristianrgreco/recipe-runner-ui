@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {formatTime} from "./time";
+import moment from 'moment';
+import {formatTime, timeRemaining} from "./time";
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -8,9 +9,7 @@ export default function RecipeRunner({recipe}) {
 
     useEffect(() => {
         if (timers.length > 0) {
-            const intervalId = setInterval(() => setTimers(timers => timers
-                .map(timer => ({...timer, duration: Math.max(0, timer.duration - 1000)}))), 1000);
-
+            const intervalId = setInterval(() => setTimers(timers => [...timers]), 1000);
             return () => clearInterval(intervalId)
         }
     });
@@ -33,7 +32,8 @@ export default function RecipeRunner({recipe}) {
     };
 
     const isTimerCompleteForStep = step => {
-        return getTimerForStep(step).duration === 0;
+        const timer = getTimerForStep(step);
+        return moment().isSameOrAfter(timer.endTime);
     };
 
     return (
@@ -149,7 +149,7 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 function AlarmAndInProgress({step, timer}) {
     return (
         <Fragment>
-            <span className="badge orange white-text lighten-2">{formatTime(timer.duration)}</span>
+            <span className="badge orange white-text lighten-2">{timeRemaining(moment(), timer.endTime)}</span>
             <div>{step.instruction}</div>
         </Fragment>
     );
@@ -159,7 +159,7 @@ function AlarmAndReady({step, setTimers, timers}) {
     const addTimer = (timers, step) => [
         ...timers, {
             name: step.instruction,
-            duration: step.alarm.duration
+            endTime: moment().add(step.alarm.duration, 'ms'),
         }
     ];
 
