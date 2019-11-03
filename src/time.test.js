@@ -30,14 +30,14 @@ describe('time', () => {
             const start = moment();
             const end = start.clone();
 
-            expect(timeRemaining(start, end)).toBe('0')
+            expect(timeRemaining(start, end)).toBe('0s')
         });
 
         it('should return zero when time is in the past', () => {
             const start = moment();
             const end = start.clone().subtract(1, 'd');
 
-            expect(timeRemaining(start, end)).toBe('0');
+            expect(timeRemaining(start, end)).toBe('0s');
         });
 
         it('should return seconds remaining', () => {

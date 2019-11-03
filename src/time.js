@@ -29,9 +29,9 @@ export const timeRemaining = (start, end) => {
     const seconds = Math.floor(duration.asSeconds() % 60);
 
     if (minutes === 0 && seconds === 0) {
-        return '0';
+        return '0s';
     } else if (minutes < 0 || seconds < 0) {
-        return '0';
+        return '0s';
     } else if (minutes === 0 && seconds > 0) {
         return `${seconds}s`
     } else if (minutes > 0 && seconds === 0) {
