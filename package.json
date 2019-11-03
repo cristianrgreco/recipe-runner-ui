@@ -15,7 +15,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync build/ s3://recipe-runner"
+    "deploy:build": "npm run build",
+    "deploy:sync": "aws s3 sync build/ s3://recipe-runner",
+    "deploy": "npm run deploy:build && npm run deploy:sync"
   },
   "eslintConfig": {
     "extends": "react-app"
