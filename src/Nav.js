@@ -18,7 +18,7 @@ export default function Nav() {
             <nav>
                 <div className="nav-wrapper">
                     <div className="container">
-                        <Link to="/" className="brand-logo header">Recipe Runner</Link>
+                        <Link to="/" className="brand-logo header">Hello Diners</Link>
                         <a href="#" data-target="mobile" className="sidenav-trigger">
                             <i className="material-icons">menu</i>
                         </a>
