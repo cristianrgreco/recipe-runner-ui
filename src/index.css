@@ -20,9 +20,9 @@ main {
 }
 
 #logo-container {
-    height: 65px;
-    margin-bottom: 15px;
-    padding-top: 15px;
+    height: 75px;
+    margin-bottom: 10px;
+    padding-top: 20px;
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
 }

@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from "react-router-dom";
-import theme from './theme';
+import config from './config';
 import {Icon} from "./components/Icon";
 import {H1} from "./components/Heading";
 
@@ -18,10 +18,10 @@ export default function Nav() {
 
     return (
         <header>
-            <nav className={`${theme.color} lighten-2`}>
+            <nav className={`${config.color} lighten-2`}>
                 <div className="nav-wrapper">
                     <div className="container">
-                        <Link to="/" className="brand-logo header">Hello Diners</Link>
+                        <Link to="/" className="brand-logo header">{config.title}</Link>
                         <a href="#" data-target="mobile" className="sidenav-trigger">
                             <Icon name="menu"/>
                         </a>
@@ -44,7 +44,7 @@ function NavLinks({mobile}) {
             {mobile && (
                 <li className="logo">
                     <a href="/" id="logo-container" className="brand-logo">
-                        <H1 style={{margin: '0', fontSize: '30px', fontWeight: '400'}}>Hello Diners</H1>
+                        <H1 style={{margin: '0', fontSize: '30px', fontWeight: '400'}}>{config.title}</H1>
                     </a>
                 </li>
             )}

@@ -1,9 +1,9 @@
 import React from 'react';
-import theme from './theme';
+import config from './config';
 
 export default function () {
     return (
-        <footer className={`page-footer ${theme.color} lighten-2`}>
+        <footer className={`page-footer ${config.color} lighten-2`}>
             <div className="footer-copyright">
                 <div className="container">
                     © 2019 GRECO TECH LTD

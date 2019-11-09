@@ -1,9 +1,9 @@
 import React from 'react';
-import theme from '../theme';
+import config from '../config';
 
 export function H1({children, ...props}) {
     return (
-        <h1 className={`header ${theme.color}-text lighten-2`} {...props}>
+        <h1 className={`header ${config.color}-text lighten-2`} {...props}>
             {children}
         </h1>
     );

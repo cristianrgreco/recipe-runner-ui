@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from '../theme';
+import config from '../config';
 
 export function Button({children, large = false, floating = false, position = '', ...props}) {
     const btnClass = () => {
@@ -13,7 +13,7 @@ export function Button({children, large = false, floating = false, position = ''
     };
 
     return (
-        <div className={`waves-effect waves-light ${theme.color} lighten-2 ${btnClass()} ${position}`} {...props}>
+        <div className={`waves-effect waves-light ${config.color} lighten-2 ${btnClass()} ${position}`} {...props}>
             {children}
         </div>
     );
