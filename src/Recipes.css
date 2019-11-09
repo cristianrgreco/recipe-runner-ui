@@ -68,18 +68,20 @@
     font-size: 16px;
     text-transform: uppercase;
     padding: 15px;
+    color: rgba(0, 0, 0, .5);
+    background-color: rgba(121, 85, 72, .1)
 }
 
 @media only screen and (max-width: 768px) {
     .Recipes {
-        margin: 0;
+        margin: 40px 0;
     }
 
     .Recipe {
         flex-direction: column;
-        height: 420px;
-        max-height: 420px;
-        margin: 40px 0;
+        height: 410px;
+        max-height: 410px;
+        margin: 20px 0;
     }
 
     .RecipeImage {
@@ -90,11 +92,20 @@
         height: 120px;
     }
 
+    .RecipeDetailsName {
+        margin-bottom: 15px;
+    }
+
     .RecipeDetailsContainer {
         flex: 1;
     }
 
+    .RecipeDetails {
+        padding: 10px 20px;
+    }
+
     .RecipeDetailsDescription {
+        margin-bottom: 15px;
         -webkit-line-clamp: 3;
     }
 }

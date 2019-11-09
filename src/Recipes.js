@@ -48,7 +48,7 @@ function Recipe({recipe}) {
                     </div>
                 </div>
                 <Link to={`/recipes/${recipe._id}`}>
-                    <div className={`RecipeDetailsLink ${config.primary} ${config.primaryAlteration} white-text`}>
+                    <div className="RecipeDetailsLink">
                         <span>
                             View Recipe
                         </span>
