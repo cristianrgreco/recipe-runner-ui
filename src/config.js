@@ -1,5 +1,5 @@
 export default {
-    title: 'Hello Diners',
+    title: 'Hello, Diners',
     primary: 'teal',
     primaryAlteration: 'lighten-2',
     secondary: 'yellow',

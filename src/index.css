@@ -43,3 +43,12 @@ main {
 .page-footer {
     padding-top: 0;
 }
+
+header a {
+    text-transform: uppercase;
+    font-weight: 600 !important;
+}
+
+header a.brand-logo {
+    white-space: nowrap;
+}

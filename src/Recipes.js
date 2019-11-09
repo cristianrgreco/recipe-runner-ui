@@ -1,9 +1,8 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Recipes.css';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {formatTime} from "./time";
-import {H1} from "./components/Heading";
 import config from './config';
 import {Icon} from "./components/Icon";
 

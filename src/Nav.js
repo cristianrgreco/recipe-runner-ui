@@ -19,10 +19,10 @@ export default function Nav() {
     return (
         <header>
             <nav className={`${config.primary} ${config.primaryAlteration}`}>
-                <div className="nav-wrapper">
+                <div className={`nav-wrapper white`}>
                     <div className="container">
-                        <Link to="/" className="brand-logo header">{config.title}</Link>
-                        <a href="#" data-target="mobile" className="sidenav-trigger">
+                        <Link to="/" className={`brand-logo header ${config.primary}-text text-${config.primaryAlteration}`}>{config.title}</Link>
+                        <a href="#" data-target="mobile" className={`sidenav-trigger ${config.primary}-text text-${config.primaryAlteration}`}>
                             <Icon name="menu"/>
                         </a>
                         <ul className="right hide-on-med-and-down">
@@ -43,13 +43,13 @@ function NavLinks({mobile}) {
         <Fragment>
             {mobile && (
                 <li className="logo">
-                    <a href="/" id="logo-container" className="brand-logo">
-                        <H1 style={{margin: '0', fontSize: '30px', fontWeight: '400'}}>{config.title}</H1>
+                    <a href="/" id="logo-container" className={`brand-logo ${config.primary}-text text-${config.primaryAlteration}`}>
+                        <H1 style={{margin: '0', fontSize: '30px', fontWeight: '600'}}>{config.title}</H1>
                     </a>
                 </li>
             )}
-            <li><Link to="/">Recipes</Link></li>
-            <li><Link to="/create-recipe">Create new</Link></li>
+            <li><Link to="/" className={`${config.primary}-text text-${config.primaryAlteration}`}>Recipes</Link></li>
+            <li><Link to="/create-recipe" className={`${config.primary}-text text-${config.primaryAlteration}`}>Create new</Link></li>
         </Fragment>
     );
 }
