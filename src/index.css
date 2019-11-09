@@ -19,6 +19,14 @@ main {
     flex: 1 0 auto;
 }
 
+#logo-container {
+    height: 65px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
 .page-footer {
     padding-top: 0;
 }

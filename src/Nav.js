@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {Link} from "react-router-dom";
 import theme from './theme';
 import {Icon} from "./components/Icon";
+import {H1} from "./components/Heading";
 
 export default function Nav() {
     const [domContentLoaded, setDomContentLoaded] = useState(false);
@@ -25,21 +26,28 @@ export default function Nav() {
                             <Icon name="menu"/>
                         </a>
                         <ul className="right hide-on-med-and-down">
-                            <NavLinks/>
+                            <NavLinks mobile={false}/>
                         </ul>
                     </div>
                 </div>
             </nav>
             <ul id="mobile" className="sidenav">
-                <NavLinks/>
+                <NavLinks mobile={true}/>
             </ul>
         </header>
     );
 }
 
-function NavLinks() {
+function NavLinks({mobile}) {
     return (
         <Fragment>
+            {mobile && (
+                <li className="logo">
+                    <a href="/" id="logo-container" className="brand-logo">
+                        <H1 style={{margin: '0', fontSize: '30px', fontWeight: '400'}}>Hello Diners</H1>
+                    </a>
+                </li>
+            )}
             <li><Link to="/">Home</Link></li>
             <li><Link to="/recipes">Recipes</Link></li>
             <li><Link to="/create-recipe">Create new</Link></li>
