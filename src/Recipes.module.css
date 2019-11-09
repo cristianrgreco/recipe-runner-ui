@@ -74,13 +74,13 @@
 
 @media only screen and (max-width: 768px) {
     .Recipes {
-        margin: 40px 0;
+        margin: 20px 0;
     }
 
     .Recipe {
         flex-direction: column;
-        height: 282px;
-        max-height: 282px;
+        height: 295px;
+        max-height: 295px;
         margin: 20px 0;
     }
 
@@ -89,7 +89,7 @@
     }
 
     .RecipeImage img {
-        height: 100px;
+        height: 120px;
     }
 
     .RecipeDetailsName {
@@ -114,5 +114,11 @@
 
     .RecipeDetailsDescription {
         display: none;
+    }
+
+    .RecipeDetailsLink {
+        font-size: 14px;
+        padding: 10px;
+        margin-top: 5px;
     }
 }

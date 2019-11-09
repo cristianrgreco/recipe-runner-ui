@@ -41,58 +41,44 @@ export default function Recipe() {
                     </div>
                     <div className={styles.RecipeBody}>
                         <div className={styles.RecipeBody_Requirements}>
-                            <div className={styles.RecipeBody_Requirements_Equipment}>
-                                <div className={styles.Recipe_Heading}>
-                                    Equipment
+                            {recipe.equipment.length > 0 && (
+                                <div className={styles.RecipeBody_Requirements_Equipment}>
+                                    <div className={styles.Recipe_Heading}>
+                                        Equipment
+                                    </div>
+                                    <div className={styles.RecipeBody_Requirements_Equipment_Body}>
+                                        <ul className="collection">
+                                            {recipe.equipment.map(equipmentItem => (
+                                                <li className="collection-item">
+                                                    <label>
+                                                        <input type="checkbox"/>
+                                                        <span>{equipmentItem}</span>
+                                                    </label>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div className={styles.RecipeBody_Requirements_Equipment_Body}>
-                                    <ul className="collection">
-                                        {recipe.equipment.map(equipmentItem => (
-                                            <li className="collection-item">
-                                                <label>
-                                                    <input type="checkbox"/>
-                                                    <span>{equipmentItem}</span>
-                                                </label>
-                                            </li>
-                                        ))}
-                                        <li className="collection-item">
-                                            <label>
-                                                <input type="checkbox"/>
-                                                <span>Item 1</span>
-                                            </label>
-                                        </li>
-                                        <li className="collection-item">
-                                            <label>
-                                                <input type="checkbox"/>
-                                                <span>Item 2</span>
-                                            </label>
-                                        </li>
-                                        <li className="collection-item">
-                                            <label>
-                                                <input type="checkbox"/>
-                                                <span>Item 3</span>
-                                            </label>
-                                        </li>
-                                    </ul>
+                            )}
+                            {recipe.ingredients.length > 0 && (
+                                <div className={styles.RecipeBody_Requirements_Ingredients}>
+                                    <div className={styles.Recipe_Heading}>
+                                        Ingredients
+                                    </div>
+                                    <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
+                                        <ul className="collection">
+                                            {recipe.ingredients.map(ingredient => (
+                                                <li className="collection-item">
+                                                    <label>
+                                                        <input type="checkbox"/>
+                                                        <span>{ingredient}</span>
+                                                    </label>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={styles.RecipeBody_Requirements_Ingredients}>
-                                <div className={styles.Recipe_Heading}>
-                                    Ingredients
-                                </div>
-                                <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
-                                    <ul className="collection">
-                                        {recipe.ingredients.map(ingredient => (
-                                            <li className="collection-item">
-                                                <label>
-                                                    <input type="checkbox"/>
-                                                    <span>{ingredient}</span>
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
+                            )}
                         </div>
                         <div className={styles.RecipeBody_Method}>
                             <div className={styles.Recipe_Heading}>
