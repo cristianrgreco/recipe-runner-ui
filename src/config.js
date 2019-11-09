@@ -1,5 +1,7 @@
 export default {
     title: 'Hello Diners',
-    color: 'red',
-    colorAlteration: 'lighten-2'
+    primary: 'teal',
+    primaryAlteration: 'lighten-2',
+    secondary: 'yellow',
+    secondaryAlteration: 'darken-2'
 };

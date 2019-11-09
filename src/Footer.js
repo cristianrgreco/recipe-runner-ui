@@ -3,7 +3,7 @@ import config from './config';
 
 export default function () {
     return (
-        <footer className={`page-footer ${config.color} ${config.colorAlteration}`}>
+        <footer className={`page-footer ${config.primary} ${config.primaryAlteration}`}>
             <div className="footer-copyright">
                 <div className="container">
                     © 2019 GRECO TECH LTD

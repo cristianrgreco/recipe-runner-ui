@@ -18,7 +18,7 @@ export default function Nav() {
 
     return (
         <header>
-            <nav className={`${config.color} ${config.colorAlteration}`}>
+            <nav className={`${config.primary} ${config.primaryAlteration}`}>
                 <div className="nav-wrapper">
                     <div className="container">
                         <Link to="/" className="brand-logo header">{config.title}</Link>

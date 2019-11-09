@@ -100,7 +100,7 @@ export default function RecipeRunner({recipe}) {
 function NoAlarmAndComplete({step}) {
     return (
         <Fragment>
-            <span className={`badge green white-text ${config.colorAlteration}`}>DONE</span>
+            <span className={`badge green white-text ${config.primaryAlteration}`}>DONE</span>
             <div className="grey-text" style={{textDecoration: "line-through"}}>
                 {step.instruction}
             </div>
@@ -147,7 +147,7 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 
     return (
         <Fragment>
-            <span className={`badge green white-text ${config.colorAlteration}`}>DONE</span>
+            <span className={`badge green white-text ${config.primaryAlteration}`}>DONE</span>
             <div className="grey-text" style={{textDecoration: "line-through"}}>
                 {step.instruction}
             </div>
@@ -158,7 +158,7 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 function AlarmAndInProgress({step, timer}) {
     return (
         <Fragment>
-            <span className={`badge orange white-text ${config.colorAlteration}`}>{timeRemaining(moment(), timer.endTime)}</span>
+            <span className={`badge orange white-text ${config.primaryAlteration}`}>{timeRemaining(moment(), timer.endTime)}</span>
             <div>{step.instruction}</div>
         </Fragment>
     );

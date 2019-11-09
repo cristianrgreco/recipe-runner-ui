@@ -1,9 +1,11 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import './Recipes.css';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {formatTime} from "./time";
-import {H1, H2} from "./components/Heading";
+import {H1} from "./components/Heading";
 import config from './config';
+import {Icon} from "./components/Icon";
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -18,28 +20,58 @@ export default function Recipes() {
     }, []);
 
     return (
-        <Fragment>
-            <H1>Recipes</H1>
-            {recipes.length > 0 && (
-                <div className="section">
-                    <ul className="collection">
-                        {recipes.map(recipe => (
-                            <li key={recipe.name} className={`collection-item avatar ${config.color} ${config.colorAlteration}`}>
-                                <Link to={`/recipes/${recipe._id}`} className="white-text">
-                                    <img src={recipe.image} alt="" className="circle"/>
-                                    <strong><span className="title">{recipe.name}</span></strong>
-                                    <p>
-                                        Serves {recipe.serves} people
-                                        <br/>
-                                        Takes {formatTime(recipe.duration)}
-                                    </p>
-                                    <i className="secondary-content white-text material-icons left">arrow_forward</i>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+        <div className="Recipes">
+            {recipes.map(recipe => (
+                <Recipe recipe={recipe}/>
+            ))}
+        </div>
+    );
+}
+
+function Recipe({recipe}) {
+    return (
+        <div className="Recipe">
+            <div className="RecipeImage">
+                <img src={recipe.image} alt=""/>
+            </div>
+            <div className="RecipeDetailsContainer">
+                <div className="RecipeDetails">
+                    <div className={`RecipeDetailsName ${config.primary}-text text-${config.primaryAlteration}`}>
+                        {recipe.name}
+                    </div>
+                    <div className="RecipeDetailsDescription">
+                        {recipe.description}
+                    </div>
+                    <div className="RecipeDetailsInfo">
+                        <RecipeDetailInfoItem value={recipe.serves} label="Serves"/>
+                        <RecipeDetailInfoItem value={formatTime(recipe.duration)} label="Duration"/>
+                        <RecipeDetailInfoItem value={recipe.ingredients.length} label="Ingredients"/>
+                    </div>
                 </div>
-            )}
-        </Fragment>
+                <Link to={`/recipes/${recipe._id}`}>
+                    <div className={`RecipeDetailsLink ${config.primary} ${config.primaryAlteration} white-text`}>
+                        <span>
+                            View Recipe
+                        </span>
+                        <span>
+                            <Icon name="keyboard_arrow_right" position="right"/>
+                        </span>
+                    </div>
+                </Link>
+            </div>
+        </div>
+    );
+}
+
+function RecipeDetailInfoItem({value, label}) {
+    return (
+        <div className="RecipeDetailsInfoItem">
+            <div className={`RecipeDetailsInfoItemValue ${config.primary}-text ${config.primaryAlteration}`}>
+                {value}
+            </div>
+            <div className="RecipeDetailsInfoItemLabel">
+                {label}
+            </div>
+        </div>
     );
 }

@@ -24,9 +24,6 @@ export default function App() {
                         </Route>
                     </Switch>
                 </div>
-                <div className="section"/>
-                <div className="section"/>
-                <div className="section"/>
             </main>
             <Footer/>
         </Router>

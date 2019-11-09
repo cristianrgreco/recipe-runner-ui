@@ -13,7 +13,7 @@ export function Button({children, large = false, floating = false, position = ''
     };
 
     return (
-        <div className={`waves-effect waves-light ${config.color} ${config.colorAlteration} ${btnClass()} ${position}`} {...props}>
+        <div className={`waves-effect waves-light ${config.primary} ${config.primaryAlteration} ${btnClass()} ${position}`} {...props}>
             {children}
         </div>
     );
