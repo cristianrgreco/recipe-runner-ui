@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import './Recipes.css';
+import styles from './Recipes.module.css';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {formatTime} from "./time";
@@ -19,7 +19,7 @@ export default function Recipes() {
     }, []);
 
     return (
-        <div className="Recipes">
+        <div className={styles.Recipes}>
             {recipes.map(recipe => (
                 <Recipe recipe={recipe}/>
             ))}
@@ -29,26 +29,26 @@ export default function Recipes() {
 
 function Recipe({recipe}) {
     return (
-        <div className="Recipe">
-            <div className="RecipeImage">
+        <div className={styles.Recipe}>
+            <div className={styles.RecipeImage}>
                 <img src={recipe.image} alt=""/>
             </div>
-            <div className="RecipeDetailsContainer">
-                <div className="RecipeDetails">
-                    <div className={`RecipeDetailsName ${config.primary}-text text-${config.primaryAlteration}`}>
+            <div className={styles.RecipeDetailsContainer}>
+                <div className={styles.RecipeDetails}>
+                    <div className={`${styles.RecipeDetailsName} ${config.primary}-text text-${config.primaryAlteration}`}>
                         {recipe.name}
                     </div>
-                    <div className="RecipeDetailsDescription">
+                    <div className={styles.RecipeDetailsDescription}>
                         {recipe.description}
                     </div>
-                    <div className="RecipeDetailsInfo">
+                    <div className={styles.RecipeDetailsInfo}>
                         <RecipeDetailInfoItem value={recipe.serves} label="Serves"/>
                         <RecipeDetailInfoItem value={formatTime(recipe.duration)} label="Duration"/>
                         <RecipeDetailInfoItem value={recipe.ingredients.length} label="Ingredients"/>
                     </div>
                 </div>
                 <Link to={`/recipes/${recipe._id}`}>
-                    <div className="RecipeDetailsLink">
+                    <div className={styles.RecipeDetailsLink}>
                         <span>
                             View Recipe
                         </span>
@@ -64,11 +64,11 @@ function Recipe({recipe}) {
 
 function RecipeDetailInfoItem({value, label}) {
     return (
-        <div className="RecipeDetailsInfoItem">
-            <div className={`RecipeDetailsInfoItemValue ${config.primary}-text ${config.primaryAlteration}`}>
+        <div className={styles.RecipeDetailsInfoItem}>
+            <div className={`${styles.RecipeDetailsInfoItemValue} ${config.primary}-text text-${config.primaryAlteration}`}>
                 {value}
             </div>
-            <div className={`RecipeDetailsInfoItemLabel ${config.secondary}-text ${config.secondaryAlteration}`}>
+            <div className={`${styles.RecipeDetailsInfoItemLabel} ${config.secondary}-text text-${config.secondaryAlteration}`}>
                 {label}
             </div>
         </div>

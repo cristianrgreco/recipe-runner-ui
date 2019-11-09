@@ -5,8 +5,8 @@
 .Recipe {
     display: flex;
     border: 1px solid lightgrey;
-    height: 350px;
-    max-height: 350px;
+    height: 340px;
+    max-height: 340px;
     margin: 20px 0;
 }
 
@@ -32,10 +32,10 @@
 }
 
 .RecipeDetailsName {
-    font-size: 20px;
-    line-height: 22px;
-    text-transform: uppercase;
+    font-size: 30px;
+    line-height: 34px;
     font-weight: 600;
+    letter-spacing: 2px;
     margin-bottom: 20px;
 }
 
@@ -44,7 +44,7 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 4;
 }
 
 .RecipeDetailsInfo {
@@ -61,7 +61,7 @@
 }
 
 .RecipeDetailsInfoItemLabel {
-    color: rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, .5);
 }
 
 .RecipeDetailsLink {
@@ -79,8 +79,8 @@
 
     .Recipe {
         flex-direction: column;
-        height: 410px;
-        max-height: 410px;
+        height: 282px;
+        max-height: 282px;
         margin: 20px 0;
     }
 
@@ -89,11 +89,19 @@
     }
 
     .RecipeImage img {
-        height: 120px;
+        height: 100px;
     }
 
     .RecipeDetailsName {
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: 0;
+        text-transform: uppercase;
         margin-bottom: 15px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
     }
 
     .RecipeDetailsContainer {
@@ -105,7 +113,6 @@
     }
 
     .RecipeDetailsDescription {
-        margin-bottom: 15px;
-        -webkit-line-clamp: 3;
+        display: none;
     }
 }

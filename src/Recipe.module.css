@@ -24,18 +24,18 @@
 .RecipeHeader_Info_Name {
     font-size: 36px;
     line-height: 40px;
-    text-transform: uppercase;
     font-weight: 600;
+    letter-spacing: 2px;
     margin-bottom: 40px;
 }
 
 .Recipe_Heading {
-    color: #795548;
+    color: #a1887f;
     font-size: 20px;
     text-transform: uppercase;
     width: 100%;
     padding-bottom: 2px;
-    border-bottom: 1px solid #795548;
+    border-bottom: 1px solid #a1887f;
     margin-bottom: 20px;
 }
 
@@ -113,7 +113,7 @@
     }
 
     .RecipeHeader_Image img {
-        height: 140px;
+        height: 180px;
     }
 
     .RecipeHeader_Info {
@@ -124,6 +124,7 @@
         font-size: 26px;
         line-height: 30px;
         margin-bottom: 40px;
+        letter-spacing: 0;
     }
 
     .Recipe_Heading {
