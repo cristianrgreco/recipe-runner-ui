@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
+import {H1} from "./components/Heading";
 
 export default function Home() {
     return (
         <Fragment>
-            <h1 className="header">Hello Diners</h1>
+            <H1>Hello Diners</H1>
         </Fragment>
     );
 }

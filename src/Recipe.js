@@ -3,6 +3,7 @@ import {Switch, Route, useParams} from "react-router-dom";
 import axios from 'axios';
 import RecipePreview from "./RecipePreview";
 import RecipeRunner from "./RecipeRunner";
+import {H1} from "./components/Heading";
 
 export default function Recipe() {
     const [recipe, setRecipe] = useState(undefined);
@@ -16,7 +17,7 @@ export default function Recipe() {
         <Fragment>
             {recipe && (
                 <Fragment>
-                    <h1 className="header">{recipe.name}</h1>
+                    <H1>{recipe.name}</H1>
                     <Switch>
                         <Route path="/recipes/:recipeId/start">
                             <RecipeRunner recipe={recipe}/>

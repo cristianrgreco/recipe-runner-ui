@@ -1,5 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from "react-router-dom";
+import theme from './theme';
+import {Icon} from "./components/Icon";
 
 export default function Nav() {
     const [domContentLoaded, setDomContentLoaded] = useState(false);
@@ -15,12 +17,12 @@ export default function Nav() {
 
     return (
         <header>
-            <nav>
+            <nav className={`${theme.color} lighten-2`}>
                 <div className="nav-wrapper">
                     <div className="container">
                         <Link to="/" className="brand-logo header">Hello Diners</Link>
                         <a href="#" data-target="mobile" className="sidenav-trigger">
-                            <i className="material-icons">menu</i>
+                            <Icon name="menu"/>
                         </a>
                         <ul className="right hide-on-med-and-down">
                             <NavLinks/>

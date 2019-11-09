@@ -1,6 +1,8 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import moment from 'moment';
 import {formatTime, timeRemaining} from "./time";
+import {Button} from "./components/Button";
+import {Icon} from "./components/Icon";
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -41,11 +43,11 @@ export default function RecipeRunner({recipe}) {
             <audio id="audio" src="/audio/beep.mp3" autoPlay={false}/>
             <div className="row">
                 <div className="col">
-                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>person</i>
+                    <Icon name="person" style={{verticalAlign: 'bottom'}}/>
                     <span style={{verticalAlign: 'bottom'}}>{recipe.serves}</span>
                 </div>
                 <div className="col">
-                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>timer</i>
+                    <Icon name="timer" style={{verticalAlign: 'bottom'}}/>
                     <span style={{verticalAlign: 'bottom'}}>{formatTime(recipe.duration)}</span>
                 </div>
             </div>
@@ -106,17 +108,18 @@ function NoAlarmAndComplete({step}) {
 }
 
 function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
+    const onClick = () => {
+        setSteps(nextSteps(step));
+        setCompletedSteps(completedSteps => [...completedSteps, step]);
+    };
+
     return (
         <Fragment>
             <div>{step.instruction}</div>
             <p className="caption"/>
-            <a className="waves-effect waves-light red lighten-2 btn"
-               onClick={() => {
-                   setSteps(nextSteps(step));
-                   setCompletedSteps(completedSteps => [...completedSteps, step]);
-               }}>
-                <i className="material-icons left">check</i>Done
-            </a>
+            <Button onClick={onClick}>
+                <Icon name="check" position="left" />DONE
+            </Button>
         </Fragment>
     );
 }
@@ -168,14 +171,17 @@ function AlarmAndReady({step, setTimers, timers}) {
         }
     ];
 
+    const onClick = () => {
+        setTimers(addTimer(timers, step))
+    };
+
     return (
         <Fragment>
             <div>{step.instruction}</div>
             <p className="caption"/>
-            <a className="waves-effect waves-light red lighten-2 btn"
-               onClick={() => setTimers(addTimer(timers, step))}>
-                <i className="material-icons left">timer</i>Start timer
-            </a>
+            <Button onClick={onClick}>
+                <Icon name="timer" position="left"/>Start timer
+            </Button>
         </Fragment>
     );
 }

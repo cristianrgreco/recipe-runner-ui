@@ -2,6 +2,9 @@ import React, {Fragment, createRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {methodDuration} from "./duration";
+import {Icon} from "./components/Icon";
+import {Button} from "./components/Button";
+import {H1} from "./components/Heading";
 
 export default function () {
     const [name, setName] = useState("");
@@ -37,7 +40,7 @@ export default function () {
 
     return (
         <Fragment>
-            <h1 className="header">Create Recipe</h1>
+            <H1>Create Recipe</H1>
             <form className="col s12">
                 <div className="row">
                     <Name name={name} setName={setName}/>
@@ -48,20 +51,19 @@ export default function () {
                 <div className="row">
                     <Image image={image} setImage={setImage}/>
                 </div>
-                <div className="section">
+                <div className="row">
                     <Equipment equipment={equipment} setEquipment={setEquipment}/>
                 </div>
-                <div className="section">
+                <div className="row">
                     <Ingredients ingredients={ingredients} setIngredients={setIngredients}/>
                 </div>
-                <div className="section">
+                <div className="row">
                     <Method method={method} setMethod={setMethod}/>
                 </div>
-                <div className="section">
-                    <div className="btn-large red lighten-2 right" onClick={save}>
-                        <i className="material-icons left">save</i>
-                        <span>Save</span>
-                    </div>
+                <div className="row">
+                    <Button large position="right" onClick={save}>
+                        <Icon name="save" position="left"/>SAVE
+                    </Button>
                 </div>
             </form>
         </Fragment>
@@ -100,16 +102,16 @@ function Image({image, setImage}) {
     return (
         <Fragment>
             <div className="file-field input-field col s12">
-                <div className="btn red lighten-2">
+                <Button>
                     <span>Image</span>
                     <input type="file" ref={inputRef} onChange={onChange}/>
-                </div>
+                </Button>
                 <div className="file-path-wrapper">
                     <input className="file-path validate" id="image" type="text"/>
                 </div>
             </div>
             <div className="col s12 m6">
-                {image !== undefined && <img src={URL.createObjectURL(image)} className="responsive-img"/>}
+                {image !== undefined && <img src={URL.createObjectURL(image)} className="responsive-img" alt="recipe-image"/>}
             </div>
         </Fragment>
     );
@@ -139,10 +141,9 @@ function Equipment({equipment, setEquipment}) {
                                 <li key={item} className="collection-item">
                                     <div className="valign-wrapper" style={{display: 'flex'}}>
                                         <span style={{flex: '1'}}>{item}</span>
-                                        <div className="btn-floating red lighten-2" style={{justifySelf: 'flex-end'}}
-                                             onClick={() => remove(item)}>
-                                            <i className="material-icons">delete</i>
-                                        </div>
+                                        <Button floating style={{justifySelf: 'flex-end'}} onClick={() => remove(item)}>
+                                            <Icon name="delete"/>
+                                        </Button>
                                     </div>
                                 </li>
                             ))}
@@ -154,9 +155,9 @@ function Equipment({equipment, setEquipment}) {
                 <div className="input-field col s12">
                     <input id="equipment" type="text" className="validate" ref={inputRef}/>
                     <label htmlFor="equipment">Equipment</label>
-                    <div className="btn red lighten-2" onClick={add}>
+                    <Button onClick={add}>
                         <span>Add</span>
-                    </div>
+                    </Button>
                 </div>
             </div>
         </Fragment>
@@ -187,9 +188,9 @@ function Ingredients({ingredients, setIngredients}) {
                                 <li key={item} className="collection-item">
                                     <div className="valign-wrapper" style={{display: 'flex'}}>
                                         <span style={{flex: '1'}}>{item}</span>
-                                        <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
-                                            <i className="material-icons">delete</i>
-                                        </div>
+                                        <Button floating style={{justifySelf: 'flex-end'}} onClick={() => remove(item)}>
+                                            <Icon name="delete"/>
+                                        </Button>
                                     </div>
                                 </li>
                             ))}
@@ -201,9 +202,9 @@ function Ingredients({ingredients, setIngredients}) {
                 <div className="input-field col s12">
                     <input id="ingredients" type="text" className="validate" ref={inputRef}/>
                     <label htmlFor="ingredients">Ingredients</label>
-                    <div className="btn red lighten-2" onClick={add}>
+                    <Button onClick={add}>
                         <span>Add</span>
-                    </div>
+                    </Button>
                 </div>
             </div>
         </Fragment>
@@ -258,9 +259,9 @@ function MethodItem({method, setMethod, i = 0}) {
                                 <li key={item.instruction} className="collection-item">
                                     <div className="valign-wrapper" style={{display: 'flex'}}>
                                         <span style={{flex: '1'}}>{item.instruction}</span>
-                                        <div className="btn-floating red lighten-2" onClick={() => remove(item)}>
-                                            <i className="material-icons">delete</i>
-                                        </div>
+                                        <Button floating onClick={() => remove(item)}>
+                                            <Icon name="delete"/>
+                                        </Button>
                                     </div>
                                     <MethodItem method={item.next} setMethod={setMethod} i={(i + 1 * j + 1) + 1}/>
                                 </li>
@@ -279,14 +280,13 @@ function MethodItem({method, setMethod, i = 0}) {
                     <label htmlFor={`timer-${i}`}>Timer (seconds)</label>
                 </div>
                 <div className="input-field col s6">
-                    <input id={`timer-description-${i}`} type="text" className="validate"
-                           ref={timerDescriptionInputRef}/>
+                    <input id={`timer-description-${i}`} type="text" className="validate" ref={timerDescriptionInputRef}/>
                     <label htmlFor={`timer-description-${i}`}>Description</label>
                 </div>
                 <div className="col s12">
-                    <div className="btn red lighten-2" onClick={add}>
+                    <Button onClick={add}>
                         <span>Add</span>
-                    </div>
+                    </Button>
                 </div>
             </div>
         </Fragment>

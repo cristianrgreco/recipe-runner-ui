@@ -2,6 +2,8 @@ import React, {Fragment, useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {formatTime} from "./time";
+import {H1} from "./components/Heading";
+import theme from './theme';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -17,12 +19,12 @@ export default function Recipes() {
 
     return (
         <Fragment>
-            <h1 className="header">Recipes</h1>
+            <H1>Recipes</H1>
             {recipes.length > 0 && (
                 <div className="section">
                     <ul className="collection">
                         {recipes.map(recipe => (
-                            <li key={recipe.name} className="collection-item avatar red lighten-2">
+                            <li key={recipe.name} className={`collection-item avatar ${theme.color} lighten-2`}>
                                 <Link to={`/recipes/${recipe._id}`} className="white-text">
                                     <img src={recipe.image} alt="" className="circle"/>
                                     <strong><span className="title">{recipe.name}</span></strong>

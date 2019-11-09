@@ -1,17 +1,20 @@
 import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
 import {formatTime} from "./time";
+import {Icon} from "./components/Icon";
+import {H2} from "./components/Heading";
+import {Button} from "./components/Button";
 
 export default function RecipePreview({recipe}) {
     return (
         <Fragment>
             <div className="row">
                 <div className="col">
-                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>person</i>
+                    <Icon name="person" style={{verticalAlign: 'bottom'}}/>
                     <span style={{verticalAlign: 'bottom'}}>{recipe.serves}</span>
                 </div>
                 <div className="col">
-                    <i className="material-icons" style={{verticalAlign: 'bottom'}}>timer</i>
+                    <Icon name="timer" style={{verticalAlign: 'bottom'}}/>
                     <span style={{verticalAlign: 'bottom'}}>{formatTime(recipe.duration)}</span>
                 </div>
             </div>
@@ -23,7 +26,7 @@ export default function RecipePreview({recipe}) {
             <div className="row">
                 {recipe.equipment.length > 0 && (
                     <Fragment>
-                        <h3 className="header">Equipment</h3>
+                        <H2>Equipment</H2>
                         <ul className="collection">
                             {recipe.equipment.map(item =>
                                 <li key={item} className="collection-item">
@@ -40,7 +43,7 @@ export default function RecipePreview({recipe}) {
             <div className="row">
                 {recipe.ingredients.length > 0 && (
                     <Fragment>
-                        <h3 className="header">Ingredients</h3>
+                        <H2>Ingredients</H2>
                         <ul className="collection">
                             {recipe.ingredients.map(ingredient =>
                                 <li key={ingredient} className="collection-item">
@@ -55,9 +58,10 @@ export default function RecipePreview({recipe}) {
                 )}
             </div>
             <div className="row">
-                <Link to={`/recipes/${recipe._id}/start`} className="waves-effect waves-light red lighten-2 btn-large">
-                    <i className="material-icons left">sentiment_very_satisfied</i>
-                    I'm ready!
+                <Link to={`/recipes/${recipe._id}/start`}>
+                    <Button large>
+                        <Icon name="sentiment_very_satisfied" position="left"/>I'M READY!
+                    </Button>
                 </Link>
             </div>
         </Fragment>
