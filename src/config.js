@@ -1,4 +1,5 @@
 export default {
     title: 'Hello Diners',
-    color: 'red'
+    color: 'red',
+    colorAlteration: 'lighten-2'
 };

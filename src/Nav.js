@@ -18,7 +18,7 @@ export default function Nav() {
 
     return (
         <header>
-            <nav className={`${config.color} lighten-2`}>
+            <nav className={`${config.color} ${config.colorAlteration}`}>
                 <div className="nav-wrapper">
                     <div className="container">
                         <Link to="/" className="brand-logo header">{config.title}</Link>
@@ -48,8 +48,7 @@ function NavLinks({mobile}) {
                     </a>
                 </li>
             )}
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/recipes">Recipes</Link></li>
+            <li><Link to="/">Recipes</Link></li>
             <li><Link to="/create-recipe">Create new</Link></li>
         </Fragment>
     );

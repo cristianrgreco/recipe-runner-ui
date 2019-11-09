@@ -3,7 +3,7 @@ import config from '../config';
 
 export function H1({children, ...props}) {
     return (
-        <h1 className={`header ${config.color}-text lighten-2`} {...props}>
+        <h1 className={`header ${config.color}-text text-${config.colorAlteration}`} {...props}>
             {children}
         </h1>
     );
@@ -11,7 +11,7 @@ export function H1({children, ...props}) {
 
 export function H2({children, ...props}) {
     return (
-        <h2 className={`header lighten-2`} {...props}>
+        <h2 className={`header text-${config.colorAlteration}`} {...props}>
             {children}
         </h2>
     );
