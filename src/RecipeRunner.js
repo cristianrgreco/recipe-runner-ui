@@ -42,57 +42,45 @@ export default function RecipeRunner({recipe}) {
     return (
         <Fragment>
             <audio id="audio" src="/audio/beep.mp3" autoPlay={false}/>
-            <div className="row">
-                <div className="col">
-                    <Icon name="person" style={{verticalAlign: 'bottom'}}/>
-                    <span style={{verticalAlign: 'bottom'}}>{recipe.serves}</span>
-                </div>
-                <div className="col">
-                    <Icon name="timer" style={{verticalAlign: 'bottom'}}/>
-                    <span style={{verticalAlign: 'bottom'}}>{formatTime(recipe.duration)}</span>
-                </div>
-            </div>
-            <div className="section">
-                {steps.length > 0 && (
-                    <ul className="collection">
-                        {steps.map(step => (
-                            <li key={step.instruction} className="collection-item">
-                                <div className="section">
-                                    {step.alarm === undefined && isStepCompleted(step) && (
-                                        <NoAlarmAndComplete step={step}/>
-                                    )}
-                                    {step.alarm === undefined && !isStepCompleted(step) && (
-                                        <NoAlarmAndInProgress
-                                            step={step}
-                                            setSteps={setSteps}
-                                            setCompletedSteps={setCompletedSteps}
-                                            nextSteps={nextSteps}/>
-                                    )}
-                                    {step.alarm !== undefined && !isTimerSetForStep(step) && (
-                                        <AlarmAndReady
-                                            step={step}
-                                            timers={timers}
-                                            setTimers={setTimers}/>
-                                    )}
-                                    {step.alarm !== undefined && isTimerSetForStep(step) && !isTimerCompleteForStep(step) && (
-                                        <AlarmAndInProgress
-                                            step={step}
-                                            timer={getTimerForStep(step)}/>
-                                    )}
-                                    {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
-                                        <AlarmAndComplete
-                                            step={step}
-                                            setSteps={setSteps}
-                                            setCompletedSteps={setCompletedSteps}
-                                            nextSteps={nextSteps}
-                                        />
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                    </ul>)
-                }
-            </div>
+            {steps.length > 0 && (
+                <ul className="collection">
+                    {steps.map(step => (
+                        <li key={step.instruction} className="collection-item">
+                            <div className="section">
+                                {step.alarm === undefined && isStepCompleted(step) && (
+                                    <NoAlarmAndComplete step={step}/>
+                                )}
+                                {step.alarm === undefined && !isStepCompleted(step) && (
+                                    <NoAlarmAndInProgress
+                                        step={step}
+                                        setSteps={setSteps}
+                                        setCompletedSteps={setCompletedSteps}
+                                        nextSteps={nextSteps}/>
+                                )}
+                                {step.alarm !== undefined && !isTimerSetForStep(step) && (
+                                    <AlarmAndReady
+                                        step={step}
+                                        timers={timers}
+                                        setTimers={setTimers}/>
+                                )}
+                                {step.alarm !== undefined && isTimerSetForStep(step) && !isTimerCompleteForStep(step) && (
+                                    <AlarmAndInProgress
+                                        step={step}
+                                        timer={getTimerForStep(step)}/>
+                                )}
+                                {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
+                                    <AlarmAndComplete
+                                        step={step}
+                                        setSteps={setSteps}
+                                        setCompletedSteps={setCompletedSteps}
+                                        nextSteps={nextSteps}
+                                    />
+                                )}
+                            </div>
+                        </li>
+                    ))}
+                </ul>)
+            }
         </Fragment>
     );
 }
@@ -119,7 +107,7 @@ function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
             <div>{step.instruction}</div>
             <p className="caption"/>
             <Button onClick={onClick}>
-                <Icon name="check" position="left" />DONE
+                <Icon name="check" position="left"/>DONE
             </Button>
         </Fragment>
     );
@@ -158,7 +146,8 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 function AlarmAndInProgress({step, timer}) {
     return (
         <Fragment>
-            <span className={`badge orange white-text ${config.primaryAlteration}`}>{timeRemaining(moment(), timer.endTime)}</span>
+            <span
+                className={`badge orange white-text ${config.primaryAlteration}`}>{timeRemaining(moment(), timer.endTime)}</span>
             <div>{step.instruction}</div>
         </Fragment>
     );

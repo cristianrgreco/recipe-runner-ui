@@ -46,9 +46,10 @@ main {
 
 header a {
     text-transform: uppercase;
-    font-weight: 600 !important;
+    font-weight: 600;
 }
 
 header a.brand-logo {
     white-space: nowrap;
+    font-weight: 100;
 }

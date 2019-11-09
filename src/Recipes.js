@@ -68,7 +68,7 @@ function RecipeDetailInfoItem({value, label}) {
             <div className={`RecipeDetailsInfoItemValue ${config.primary}-text ${config.primaryAlteration}`}>
                 {value}
             </div>
-            <div className="RecipeDetailsInfoItemLabel">
+            <div className={`RecipeDetailsInfoItemLabel ${config.secondary}-text ${config.secondaryAlteration}`}>
                 {label}
             </div>
         </div>
