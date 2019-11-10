@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import moment from 'moment';
-import {formatTime, timeRemaining} from "./time";
+import {timeRemaining} from "./time";
 import {Button} from "./components/Button";
 import {Icon} from "./components/Icon";
 import config from './config';

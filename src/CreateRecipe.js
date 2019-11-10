@@ -111,7 +111,7 @@ function Image({image, setImage}) {
                 </div>
             </div>
             <div className="col s12 m6">
-                {image !== undefined && <img src={URL.createObjectURL(image)} className="responsive-img" alt="recipe-image"/>}
+                {image !== undefined && <img src={URL.createObjectURL(image)} className="responsive-img"/>}
             </div>
         </Fragment>
     );

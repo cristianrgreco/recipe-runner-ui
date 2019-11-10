@@ -49,7 +49,7 @@ export default function Recipe() {
                                     <div className={styles.RecipeBody_Requirements_Equipment_Body}>
                                         <ul className="collection">
                                             {recipe.equipment.map(equipmentItem => (
-                                                <li className="collection-item">
+                                                <li key={equipmentItem} className="collection-item">
                                                     <label>
                                                         <input type="checkbox"/>
                                                         <span>{equipmentItem}</span>
@@ -68,7 +68,7 @@ export default function Recipe() {
                                     <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
                                         <ul className="collection">
                                             {recipe.ingredients.map(ingredient => (
-                                                <li className="collection-item">
+                                                <li key={ingredient} className="collection-item">
                                                     <label>
                                                         <input type="checkbox"/>
                                                         <span>{ingredient}</span>

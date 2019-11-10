@@ -21,7 +21,7 @@ export default function Recipes() {
     return (
         <div className={styles.Recipes}>
             {recipes.map(recipe => (
-                <Recipe recipe={recipe}/>
+                <Recipe key={recipe._id} recipe={recipe}/>
             ))}
         </div>
     );

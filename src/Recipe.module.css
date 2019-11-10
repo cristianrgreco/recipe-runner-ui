@@ -7,7 +7,7 @@
 }
 
 .RecipeHeader_Image {
-    flex: 2;
+    flex: 1;
 }
 
 .RecipeHeader_Image img {
@@ -17,15 +17,14 @@
 }
 
 .RecipeHeader_Info {
-    flex: 3;
+    flex: 2;
     padding: 0 40px;
 }
 
 .RecipeHeader_Info_Name {
     font-size: 36px;
     line-height: 40px;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 400;
     margin-bottom: 40px;
 }
 
@@ -149,5 +148,9 @@
 
     .RecipeBody_Method {
         padding: 0;
+    }
+
+    .RecipeDetails_InfoItem_Value {
+        font-weight: 400;
     }
 }
