@@ -3,7 +3,6 @@ import styles from './Recipes.module.css';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {formatTime} from "./time";
-import config from './config';
 import {Icon} from "./components/Icon";
 
 export default function Recipes() {
