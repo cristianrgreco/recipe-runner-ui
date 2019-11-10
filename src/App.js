@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import CreateRecipe from "./CreateRecipe";
 import Recipes from "./Recipes";
 import Recipe from "./Recipe";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 export default function App() {
     return (
