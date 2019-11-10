@@ -88,8 +88,8 @@
     .Recipe {
         flex-direction: column;
         margin: 20px 0;
-        height: 290px;
-        max-height: 290px;
+        height: 310px;
+        max-height: 310px;
     }
 
     .RecipeImage {
@@ -125,7 +125,7 @@
 
     .RecipeDetailsLink {
         font-size: 14px;
-        padding: 10px 20px;
+        padding: 20px;
         margin-top: 5px;
     }
 }
