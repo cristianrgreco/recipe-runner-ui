@@ -75,7 +75,7 @@
 .RecipeDetailsLink {
     font-size: 16px;
     text-transform: uppercase;
-    padding: 20px 40px;
+    padding: 20px;
     color: secondary;
     background-color: secondaryBackground;
 }
