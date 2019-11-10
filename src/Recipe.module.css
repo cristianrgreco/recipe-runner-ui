@@ -9,14 +9,6 @@
     border-bottom-color: secondaryBackground !important;
 }
 
-.Collection_Item span {
-    line-height: 21px !important;
-}
-
-.Collection_Item label {
-    color: dark;
-}
-
 .Container {
     margin: 40px 0;
 }

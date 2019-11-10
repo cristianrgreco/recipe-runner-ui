@@ -49,10 +49,7 @@ export default function Recipe() {
                                         <ul className={`${styles.Collection} collection`}>
                                             {recipe.equipment.map(equipmentItem => (
                                                 <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
-                                                    <label>
-                                                        <input type="checkbox"/>
-                                                        <span>{equipmentItem}</span>
-                                                    </label>
+                                                    {equipmentItem}
                                                 </li>
                                             ))}
                                         </ul>
@@ -68,10 +65,7 @@ export default function Recipe() {
                                         <ul className={`${styles.Collection} collection`}>
                                             {recipe.ingredients.map(ingredient => (
                                                 <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
-                                                    <label>
-                                                        <input type="checkbox"/>
-                                                        <span>{ingredient}</span>
-                                                    </label>
+                                                    {ingredient}
                                                 </li>
                                             ))}
                                         </ul>
