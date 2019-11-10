@@ -17,7 +17,7 @@
     "eject": "react-scripts eject",
     "version": "git rev-parse --short HEAD",
     "deploy:build": "npm run build",
-    "deploy:sync": "aws s3 sync build/ s3://recipe-runner",
+    "deploy:sync": "aws s3 sync --delete build/ s3://recipe-runner",
     "deploy": "npm run deploy:build && npm run deploy:sync"
   },
   "eslintConfig": {
