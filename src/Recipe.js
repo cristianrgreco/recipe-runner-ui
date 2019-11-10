@@ -4,9 +4,11 @@ import axios from 'axios';
 import styles from './Recipe.module.css';
 import {formatTime} from "./time";
 import RecipeRunner from "./RecipeRunner";
+import {Button} from "./components/Button";
 
 export default function Recipe() {
     const [recipe, setRecipe] = useState(undefined);
+    const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
 
     useEffect(() => {
@@ -49,7 +51,10 @@ export default function Recipe() {
                                         <ul className={`${styles.Collection} collection`}>
                                             {recipe.equipment.map(equipmentItem => (
                                                 <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
-                                                    {equipmentItem}
+                                                    <label>
+                                                        <input type="checkbox"/>
+                                                        <span>{equipmentItem}</span>
+                                                    </label>
                                                 </li>
                                             ))}
                                         </ul>
@@ -65,7 +70,10 @@ export default function Recipe() {
                                         <ul className={`${styles.Collection} collection`}>
                                             {recipe.ingredients.map(ingredient => (
                                                 <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
-                                                    {ingredient}
+                                                    <label>
+                                                        <input type="checkbox"/>
+                                                        <span>{ingredient}</span>
+                                                    </label>
                                                 </li>
                                             ))}
                                         </ul>
@@ -78,7 +86,18 @@ export default function Recipe() {
                                 Method
                             </div>
                             <div className={styles.RecipeBody_Method_Body}>
-                                <RecipeRunner recipe={recipe}/>
+                                {started
+                                    ? <RecipeRunner recipe={recipe}/>
+                                    :
+                                    (
+                                        <Fragment>
+                                            <Method recipe={recipe}/>
+                                            <Button onClick={() => setStarted(true)}>
+                                                <span>Start</span>
+                                            </Button>
+                                        </Fragment>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
@@ -98,5 +117,26 @@ function RecipeDetailInfoItem({value, label}) {
                 {label}
             </div>
         </div>
+    );
+}
+
+function Method({recipe}) {
+    return (
+        <ul className={`${styles.Collection} collection`}>
+            <MethodItem methodItem={recipe.method}/>
+        </ul>
+    );
+}
+
+function MethodItem({methodItem}) {
+    return (
+        (methodItem || []).map(aMethodItem => (
+            <Fragment key={aMethodItem.instruction}>
+                <li className={`${styles.Collection_Item} collection-item`}>
+                    {aMethodItem.instruction}
+                </li>
+                <MethodItem methodItem={aMethodItem.next}/>
+            </Fragment>
+        ))
     );
 }
