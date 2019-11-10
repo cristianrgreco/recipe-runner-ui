@@ -36,9 +36,9 @@ function Recipe({recipe}) {
                         {recipe.description}
                     </div>
                     <div className={styles.RecipeDetailsInfo}>
-                        <RecipeDetailInfoItem value={recipe.serves} label="Serves"/>
-                        <RecipeDetailInfoItem value={formatTime(recipe.duration)} label="Duration"/>
-                        <RecipeDetailInfoItem value={recipe.ingredients.length} label="Ingredients"/>
+                        <RecipeDetail value={recipe.serves} label="Serves"/>
+                        <RecipeDetail value={formatTime(recipe.duration)} label="Duration"/>
+                        <RecipeDetail value={recipe.ingredients.length} label="Ingredients"/>
                     </div>
                 </div>
                 <Link to={`/recipes/${recipe._id}`}>
@@ -56,7 +56,7 @@ function Recipe({recipe}) {
     );
 }
 
-function RecipeDetailInfoItem({value, label}) {
+function RecipeDetail({value, label}) {
     return (
         <div className={styles.RecipeDetailsInfoItem}>
             <div className={styles.RecipeDetailsInfoItemValue}>
