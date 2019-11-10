@@ -19,66 +19,15 @@ export default function Recipe() {
         <Fragment>
             {recipe && (
                 <div className={styles.Container}>
-                    <div className={styles.RecipeHeader}>
-                        <div className={styles.RecipeHeader_Image}>
-                            <img src={recipe.image} alt=""/>
-                        </div>
-                        <div className={styles.RecipeHeader_Info}>
-                            <div className={styles.RecipeHeader_Info_Name}>
-                                {recipe.name}
-                            </div>
-                            <div className={`${styles.Recipe_Heading}`}>
-                                About this recipe
-                            </div>
-                            <div className={styles.RecipeHeader_Info_Description}>
-                                {recipe.description}
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.RecipeDetails}>
-                        <RecipeDetailInfoItem value={recipe.serves} label="Serves"/>
-                        <RecipeDetailInfoItem value={formatTime(recipe.duration)} label="Duration"/>
-                        <RecipeDetailInfoItem value={recipe.ingredients.length} label="Ingredients"/>
-                    </div>
+                    <RecipeHeader recipe={recipe}/>
+                    <RecipeDetails recipe={recipe}/>
                     <div className={styles.RecipeBody}>
                         <div className={styles.RecipeBody_Requirements}>
                             {recipe.equipment.length > 0 && (
-                                <div className={styles.RecipeBody_Requirements_Equipment}>
-                                    <div className={styles.Recipe_Heading}>
-                                        Equipment
-                                    </div>
-                                    <div className={styles.RecipeBody_Requirements_Equipment_Body}>
-                                        <ul className={`${styles.Collection} collection`}>
-                                            {recipe.equipment.map(equipmentItem => (
-                                                <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
-                                                    <label>
-                                                        <input type="checkbox"/>
-                                                        <span>{equipmentItem}</span>
-                                                    </label>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
+                                <RecipeEquipment recipe={recipe}/>
                             )}
                             {recipe.ingredients.length > 0 && (
-                                <div className={styles.RecipeBody_Requirements_Ingredients}>
-                                    <div className={styles.Recipe_Heading}>
-                                        Ingredients
-                                    </div>
-                                    <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
-                                        <ul className={`${styles.Collection} collection`}>
-                                            {recipe.ingredients.map(ingredient => (
-                                                <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
-                                                    <label>
-                                                        <input type="checkbox"/>
-                                                        <span>{ingredient}</span>
-                                                    </label>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
+                                <RecipeIngredients recipe={recipe}/>
                             )}
                         </div>
                         <div className={styles.RecipeBody_Method}>
@@ -91,10 +40,8 @@ export default function Recipe() {
                                     :
                                     (
                                         <Fragment>
-                                            <Method recipe={recipe}/>
-                                            <Button onClick={() => setStarted(true)}>
-                                                <span>Start</span>
-                                            </Button>
+                                            <RecipeMethod recipe={recipe}/>
+                                            <Button onClick={() => setStarted(true)}>Start</Button>
                                         </Fragment>
                                     )
                                 }
@@ -107,7 +54,38 @@ export default function Recipe() {
     );
 }
 
-function RecipeDetailInfoItem({value, label}) {
+function RecipeHeader({recipe}) {
+    return (
+        <div className={styles.RecipeHeader}>
+            <div className={styles.RecipeHeader_Image}>
+                <img src={recipe.image} alt=""/>
+            </div>
+            <div className={styles.RecipeHeader_Info}>
+                <div className={styles.RecipeHeader_Info_Name}>
+                    {recipe.name}
+                </div>
+                <div className={`${styles.Recipe_Heading}`}>
+                    About this recipe
+                </div>
+                <div className={styles.RecipeHeader_Info_Description}>
+                    {recipe.description}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function RecipeDetails({recipe}) {
+    return (
+        <div className={styles.RecipeDetails}>
+            <RecipeDetail value={recipe.serves} label="Serves"/>
+            <RecipeDetail value={formatTime(recipe.duration)} label="Duration"/>
+            <RecipeDetail value={recipe.ingredients.length} label="Ingredients"/>
+        </div>
+    );
+}
+
+function RecipeDetail({value, label}) {
     return (
         <div className={styles.RecipeDetails_InfoItem}>
             <div className={styles.RecipeDetails_InfoItem_Value}>
@@ -120,22 +98,66 @@ function RecipeDetailInfoItem({value, label}) {
     );
 }
 
-function Method({recipe}) {
+function RecipeEquipment({recipe}) {
+    return (
+        <div className={styles.RecipeBody_Requirements_Equipment}>
+            <div className={styles.Recipe_Heading}>
+                Equipment
+            </div>
+            <div className={styles.RecipeBody_Requirements_Equipment_Body}>
+                <ul className={`${styles.Collection} collection`}>
+                    {recipe.equipment.map(equipmentItem => (
+                        <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
+                            <label>
+                                <input type="checkbox"/>
+                                <span>{equipmentItem}</span>
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+function RecipeIngredients({recipe}) {
+    return (
+        <div className={styles.RecipeBody_Requirements_Ingredients}>
+            <div className={styles.Recipe_Heading}>
+                Ingredients
+            </div>
+            <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
+                <ul className={`${styles.Collection} collection`}>
+                    {recipe.ingredients.map(ingredient => (
+                        <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
+                            <label>
+                                <input type="checkbox"/>
+                                <span>{ingredient}</span>
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+function RecipeMethod({recipe}) {
     return (
         <ul className={`${styles.Collection} collection`}>
-            <MethodItem methodItem={recipe.method}/>
+            <RecipeMethodItem methodItem={recipe.method}/>
         </ul>
     );
 }
 
-function MethodItem({methodItem}) {
+function RecipeMethodItem({methodItem}) {
     return (
         (methodItem || []).map(aMethodItem => (
             <Fragment key={aMethodItem.instruction}>
                 <li className={`${styles.Collection_Item} collection-item`}>
                     {aMethodItem.instruction}
                 </li>
-                <MethodItem methodItem={aMethodItem.next}/>
+                <RecipeMethodItem methodItem={aMethodItem.next}/>
             </Fragment>
         ))
     );
