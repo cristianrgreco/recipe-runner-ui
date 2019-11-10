@@ -2,7 +2,6 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from 'axios';
 import styles from './Recipe.module.css';
-import config from "./config";
 import {formatTime} from "./time";
 import RecipeRunner from "./RecipeRunner";
 
@@ -23,7 +22,7 @@ export default function Recipe() {
                             <img src={recipe.image} alt=""/>
                         </div>
                         <div className={styles.RecipeHeader_Info}>
-                            <div className={`${styles.RecipeHeader_Info_Name} ${config.primary}-text text-${config.primaryAlteration}`}>
+                            <div className={styles.RecipeHeader_Info_Name}>
                                 {recipe.name}
                             </div>
                             <div className={`${styles.Recipe_Heading}`}>
@@ -47,9 +46,9 @@ export default function Recipe() {
                                         Equipment
                                     </div>
                                     <div className={styles.RecipeBody_Requirements_Equipment_Body}>
-                                        <ul className="collection">
+                                        <ul className={`${styles.Collection} collection`}>
                                             {recipe.equipment.map(equipmentItem => (
-                                                <li key={equipmentItem} className="collection-item">
+                                                <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
                                                     <label>
                                                         <input type="checkbox"/>
                                                         <span>{equipmentItem}</span>
@@ -66,9 +65,9 @@ export default function Recipe() {
                                         Ingredients
                                     </div>
                                     <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
-                                        <ul className="collection">
+                                        <ul className={`${styles.Collection} collection`}>
                                             {recipe.ingredients.map(ingredient => (
-                                                <li key={ingredient} className="collection-item">
+                                                <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
                                                     <label>
                                                         <input type="checkbox"/>
                                                         <span>{ingredient}</span>
@@ -98,10 +97,10 @@ export default function Recipe() {
 function RecipeDetailInfoItem({value, label}) {
     return (
         <div className={styles.RecipeDetails_InfoItem}>
-            <div className={`${styles.RecipeDetails_InfoItem_Value} ${config.primary}-text ${config.primaryAlteration}`}>
+            <div className={styles.RecipeDetails_InfoItem_Value}>
                 {value}
             </div>
-            <div className={`${styles.RecipeDetails_InfoItem_Label} ${config.secondary}-text ${config.secondaryAlteration}`}>
+            <div className={styles.RecipeDetails_InfoItem_Label}>
                 {label}
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../config';
+import styles from './Button.module.css';
 
 export function Button({children, large = false, floating = false, position = '', ...props}) {
     const btnClass = () => {
@@ -13,7 +13,7 @@ export function Button({children, large = false, floating = false, position = ''
     };
 
     return (
-        <div style={{fontWeight: '600'}} className={`waves-effect waves-light white ${config.primary}-text text-${config.primaryAlteration} ${btnClass()} ${position}`} {...props}>
+        <div className={`${styles.Button} ${btnClass()} ${position}`} {...props}>
             {children}
         </div>
     );

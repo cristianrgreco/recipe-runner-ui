@@ -5,6 +5,16 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
 h1, h2, h3 {
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -20,36 +30,4 @@ h2 {
 
 h3 {
     font-size: 1.5rem;
-}
-
-#root {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
-}
-
-#logo-container {
-    height: 75px;
-    margin-bottom: 10px;
-    padding-top: 20px;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-}
-
-.page-footer {
-    padding-top: 0;
-}
-
-header a {
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-header a.brand-logo {
-    white-space: nowrap;
-    font-weight: 100;
 }

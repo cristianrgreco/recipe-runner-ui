@@ -35,7 +35,7 @@ function Recipe({recipe}) {
             </div>
             <div className={styles.RecipeDetailsContainer}>
                 <div className={styles.RecipeDetails}>
-                    <div className={`${styles.RecipeDetailsName} ${config.primary}-text text-${config.primaryAlteration}`}>
+                    <div className={styles.RecipeDetailsName}>
                         {recipe.name}
                     </div>
                     <div className={styles.RecipeDetailsDescription}>
@@ -65,10 +65,10 @@ function Recipe({recipe}) {
 function RecipeDetailInfoItem({value, label}) {
     return (
         <div className={styles.RecipeDetailsInfoItem}>
-            <div className={`${styles.RecipeDetailsInfoItemValue} ${config.primary}-text text-${config.primaryAlteration}`}>
+            <div className={styles.RecipeDetailsInfoItemValue}>
                 {value}
             </div>
-            <div className={`${styles.RecipeDetailsInfoItemLabel} ${config.secondary}-text text-${config.secondaryAlteration}`}>
+            <div className={styles.RecipeDetailsInfoItemLabel}>
                 {label}
             </div>
         </div>

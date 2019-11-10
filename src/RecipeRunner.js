@@ -4,6 +4,7 @@ import {timeRemaining} from "./time";
 import {Button} from "./components/Button";
 import {Icon} from "./components/Icon";
 import config from './config';
+import styles from './RecipeRunner.module.css';
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -43,9 +44,9 @@ export default function RecipeRunner({recipe}) {
         <Fragment>
             <audio id="audio" src="/audio/beep.mp3" autoPlay={false}/>
             {steps.length > 0 && (
-                <ul className="collection">
+                <ul className={`${styles.Collection} collection`}>
                     {steps.map(step => (
-                        <li key={step.instruction} className="collection-item">
+                        <li key={step.instruction} className={`${styles.Collection_Item} collection-item`}>
                             <div className="section">
                                 {step.alarm === undefined && isStepCompleted(step) && (
                                     <NoAlarmAndComplete step={step}/>
@@ -88,8 +89,8 @@ export default function RecipeRunner({recipe}) {
 function NoAlarmAndComplete({step}) {
     return (
         <Fragment>
-            <span className={`badge green white-text ${config.primaryAlteration}`}>DONE</span>
-            <div className="grey-text" style={{textDecoration: "line-through"}}>
+            <span className={`${styles.Green} badge`}>DONE</span>
+            <div className={styles.Complete}>
                 {step.instruction}
             </div>
         </Fragment>
@@ -135,8 +136,8 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 
     return (
         <Fragment>
-            <span className={`badge green white-text ${config.primaryAlteration}`}>DONE</span>
-            <div className="grey-text" style={{textDecoration: "line-through"}}>
+            <span className={`badge ${styles.Green}`}>DONE</span>
+            <div className={styles.Complete}>
                 {step.instruction}
             </div>
         </Fragment>
@@ -147,7 +148,7 @@ function AlarmAndInProgress({step, timer}) {
     return (
         <Fragment>
             <span
-                className={`badge orange white-text ${config.primaryAlteration}`}>{timeRemaining(moment(), timer.endTime)}</span>
+                className={`badge ${styles.Orange}`}>{timeRemaining(moment(), timer.endTime)}</span>
             <div>{step.instruction}</div>
         </Fragment>
     );

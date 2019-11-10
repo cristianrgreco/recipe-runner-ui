@@ -1,0 +1,12 @@
+@value colors: "../colors.css";
+@value primary, primaryLighter, lightText from colors;
+
+.Button {
+    font-weight: 600;
+    background-color: primary;
+    color: lightText;
+}
+
+.Button:hover {
+    background-color: primaryLighter;
+}

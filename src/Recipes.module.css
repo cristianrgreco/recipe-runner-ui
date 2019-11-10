@@ -1,17 +1,20 @@
+@value colors: "./colors.css";
+@value primary, secondary, secondaryBackground from colors;
+
 .Recipes {
     margin: 40px 0;
 }
 
 .Recipe {
     display: flex;
-    border: 1px solid lightgrey;
-    height: 310px;
-    max-height: 310px;
+    border: 1px solid secondaryBackground;
+    height: 320px;
+    max-height: 320px;
     margin: 20px 0;
 }
 
 .RecipeImage {
-    flex: 2 0;
+    flex: 2;
 }
 
 .RecipeImage img {
@@ -32,9 +35,10 @@
 }
 
 .RecipeDetailsName {
+    color: primary;
     font-size: 36px;
     line-height: 40px;
-    font-weight: 100;
+    font-weight: 400;
     margin-bottom: 20px;
     overflow: hidden;
     display: -webkit-box;
@@ -60,19 +64,20 @@
 }
 
 .RecipeDetailsInfoItemValue {
+    color: primary;
     font-weight: 600;
 }
 
 .RecipeDetailsInfoItemLabel {
-    color: rgba(0, 0, 0, .5);
+    color: secondary;
 }
 
 .RecipeDetailsLink {
     font-size: 16px;
     text-transform: uppercase;
-    padding: 15px;
-    color: rgba(0, 0, 0, .5);
-    background-color: rgba(121, 85, 72, .1)
+    padding: 20px 40px;
+    color: secondary;
+    background-color: secondaryBackground;
 }
 
 @media only screen and (max-width: 768px) {
@@ -83,6 +88,8 @@
     .Recipe {
         flex-direction: column;
         margin: 20px 0;
+        height: 290px;
+        max-height: 290px;
     }
 
     .RecipeImage {
@@ -90,7 +97,7 @@
     }
 
     .RecipeImage img {
-        height: 120px;
+        height: 100px;
     }
 
     .RecipeDetailsName {
@@ -118,11 +125,7 @@
 
     .RecipeDetailsLink {
         font-size: 14px;
-        padding: 10px;
+        padding: 10px 20px;
         margin-top: 5px;
-    }
-
-    .RecipeDetailsInfoItemValue {
-        font-weight: 100;
     }
 }

@@ -1,8 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import {Link} from "react-router-dom";
-import config from './config';
+import styles from './Nav.module.css';
 import {Icon} from "./components/Icon";
-import {H1} from "./components/Heading";
+import config from './config';
 
 export default function Nav() {
     const [domContentLoaded, setDomContentLoaded] = useState(false);
@@ -18,11 +18,11 @@ export default function Nav() {
 
     return (
         <header>
-            <nav className={`${config.primary} ${config.primaryAlteration}`}>
-                <div className={`nav-wrapper white`}>
+            <nav className={styles.Nav}>
+                <div className={`${styles.Nav_Wrapper} nav-wrapper`}>
                     <div className="container">
-                        <Link to="/" className={`brand-logo header ${config.primary}-text text-${config.primaryAlteration}`}>{config.title}</Link>
-                        <a href="#" data-target="mobile" className={`sidenav-trigger ${config.secondary}-text text-${config.secondaryAlteration}`}>
+                        <Link to="/" className={`${styles.Nav_Wrapper_Logo} brand-logo`}>{config.title}</Link>
+                        <a href="#" data-target="mobile" className={`${styles.Nav_Wrapper_SidenavTrigger} sidenav-trigger`}>
                             <Icon name="menu"/>
                         </a>
                         <ul className="right hide-on-med-and-down">
@@ -43,13 +43,13 @@ function NavLinks({mobile}) {
         <Fragment>
             {mobile && (
                 <li className="logo">
-                    <a href="/" id="logo-container" className={`brand-logo ${config.primary}-text text-${config.primaryAlteration}`}>
-                        <H1 style={{margin: '0', fontSize: '30px', fontWeight: '100'}}>{config.title}</H1>
+                    <a href="/" className={`${styles.Nav_Wrapper_Sidenav_LogoContainer} brand-logo`}>
+                        <h1 className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>{config.title}</h1>
                     </a>
                 </li>
             )}
-            <li><Link to="/" className={`${config.secondary}-text text-${config.secondaryAlteration}`}>Recipes</Link></li>
-            <li><Link to="/create-recipe" className={`${config.secondary}-text text-${config.secondaryAlteration}`}>Create new</Link></li>
+            <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
+            <li><Link to="/create-recipe" className={styles.Nav_Wrapper_Sidenav_Link}>Create new</Link></li>
         </Fragment>
     );
 }

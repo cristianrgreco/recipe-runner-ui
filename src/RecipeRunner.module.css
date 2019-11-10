@@ -1,0 +1,25 @@
+@value colors: "./colors.css";
+@value primary, secondary, secondaryBackground, dark from colors;
+
+.Collection {
+    border-color: secondaryBackground;
+}
+
+.Collection_Item {
+    border-bottom-color: secondaryBackground !important;
+}
+
+.Green {
+    color: white !important;
+    background-color: #81c784 !important;
+}
+
+.Orange {
+    color: white !important;
+    background-color: #ffb74d !important;
+}
+
+.Complete {
+    color: #9e9e9e !important;
+    text-decoration: line-through;
+}

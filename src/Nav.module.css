@@ -1,0 +1,42 @@
+@value colors: "./colors.css";
+@value primary, secondary, light from colors;
+
+.Nav {
+    color: primary;
+}
+
+.Nav_Wrapper {
+    background-color: light;
+}
+
+.Nav_Wrapper_Logo {
+    white-space: nowrap;
+    color: primary !important;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+.Nav_Wrapper_SidenavTrigger {
+    color: secondary;
+}
+
+.Nav_Wrapper_Sidenav_LogoContainer {
+    color: primary !important;
+    height: 75px !important;
+    padding-top: 20px !important;
+    margin-bottom: 10px;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
+.Nav_Wrapper_Sidenav_LogoContainer_Logo {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.Nav_Wrapper_Sidenav_Link {
+    color: secondary !important;
+    text-transform: uppercase;
+    font-weight: 600;
+}

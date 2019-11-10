@@ -4,7 +4,6 @@ import axios from 'axios';
 import {methodDuration} from "./duration";
 import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
-import {H1} from "./components/Heading";
 
 export default function () {
     const [name, setName] = useState("");
@@ -40,7 +39,7 @@ export default function () {
 
     return (
         <Fragment>
-            <H1>Create Recipe</H1>
+            <h1>Create Recipe</h1>
             <form className="col s12">
                 <div className="row">
                     <Name name={name} setName={setName}/>

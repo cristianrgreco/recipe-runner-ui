@@ -1,0 +1,9 @@
+@value primary: rgb(77, 182, 172);
+@value primaryLighter: rgba(77, 182, 172, .8);
+
+@value secondary: rgb(161, 136, 127);
+@value secondaryBackground: rgba(161, 136, 127, .1);
+
+@value dark: rgba(0, 0, 0, .87);
+
+@value light: rgb(255, 255, 255);
