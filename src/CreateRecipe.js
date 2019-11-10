@@ -7,6 +7,7 @@ import {Button} from "./components/Button";
 
 export default function () {
     const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
     const [serves, setServes] = useState(0);
     const [image, setImage] = useState(undefined);
     const [equipment, setEquipment] = useState([]);
@@ -16,6 +17,7 @@ export default function () {
 
     const recipe = {
         name,
+        description,
         duration: methodDuration(method),
         serves,
         equipment,
@@ -43,6 +45,9 @@ export default function () {
             <form className="col s12">
                 <div className="row">
                     <Name name={name} setName={setName}/>
+                </div>
+                <div className="row">
+                    <Description description={description} setDescription={setDescription}/>
                 </div>
                 <div className="row">
                     <Serves serves={serves} setServes={setServes}/>
@@ -76,6 +81,17 @@ function Name({name, setName}) {
         <div className="input-field col s12">
             <input id="name" type="text" className="validate" autoFocus={true} value={name} onChange={onChange}/>
             <label htmlFor="name">Name</label>
+        </div>
+    );
+}
+
+function Description({description, setDescription}) {
+    const onChange = e => setDescription(e.target.value);
+
+    return (
+        <div className="input-field col s12">
+            <textarea id="description" className="materialize-textarea" value={description} onChange={onChange}/>
+            <label htmlFor="description">Description</label>
         </div>
     );
 }
