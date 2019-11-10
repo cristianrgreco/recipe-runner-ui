@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import axios from 'axios';
 import styles from './Recipe.module.css';
 import {formatTime} from "./time";
 import RecipeRunner from "./RecipeRunner";
 import {Button} from "./components/Button";
+import {fetchRecipe} from "./api";
 
 export default function Recipe() {
     const [recipe, setRecipe] = useState(undefined);
@@ -12,7 +12,7 @@ export default function Recipe() {
     const {recipeId} = useParams();
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/recipes/${recipeId}`).then(response => setRecipe(response.data));
+        fetchRecipe(recipeId).then(recipe => setRecipe(recipe));
     }, []);
 
     return (

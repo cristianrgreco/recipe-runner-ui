@@ -1,17 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import styles from './Recipes.module.css';
 import {Link} from "react-router-dom";
-import axios from 'axios';
 import {formatTime} from "./time";
 import {Icon} from "./components/Icon";
+import {fetchRecipes} from "./api";
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
-
-    const fetchRecipes = async () => {
-        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/recipes`);
-        return response.data;
-    };
 
     useEffect(() => {
         fetchRecipes().then(recipes => setRecipes(recipes));

@@ -1,9 +1,9 @@
 import React, {Fragment, createRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import axios from 'axios';
 import {methodDuration} from "./duration";
 import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
+import {saveRecipe} from "./api";
 
 export default function () {
     const [name, setName] = useState("");
@@ -26,17 +26,8 @@ export default function () {
     };
 
     const save = async () => {
-        const formData = new FormData();
-        formData.append('image', image);
-        formData.append('recipe', JSON.stringify(recipe));
-
-        const response = await axios.post(
-            `${process.env.REACT_APP_SERVER_URL}/recipes`,
-            formData,
-            {headers: {'content-type': 'multipart/form-data'}}
-        );
-
-        history.push(response.headers.location);
+        const location = await saveRecipe(recipe, image);
+        history.push(location);
     };
 
     return (
