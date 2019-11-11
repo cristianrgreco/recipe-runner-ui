@@ -41,7 +41,7 @@ export default function Recipe() {
                                     (
                                         <Fragment>
                                             <RecipeMethod recipe={recipe}/>
-                                            <Button onClick={() => setStarted(true)}>Start</Button>
+                                            <Button onClick={() => setStarted(true)}>Run</Button>
                                         </Fragment>
                                     )
                                 }

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from './Login.module.css';
 import {login} from "./auth";
+import {Button} from "./components/Button";
 
 export default function Login({setLoggedIn}) {
     const [email, setEmail] = useState('');
@@ -21,23 +22,41 @@ export default function Login({setLoggedIn}) {
         }
     };
 
+    const onEmailChange = e => {
+        setEmail(e.target.value);
+    };
+
+    const onPasswordChange = e => {
+        setPassword(e.target.value);
+    };
+
     return (
-        <form onSubmit={onSubmit}>
-            <div>
-                <h1>Log in to Hello Diners</h1>
-            </div>
-            <div className="input-field">
-                <input id="email" type="email" autoFocus={true} value={email} onChange={e => setEmail(e.target.value)}/>
-                <label htmlFor="email">Email</label>
-            </div>
-            <div className="input-field">
-                <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
-                <label htmlFor="password">Password</label>
-            </div>
-            <button type="submit">Log in</button>
-            {error && (
-                <div>{error}</div>
-            )}
-        </form>
+        <div className={styles.Container}>
+            <form onSubmit={onSubmit}>
+                <div className={styles.Heading}>Log in</div>
+                <div className="row">
+                    <div className="input-field col s12 m6">
+                        <input id="email" type="email" autoFocus={true} value={email} onChange={onEmailChange}/>
+                        <label htmlFor="email">Email</label>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="input-field col s12 m6">
+                        <input id="password" type="password" value={password} onChange={onPasswordChange}/>
+                        <label htmlFor="password">Password</label>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="input-field col s12 m6">
+                        <Button type="submit">Log in</Button>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12 m6">
+                        {error && <div className={styles.ValidationError}>{error}</div>}
+                    </div>
+                </div>
+            </form>
+        </div>
     );
 }

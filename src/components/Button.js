@@ -13,8 +13,8 @@ export function Button({children, large = false, floating = false, position = ''
     };
 
     return (
-        <div className={`${styles.Button} ${btnClass()} ${position}`} {...props}>
+        <button type="button" className={`${styles.Button} ${btnClass()} ${position}`} {...props}>
             {children}
-        </div>
+        </button>
     );
 }

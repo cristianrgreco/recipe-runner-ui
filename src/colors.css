@@ -5,5 +5,5 @@
 @value secondaryBackground: rgba(161, 136, 127, .1);
 
 @value dark: rgba(0, 0, 0, .87);
-
 @value light: rgb(255, 255, 255);
+@value error: rgb(229, 115, 115);
