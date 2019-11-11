@@ -17,41 +17,32 @@ const cognitoUser = username => {
     });
 };
 
-export const register = (username, password) => {
-    const attributes = [
-        new CognitoUserAttribute({Name: 'email', Value: username})
-    ];
-
+const getCurrentUser = () => {
     const pool = userPool();
-
-    return new Promise((resolve, reject) => {
-        pool.signUp(username, password, attributes, null, (err, result) => {
-            if (err) {
-                console.error(err);
-                reject(err);
-            } else {
-                console.log(result);
-                resolve(result.user);
-            }
-        });
-    });
+    return pool.getCurrentUser();
 };
 
-export const confirmRegistration = (cognitoUser, code) => {
-    return new Promise((resolve, reject) => {
-        cognitoUser.confirmRegistration(code, true, (err, result) => {
+export const isLoggedIn = () => new Promise((resolve, reject) => {
+    const user = getCurrentUser();
+
+    if (user === null) {
+        resolve(false);
+    } else {
+        user.getSession((err, session) => {
             if (err) {
-                console.error(err);
                 reject(err);
             } else {
-                console.log(result);
-                resolve();
+                if (session.isValid()) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
             }
         });
-    });
-};
+    }
+});
 
-export const login = (username, password) => {
+export const login = (username, password) => new Promise((resolve, reject) => {
     const authenticationDetails = new AuthenticationDetails({
         Username: username,
         Password: password
@@ -59,40 +50,50 @@ export const login = (username, password) => {
 
     const user = cognitoUser(username);
 
-    return new Promise((resolve, reject) => {
-        user.authenticateUser(authenticationDetails, {
-            onSuccess: result => {
-                console.log(result);
-                resolve({user, result});
-            },
-            onFailure: err => {
-                console.error(err);
-                reject(err);
-            }
-        });
-    });
-};
-
-export const logout = username => {
-    cognitoUser(username).signOut();
-};
-
-export const getSession = () => {
-    const pool = userPool();
-    const user = pool.getCurrentUser();
-    console.log(user);
-
-    return new Promise((resolve, reject) => {
-        if (user !== null) {
-            user.getSession((err, session) => {
-                if (err) {
-                    console.error(err);
-                    reject(err);
-                } else {
-                    console.log(session, session.isValid());
-                    resolve(session);
-                }
-            });
+    user.authenticateUser(authenticationDetails, {
+        onSuccess: () => {
+            resolve(user);
+        },
+        onFailure: err => {
+            reject(err);
         }
     });
+});
+
+export const logout = () => {
+    getCurrentUser().signOut();
 };
+
+// const register = (username, password) => {
+//     const attributes = [
+//         new CognitoUserAttribute({Name: 'email', Value: username})
+//     ];
+//
+//     const pool = userPool();
+//
+//     return new Promise((resolve, reject) => {
+//         pool.signUp(username, password, attributes, null, (err, result) => {
+//             if (err) {
+//                 console.error(err);
+//                 reject(err);
+//             } else {
+//                 console.log(result);
+//                 resolve(result.user);
+//             }
+//         });
+//     });
+// };
+//
+// const confirmRegistration = (cognitoUser, code) => {
+//     return new Promise((resolve, reject) => {
+//         cognitoUser.confirmRegistration(code, true, (err, result) => {
+//             if (err) {
+//                 console.error(err);
+//                 reject(err);
+//             } else {
+//                 console.log(result);
+//                 resolve();
+//             }
+//         });
+//     });
+// };

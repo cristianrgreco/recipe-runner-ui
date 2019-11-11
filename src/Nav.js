@@ -1,15 +1,16 @@
 import React, {Fragment, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import styles from './Nav.module.css';
 import {Icon} from "./components/Icon";
 import config from './config';
+import {logout} from "./auth";
 
-export default function Nav() {
+export default function Nav({loggedIn, setLoggedIn}) {
     const [domContentLoaded, setDomContentLoaded] = useState(false);
+    const history = useHistory();
 
     if (!domContentLoaded) {
         setDomContentLoaded(true);
-
         document.addEventListener('DOMContentLoaded', () => {
             const elems = document.querySelectorAll('.sidenav');
             window.M.Sidenav.init(elems);
@@ -26,22 +27,28 @@ export default function Nav() {
                             <Icon name="menu"/>
                         </a>
                         <ul className="right hide-on-med-and-down">
-                            <NavLinks mobile={false}/>
+                            <NavLinks history={history} isMobile={false} loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout}/>
                         </ul>
                     </div>
                 </div>
             </nav>
             <ul id="mobile" className="sidenav">
-                <NavLinks mobile={true}/>
+                <NavLinks history={history} isMobile={true} loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout}/>
             </ul>
         </header>
     );
 }
 
-function NavLinks({mobile}) {
+function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
+    const onLogout = () => {
+        logout();
+        setLoggedIn(false);
+        history.push('/');
+    };
+
     return (
         <Fragment>
-            {mobile && (
+            {isMobile && (
                 <li className="logo">
                     <a href="/" className={`${styles.Nav_Wrapper_Sidenav_LogoContainer} brand-logo`}>
                         <h1 className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>{config.title}</h1>
@@ -49,7 +56,17 @@ function NavLinks({mobile}) {
                 </li>
             )}
             <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
-            <li><Link to="/create-recipe" className={styles.Nav_Wrapper_Sidenav_Link}>Create new</Link></li>
+            {loggedIn ? (
+                <Fragment>
+                    <li><Link to="/create-recipe" className={styles.Nav_Wrapper_Sidenav_Link}>Create new</Link></li>
+                    <li><Link to="#" className={styles.Nav_Wrapper_Sidenav_Link} onClick={onLogout}>Logout</Link></li>
+                </Fragment>
+            ) : (
+                <Fragment>
+                    <li><Link to="/login" className={styles.Nav_Wrapper_Sidenav_Link}>Login</Link></li>
+                    <li><Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>Register</Link></li>
+                </Fragment>
+            )}
         </Fragment>
     );
 }
