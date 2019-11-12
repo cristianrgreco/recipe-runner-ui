@@ -63,7 +63,7 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
             ) : (
                 <Fragment>
                     <li><Link to="/login" className={styles.Nav_Wrapper_Sidenav_Link}>Login</Link></li>
-                    <li><Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>Register</Link></li>
+                    {/*<li><Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>Register</Link></li>*/}
                 </Fragment>
             )}
         </Fragment>
