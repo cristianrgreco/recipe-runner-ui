@@ -1,5 +1,5 @@
 @value colors: "./colors.css";
-@value primary, secondary, light from colors;
+@value primary, secondary, secondaryBackground, light from colors;
 
 .Nav {
     color: primary;
@@ -39,4 +39,8 @@
     color: secondary !important;
     text-transform: uppercase;
     font-weight: 600;
+}
+
+.Nav_Wrapper_Sidenav_Link:hover {
+    background-color: secondaryBackground;
 }

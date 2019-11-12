@@ -1,20 +1,16 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {Link, useHistory} from "react-router-dom";
 import styles from './Nav.module.css';
 import {Icon} from "./components/Icon";
 import {logout} from "./auth";
 
 export default function Nav({loggedIn, setLoggedIn}) {
-    const [domContentLoaded, setDomContentLoaded] = useState(false);
     const history = useHistory();
 
-    if (!domContentLoaded) {
-        setDomContentLoaded(true);
-        document.addEventListener('DOMContentLoaded', () => {
-            const elems = document.querySelectorAll('.sidenav');
-            window.M.Sidenav.init(elems);
-        });
-    }
+    useEffect(() => {
+        const elems = document.querySelectorAll('.sidenav');
+        window.M.Sidenav.init(elems);
+    }, []);
 
     return (
         <header>
@@ -57,7 +53,7 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
             <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
             {loggedIn ? (
                 <Fragment>
-                    <li><Link to="/create-recipe" className={styles.Nav_Wrapper_Sidenav_Link}>Create new</Link></li>
+                    <li><Link to="/create-recipe" className={styles.Nav_Wrapper_Sidenav_Link}>Create</Link></li>
                     <li><Link to="#" className={styles.Nav_Wrapper_Sidenav_Link} onClick={onLogout}>Logout</Link></li>
                 </Fragment>
             ) : (
