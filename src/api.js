@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getJwtToken} from "./auth";
 
 const URL = process.env.REACT_APP_SERVER_URL;
 
@@ -17,10 +18,14 @@ export const saveRecipe = async (recipe, image) => {
     formData.append('image', image);
     formData.append('recipe', JSON.stringify(recipe));
 
-    const response = await axios.post(
-        `${URL}/recipes`,
+    const response = await axios.post(`${URL}/recipes`,
         formData,
-        {headers: {'content-type': 'multipart/form-data'}}
+        {
+            headers: {
+                'authorization': `Bearer ${await getJwtToken()}`,
+                'content-type': 'multipart/form-data'
+            }
+        }
     );
 
     return response.headers.location;

@@ -22,6 +22,26 @@ const getCurrentUser = () => {
     return pool.getCurrentUser();
 };
 
+export const getJwtToken = () => new Promise((resolve, reject) => {
+    const user = getCurrentUser();
+
+    if (user === null) {
+        reject(new Error('Cannot get JWT token as user is not logged in'));
+    } else {
+        user.getSession((err, session) => {
+            if (err) {
+                reject(new Error(`Error getting user session: ${err}`));
+            } else {
+                if (session.isValid()) {
+                    resolve(session.getAccessToken().getJwtToken());
+                } else {
+                    reject(new Error('Session exists but is not valid'));
+                }
+            }
+        });
+    }
+});
+
 export const isLoggedIn = () => new Promise((resolve, reject) => {
     const user = getCurrentUser();
 
@@ -29,7 +49,6 @@ export const isLoggedIn = () => new Promise((resolve, reject) => {
         resolve(false);
     } else {
         user.getSession((err, session) => {
-            window.session = session;
             if (err) {
                 reject(err);
             } else {
