@@ -35,19 +35,19 @@ export default function Login({setLoggedIn}) {
             <form onSubmit={onSubmit}>
                 <div className={styles.Heading}>Log in</div>
                 <div className="row">
-                    <div className="input-field col s12 m6">
+                    <div className="input-field col s12 m12 l6">
                         <input id="email" type="email" autoFocus={true} value={email} onChange={onEmailChange}/>
                         <label htmlFor="email">Email</label>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="input-field col s12 m6">
+                    <div className="input-field col s12 m12 l6">
                         <input id="password" type="password" value={password} onChange={onPasswordChange}/>
                         <label htmlFor="password">Password</label>
                     </div>
                 </div>
                 <div className="row">
-                    <div className="input-field col s12 m6">
+                    <div className="input-field col s12 m12 l6">
                         <Button type="submit">Log in</Button>
                     </div>
                 </div>

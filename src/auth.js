@@ -29,6 +29,7 @@ export const isLoggedIn = () => new Promise((resolve, reject) => {
         resolve(false);
     } else {
         user.getSession((err, session) => {
+            window.session = session;
             if (err) {
                 reject(err);
             } else {
