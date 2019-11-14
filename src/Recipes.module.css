@@ -8,8 +8,8 @@
 .Recipe {
     display: flex;
     border: 1px solid secondaryBackground;
-    height: 320px;
-    max-height: 320px;
+    height: 280px;
+    max-height: 280px;
     margin: 20px 0;
 }
 
@@ -51,7 +51,7 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 2;
 }
 
 .RecipeDetailsInfo {
@@ -88,8 +88,6 @@
     .Recipe {
         flex-direction: column;
         margin: 20px 0;
-        height: 310px;
-        max-height: 310px;
     }
 
     .RecipeImage {
@@ -108,7 +106,7 @@
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
     }
 
     .RecipeDetailsContainer {
