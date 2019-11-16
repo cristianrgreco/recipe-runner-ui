@@ -1,0 +1,18 @@
+@value colors: "./colors.css";
+@value primary, error from colors;
+
+.Container {
+    margin: 40px 0;
+}
+
+.Heading {
+    color: primary;
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.ValidationError {
+    color: error;
+}

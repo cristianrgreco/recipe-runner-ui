@@ -14,6 +14,7 @@ export default function Login({setLoggedIn}) {
         e.preventDefault();
 
         try {
+            setError('');
             await login(email, password);
             setLoggedIn(true);
             history.push('/');

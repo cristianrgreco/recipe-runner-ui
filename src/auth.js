@@ -84,36 +84,28 @@ export const logout = () => {
     getCurrentUser().signOut();
 };
 
-// const register = (username, password) => {
-//     const attributes = [
-//         new CognitoUserAttribute({Name: 'email', Value: username})
-//     ];
-//
-//     const pool = userPool();
-//
-//     return new Promise((resolve, reject) => {
-//         pool.signUp(username, password, attributes, null, (err, result) => {
-//             if (err) {
-//                 console.error(err);
-//                 reject(err);
-//             } else {
-//                 console.log(result);
-//                 resolve(result.user);
-//             }
-//         });
-//     });
-// };
-//
-// const confirmRegistration = (cognitoUser, code) => {
-//     return new Promise((resolve, reject) => {
-//         cognitoUser.confirmRegistration(code, true, (err, result) => {
-//             if (err) {
-//                 console.error(err);
-//                 reject(err);
-//             } else {
-//                 console.log(result);
-//                 resolve();
-//             }
-//         });
-//     });
-// };
+export const register = (username, password) => new Promise((resolve, reject) => {
+    const attributes = [
+        new CognitoUserAttribute({Name: 'email', Value: username})
+    ];
+
+    const pool = userPool();
+
+    pool.signUp(username, password, attributes, null, (err, result) => {
+        if (err) {
+            reject(err);
+        } else {
+            resolve(result.user);
+        }
+    });
+});
+
+export const confirmRegistration = (user, confirmationCode) => new Promise((resolve, reject) => {
+    user.confirmRegistration(confirmationCode, true, err => {
+        if (err) {
+            reject(err);
+        } else {
+            resolve();
+        }
+    });
+});

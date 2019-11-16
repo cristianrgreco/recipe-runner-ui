@@ -7,7 +7,7 @@ import Recipe from "./Recipe";
 import Login from "./Login";
 import Register from "./Register";
 import {isLoggedIn} from "./auth";
-import {BrowserRouter as Router, Redirect, Route} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 
 export default function App() {
     const [loggedIn, setLoggedIn] = useState(undefined);
@@ -19,29 +19,31 @@ export default function App() {
     return (
         <Router>
             {loggedIn !== undefined && (
-              <Fragment>
-                  <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-                  <main>
-                      <div className="container">
-                          <Route exact path="/">
-                              <Recipes/>
-                          </Route>
-                          <Route path="/login">
-                              {loggedIn ? <Redirect to="/"/> : <Login setLoggedIn={setLoggedIn}/>}
-                          </Route>
-                          <Route path="/register">
-                              {loggedIn ? <Redirect to="/"/> : <Register/>}
-                          </Route>
-                          <Route path="/create-recipe">
-                              {loggedIn ? <CreateRecipe/> : <Redirect to="/login"/>}
-                          </Route>
-                          <Route path="/recipes/:recipeId">
-                              <Recipe/>
-                          </Route>
-                      </div>
-                  </main>
-                  <Footer/>
-              </Fragment>
+                <Fragment>
+                    <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+                    <main>
+                        <div className="container">
+                            <Switch>
+                                <Route exact path="/">
+                                    <Recipes/>
+                                </Route>
+                                <Route path="/login">
+                                    {loggedIn ? <Redirect to="/"/> : <Login setLoggedIn={setLoggedIn}/>}
+                                </Route>
+                                <Route path="/register">
+                                    {loggedIn ? <Redirect to="/"/> : <Register setLoggedIn={setLoggedIn}/>}
+                                </Route>
+                                <Route path="/create-recipe">
+                                    {loggedIn ? <CreateRecipe/> : <Redirect to="/login"/>}
+                                </Route>
+                                <Route path="/recipes/:recipeId">
+                                    <Recipe/>
+                                </Route>
+                            </Switch>
+                        </div>
+                    </main>
+                    <Footer/>
+                </Fragment>
             )}
         </Router>
     );
