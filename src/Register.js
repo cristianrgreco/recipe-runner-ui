@@ -30,11 +30,26 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
     const [email, setEmail] = useState('');
     const [confirmEmail, setConfirmEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(undefined);
     const history = useHistory();
 
+    const getValidationError = () => {
+        if (email !== confirmEmail) {
+            return 'Emails must match';
+        } else if (password !== confirmPassword) {
+            return 'Passwords must match';
+        }
+    };
+
     const onSubmit = async e => {
         e.preventDefault();
+
+        const validationError = getValidationError();
+        if (validationError) {
+            setError(validationError);
+            return;
+        }
 
         try {
             setError('');
@@ -70,26 +85,36 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
         setPassword(e.target.value);
     };
 
+    const onConfirmPasswordChange = e => {
+        setConfirmPassword(e.target.value);
+    };
+
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
                 <div className={styles.Heading}>Register</div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="email" type="email" autoFocus={true} value={email} onChange={onEmailChange}/>
+                        <input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange}/>
                         <label htmlFor="email">Email</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="confirm-email" type="email" value={confirmEmail} onChange={onConfirmEmailChange}/>
+                        <input id="confirm-email" type="email" required value={confirmEmail} onChange={onConfirmEmailChange}/>
                         <label htmlFor="confirm-email">Confirm Email</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="password" type="password" value={password} onChange={onPasswordChange}/>
+                        <input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange}/>
                         <label htmlFor="password">Password</label>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="input-field col s12 m12 l6">
+                        <input id="confirm-password" type="password" required minLength={8} value={confirmPassword} onChange={onConfirmPasswordChange}/>
+                        <label htmlFor="confirm-password">Confirm Password</label>
                     </div>
                 </div>
                 <div className="row">
