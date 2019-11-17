@@ -53,7 +53,7 @@ export default function Login({setLoggedIn}) {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col s12 m6">
+                    <div className="col s12 m12 l6">
                         {error && <div className={styles.ValidationError}>{error}</div>}
                     </div>
                 </div>

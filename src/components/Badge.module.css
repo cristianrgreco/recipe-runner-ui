@@ -1,0 +1,19 @@
+@value colors: "../colors.css";
+@value secondary, light from colors;
+
+.Badge {
+    color: light !important;
+    background-color: secondary !important;
+    padding: 2px 5px;
+    vertical-align: middle;
+}
+
+.Green {
+    color: light !important;
+    background-color: #81c784 !important;
+}
+
+.Orange {
+    color: light !important;
+    background-color: #ffb74d !important;
+}

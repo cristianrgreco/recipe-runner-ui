@@ -1,42 +1,37 @@
 import moment from "moment";
 
-export const formatTime = ms => {
-    if (ms <= 0) {
-        return "0";
+const formatDuration = duration => {
+    const hours = duration.get('hours');
+    const minutes = duration.get('minutes');
+    const seconds = duration.get('seconds');
+
+    const formattedTimeParts = [];
+
+    if (hours !== 0) {
+        formattedTimeParts.push(`${hours}h`);
+    }
+    if (minutes !== 0) {
+        formattedTimeParts.push(`${minutes}m`);
+    }
+    if (seconds !== 0) {
+        formattedTimeParts.push(`${seconds}s`);
     }
 
-    const seconds = ms / 1000;
-    const minutes = Math.floor(seconds / 60);
-
-    if (minutes > 0) {
-        const remainingSeconds = seconds - minutes * 60;
-
-        if (remainingSeconds > 0) {
-            return `${minutes}m ${remainingSeconds}s`;
-        } else {
-            return `${minutes}m`;
-        }
-
+    if (formattedTimeParts.length === 0) {
+        return '0s';
     } else {
-        return `${seconds}s`
+        return formattedTimeParts.join(' ');
     }
 };
 
-export const timeRemaining = (start, end) => {
-    const duration = moment.duration(end.diff(start));
-
-    const minutes = Math.floor(duration.asMinutes());
-    const seconds = Math.floor(duration.asSeconds() % 60);
-
-    if (minutes === 0 && seconds === 0) {
+export const formatTime = ms => {
+    if (ms <= 0) {
         return '0s';
-    } else if (minutes < 0 || seconds < 0) {
-        return '0s';
-    } else if (minutes === 0 && seconds > 0) {
-        return `${seconds}s`
-    } else if (minutes > 0 && seconds === 0) {
-        return `${minutes}m`
-    } else {
-        return `${minutes}m ${seconds}s`
     }
+
+    return formatDuration(moment.utc(moment.duration(ms).as('milliseconds')));
+};
+
+export const timeRemaining = (start, end) => {
+    return formatDuration(moment.duration(end.diff(start)));
 };

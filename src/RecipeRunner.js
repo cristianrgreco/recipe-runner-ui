@@ -4,6 +4,7 @@ import {timeRemaining} from "./time";
 import {Button} from "./components/Button";
 import {Icon} from "./components/Icon";
 import styles from './RecipeRunner.module.css';
+import Badge from "./components/Badge";
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -88,7 +89,7 @@ export default function RecipeRunner({recipe}) {
 function NoAlarmAndComplete({step}) {
     return (
         <Fragment>
-            <span className={`${styles.Green} badge`}>DONE</span>
+            <Badge green>DONE</Badge>
             <div className={styles.Complete}>
                 {step.instruction}
             </div>
@@ -116,7 +117,7 @@ function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
 function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
     const alertOnCompletion = () => {
         window.M.toast({
-            html: step.alarm.description,
+            html: `${step.instruction} DONE`,
             displayLength: 10000
         });
 
@@ -135,7 +136,7 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 
     return (
         <Fragment>
-            <span className={`badge ${styles.Green}`}>DONE</span>
+            <Badge green>DONE</Badge>
             <div className={styles.Complete}>
                 {step.instruction}
             </div>
@@ -146,8 +147,7 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
 function AlarmAndInProgress({step, timer}) {
     return (
         <Fragment>
-            <span
-                className={`badge ${styles.Orange}`}>{timeRemaining(moment(), timer.endTime)}</span>
+            <Badge orange>{timeRemaining(moment(), timer.endTime)}</Badge>
             <div>{step.instruction}</div>
         </Fragment>
     );

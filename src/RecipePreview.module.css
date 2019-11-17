@@ -1,0 +1,121 @@
+@value colors: "./colors.css";
+@value primary, secondary, secondaryBackground from colors;
+
+.Recipe {
+    display: flex;
+    border: 1px solid secondaryBackground;
+    height: 280px;
+    max-height: 280px;
+    margin: 20px 0;
+}
+
+.RecipeImage {
+    flex: 2;
+}
+
+.RecipeImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.RecipeDetailsContainer {
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+}
+
+.RecipeDetails {
+    padding: 20px;
+    flex: 1;
+}
+
+.RecipeDetailsName {
+    color: primary;
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.RecipeDetailsDescription {
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.RecipeDetailsInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.RecipeDetailsInfoItem {
+    flex: 1;
+}
+
+.RecipeDetailsInfoItemValue {
+    color: primary;
+    font-weight: 600;
+}
+
+.RecipeDetailsInfoItemLabel {
+    color: secondary;
+}
+
+.RecipeDetailsLink {
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 20px;
+    color: secondary;
+    background-color: secondaryBackground;
+}
+
+@media only screen and (max-width: 768px) {
+    .Recipe {
+        flex-direction: column;
+        margin: 20px 0;
+    }
+
+    .RecipeImage {
+        flex: 1;
+    }
+
+    .RecipeImage img {
+        height: 100px;
+    }
+
+    .RecipeDetailsName {
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0;
+        margin-bottom: 15px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+
+    .RecipeDetailsContainer {
+        flex: 1;
+    }
+
+    .RecipeDetails {
+        padding: 10px 20px;
+    }
+
+    .RecipeDetailsDescription {
+        display: none;
+    }
+
+    .RecipeDetailsLink {
+        font-size: 14px;
+        padding: 20px;
+        margin-top: 5px;
+    }
+}

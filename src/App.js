@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import {isLoggedIn} from "./auth";
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import CreateRecipeNew from "./CreateRecipeNew";
 
 export default function App() {
     const [loggedIn, setLoggedIn] = useState(undefined);
@@ -35,6 +36,9 @@ export default function App() {
                                 </Route>
                                 <Route path="/create-recipe">
                                     {loggedIn ? <CreateRecipe/> : <Redirect to="/login"/>}
+                                </Route>
+                                <Route path="/create-recipe-new">
+                                    {loggedIn ? <CreateRecipeNew/> : <Redirect to="/login"/>}
                                 </Route>
                                 <Route path="/recipes/:recipeId">
                                     <Recipe/>

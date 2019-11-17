@@ -6,8 +6,8 @@ describe('time', () => {
     describe('formatTime', () => {
 
         it('should return zero for zero or negative', () => {
-            expect(formatTime(0)).toBe('0');
-            expect(formatTime(-1)).toBe('0');
+            expect(formatTime(0)).toBe('0s');
+            expect(formatTime(-1)).toBe('0s');
         });
 
         it('should return secs from ms', () => {

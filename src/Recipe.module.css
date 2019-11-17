@@ -5,6 +5,10 @@
     border-color: secondaryBackground;
 }
 
+.Collection:last-child {
+    margin-bottom: 0;
+}
+
 .Collection_Item {
     border-bottom-color: secondaryBackground !important;
 }
@@ -46,7 +50,7 @@
 }
 
 .Recipe_Heading {
-    color: #a1887f;
+    color: secondary;
     font-size: 20px;
     text-transform: uppercase;
     width: 100%;
@@ -99,24 +103,20 @@
 }
 
 .RecipeBody_Requirements_Equipment_Body {
-
 }
 
 .RecipeBody_Requirements_Ingredients {
-
 }
 
 .RecipeBody_Requirements_Ingredients_Body {
-
 }
 
 .RecipeBody_Method {
     flex: 3;
-    padding: 20px 0 20px 20px;
+    padding: 20px 0 0 20px;
 }
 
 .RecipeBody_Method_Body {
-
 }
 
 @media only screen and (max-width: 768px) {
