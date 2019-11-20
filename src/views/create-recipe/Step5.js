@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {methodDuration} from "../../duration";
 import {saveRecipe} from "../../api";
@@ -9,6 +9,7 @@ import Recipe from "../../Recipe";
 import {Button} from "../../components/Button";
 
 export default function Review({name, description, serves, image, equipment, ingredients, method}) {
+    const [isPublishing, setIsPublishing] = useState(false);
     const history = useHistory();
 
     const recipe = {
@@ -31,7 +32,9 @@ export default function Review({name, description, serves, image, equipment, ing
     };
 
     const onClickPublish = async () => {
+        setIsPublishing(true);
         const location = await saveRecipe(recipe, image);
+        setIsPublishing(false);
         history.push(location);
     };
 
@@ -52,7 +55,7 @@ export default function Review({name, description, serves, image, equipment, ing
                 <div className="input-field col s12 m12 l6">
                     <div className={baseStyles.ButtonsContainer}>
                         <Button secondary onClick={onClickBack}>Back</Button>
-                        <Button onClick={onClickPublish}>Publish</Button>
+                        <Button onClick={onClickPublish} spinner={isPublishing}>Publish</Button>
                     </div>
                 </div>
             </div>

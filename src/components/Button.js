@@ -1,7 +1,18 @@
 import React from 'react';
 import styles from './Button.module.css';
+import Spinner from "./Spinner";
 
-export function Button({children, secondary = false, large = false, floating = false, position = '', ...props}) {
+export function Button(
+    {
+        children,
+        secondary = false,
+        large = false,
+        floating = false,
+        spinner = false,
+        position = '',
+        ...props
+    }
+) {
     const btnType = () => {
         if (large) {
             return 'btn-large';
@@ -22,7 +33,14 @@ export function Button({children, secondary = false, large = false, floating = f
 
     return (
         <button type="button" className={`${styles.Button} ${btnType()} ${btnTheme()} ${position}`} {...props}>
-            {children}
+            <div>
+                {children}
+            </div>
+            {spinner && (
+                <div className={styles.SpinnerContainer}>
+                    <Spinner/>
+                </div>
+            )}
         </button>
     );
 }

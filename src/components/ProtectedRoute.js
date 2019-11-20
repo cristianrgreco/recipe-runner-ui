@@ -6,9 +6,9 @@ export default function ProtectedRoute({component: Component, loggedIn, ...rest}
     return (
         <ConditionalRoute
             {...rest}
-            condition={loggedIn}
+            condition={() => loggedIn}
             true={props => <Component {...props}/>}
-            false={props => <Redirect to="/login" {...props}/>}
+            false={() => <Redirect to="/login"/>}
         />
     );
 }
