@@ -8,6 +8,7 @@ import Badge from "./components/Badge";
 import {formatTime} from "./time";
 import RecipePreview from "./RecipePreview";
 import Recipe from "./Recipe";
+import {saveRecipe} from "./api";
 
 export default function CreateRecipe() {
     const [name, setName] = useState('');
@@ -453,7 +454,6 @@ function Review({name, description, serves, image, equipment, ingredients, metho
     const recipe = {
         name,
         description,
-        image: URL.createObjectURL(image),
         duration: methodDuration(method),
         serves,
         equipment,
@@ -461,12 +461,18 @@ function Review({name, description, serves, image, equipment, ingredients, metho
         method
     };
 
+    const recipeWithImagePreview = {
+        ...recipe,
+        image: URL.createObjectURL(image)
+    };
+
     const onClickBack = () => {
         history.push('/create-recipe-new/step-4');
     };
 
-    const onClickPublish = () => {
-        console.log('PUBLISH');
+    const onClickPublish = async () => {
+        const location = await saveRecipe(recipe, image);
+        history.push(location);
     };
 
     return (
@@ -474,11 +480,11 @@ function Review({name, description, serves, image, equipment, ingredients, metho
             <div className={styles.Heading}>Create Recipe (5/5)</div>
             <div className="row">
                 <div className={styles.SubHeading}>Preview</div>
-                <RecipePreview recipe={recipe}/>
+                <RecipePreview recipe={recipeWithImagePreview}/>
             </div>
             <div className="row">
                 <div className={styles.SubHeading}>Full</div>
-                <Recipe recipe={recipe}/>
+                <Recipe recipe={recipeWithImagePreview}/>
             </div>
             <div className="row">
                 <div className="input-field col s12 m12 l6">
