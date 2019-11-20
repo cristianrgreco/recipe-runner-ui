@@ -24,21 +24,11 @@ export default function App() {
                     <main>
                         <div className="container">
                             <Switch>
-                                <Route exact path="/">
-                                    <Recipes/>
-                                </Route>
-                                <Route path="/login">
-                                    {loggedIn ? <Redirect to="/"/> : <Login setLoggedIn={setLoggedIn}/>}
-                                </Route>
-                                <Route path="/register">
-                                    {loggedIn ? <Redirect to="/"/> : <Register setLoggedIn={setLoggedIn}/>}
-                                </Route>
-                                <Route path="/create-recipe">
-                                    {loggedIn ? <CreateRecipe/> : <Redirect to="/login"/>}
-                                </Route>
-                                <Route path="/recipes/:recipeId">
-                                    <Recipe/>
-                                </Route>
+                                <Route exact path="/" component={Recipes}/>
+                                <Route path="/login" render={() => loggedIn ? <Redirect to="/"/> : <Login setLoggedIn={setLoggedIn}/>}/>
+                                <Route path="/register" render={() => loggedIn ? <Redirect to="/"/> : <Register setLoggedIn={setLoggedIn}/>}/>
+                                <Route path="/create-recipe" render={() => loggedIn ? <CreateRecipe/> : <Redirect to="/login"/>}/>
+                                <Route path="/recipes/:recipeId" component={Recipe}/>
                             </Switch>
                         </div>
                     </main>

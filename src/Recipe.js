@@ -6,8 +6,10 @@ import RecipeRunner from "./RecipeRunner";
 import {Button} from "./components/Button";
 import {fetchRecipe} from "./api";
 
-export default function Recipe({recipe: recipee}) {
-    const [recipe, setRecipe] = useState(recipee);
+export default function Recipe(props) {
+    const recipe = props.recipe || props.location.state.recipe || undefined;
+
+    const [, setRecipe] = useState(recipe);
     const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
 

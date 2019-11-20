@@ -24,7 +24,7 @@ export default function Recipe({recipe}) {
                         <RecipeDetail value={recipe.ingredients.length} label="Ingredients"/>
                     </div>
                 </div>
-                <Link to={`/recipes/${recipe.id}`}>
+                <Link to={{pathname: `/recipes/${recipe.id}`, state: {recipe}}}>
                     <div className={styles.RecipeDetailsLink}>
                         <span>
                             View Recipe
