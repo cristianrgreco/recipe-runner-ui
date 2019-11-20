@@ -72,6 +72,10 @@
     margin-right: 10px;
 }
 
+.RecipePreview_Container a {
+    pointer-events: none;
+}
+
 .Nested {
     margin: 1rem .75rem;
     background-color: rgba(secondary_r, secondary_g, secondary_b, 0.015);
