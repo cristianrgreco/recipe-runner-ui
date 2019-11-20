@@ -14,7 +14,7 @@ export default function CreateRecipe() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [serves, setServes] = useState('');
-    const [image, setImage] = useState(undefined);
+    const [image, setImage] = useState('');
     const [equipment, setEquipment] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState([]);
@@ -81,6 +81,13 @@ function Step1({name, setName, description, setDescription, serves, setServes, i
         history.push('/create-recipe/step-2');
     };
 
+    const isFormValid = () => {
+        return name !== ''
+            && description !== ''
+            && serves !== ''
+            && image !== ''
+    };
+
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
@@ -110,11 +117,11 @@ function Step1({name, setName, description, setDescription, serves, setServes, i
                             <input type="file" ref={imageInputRef} onChange={onImageChange}/>
                         </Button>
                         <div className="file-path-wrapper">
-                            <input value={image && image.name} className={`file-path ${name.length > 0 ? 'active': ''}`} type="text"/>
+                            <input value={image && image.name} readOnly className={`file-path ${name.length > 0 ? 'active': ''}`} type="text"/>
                         </div>
                     </div>
                 </div>
-                {image && (
+                {image !== '' && (
                     <div className="row">
                         <div className="col s12 m12 l6">
                             <img src={URL.createObjectURL(image)} className="responsive-img"/>
@@ -123,7 +130,7 @@ function Step1({name, setName, description, setDescription, serves, setServes, i
                 )}
                 <div className="row">
                     <div className="input-field col s12">
-                        <Button type="submit">Next</Button>
+                        <Button disabled={!isFormValid()} type="submit">Next</Button>
                     </div>
                 </div>
             </form>
