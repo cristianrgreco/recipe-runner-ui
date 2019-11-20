@@ -13,7 +13,7 @@ export default function Recipes() {
     return (
         <div className={styles.Recipes}>
             {recipes.map(recipe => (
-                <RecipePreview key={recipe._id} recipe={recipe}/>
+                <RecipePreview key={recipe.id} recipe={recipe}/>
             ))}
         </div>
     );
