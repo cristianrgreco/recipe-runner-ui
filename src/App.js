@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import Nav from "./Nav";
 import Footer from "./Footer";
-import CreateRecipe from "./CreateRecipe";
+import CreateRecipe from "./views/create-recipe/CreateRecipe";
 import Recipes from "./Recipes";
 import Recipe from "./Recipe";
 import Login from "./Login";

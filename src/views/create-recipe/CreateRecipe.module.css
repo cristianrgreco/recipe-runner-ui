@@ -1,9 +1,5 @@
-@value colors: "./colors.css";
+@value colors: "../../colors.css";
 @value primary, light, secondary_r, secondary_g, secondary_b, secondary, secondaryBackground from colors;
-
-.NoMargin {
-    margin: 0;
-}
 
 .Container {
     margin: 40px 0;
@@ -44,46 +40,13 @@
     border-bottom-color: secondaryBackground !important;
 }
 
-.Collection_Nested {
-    display: flex;
-    flex-direction: column;
-}
-
 .Collection_Item_Content {
     display: flex;
     width: 100%;
 }
 
-.Collection_Item_Content_Depth {
-    font-weight: 600;
-    margin-right: 10px;
-}
-
-.Collection_Item_Content_Instruction {
-    flex: 1;
-}
-
-.Collection_Item_Content_Duration {
-    justify-self: flex-end;
-    margin-right: 10px;
-}
-
 .ButtonsContainer button {
     margin-right: 10px;
-}
-
-.RecipePreview_Container a {
-    pointer-events: none;
-}
-
-.Nested {
-    margin: 1rem .75rem;
-    background-color: rgba(secondary_r, secondary_g, secondary_b, 0.015);
-}
-
-.NestedFirst {
-    margin: inherit;
-    background-color: light;
 }
 
 @media only screen and (max-width: 768px) {
@@ -93,9 +56,5 @@
 
     .Collection_Item {
         padding: 0 .75rem;
-    }
-
-    .Nested {
-        margin: .75rem 0;
     }
 }
