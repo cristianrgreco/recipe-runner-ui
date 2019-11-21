@@ -29,13 +29,13 @@ export default function App() {
                                 <Route exact path="/" component={Recipes}/>
                                 <ConditionalRoute
                                     path="/login"
-                                    condition={() => loggedIn}
+                                    condition={loggedIn}
                                     true={() => <Redirect to="/"/>}
                                     false={() => <Login setLoggedIn={setLoggedIn}/>}
                                 />
                                 <ConditionalRoute
                                     path="/register"
-                                    condition={() => loggedIn}
+                                    condition={loggedIn}
                                     true={() => <Redirect to="/"/>}
                                     false={() => <Register setLoggedIn={setLoggedIn}/>}
                                 />

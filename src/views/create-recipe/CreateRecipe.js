@@ -37,28 +37,28 @@ export default function CreateRecipe() {
             <ConditionalRoute
                 exact
                 path="/create-recipe/step-2"
-                condition={hasCompletedRequiredSteps}
+                condition={hasCompletedRequiredSteps()}
                 true={() => <Step2 equipment={equipment} setEquipment={setEquipment}/>}
                 false={() => <Redirect to="/create-recipe/step-1"/>}
             />
             <ConditionalRoute
                 exact
                 path="/create-recipe/step-3"
-                condition={hasCompletedRequiredSteps}
+                condition={hasCompletedRequiredSteps()}
                 true={() => <Step3 ingredients={ingredients} setIngredients={setIngredients}/>}
                 false={() => <Redirect to="/create-recipe/step-1"/>}
             />
             <ConditionalRoute
                 exact
                 path="/create-recipe/step-4"
-                condition={hasCompletedRequiredSteps}
+                condition={hasCompletedRequiredSteps()}
                 true={() => <Step4 method={method} setMethod={setMethod}/>}
                 false={() => <Redirect to="/create-recipe/step-1"/>}
             />
             <ConditionalRoute
                 exact
                 path="/create-recipe/step-5"
-                condition={hasCompletedRequiredSteps}
+                condition={hasCompletedRequiredSteps()}
                 true={() => <Step5
                     name={name}
                     description={description}
