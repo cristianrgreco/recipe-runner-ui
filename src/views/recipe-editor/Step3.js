@@ -4,7 +4,7 @@ import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
 
-export default function Step3({ingredients, setIngredients}) {
+export default function Step3({isEdit, ingredients, setIngredients}) {
     const [ingredient, setIngredient] = useState('');
     const history = useHistory();
 
@@ -33,7 +33,7 @@ export default function Step3({ingredients, setIngredients}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Recipe Editor (3/5)</div>
+                <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (3/5)</div>
                 {ingredients.length > 0 && (
                     <div className="row">
                         <div className="input-field col s12 m12 l6">
@@ -66,7 +66,7 @@ export default function Step3({ingredients, setIngredients}) {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="input-field col s12 m12 l6">
+                    <div className="input-field col s12">
                         <div className={styles.ButtonsContainer}>
                             <Button secondary onClick={onClickBack}>Back</Button>
                             <Button onClick={onClickNext}>Next</Button>

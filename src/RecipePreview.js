@@ -3,8 +3,14 @@ import styles from "./RecipePreview.module.css";
 import {formatTime} from "./time";
 import {Link} from "react-router-dom";
 import {Icon} from "./components/Icon";
+import {Button} from "./components/Button";
+import {getLoggedInEmail} from "./auth";
 
 export default function Recipe({recipe}) {
+    const loggedInUserOwnsRecipe = () => {
+        return getLoggedInEmail() === recipe.createdBy;
+    };
+
     return (
         <div className={styles.Recipe}>
             <div className={styles.RecipeImage}>
@@ -12,8 +18,19 @@ export default function Recipe({recipe}) {
             </div>
             <div className={styles.RecipeDetailsContainer}>
                 <div className={styles.RecipeDetails}>
-                    <div className={styles.RecipeDetailsName}>
-                        {recipe.name}
+                    <div className={styles.RecipeDetailsNameContainer}>
+                        <div className={styles.RecipeDetailsNameContainer_Name}>
+                            {recipe.name}
+                        </div>
+                        {loggedInUserOwnsRecipe() && (
+                            <div className={styles.RecipeDetailsNameContainer_Controls}>
+                                <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
+                                    <Button floating>
+                                        <Icon name="edit"/>
+                                    </Button>
+                                </Link>
+                            </div>
+                        )}
                     </div>
                     <div className={styles.RecipeDetailsDescription}>
                         {recipe.description}

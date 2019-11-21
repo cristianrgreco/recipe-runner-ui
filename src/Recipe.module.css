@@ -41,12 +41,23 @@
     padding-left: 40px;
 }
 
-.RecipeHeader_Info_Name {
+.RecipeHeader_Info_NameContainer {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 40px;
+}
+
+.RecipeHeader_Info_NameContainer_Name {
+    flex: 1;
     color: primary;
     font-size: 36px;
     line-height: 40px;
     font-weight: 400;
-    margin-bottom: 40px;
+}
+
+.RecipeHeader_Info_NameContainer_Controls {
+    margin-left: 10px;
 }
 
 .Recipe_Heading {
@@ -136,10 +147,13 @@
         padding: 0;
     }
 
-    .RecipeHeader_Info_Name {
+    .RecipeHeader_Info_NameContainer {
+        margin-bottom: 40px;
+    }
+
+    .RecipeHeader_Info_NameContainer_Name {
         font-size: 26px;
         line-height: 30px;
-        margin-bottom: 40px;
         letter-spacing: 0;
     }
 

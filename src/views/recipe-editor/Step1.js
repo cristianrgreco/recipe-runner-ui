@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 
-export default function Step1({name, setName, description, setDescription, serves, setServes, image, setImage}) {
+export default function Step1({isEdit, name, setName, description, setDescription, serves, setServes, image, setImage}) {
     const history = useHistory();
     const imageInputRef = createRef();
 
@@ -35,10 +35,26 @@ export default function Step1({name, setName, description, setDescription, serve
             && image !== ''
     };
 
+    const getImageUrl = () => {
+        if (image instanceof File) {
+            return URL.createObjectURL(image);
+        } else {
+            return image;
+        }
+    };
+
+    const getImageName = () => {
+        if (image instanceof File) {
+            return image.name;
+        } else {
+            return image;
+        }
+    };
+
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Recipe Editor (1/5)</div>
+                <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (1/5)</div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>
@@ -64,14 +80,14 @@ export default function Step1({name, setName, description, setDescription, serve
                             <input type="file" ref={imageInputRef} onChange={onImageChange}/>
                         </Button>
                         <div className="file-path-wrapper">
-                            <input value={image && image.name} readOnly className={`file-path ${name.length > 0 ? 'active': ''}`} type="text"/>
+                            <input value={getImageName()} readOnly className={`file-path ${name.length > 0 ? 'active': ''}`} type="text"/>
                         </div>
                     </div>
                 </div>
                 {image !== '' && (
                     <div className="row">
                         <div className="col s12 m12 l6">
-                            <img src={URL.createObjectURL(image)} className="responsive-img"/>
+                            <img src={getImageUrl()} className="responsive-img"/>
                         </div>
                     </div>
                 )}

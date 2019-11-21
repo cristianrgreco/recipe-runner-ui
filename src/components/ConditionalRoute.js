@@ -3,11 +3,11 @@ import {Route} from "react-router-dom";
 
 export default function ConditionalRoute({condition, true: trueComponent, false: falseComponent, ...rest}) {
     return (
-        <Route {...rest} render={() => {
+        <Route {...rest} render={props => {
             if (condition) {
-                return trueComponent();
+                return trueComponent(props);
             } else {
-                return falseComponent();
+                return falseComponent(props);
             }
         }}/>
     );

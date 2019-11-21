@@ -22,6 +22,10 @@ const getCurrentUser = () => {
     return pool.getCurrentUser();
 };
 
+export const getLoggedInEmail = () => {
+    return getCurrentUser().getUsername();
+};
+
 export const getJwtToken = () => new Promise((resolve, reject) => {
     const user = getCurrentUser();
 

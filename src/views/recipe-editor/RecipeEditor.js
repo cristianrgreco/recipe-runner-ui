@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import ConditionalRoute from "../../components/ConditionalRoute";
 import Step1 from "./Step1";
@@ -7,7 +7,11 @@ import Step3 from "./Step3";
 import Step4 from "./Step4";
 import Step5 from "./Step5";
 
-export default function RecipeEditor() {
+export default function RecipeEditor(props) {
+    const recipe = (props.location.state && props.location.state.recipe) || undefined;
+
+    const [isEdit, setIsEdit] = useState(false);
+    const [id, setId] = useState(undefined);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [serves, setServes] = useState('');
@@ -15,6 +19,20 @@ export default function RecipeEditor() {
     const [equipment, setEquipment] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [method, setMethod] = useState([]);
+
+    useEffect(() => {
+        if (recipe) {
+            setIsEdit(true);
+            setId(recipe.id);
+            setName(recipe.name);
+            setDescription(recipe.description);
+            setServes(recipe.serves);
+            setImage(recipe.image);
+            setEquipment(recipe.equipment);
+            setIngredients(recipe.ingredients);
+            setMethod(recipe.method);
+        }
+    }, []);
 
     const hasCompletedRequiredSteps = () => {
         return name !== ''
@@ -28,6 +46,7 @@ export default function RecipeEditor() {
             <Route exact path="/recipe-editor" render={() => <Redirect to="/recipe-editor/step-1"/>}/>
             <Route exact path="/recipe-editor/step-1" render={() => (
                 <Step1
+                    isEdit={isEdit}
                     name={name} setName={setName}
                     description={description} setDescription={setDescription}
                     serves={serves} setServes={setServes}
@@ -38,28 +57,30 @@ export default function RecipeEditor() {
                 exact
                 path="/recipe-editor/step-2"
                 condition={hasCompletedRequiredSteps()}
-                true={() => <Step2 equipment={equipment} setEquipment={setEquipment}/>}
-                false={() => <Redirect to="/recipe-editor/step-1"/>}
+                true={props => <Step2 isEdit={isEdit} equipment={equipment} setEquipment={setEquipment} {...props}/>}
+                false={props => <Redirect to="/recipe-editor/step-1" {...props}/>}
             />
             <ConditionalRoute
                 exact
                 path="/recipe-editor/step-3"
                 condition={hasCompletedRequiredSteps()}
-                true={() => <Step3 ingredients={ingredients} setIngredients={setIngredients}/>}
-                false={() => <Redirect to="/recipe-editor/step-1"/>}
+                true={props => <Step3 isEdit={isEdit} ingredients={ingredients} setIngredients={setIngredients} {...props}/>}
+                false={props => <Redirect to="/recipe-editor/step-1" {...props}/>}
             />
             <ConditionalRoute
                 exact
                 path="/recipe-editor/step-4"
                 condition={hasCompletedRequiredSteps()}
-                true={() => <Step4 method={method} setMethod={setMethod}/>}
-                false={() => <Redirect to="/recipe-editor/step-1"/>}
+                true={props => <Step4 isEdit={isEdit} method={method} setMethod={setMethod} {...props}/>}
+                false={props => <Redirect to="/recipe-editor/step-1" {...props}/>}
             />
             <ConditionalRoute
                 exact
                 path="/recipe-editor/step-5"
                 condition={hasCompletedRequiredSteps()}
-                true={() => <Step5
+                true={props => <Step5
+                    isEdit={isEdit}
+                    id={id}
                     name={name}
                     description={description}
                     serves={serves}
@@ -67,8 +88,9 @@ export default function RecipeEditor() {
                     equipment={equipment}
                     ingredients={ingredients}
                     method={method}
+                    {...props}
                 />}
-                false={() => <Redirect to="/recipe-editor/step-1"/>}
+                false={props => <Redirect to="/recipe-editor/step-1" {...props}/>}
             />
         </Switch>
     );

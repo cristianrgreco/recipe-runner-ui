@@ -4,7 +4,7 @@ import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
 
-export default function Step2({equipment, setEquipment}) {
+export default function Step2({isEdit, equipment, setEquipment}) {
     const [equipmentItem, setEquipmentItem] = useState('');
     const history = useHistory();
 
@@ -39,7 +39,7 @@ export default function Step2({equipment, setEquipment}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Recipe Editor (2/5)</div>
+                <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (2/5)</div>
                 {equipment.length > 0 && (
                     <div className="row">
                         <div className="input-field col s12 m12 l6">
@@ -72,7 +72,7 @@ export default function Step2({equipment, setEquipment}) {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="input-field col s12 m12 l6">
+                    <div className="input-field col s12">
                         <div className={styles.ButtonsContainer}>
                             <Button secondary onClick={onClickBack}>Back</Button>
                             <Button onClick={onClickNext}>Next</Button>

@@ -30,19 +30,19 @@ export default function App() {
                                 <ConditionalRoute
                                     path="/login"
                                     condition={loggedIn}
-                                    true={() => <Redirect to="/"/>}
-                                    false={() => <Login setLoggedIn={setLoggedIn}/>}
+                                    true={props => <Redirect to="/" {...props}/>}
+                                    false={props => <Login setLoggedIn={setLoggedIn} {...props}/>}
                                 />
                                 <ConditionalRoute
                                     path="/register"
                                     condition={loggedIn}
-                                    true={() => <Redirect to="/"/>}
-                                    false={() => <Register setLoggedIn={setLoggedIn}/>}
+                                    true={props => <Redirect to="/" {...props}/>}
+                                    false={props => <Register setLoggedIn={setLoggedIn} {...props}/>}
                                 />
                                 <ProtectedRoute
                                     path="/recipe-editor"
                                     loggedIn={loggedIn}
-                                    component={() => <RecipeEditor/>}
+                                    component={props => <RecipeEditor {...props}/>}
                                 />
                                 <Route path="/recipes/:recipeId" component={Recipe}/>
                                 <Redirect to="/"/>

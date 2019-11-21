@@ -7,7 +7,7 @@ import Badge from "../../components/Badge";
 import {formatTime} from "../../time";
 import {Icon} from "../../components/Icon";
 
-export default function Step4({method, setMethod}) {
+export default function Step4({isEdit, method, setMethod}) {
     const history = useHistory();
 
     const onClickBack = () => {
@@ -20,13 +20,25 @@ export default function Step4({method, setMethod}) {
 
     return (
         <div className={baseStyles.Container}>
-            <div className={baseStyles.Heading}>Recipe Editor (4/5)</div>
+            <div className={baseStyles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (4/5)</div>
             {method.length === 0
-                ? <MethodItemForm method={method} setMethod={setMethod} depth={'1'}/>
-                : <MethodItem method={method} setMethod={setMethod} depth={'1'}/>
+                ? (
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <MethodItemForm method={method} setMethod={setMethod} depth={'1'}/>
+                        </div>
+                    </div>
+                )
+                : (
+                    <div className="row">
+                        <div className="input-field col s12">
+                            <MethodItem method={method} setMethod={setMethod} depth={'1'}/>
+                        </div>
+                    </div>
+                )
             }
             <div className="row">
-                <div className="input-field col s12 m12 l6">
+                <div className="input-field col s12">
                     <div className={baseStyles.ButtonsContainer}>
                         <Button secondary onClick={onClickBack}>Back</Button>
                         <Button onClick={onClickNext}>Next</Button>

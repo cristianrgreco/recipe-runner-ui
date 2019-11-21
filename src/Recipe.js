@@ -1,10 +1,12 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import styles from './Recipe.module.css';
 import {formatTime} from "./time";
 import RecipeRunner from "./RecipeRunner";
 import {Button} from "./components/Button";
 import {fetchRecipe} from "./api";
+import {Icon} from "./components/Icon";
+import {getLoggedInEmail} from "./auth";
 
 export default function Recipe(props) {
     const recipeFromProps = props.recipe || (props.location.state && props.location.state.recipe) || undefined;
@@ -61,14 +63,29 @@ export default function Recipe(props) {
 }
 
 function RecipeHeader({recipe}) {
+    const loggedInUserOwnsRecipe = () => {
+        return getLoggedInEmail() === recipe.createdBy;
+    };
+
     return (
         <div className={styles.RecipeHeader}>
             <div className={styles.RecipeHeader_Image}>
                 <img src={recipe.image} alt=""/>
             </div>
             <div className={styles.RecipeHeader_Info}>
-                <div className={styles.RecipeHeader_Info_Name}>
-                    {recipe.name}
+                <div className={styles.RecipeHeader_Info_NameContainer}>
+                    <div className={styles.RecipeHeader_Info_NameContainer_Name}>
+                        {recipe.name}
+                    </div>
+                    {loggedInUserOwnsRecipe() && (
+                        <div className={styles.RecipeHeader_Info_NameContainer_Controls}>
+                            <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
+                                <Button floating>
+                                    <Icon name="edit"/>
+                                </Button>
+                            </Link>
+                        </div>
+                    )}
                 </div>
                 <div className={`${styles.Recipe_Heading}`}>
                     About this recipe
