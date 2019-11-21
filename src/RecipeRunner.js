@@ -118,7 +118,7 @@ function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
     const alertOnCompletion = () => {
         window.M.toast({
             html: `${step.instruction} DONE`,
-            displayLength: 10000
+            displayLength: 60000
         });
 
         document.querySelector("#audio").play();
