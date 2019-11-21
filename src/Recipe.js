@@ -7,14 +7,16 @@ import {Button} from "./components/Button";
 import {fetchRecipe} from "./api";
 
 export default function Recipe(props) {
-    const recipe = props.recipe || props.location.state.recipe || undefined;
+    const recipeFromProps = props.recipe || (props.location.state && props.location.state.recipe) || undefined;
 
-    const [, setRecipe] = useState(recipe);
+    const [recipe, setRecipe] = useState(undefined);
     const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
 
     useEffect(() => {
-        if (!recipe) {
+        if (recipeFromProps) {
+            setRecipe(recipeFromProps)
+        } else {
             fetchRecipe(recipeId).then(recipe => setRecipe(recipe));
         }
     }, []);

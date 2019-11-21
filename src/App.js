@@ -42,7 +42,7 @@ export default function App() {
                                 <ProtectedRoute
                                     path="/create-recipe"
                                     loggedIn={loggedIn}
-                                    component={CreateRecipe}
+                                    component={() => <CreateRecipe/>}
                                 />
                                 <Route path="/recipes/:recipeId" component={Recipe}/>
                             </Switch>

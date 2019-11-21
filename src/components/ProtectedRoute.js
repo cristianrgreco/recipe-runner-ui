@@ -2,12 +2,12 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import ConditionalRoute from "./ConditionalRoute";
 
-export default function ProtectedRoute({component: Component, loggedIn, ...rest}) {
+export default function ProtectedRoute({component, loggedIn, ...rest}) {
     return (
         <ConditionalRoute
             {...rest}
             condition={loggedIn}
-            true={props => <Component {...props}/>}
+            true={component}
             false={() => <Redirect to="/login"/>}
         />
     );

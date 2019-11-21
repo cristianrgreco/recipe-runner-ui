@@ -15,7 +15,7 @@ export default function Step4({method, setMethod}) {
     };
 
     const onClickNext = () => {
-        history.push('/create-recipe/review');
+        history.push('/create-recipe/step-5');
     };
 
     return (
