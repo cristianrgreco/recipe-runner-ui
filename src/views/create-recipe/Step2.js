@@ -12,6 +12,12 @@ export default function Step2({equipment, setEquipment}) {
         setEquipmentItem(e.target.value);
     };
 
+    const onEdit = equipmentItem => e => {
+        const index = equipment.findIndex(anEquipmentItem => anEquipmentItem === equipmentItem);
+        const updatedEquipment = [...equipment.slice(0, index), e.target.value, ...equipment.slice(index + 1)];
+        setEquipment(updatedEquipment);
+    };
+
     const onDelete = equipmentItem => () => {
         setEquipment(equipment.filter(anEquipmentItem => anEquipmentItem !== equipmentItem));
     };
@@ -38,12 +44,12 @@ export default function Step2({equipment, setEquipment}) {
                     <div className="row">
                         <div className="input-field col s12 m12 l6">
                             <ul className={`${styles.Collection} collection`}>
-                                {equipment.map(equipmentItem => (
-                                    <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
+                                {equipment.map((equipmentItem, i) => (
+                                    <li key={i} className={`${styles.Collection_Item} collection-item`}>
                                         <div className={styles.Collection_Item_Content}>
-                                            {equipmentItem}
+                                            <input type="text" required value={equipmentItem} onChange={onEdit(equipmentItem)}/>
                                         </div>
-                                        <div>
+                                        <div className={styles.Collection_Item_Controls}>
                                             <Button floating onClick={onDelete(equipmentItem)}>
                                                 <Icon name="delete"/>
                                             </Button>

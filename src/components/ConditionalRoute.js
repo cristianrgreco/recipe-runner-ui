@@ -1,13 +1,13 @@
 import React from "react";
-import {Redirect, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 
-export default function ConditionalRoute({condition, true: TrueComponent, false: FalseComponent, ...rest}) {
+export default function ConditionalRoute({condition, true: trueComponent, false: falseComponent, ...rest}) {
     return (
-        <Route {...rest} render={props => {
+        <Route {...rest} render={() => {
             if (condition) {
-                return <TrueComponent {...props}/>;
+                return trueComponent();
             } else {
-                return <FalseComponent {...props}/>;
+                return falseComponent();
             }
         }}/>
     );

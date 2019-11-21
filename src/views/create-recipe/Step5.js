@@ -42,7 +42,7 @@ export default function Review({name, description, serves, image, equipment, ing
         <div className={baseStyles.Container}>
             <div className={baseStyles.Heading}>Create Recipe (5/5)</div>
             <div className="row">
-                <div className={baseStyles.SubHeading}>Preview</div>
+                <div className={baseStyles.SubHeading}>Snippet</div>
                 <div className={styles.RecipePreview_Container}>
                     <RecipePreview recipe={recipeWithImagePreview}/>
                 </div>

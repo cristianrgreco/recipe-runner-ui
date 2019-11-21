@@ -45,6 +45,10 @@
     width: 100%;
 }
 
+.Collection_Item_Controls {
+    margin-left: 10px;
+ }
+
 .ButtonsContainer button {
     margin-right: 10px;
 }
