@@ -92,7 +92,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                 {image !== '' && (
                     <div className="row">
                         <div className="col s12 m12 l6">
-                            <img src={getImageUrl()} className="responsive-img"/>
+                            <img src={getImageUrl()} alt="recipe" className="responsive-img"/>
                         </div>
                     </div>
                 )}

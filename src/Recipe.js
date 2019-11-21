@@ -21,7 +21,7 @@ export default function Recipe({loggedIn, ...props}) {
         } else {
             fetchRecipe(recipeId).then(recipe => setRecipe(recipe));
         }
-    }, []);
+    }, [recipeFromProps, recipeId]);
 
     return (
         <Fragment>

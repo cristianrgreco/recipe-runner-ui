@@ -32,7 +32,7 @@ export default function RecipeEditor(props) {
             setIngredients(recipe.ingredients);
             setMethod(recipe.method);
         }
-    }, []);
+    }, [recipe]);
 
     const hasCompletedRequiredSteps = () => {
         return name !== ''

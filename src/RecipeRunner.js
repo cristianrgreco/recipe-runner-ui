@@ -115,24 +115,24 @@ function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
 }
 
 function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
-    const alertOnCompletion = () => {
-        window.M.toast({
-            html: `${step.instruction} DONE`,
-            displayLength: 60000
-        });
-
-        document.querySelector("#audio").play();
-
-        if (navigator.vibrate) {
-            navigator.vibrate(500);
-        }
-    };
-
     useEffect(() => {
+        const alertOnCompletion = () => {
+            window.M.toast({
+                html: `${step.instruction} DONE`,
+                displayLength: 60000
+            });
+
+            document.querySelector("#audio").play();
+
+            if (navigator.vibrate) {
+                navigator.vibrate(500);
+            }
+        };
+
         setSteps(nextSteps(step));
         setCompletedSteps(completedSteps => [...completedSteps, step]);
         alertOnCompletion();
-    }, []);
+    }, [step, setSteps, setCompletedSteps, nextSteps]);
 
     return (
         <Fragment>
