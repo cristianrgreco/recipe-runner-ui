@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import React, {createRef, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
@@ -6,6 +6,10 @@ import {Button} from "../../components/Button";
 export default function Step1({isEdit, name, setName, description, setDescription, serves, setServes, image, setImage}) {
     const history = useHistory();
     const imageInputRef = createRef();
+
+    useEffect(() => {
+        window.M.textareaAutoResize(document.querySelector('#description'));
+    });
 
     const onNameChange = e => {
         setName(e.target.value);
