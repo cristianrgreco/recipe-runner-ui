@@ -1,5 +1,8 @@
-@value primary: rgb(77, 182, 172);
-@value primaryLighter: rgba(77, 182, 172, .8);
+@value primary_r: 77;
+@value primary_g: 182;
+@value primary_b: 182;
+@value primary: rgb(primary_r, primary_g, primary_b);
+@value primaryLighter: rgba(77, primary_g, primary_b, .8);
 
 @value secondary_r: 161;
 @value secondary_g: 136;
