@@ -8,6 +8,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
     const imageInputRef = createRef();
 
     useEffect(() => {
+        window.M.updateTextFields();
         window.M.textareaAutoResize(document.querySelector('#description'));
     });
 
@@ -62,19 +63,19 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>
-                        <label htmlFor="name" className={`${name.length > 0 ? 'active': ''}`}>Name</label>
+                        <label htmlFor="name">Name</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <input id="serves" type="number" required min="0" step="1" value={serves} onChange={onServesChange}/>
-                        <label htmlFor="serves" className={`${serves !== '' ? 'active': ''}`}>Serves</label>
+                        <label htmlFor="serves">Serves</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <textarea id="description" className="materialize-textarea" required value={description} onChange={onDescriptionChange}/>
-                        <label htmlFor="description" className={`${description.length > 0 ? 'active': ''}`}>Description</label>
+                        <label htmlFor="description">Description</label>
                     </div>
                 </div>
                 <div className="row">
@@ -84,7 +85,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                             <input type="file" ref={imageInputRef} onChange={onImageChange}/>
                         </Button>
                         <div className="file-path-wrapper">
-                            <input value={getImageName()} readOnly className={`file-path ${name.length > 0 ? 'active': ''}`} type="text"/>
+                            <input value={getImageName()} readOnly type="text"/>
                         </div>
                     </div>
                 </div>

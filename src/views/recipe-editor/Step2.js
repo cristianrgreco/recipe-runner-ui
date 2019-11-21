@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
@@ -7,6 +7,10 @@ import {Icon} from "../../components/Icon";
 export default function Step2({isEdit, equipment, setEquipment}) {
     const [equipmentItem, setEquipmentItem] = useState('');
     const history = useHistory();
+
+    useEffect(() => {
+        window.M.updateTextFields();
+    });
 
     const onEquipmentItemChange = e => {
         setEquipmentItem(e.target.value);
@@ -63,7 +67,7 @@ export default function Step2({isEdit, equipment, setEquipment}) {
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <input id="equipment-item" type="text" autoFocus={true} required value={equipmentItem} onChange={onEquipmentItemChange}/>
-                        <label htmlFor="equipment-item" className={`${equipmentItem.length > 0 ? 'active': ''}`}>Equipment</label>
+                        <label htmlFor="equipment-item">Equipment</label>
                     </div>
                 </div>
                 <div className="row">

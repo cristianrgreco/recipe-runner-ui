@@ -106,6 +106,7 @@ function MethodItemForm({method, setMethod, depth}) {
     const [durationUnit, setDurationUnit] = useState('minutes');
 
     useEffect(() => {
+        window.M.updateTextFields();
         window.M.FormSelect.init(document.querySelector(`#duration-unit-${elementId(depth)}`));
     });
 
@@ -165,11 +166,11 @@ function MethodItemForm({method, setMethod, depth}) {
             <div className={`row ${styles.NoMarginBottom}`}>
                 <div className="input-field col s12">
                     <textarea id={`instruction-${elementId(depth)}`} autoFocus={true} className="materialize-textarea" required value={instruction} onChange={onInstructionChange}/>
-                    <label htmlFor={`instruction-${elementId(depth)}`} className={`${instruction.length > 0 ? 'active': ''}`}>Step {depth}</label>
+                    <label htmlFor={`instruction-${elementId(depth)}`}>Step {depth}</label>
                 </div>
                 <div className="input-field col s12 m12 l6">
                     <input id={`duration-${elementId(depth)}`} type="number" min="0" step=".1" value={duration} onChange={onDurationChange}/>
-                    <label htmlFor={`duration-${elementId(depth)}`} className={`${duration !== '' ? 'active': ''}`}>Duration (optional)</label>
+                    <label htmlFor={`duration-${elementId(depth)}`}>Duration (optional)</label>
                 </div>
                 <div className="input-field col s12 m12 l6">
                     <select id={`duration-unit-${elementId(depth)}`} disabled={duration === ''} value={durationUnit} onChange={onDurationUnitChange}>
