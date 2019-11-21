@@ -81,7 +81,7 @@ function MethodItem({method, setMethod, depth}) {
                                     </span>
                                 )}
                             </div>
-                            <div>
+                            <div className={baseStyles.Collection_Item_Controls}>
                                 <Button floating onClick={onDelete(methodItem)}>
                                     <Icon name="delete"/>
                                 </Button>
@@ -162,7 +162,7 @@ function MethodItemForm({method, setMethod, depth}) {
 
     return (
         <form onSubmit={onSubmit}>
-            <div className="row">
+            <div className={`row ${styles.NoMarginBottom}`}>
                 <div className="input-field col s12">
                     <textarea id={`instruction-${elementId(depth)}`} autoFocus={true} className="materialize-textarea" required value={instruction} onChange={onInstructionChange}/>
                     <label htmlFor={`instruction-${elementId(depth)}`} className={`${instruction.length > 0 ? 'active': ''}`}>Step {depth}</label>
@@ -179,7 +179,7 @@ function MethodItemForm({method, setMethod, depth}) {
                     </select>
                 </div>
             </div>
-            <div className="row">
+            <div className={`row ${styles.NoMarginBottom}`}>
                 <div className="input-field col s12">
                     <Button type="submit">Add</Button>
                 </div>

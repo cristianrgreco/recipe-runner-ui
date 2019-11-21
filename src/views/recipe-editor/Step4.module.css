@@ -5,6 +5,10 @@
     margin: 0;
 }
 
+.NoMarginBottom {
+    margin-bottom: 0;
+}
+
 .Collection_Nested {
     display: flex;
     flex-direction: column;
