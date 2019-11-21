@@ -32,6 +32,7 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(undefined);
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
     const getValidationError = () => {
@@ -53,10 +54,12 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
 
         try {
             setError('');
+            setIsLoading(true);
             const user = await register(email, password);
             setUser(user);
             setConfirmedEmail(email);
             setConfirmedPassword(password);
+            setIsLoading(false);
             history.push('/register/confirm');
         } catch (err) {
             switch (err.code) {
@@ -70,6 +73,7 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
                 default:
                     setError(`An unknown registration error occurred: ${err.code}`);
             }
+            setIsLoading(false);
         }
     };
 
@@ -119,7 +123,7 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <Button type="submit">Register</Button>
+                        <Button type="submit" spinner={isLoading}>Register</Button>
                     </div>
                 </div>
                 <div className="row">
@@ -135,6 +139,7 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
 function ConfirmRegistrationForm({user, email, password, setLoggedIn}) {
     const [confirmationCode, setConfirmationCode] = useState('');
     const [error, setError] = useState(undefined);
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
     const onSubmit = async e => {
@@ -142,12 +147,15 @@ function ConfirmRegistrationForm({user, email, password, setLoggedIn}) {
 
         try {
             setError('');
+            setIsLoading(true);
             await confirmRegistration(user, confirmationCode);
             await login(email, password);
             setLoggedIn(true);
+            setIsLoading(false);
             history.push('/');
         } catch (err) {
             setError('Invalid confirmation code');
+            setIsLoading(false);
         }
     };
 
@@ -168,7 +176,7 @@ function ConfirmRegistrationForm({user, email, password, setLoggedIn}) {
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" spinner={isLoading}>Submit</Button>
                     </div>
                 </div>
                 <div className="row">

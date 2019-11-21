@@ -8,6 +8,7 @@ export default function Login({setLoggedIn}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(undefined);
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
     const onSubmit = async e => {
@@ -15,11 +16,14 @@ export default function Login({setLoggedIn}) {
 
         try {
             setError('');
+            setIsLoading(true);
             await login(email, password);
             setLoggedIn(true);
+            setIsLoading(false);
             history.push('/');
         } catch (err) {
             setError('Invalid username or password');
+            setIsLoading(false);
         }
     };
 
@@ -49,7 +53,7 @@ export default function Login({setLoggedIn}) {
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <Button type="submit">Log in</Button>
+                        <Button type="submit" spinner={isLoading}>Log in</Button>
                     </div>
                 </div>
                 <div className="row">
