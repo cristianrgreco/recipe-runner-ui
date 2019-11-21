@@ -26,7 +26,7 @@ export default function App() {
                     <main>
                         <div className="container">
                             <Switch>
-                                <Route exact path="/" component={Recipes}/>
+                                <Route exact path="/" render={props => <Recipes loggedIn={loggedIn} {...props}/>}/>
                                 <ConditionalRoute
                                     path="/login"
                                     condition={loggedIn}
@@ -44,7 +44,7 @@ export default function App() {
                                     loggedIn={loggedIn}
                                     component={props => <RecipeEditor {...props}/>}
                                 />
-                                <Route path="/recipes/:recipeId" component={Recipe}/>
+                                <Route path="/recipes/:recipeId" render={props => <Recipe loggedIn={loggedIn} {...props}/>}/>
                                 <Redirect to="/"/>
                             </Switch>
                         </div>

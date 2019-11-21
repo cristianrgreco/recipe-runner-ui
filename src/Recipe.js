@@ -8,7 +8,7 @@ import {fetchRecipe} from "./api";
 import {Icon} from "./components/Icon";
 import {getLoggedInEmail} from "./auth";
 
-export default function Recipe(props) {
+export default function Recipe({loggedIn, ...props}) {
     const recipeFromProps = props.recipe || (props.location.state && props.location.state.recipe) || undefined;
 
     const [recipe, setRecipe] = useState(undefined);
@@ -27,7 +27,7 @@ export default function Recipe(props) {
         <Fragment>
             {recipe && (
                 <div className={styles.Container}>
-                    <RecipeHeader recipe={recipe}/>
+                    <RecipeHeader loggedIn={loggedIn} recipe={recipe}/>
                     <RecipeDetails recipe={recipe}/>
                     <div className={styles.RecipeBody}>
                         <div className={styles.RecipeBody_Requirements}>
@@ -62,9 +62,9 @@ export default function Recipe(props) {
     );
 }
 
-function RecipeHeader({recipe}) {
+function RecipeHeader({recipe, loggedIn}) {
     const loggedInUserOwnsRecipe = () => {
-        return getLoggedInEmail() === recipe.createdBy;
+        return loggedIn && getLoggedInEmail() === recipe.createdBy;
     };
 
     return (

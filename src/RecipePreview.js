@@ -6,9 +6,9 @@ import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
 import {getLoggedInEmail} from "./auth";
 
-export default function Recipe({recipe}) {
+export default function Recipe({recipe, loggedIn}) {
     const loggedInUserOwnsRecipe = () => {
-        return getLoggedInEmail() === recipe.createdBy;
+        return loggedIn && getLoggedInEmail() === recipe.createdBy;
     };
 
     return (
