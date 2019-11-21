@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import styles from "./CreateRecipe.module.css";
+import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
 
@@ -17,11 +17,11 @@ export default function Step3({ingredients, setIngredients}) {
     };
 
     const onClickBack = () => {
-        history.push('/create-recipe/step-2');
+        history.push('/recipe-editor/step-2');
     };
 
     const onClickNext = () => {
-        history.push('/create-recipe/step-4');
+        history.push('/recipe-editor/step-4');
     };
 
     const onSubmit = async e => {
@@ -33,7 +33,7 @@ export default function Step3({ingredients, setIngredients}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Create Recipe (3/5)</div>
+                <div className={styles.Heading}>Recipe Editor (3/5)</div>
                 {ingredients.length > 0 && (
                     <div className="row">
                         <div className="input-field col s12 m12 l6">

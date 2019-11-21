@@ -7,7 +7,7 @@ import Step3 from "./Step3";
 import Step4 from "./Step4";
 import Step5 from "./Step5";
 
-export default function CreateRecipe() {
+export default function RecipeEditor() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [serves, setServes] = useState('');
@@ -25,8 +25,8 @@ export default function CreateRecipe() {
 
     return (
         <Switch>
-            <Route exact path="/create-recipe" render={() => <Redirect to="/create-recipe/step-1"/>}/>
-            <Route exact path="/create-recipe/step-1" render={() => (
+            <Route exact path="/recipe-editor" render={() => <Redirect to="/recipe-editor/step-1"/>}/>
+            <Route exact path="/recipe-editor/step-1" render={() => (
                 <Step1
                     name={name} setName={setName}
                     description={description} setDescription={setDescription}
@@ -36,28 +36,28 @@ export default function CreateRecipe() {
             )}/>
             <ConditionalRoute
                 exact
-                path="/create-recipe/step-2"
+                path="/recipe-editor/step-2"
                 condition={hasCompletedRequiredSteps()}
                 true={() => <Step2 equipment={equipment} setEquipment={setEquipment}/>}
-                false={() => <Redirect to="/create-recipe/step-1"/>}
+                false={() => <Redirect to="/recipe-editor/step-1"/>}
             />
             <ConditionalRoute
                 exact
-                path="/create-recipe/step-3"
+                path="/recipe-editor/step-3"
                 condition={hasCompletedRequiredSteps()}
                 true={() => <Step3 ingredients={ingredients} setIngredients={setIngredients}/>}
-                false={() => <Redirect to="/create-recipe/step-1"/>}
+                false={() => <Redirect to="/recipe-editor/step-1"/>}
             />
             <ConditionalRoute
                 exact
-                path="/create-recipe/step-4"
+                path="/recipe-editor/step-4"
                 condition={hasCompletedRequiredSteps()}
                 true={() => <Step4 method={method} setMethod={setMethod}/>}
-                false={() => <Redirect to="/create-recipe/step-1"/>}
+                false={() => <Redirect to="/recipe-editor/step-1"/>}
             />
             <ConditionalRoute
                 exact
-                path="/create-recipe/step-5"
+                path="/recipe-editor/step-5"
                 condition={hasCompletedRequiredSteps()}
                 true={() => <Step5
                     name={name}
@@ -68,7 +68,7 @@ export default function CreateRecipe() {
                     ingredients={ingredients}
                     method={method}
                 />}
-                false={() => <Redirect to="/create-recipe/step-1"/>}
+                false={() => <Redirect to="/recipe-editor/step-1"/>}
             />
         </Switch>
     );

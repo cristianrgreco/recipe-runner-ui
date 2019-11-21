@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import baseStyles from "./CreateRecipe.module.css";
+import baseStyles from "./RecipeEditor.module.css";
 import styles from "./Step4.module.css";
 import {Button} from "../../components/Button";
 import Badge from "../../components/Badge";
@@ -11,16 +11,16 @@ export default function Step4({method, setMethod}) {
     const history = useHistory();
 
     const onClickBack = () => {
-        history.push('/create-recipe/step-3');
+        history.push('/recipe-editor/step-3');
     };
 
     const onClickNext = () => {
-        history.push('/create-recipe/step-5');
+        history.push('/recipe-editor/step-5');
     };
 
     return (
         <div className={baseStyles.Container}>
-            <div className={baseStyles.Heading}>Create Recipe (4/5)</div>
+            <div className={baseStyles.Heading}>Recipe Editor (4/5)</div>
             {method.length === 0
                 ? <MethodItemForm method={method} setMethod={setMethod} depth={'1'}/>
                 : <MethodItem method={method} setMethod={setMethod} depth={'1'}/>

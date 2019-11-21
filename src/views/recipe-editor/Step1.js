@@ -1,6 +1,6 @@
 import React, {createRef} from 'react';
 import {useHistory} from 'react-router-dom';
-import styles from "./CreateRecipe.module.css";
+import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 
 export default function Step1({name, setName, description, setDescription, serves, setServes, image, setImage}) {
@@ -25,7 +25,7 @@ export default function Step1({name, setName, description, setDescription, serve
 
     const onSubmit = async e => {
         e.preventDefault();
-        history.push('/create-recipe/step-2');
+        history.push('/recipe-editor/step-2');
     };
 
     const isFormValid = () => {
@@ -38,7 +38,7 @@ export default function Step1({name, setName, description, setDescription, serve
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Create Recipe (1/5)</div>
+                <div className={styles.Heading}>Recipe Editor (1/5)</div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>

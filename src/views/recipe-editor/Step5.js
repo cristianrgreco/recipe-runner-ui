@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {methodDuration} from "../../duration";
 import {saveRecipe} from "../../api";
-import baseStyles from "./CreateRecipe.module.css";
+import baseStyles from "./RecipeEditor.module.css";
 import styles from "./Step5.module.css";
 import RecipePreview from "../../RecipePreview";
 import Recipe from "../../Recipe";
@@ -28,7 +28,7 @@ export default function Review({name, description, serves, image, equipment, ing
     };
 
     const onClickBack = () => {
-        history.push('/create-recipe/step-4');
+        history.push('/recipe-editor/step-4');
     };
 
     const onClickPublish = async () => {
@@ -40,7 +40,7 @@ export default function Review({name, description, serves, image, equipment, ing
 
     return (
         <div className={baseStyles.Container}>
-            <div className={baseStyles.Heading}>Create Recipe (5/5)</div>
+            <div className={baseStyles.Heading}>Recipe Editor (5/5)</div>
             <div className="row">
                 <div className={baseStyles.SubHeading}>Snippet</div>
                 <div className={styles.RecipePreview_Container}>

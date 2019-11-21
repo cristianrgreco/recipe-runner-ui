@@ -53,7 +53,7 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
             <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
             {loggedIn ? (
                 <Fragment>
-                    <li><Link to="/create-recipe" className={styles.Nav_Wrapper_Sidenav_Link}>Create</Link></li>
+                    <li><Link to="/recipe-editor" className={styles.Nav_Wrapper_Sidenav_Link}>Create</Link></li>
                     <li><Link to="#" className={styles.Nav_Wrapper_Sidenav_Link} onClick={onLogout}>Logout</Link></li>
                 </Fragment>
             ) : (

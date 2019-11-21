@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import CreateRecipe from "./views/create-recipe/CreateRecipe";
+import RecipeEditor from "./views/recipe-editor/RecipeEditor";
 import Recipes from "./Recipes";
 import Recipe from "./Recipe";
 import Login from "./Login";
@@ -40,11 +40,12 @@ export default function App() {
                                     false={() => <Register setLoggedIn={setLoggedIn}/>}
                                 />
                                 <ProtectedRoute
-                                    path="/create-recipe"
+                                    path="/recipe-editor"
                                     loggedIn={loggedIn}
-                                    component={() => <CreateRecipe/>}
+                                    component={() => <RecipeEditor/>}
                                 />
                                 <Route path="/recipes/:recipeId" component={Recipe}/>
+                                <Redirect to="/"/>
                             </Switch>
                         </div>
                     </main>
