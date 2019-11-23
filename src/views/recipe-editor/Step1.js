@@ -61,7 +61,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
             <form onSubmit={onSubmit}>
                 <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (1/5)</div>
                 <div className="row">
-                    <div className="input-field col s12 m12 l6">
+                    <div className="input-field col s12">
                         <input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>
                         <label htmlFor="name">Name</label>
                     </div>
@@ -73,7 +73,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                     </div>
                 </div>
                 <div className="row">
-                    <div className="input-field col s12 m12 l6">
+                    <div className="input-field col s12">
                         <textarea id="description" className="materialize-textarea" required value={description} onChange={onDescriptionChange}/>
                         <label htmlFor="description">Description</label>
                     </div>
