@@ -34,7 +34,7 @@
 
 .Nested {
     margin: 1rem .75rem;
-    background-color: rgba(secondary_r, secondary_g, secondary_b, 0.015);
+    background-color: rgba(secondary_r, secondary_g, secondary_b, 0.05);
 }
 
 .NestedFirst {
