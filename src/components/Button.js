@@ -54,7 +54,7 @@ export function Button(
         <button
             type="button"
             onClick={modifiedOnClick}
-            className={`${styles.Button} ${btnType()} ${btnTheme()} ${position}`}
+            className={`${styles.Button} ${btnType()} ${btnTheme()} ${spinner && styles.Spinner} ${position}`}
             {...props}
         >
             <div>

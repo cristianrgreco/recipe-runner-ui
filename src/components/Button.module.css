@@ -32,6 +32,10 @@
     background-color: error !important;
 }
 
+.Spinner {
+    pointer-events: none;
+}
+
 .SpinnerContainer {
     display: flex;
     margin-left: 10px;
