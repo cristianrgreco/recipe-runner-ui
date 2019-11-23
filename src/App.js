@@ -7,15 +7,21 @@ import Recipes from "./Recipes";
 import Recipe from "./Recipe";
 import Login from "./Login";
 import Register from "./Register";
-import {isLoggedIn} from "./auth";
+import {getLoggedInEmail, isLoggedIn} from "./auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ConditionalRoute from "./components/ConditionalRoute";
 
 export default function App() {
     const [loggedIn, setLoggedIn] = useState(undefined);
+    const [loggedInEmail, setLoggedInEmail] = useState(undefined);
 
     useEffect(() => {
-        isLoggedIn().then(setLoggedIn);
+        isLoggedIn().then(isLoggedIn => {
+            setLoggedIn(isLoggedIn);
+            if (isLoggedIn) {
+                setLoggedInEmail(getLoggedInEmail());
+            }
+        });
     }, []);
 
     return (
@@ -26,7 +32,13 @@ export default function App() {
                     <main>
                         <div className="container">
                             <Switch>
-                                <Route exact path="/" render={props => <Recipes loggedIn={loggedIn} {...props}/>}/>
+                                <Route
+                                    exact
+                                    path="/"
+                                    render={props => (
+                                        <Recipes loggedIn={loggedIn} loggedInEmail={loggedInEmail} {...props}/>)
+                                    }
+                                />
                                 <ConditionalRoute
                                     path="/login"
                                     condition={loggedIn}
@@ -44,7 +56,9 @@ export default function App() {
                                     loggedIn={loggedIn}
                                     component={props => <RecipeEditor {...props}/>}
                                 />
-                                <Route path="/recipes/:recipeId" render={props => <Recipe loggedIn={loggedIn} {...props}/>}/>
+                                <Route path="/recipes/:recipeId" render={props => (
+                                    <Recipe loggedIn={loggedIn} {...props}/>
+                                )}/>
                                 <Redirect to="/"/>
                             </Switch>
                         </div>

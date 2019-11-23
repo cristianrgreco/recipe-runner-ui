@@ -1,26 +1,35 @@
 @value colors: "../colors.css";
-@value primary, primaryLighter, light from colors;
+@value primary, primaryLighter, light, error from colors;
 
 .Button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    background-color: primary;
-    color: light;
+    background-color: primary !important;
+    color: light !important;
 }
 
 .Button:hover {
-    background-color: primaryLighter;
+    background-color: primaryLighter !important;
 }
 
 .Secondary {
-    color: primary;
-    background-color: light;
+    color: primary !important;
+    background-color: light !important;
 }
 
 .Secondary:hover {
-    background-color: light;
+    background-color: light !important;
+}
+
+.Danger {
+    color: light !important;
+    background-color: error !important;
+}
+
+.Danger:hover {
+    background-color: error !important;
 }
 
 .SpinnerContainer {

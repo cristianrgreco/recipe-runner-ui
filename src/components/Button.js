@@ -7,11 +7,12 @@ export function Button(
         children,
         confirm,
         secondary,
+        danger,
         large,
         floating,
         spinner,
         position = '',
-        onClick,
+        onClick = () => {},
         ...props
     }
 ) {
@@ -30,6 +31,8 @@ export function Button(
     const btnTheme = () => {
         if (secondary) {
             return `waves-effect waves-dark ${styles.Secondary}`;
+        } else if (danger) {
+            return `waves-effect waves-dark ${styles.Danger}`;
         } else {
             return `waves-effect waves-light`;
         }

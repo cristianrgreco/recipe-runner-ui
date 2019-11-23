@@ -3,7 +3,7 @@ import styles from './Recipes.module.css';
 import RecipePreview from "./RecipePreview";
 import {fetchRecipes} from "./api";
 
-export default function Recipes({loggedIn}) {
+export default function Recipes({loggedIn, loggedInEmail}) {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function Recipes({loggedIn}) {
     return (
         <div className={styles.Recipes}>
             {recipes.map(recipe => (
-                <RecipePreview key={recipe.id} loggedIn={loggedIn} recipe={recipe}/>
+                <RecipePreview key={recipe.id} loggedIn={loggedIn} loggedInEmail={loggedInEmail} recipe={recipe}/>
             ))}
         </div>
     );

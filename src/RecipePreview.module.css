@@ -51,6 +51,12 @@
 
 .RecipeDetailsNameContainer_Controls {
     margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.RecipeDetailsNameContainer_Controls_Item {
+    margin-left: 5px;
 }
 
 .RecipeDetailsDescription {

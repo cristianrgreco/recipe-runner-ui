@@ -4,11 +4,10 @@ import {formatTime} from "./time";
 import {Link} from "react-router-dom";
 import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
-import {getLoggedInEmail} from "./auth";
 
-export default function Recipe({recipe, loggedIn}) {
+export default function RecipePreview({recipe, loggedIn, loggedInEmail}) {
     const loggedInUserOwnsRecipe = () => {
-        return loggedIn && getLoggedInEmail() === recipe.createdBy;
+        return loggedIn && loggedInEmail === recipe.createdBy;
     };
 
     return (
@@ -24,11 +23,18 @@ export default function Recipe({recipe, loggedIn}) {
                         </div>
                         {loggedInUserOwnsRecipe() && (
                             <div className={styles.RecipeDetailsNameContainer_Controls}>
-                                <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
-                                    <Button floating>
-                                        <Icon name="edit"/>
+                                <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
+                                    <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
+                                        <Button floating>
+                                            <Icon name="edit"/>
+                                        </Button>
+                                    </Link>
+                                </div>
+                                <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
+                                    <Button floating danger>
+                                        <Icon name="delete"/>
                                     </Button>
-                                </Link>
+                                </div>
                             </div>
                         )}
                     </div>
