@@ -16,13 +16,15 @@ export default function App() {
     const [loggedInEmail, setLoggedInEmail] = useState(undefined);
 
     useEffect(() => {
-        isLoggedIn().then(isLoggedIn => {
-            setLoggedIn(isLoggedIn);
-            if (isLoggedIn) {
+        const setLoggedInUser = async () => {
+            const loggedIn = await isLoggedIn();
+            setLoggedIn(loggedIn);
+            if (loggedIn) {
                 setLoggedInEmail(getLoggedInEmail());
             }
-        });
-    }, []);
+        };
+        setLoggedInUser();
+    }, [loggedIn, loggedInEmail]);
 
     return (
         <Router>
