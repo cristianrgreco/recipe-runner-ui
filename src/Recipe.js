@@ -7,9 +7,7 @@ import {Button} from "./components/Button";
 import {deleteRecipe, fetchRecipe} from "./api";
 import {Icon} from "./components/Icon";
 
-export default function Recipe({loggedIn, loggedInEmail, ...props}) {
-    const recipeFromProps = props.recipe || (props.location.state && props.location.state.recipe) || undefined;
-
+export default function Recipe({loggedIn, recipe: recipeFromProps}) {
     const [recipe, setRecipe] = useState(undefined);
     const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
@@ -26,7 +24,7 @@ export default function Recipe({loggedIn, loggedInEmail, ...props}) {
         <Fragment>
             {recipe && (
                 <div className={styles.Container}>
-                    <RecipeHeader loggedIn={loggedIn} loggedInEmail={loggedInEmail} recipe={recipe}/>
+                    <RecipeHeader loggedIn={loggedIn} recipe={recipe}/>
                     <RecipeDetails recipe={recipe}/>
                     <div className={styles.RecipeBody}>
                         <div className={styles.RecipeBody_Requirements}>
@@ -61,12 +59,8 @@ export default function Recipe({loggedIn, loggedInEmail, ...props}) {
     );
 }
 
-function RecipeHeader({recipe, loggedIn, loggedInEmail}) {
+function RecipeHeader({recipe, loggedIn}) {
     const history = useHistory();
-
-    const loggedInUserOwnsRecipe = () => {
-        return loggedIn && loggedInEmail === recipe.createdBy;
-    };
 
     const onClickDelete = async () => {
         await deleteRecipe(recipe.id);
@@ -83,7 +77,7 @@ function RecipeHeader({recipe, loggedIn, loggedInEmail}) {
                     <div className={styles.RecipeHeader_Info_NameContainer_Name}>
                         {recipe.name}
                     </div>
-                    {loggedInUserOwnsRecipe() && (
+                    {loggedIn && recipe.isEditable && (
                         <div className={styles.RecipeHeader_Info_NameContainer_Controls}>
                             <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
                                 <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>

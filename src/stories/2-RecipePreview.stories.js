@@ -11,13 +11,9 @@ export default {
 addDecorator(routerDecorator);
 
 export const standard = () => (
-    <RecipePreview loggedIn={false} recipe={recipe()}/>
+    <RecipePreview recipe={recipe()}/>
 );
 
-export const loggedIn = () => (
-    <RecipePreview loggedIn={true} loggedInEmail="anotheruser@domain.com" recipe={recipe()}/>
-);
-
-export const loggedInAndOwnsRecipe = () => (
-    <RecipePreview loggedIn={true} loggedInEmail="user@domain.com" recipe={recipe()}/>
+export const isEditable = () => (
+    <RecipePreview loggedIn={true} recipe={recipe({isEditable: true})}/>
 );

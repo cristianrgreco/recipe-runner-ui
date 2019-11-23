@@ -6,11 +6,7 @@ import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
 import {deleteRecipe} from "./api";
 
-export default function RecipePreview({recipe, loggedIn, loggedInEmail, onDelete}) {
-    const loggedInUserOwnsRecipe = () => {
-        return loggedIn && loggedInEmail === recipe.createdBy;
-    };
-
+export default function RecipePreview({recipe, loggedIn, onDelete}) {
     const onClickDelete = async () => {
         await deleteRecipe(recipe.id);
         onDelete();
@@ -27,7 +23,7 @@ export default function RecipePreview({recipe, loggedIn, loggedInEmail, onDelete
                         <div className={styles.RecipeDetailsNameContainer_Name}>
                             {recipe.name}
                         </div>
-                        {loggedInUserOwnsRecipe() && (
+                        {loggedIn && recipe.isEditable && (
                             <div className={styles.RecipeDetailsNameContainer_Controls}>
                                 <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
                                     <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
@@ -53,7 +49,7 @@ export default function RecipePreview({recipe, loggedIn, loggedInEmail, onDelete
                         <RecipeDetail value={recipe.ingredients.length} label="Ingredients"/>
                     </div>
                 </div>
-                <Link to={{pathname: `/recipes/${recipe.id}`, state: {recipe}}}>
+                <Link to={`/recipes/${recipe.id}`}>
                     <div className={styles.RecipeDetailsLink}>
                         <span>
                             View Recipe

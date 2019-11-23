@@ -10,9 +10,5 @@ export default {
 addDecorator(routerDecorator);
 
 export const standard = () => (
-    <Recipes loggedIn={false}/>
-);
-
-export const loggedIn = () => (
-    <Recipes loggedIn={true} loggedInEmail="anotheruser@domain.com"/>
+    <Recipes/>
 );

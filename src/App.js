@@ -7,24 +7,19 @@ import Recipes from "./Recipes";
 import Recipe from "./Recipe";
 import Login from "./Login";
 import Register from "./Register";
-import {getLoggedInEmail, isLoggedIn} from "./auth";
+import {isLoggedIn} from "./auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ConditionalRoute from "./components/ConditionalRoute";
 
 export default function App() {
     const [loggedIn, setLoggedIn] = useState(undefined);
-    const [loggedInEmail, setLoggedInEmail] = useState(undefined);
 
     useEffect(() => {
-        const setLoggedInUser = async () => {
+        (async () => {
             const loggedIn = await isLoggedIn();
             setLoggedIn(loggedIn);
-            if (loggedIn) {
-                setLoggedInEmail(getLoggedInEmail());
-            }
-        };
-        setLoggedInUser();
-    }, [loggedIn, loggedInEmail]);
+        })();
+    }, [loggedIn]);
 
     return (
         <Router>
@@ -37,9 +32,7 @@ export default function App() {
                                 <Route
                                     exact
                                     path="/"
-                                    render={props => (
-                                        <Recipes loggedIn={loggedIn} loggedInEmail={loggedInEmail} {...props}/>
-                                    )}
+                                    render={props => <Recipes loggedIn={loggedIn} {...props}/>}
                                 />
                                 <ConditionalRoute
                                     path="/login"
@@ -59,7 +52,7 @@ export default function App() {
                                     component={props => <RecipeEditor {...props}/>}
                                 />
                                 <Route path="/recipes/:recipeId" render={props => (
-                                    <Recipe loggedIn={loggedIn} loggedInEmail={loggedInEmail} {...props}/>
+                                    <Recipe loggedIn={loggedIn} {...props}/>
                                 )}/>
                                 <Redirect to="/"/>
                             </Switch>
