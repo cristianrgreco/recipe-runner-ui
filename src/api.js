@@ -46,11 +46,20 @@ export const updateRecipe = async (id, recipe, image) => {
         formData,
         {
             headers: {
-                'authorization': `Bearer ${await getJwtToken()}`,
-                'content-type': 'multipart/form-data'
+                'Authorization': `Bearer ${await getJwtToken()}`,
+                'Content-Type': 'multipart/form-data'
             }
         }
     );
 
     return response.headers.location;
+};
+
+export const deleteRecipe = async recipeId => {
+    await axios.delete(`${URL}/recipes/${recipeId}`,
+        {
+            headers: {
+                'Authorization': `Bearer ${await getJwtToken()}`
+            }
+        });
 };

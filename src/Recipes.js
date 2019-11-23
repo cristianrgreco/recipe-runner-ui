@@ -10,10 +10,20 @@ export default function Recipes({loggedIn, loggedInEmail}) {
         fetchRecipes().then(recipes => setRecipes(recipes));
     }, []);
 
+    const onDeleteRecipe = recipe => () => {
+        setRecipes(recipes.filter(aRecipe => aRecipe !== recipe));
+    };
+
     return (
         <div className={styles.Recipes}>
             {recipes.map(recipe => (
-                <RecipePreview key={recipe.id} loggedIn={loggedIn} loggedInEmail={loggedInEmail} recipe={recipe}/>
+                <RecipePreview
+                    key={recipe.id}
+                    loggedIn={loggedIn}
+                    loggedInEmail={loggedInEmail}
+                    recipe={recipe}
+                    onDelete={onDeleteRecipe(recipe)}
+                />
             ))}
         </div>
     );

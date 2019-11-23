@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import styles from './Recipe.module.css';
 import {formatTime} from "./time";
 import RecipeRunner from "./RecipeRunner";
 import {Button} from "./components/Button";
-import {fetchRecipe} from "./api";
+import {deleteRecipe, fetchRecipe} from "./api";
 import {Icon} from "./components/Icon";
 
 export default function Recipe({loggedIn, loggedInEmail, ...props}) {
@@ -62,8 +62,15 @@ export default function Recipe({loggedIn, loggedInEmail, ...props}) {
 }
 
 function RecipeHeader({recipe, loggedIn, loggedInEmail}) {
+    const history = useHistory();
+
     const loggedInUserOwnsRecipe = () => {
         return loggedIn && loggedInEmail === recipe.createdBy;
+    };
+
+    const onClickDelete = async () => {
+        await deleteRecipe(recipe.id);
+        history.push('/');
     };
 
     return (
@@ -78,11 +85,18 @@ function RecipeHeader({recipe, loggedIn, loggedInEmail}) {
                     </div>
                     {loggedInUserOwnsRecipe() && (
                         <div className={styles.RecipeHeader_Info_NameContainer_Controls}>
-                            <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
-                                <Button floating>
-                                    <Icon name="edit"/>
+                            <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
+                                <Link to={{pathname: `/recipe-editor`, state: {recipe}}}>
+                                    <Button floating>
+                                        <Icon name="edit"/>
+                                    </Button>
+                                </Link>
+                            </div>
+                            <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
+                                <Button floating danger onClick={onClickDelete}>
+                                    <Icon name="delete"/>
                                 </Button>
-                            </Link>
+                            </div>
                         </div>
                     )}
                 </div>

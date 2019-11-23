@@ -4,10 +4,16 @@ import {formatTime} from "./time";
 import {Link} from "react-router-dom";
 import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
+import {deleteRecipe} from "./api";
 
-export default function RecipePreview({recipe, loggedIn, loggedInEmail}) {
+export default function RecipePreview({recipe, loggedIn, loggedInEmail, onDelete}) {
     const loggedInUserOwnsRecipe = () => {
         return loggedIn && loggedInEmail === recipe.createdBy;
+    };
+
+    const onClickDelete = async () => {
+        await deleteRecipe(recipe.id);
+        onDelete();
     };
 
     return (
@@ -31,7 +37,7 @@ export default function RecipePreview({recipe, loggedIn, loggedInEmail}) {
                                     </Link>
                                 </div>
                                 <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                                    <Button floating danger>
+                                    <Button floating danger onClick={onClickDelete}>
                                         <Icon name="delete"/>
                                     </Button>
                                 </div>
