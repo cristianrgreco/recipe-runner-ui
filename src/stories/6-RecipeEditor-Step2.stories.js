@@ -3,7 +3,6 @@ import {addDecorator} from "@storybook/react";
 import {action} from "@storybook/addon-actions";
 import {routerDecorator} from "./decorators";
 import {recipe} from "./data";
-import Step1 from "../views/recipe-editor/Step1";
 import Step2 from "../views/recipe-editor/Step2";
 
 export default {
