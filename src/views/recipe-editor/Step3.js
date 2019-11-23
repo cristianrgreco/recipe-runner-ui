@@ -48,8 +48,8 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                     <div className="row">
                         <div className="input-field col s12 m12 l6">
                             <ul className={`${styles.Collection} collection`}>
-                                {ingredients.map(ingredient => (
-                                    <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
+                                {ingredients.map((ingredient, i) => (
+                                    <li key={i} className={`${styles.Collection_Item} collection-item`}>
                                         <div className={styles.Collection_Item_Content}>
                                             <input type="text" required value={ingredient} onChange={onEdit(ingredient)}/>
                                         </div>
