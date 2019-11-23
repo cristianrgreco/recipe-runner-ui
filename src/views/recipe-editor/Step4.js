@@ -82,7 +82,7 @@ function MethodItem({method, setMethod, depth}) {
                                 )}
                             </div>
                             <div className={baseStyles.Collection_Item_Controls}>
-                                <Button floating onClick={onDelete(methodItem)}>
+                                <Button danger floating onClick={onDelete(methodItem)}>
                                     <Icon name="delete"/>
                                 </Button>
                             </div>

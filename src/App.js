@@ -36,8 +36,8 @@ export default function App() {
                                     exact
                                     path="/"
                                     render={props => (
-                                        <Recipes loggedIn={loggedIn} loggedInEmail={loggedInEmail} {...props}/>)
-                                    }
+                                        <Recipes loggedIn={loggedIn} loggedInEmail={loggedInEmail} {...props}/>
+                                    )}
                                 />
                                 <ConditionalRoute
                                     path="/login"
@@ -57,7 +57,7 @@ export default function App() {
                                     component={props => <RecipeEditor {...props}/>}
                                 />
                                 <Route path="/recipes/:recipeId" render={props => (
-                                    <Recipe loggedIn={loggedIn} {...props}/>
+                                    <Recipe loggedIn={loggedIn} loggedInEmail={loggedInEmail} {...props}/>
                                 )}/>
                                 <Redirect to="/"/>
                             </Switch>

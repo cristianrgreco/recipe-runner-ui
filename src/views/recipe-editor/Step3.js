@@ -48,7 +48,7 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                                             {ingredient}
                                         </div>
                                         <div>
-                                            <Button floating onClick={onDelete(ingredient)}>
+                                            <Button danger floating onClick={onDelete(ingredient)}>
                                                 <Icon name="delete"/>
                                             </Button>
                                         </div>

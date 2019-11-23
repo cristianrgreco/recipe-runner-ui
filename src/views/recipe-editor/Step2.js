@@ -54,7 +54,7 @@ export default function Step2({isEdit, equipment, setEquipment}) {
                                             <input type="text" required value={equipmentItem} onChange={onEdit(equipmentItem)}/>
                                         </div>
                                         <div className={styles.Collection_Item_Controls}>
-                                            <Button floating onClick={onDelete(equipmentItem)}>
+                                            <Button danger floating onClick={onDelete(equipmentItem)}>
                                                 <Icon name="delete"/>
                                             </Button>
                                         </div>
