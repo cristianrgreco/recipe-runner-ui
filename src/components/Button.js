@@ -1,18 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Button.module.css';
 import Spinner from "./Spinner";
 
 export function Button(
     {
         children,
-        secondary = false,
-        large = false,
-        floating = false,
-        spinner = false,
+        confirm,
+        secondary,
+        large,
+        floating,
+        spinner,
         position = '',
+        onClick,
         ...props
     }
 ) {
+    const [isConfirm, setIsConfirm] = useState(false);
+
     const btnType = () => {
         if (large) {
             return 'btn-large';
@@ -31,10 +35,27 @@ export function Button(
         }
     };
 
+    const modifiedOnClick = e => {
+        if (confirm) {
+            if (isConfirm) {
+                return onClick(e);
+            } else {
+                setIsConfirm(true);
+            }
+        } else {
+            return onClick(e);
+        }
+    };
+
     return (
-        <button type="button" className={`${styles.Button} ${btnType()} ${btnTheme()} ${position}`} {...props}>
+        <button
+            type="button"
+            onClick={modifiedOnClick}
+            className={`${styles.Button} ${btnType()} ${btnTheme()} ${position}`}
+            {...props}
+        >
             <div>
-                {children}
+                {isConfirm ? confirm : children}
             </div>
             {spinner && (
                 <div className={styles.SpinnerContainer}>
