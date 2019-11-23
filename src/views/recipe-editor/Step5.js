@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {methodDuration} from "../../duration";
-import {updateRecipe} from "../../api";
+import {saveRecipe, updateRecipe} from "../../api";
 import baseStyles from "./RecipeEditor.module.css";
 import styles from "./Step5.module.css";
 import RecipePreview from "../../RecipePreview";
@@ -41,7 +41,14 @@ export default function Review({isEdit, id, name, description, serves, image, eq
 
     const onClickPublish = async () => {
         setIsPublishing(true);
-        const location = await updateRecipe(id, recipe, image);
+
+        let location;
+        if (isEdit) {
+            location = await updateRecipe(id, recipe, image);
+        } else {
+            location = await saveRecipe(recipe, image);
+        }
+
         setIsPublishing(false);
         history.push(location);
     };
