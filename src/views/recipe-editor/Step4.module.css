@@ -28,6 +28,10 @@
     margin-right: 10px;
 }
 
+.FlexStart {
+    align-self: flex-start;
+}
+
 .Nested {
     margin: 1rem .75rem;
     background-color: rgba(secondary_r, secondary_g, secondary_b, 0.015);

@@ -1,7 +1,3 @@
 .RecipePreview_Container a {
     pointer-events: none;
 }
-
-.Collection_Item_Controls {
-    align-self: flex-start;
-}
