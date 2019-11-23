@@ -19,7 +19,9 @@
     "version": "git rev-parse --short HEAD",
     "deploy:build": "npm run build",
     "deploy:sync": "aws s3 sync --delete build/ s3://recipe-runner",
-    "deploy": "npm run deploy:build && npm run deploy:sync"
+    "deploy": "npm run deploy:build && npm run deploy:sync",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +37,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "^5.2.6"
   }
 }
