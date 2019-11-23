@@ -11,6 +11,8 @@ export const primary = () => <Button onClick={action('clicked')}>Primary</Button
 
 export const secondary = () => <Button secondary onClick={action('clicked')}>Secondary</Button>;
 
+export const danger = () => <Button danger onClick={action('clicked')}>Danger</Button>;
+
 export const large = () => <Button large onClick={action('clicked')}>Large</Button>;
 
 export const floating = () => <Button floating onClick={action('clicked')}>F</Button>;
