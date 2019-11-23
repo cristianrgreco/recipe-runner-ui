@@ -2,7 +2,7 @@
 @value primary_g: 182;
 @value primary_b: 182;
 @value primary: rgb(primary_r, primary_g, primary_b);
-@value primaryLighter: rgba(77, primary_g, primary_b, .8);
+@value primaryLighter: rgba(primary_r, primary_g, primary_b, .8);
 
 @value secondary_r: 161;
 @value secondary_g: 136;
