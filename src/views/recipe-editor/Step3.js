@@ -16,6 +16,12 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
         setIngredient(e.target.value);
     };
 
+    const onEdit = ingredient => e => {
+        const index = ingredients.findIndex(anIngredient => anIngredient === ingredient);
+        const updatedIngredients = [...ingredients.slice(0, index), e.target.value, ...ingredients.slice(index + 1)];
+        setIngredients(updatedIngredients);
+    };
+
     const onDelete = ingredient => () => {
         setIngredients(ingredients.filter(anIngredient => anIngredient !== ingredient));
     };
@@ -45,9 +51,9 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                                 {ingredients.map(ingredient => (
                                     <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
                                         <div className={styles.Collection_Item_Content}>
-                                            {ingredient}
+                                            <input type="text" required value={ingredient} onChange={onEdit(ingredient)}/>
                                         </div>
-                                        <div>
+                                        <div className={styles.Collection_Item_Controls}>
                                             <Button danger floating onClick={onDelete(ingredient)}>
                                                 <Icon name="delete"/>
                                             </Button>

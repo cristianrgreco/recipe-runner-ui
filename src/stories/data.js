@@ -13,26 +13,26 @@ export const recipe = () => ({
         'Ingredient 1',
         'Ingredient 2',
     ],
-    method: [
-        {
-            instruction: 'Instruction 1',
+    method: [{
+        instruction: 'Instruction 1',
+        alarm: {
+            duration: 6000000
+        },
+        next: [{
+            instruction: 'Instruction 1.1',
             alarm: {
-                duration: 6000000
+                duration: 600000
             },
             next: [{
-                instruction: 'Instruction 1.1',
-                alarm: {
-                    duration: 600000
-                },
+                instruction: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
                 next: []
             }]
+        }]
+    }, {
+        instruction: 'Instruction 2',
+        alarm: {
+            duration: 60000
         },
-        {
-            instruction: 'Instruction 2',
-            alarm: {
-                duration: 60000
-            },
-            next: []
-        }
-    ]
+        next: []
+    }]
 });
