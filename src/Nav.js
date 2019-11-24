@@ -8,33 +8,10 @@ export default function Nav({loggedIn, setLoggedIn}) {
     const history = useHistory();
 
     useEffect(() => {
-        const elems = document.querySelectorAll('.sidenav');
-        window.M.Sidenav.init(elems);
+        window.M.Sidenav.init(document.querySelectorAll('.sidenav'));
+        window.M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {coverTrigger: false});
     }, []);
 
-    return (
-        <header>
-            <nav className={styles.Nav}>
-                <div className={`${styles.Nav_Wrapper} nav-wrapper`}>
-                    <div className="container">
-                        <Link to="/" className={`${styles.Nav_Wrapper_Logo} brand-logo`}>Hello, Diners</Link>
-                        <a href="#" data-target="mobile" className={`${styles.Nav_Wrapper_SidenavTrigger} sidenav-trigger`}>
-                            <Icon name="menu"/>
-                        </a>
-                        <ul className="right hide-on-med-and-down">
-                            <NavLinks history={history} isMobile={false} loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout}/>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <ul id="mobile" className="sidenav sidenav-close">
-                <NavLinks history={history} isMobile={true} loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout}/>
-            </ul>
-        </header>
-    );
-}
-
-function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
     const onLogout = () => {
         logout();
         setLoggedIn(false);
@@ -42,26 +19,81 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
     };
 
     return (
-        <Fragment>
-            {isMobile && (
+        <header>
+            <ul id="auth-dropdown" className="dropdown-content">
+                <li><Link to="/login" className={styles.Nav_Wrapper_Sidenav_Link}>Login</Link></li>
+                <li><Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>Register</Link></li>
+            </ul>
+            <nav className={styles.Primary}>
+                <div className={`${styles.Nav_Wrapper} nav-wrapper`}>
+                    <div className="container">
+                        <Link to="/" className={`${styles.Nav_Wrapper_Logo} brand-logo`}>Hello, Diners</Link>
+                        <a href="#" data-target="mobile" className={`${styles.Secondary} sidenav-trigger`}>
+                            <Icon name="menu"/>
+                        </a>
+                        <ul className="right hide-on-med-and-down">
+                            <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
+                            {loggedIn ? (
+                                <Fragment>
+                                    <li>
+                                        <Link to="/recipe-editor" className={styles.Nav_Wrapper_Sidenav_Link}>
+                                            Create
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="#" className={styles.Nav_Wrapper_Sidenav_Link} onClick={onLogout}>
+                                            Logout
+                                        </Link>
+                                    </li>
+                                </Fragment>
+                            ) : (
+                                <li>
+                                    <a className={`dropdown-trigger ${styles.Secondary}`} href="#!" data-target="auth-dropdown">
+                                        <Icon name="person"/>
+                                    </a>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <ul id="mobile" className="sidenav sidenav-close">
                 <li className="logo">
                     <a href="/" className={`${styles.Nav_Wrapper_Sidenav_LogoContainer} brand-logo`}>
-                        <div className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>Hello, Diners</div>
+                        <div className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>
+                            Hello, Diners
+                        </div>
                     </a>
                 </li>
-            )}
-            <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
-            {loggedIn ? (
-                <Fragment>
-                    <li><Link to="/recipe-editor" className={styles.Nav_Wrapper_Sidenav_Link}>Create</Link></li>
-                    <li><Link to="#" className={styles.Nav_Wrapper_Sidenav_Link} onClick={onLogout}>Logout</Link></li>
-                </Fragment>
-            ) : (
-                <Fragment>
-                    <li><Link to="/login" className={styles.Nav_Wrapper_Sidenav_Link}>Login</Link></li>
-                    <li><Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>Register</Link></li>
-                </Fragment>
-            )}
-        </Fragment>
+                <li><Link to="/" className={styles.Nav_Wrapper_Sidenav_Link}>Recipes</Link></li>
+                {loggedIn ? (
+                    <Fragment>
+                        <li>
+                            <Link to="/recipe-editor" className={styles.Nav_Wrapper_Sidenav_Link}>
+                                Create
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#" className={styles.Nav_Wrapper_Sidenav_Link} onClick={onLogout}>
+                                Logout
+                            </Link>
+                        </li>
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <li>
+                            <Link to="/login" className={styles.Nav_Wrapper_Sidenav_Link}>
+                                Login
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>
+                                Register
+                            </Link>
+                        </li>
+                    </Fragment>
+                )}
+            </ul>
+        </header>
     );
 }
