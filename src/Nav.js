@@ -27,7 +27,7 @@ export default function Nav({loggedIn, setLoggedIn}) {
                     </div>
                 </div>
             </nav>
-            <ul id="mobile" className="sidenav">
+            <ul id="mobile" className="sidenav sidenav-close">
                 <NavLinks history={history} isMobile={true} loggedIn={loggedIn} setLoggedIn={setLoggedIn} logout={logout}/>
             </ul>
         </header>
