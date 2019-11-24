@@ -7,10 +7,3 @@
     line-height: 30px;
     text-transform: capitalize;
 }
-
-@media only screen and (max-width: 768px) {
-    .Heading {
-        font-size: 20px;
-        line-height: 24px;
-    }
-}

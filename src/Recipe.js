@@ -8,6 +8,7 @@ import {deleteRecipe, fetchRecipe} from "./api";
 import {Icon} from "./components/Icon";
 import Input from "./components/Input";
 import Heading from "./components/Heading";
+import SubHeading from "./components/SubHeading";
 
 export default function Recipe({loggedIn, recipe: recipeFromProps}) {
     const [recipe, setRecipe] = useState(undefined);
@@ -39,7 +40,9 @@ export default function Recipe({loggedIn, recipe: recipeFromProps}) {
                         </div>
                         <div className={styles.RecipeBody_Method}>
                             <div className={styles.Recipe_Heading}>
-                                Method
+                                <SubHeading>
+                                    Method
+                                </SubHeading>
                             </div>
                             <div className={styles.RecipeBody_Method_Body}>
                                 {started
@@ -97,7 +100,9 @@ function RecipeHeader({recipe, loggedIn}) {
                     )}
                 </div>
                 <div className={`${styles.Recipe_Heading}`}>
-                    About this recipe
+                    <SubHeading>
+                        About this recipe
+                    </SubHeading>
                 </div>
                 <div className={styles.RecipeHeader_Info_Description}>
                     {recipe.description}
@@ -134,7 +139,9 @@ function RecipeEquipment({recipe}) {
     return (
         <div className={styles.RecipeBody_Requirements_Equipment}>
             <div className={styles.Recipe_Heading}>
-                Equipment
+                <SubHeading>
+                    Equipment
+                </SubHeading>
             </div>
             <div className={styles.RecipeBody_Requirements_Equipment_Body}>
                 <ul className={`${styles.Collection} collection`}>
@@ -156,7 +163,9 @@ function RecipeIngredients({recipe}) {
     return (
         <div className={styles.RecipeBody_Requirements_Ingredients}>
             <div className={styles.Recipe_Heading}>
-                Ingredients
+                <SubHeading>
+                    Ingredients
+                </SubHeading>
             </div>
             <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
                 <ul className={`${styles.Collection} collection`}>

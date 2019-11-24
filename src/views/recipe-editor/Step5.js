@@ -8,6 +8,7 @@ import RecipePreview from "../../RecipePreview";
 import Recipe from "../../Recipe";
 import {Button} from "../../components/Button";
 import Heading from "../../components/Heading";
+import SubHeading from "../../components/SubHeading";
 
 export default function Review({isEdit, id, name, description, serves, image, equipment, ingredients, method}) {
     const [isPublishing, setIsPublishing] = useState(false);
@@ -63,7 +64,11 @@ export default function Review({isEdit, id, name, description, serves, image, eq
             </div>
             <div className="row">
                 <div className="input-field col s12">
-                    <div className={baseStyles.SubHeading}>Snippet</div>
+                    <div className={baseStyles.SubHeading}>
+                        <SubHeading>
+                            Preview
+                        </SubHeading>
+                    </div>
                     <div className={styles.RecipePreview_Container}>
                         <RecipePreview recipe={recipeWithImagePreview}/>
                     </div>
@@ -71,7 +76,11 @@ export default function Review({isEdit, id, name, description, serves, image, eq
             </div>
             <div className="row">
                 <div className="input-field col s12">
-                    <div className={baseStyles.SubHeading}>Full</div>
+                    <div className={baseStyles.SubHeading}>
+                        <SubHeading>
+                            Full
+                        </SubHeading>
+                    </div>
                     <Recipe recipe={recipeWithImagePreview}/>
                 </div>
             </div>
