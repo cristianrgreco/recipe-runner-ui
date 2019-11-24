@@ -50,6 +50,8 @@
     margin-left: 10px;
     display: flex;
     flex-direction: row;
+    height: 28px;
+    align-items: center;
 }
 
 .RecipeDetailsNameContainer_Controls_Item {

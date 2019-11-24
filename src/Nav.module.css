@@ -1,12 +1,8 @@
 @value colors: "./colors.css";
 @value primary, secondary, secondaryBackground, light from colors;
 
-.Primary {
+.Nav {
     color: primary;
-}
-
-.Secondary {
-    color: secondary;
 }
 
 .Nav_Wrapper {
@@ -18,6 +14,10 @@
     color: primary !important;
     font-weight: 300;
     text-transform: uppercase;
+}
+
+.Nav_Wrapper_SidenavTrigger {
+    color: secondary;
 }
 
 .Nav_Wrapper_Sidenav_LogoContainer {
