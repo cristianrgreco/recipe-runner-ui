@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import React from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
@@ -7,7 +7,6 @@ import Input from "../../components/Input";
 
 export default function Step1({isEdit, name, setName, description, setDescription, serves, setServes, image, setImage}) {
     const history = useHistory();
-    const imageInputRef = createRef();
 
     const onNameChange = e => {
         setName(e.target.value);
@@ -21,8 +20,8 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
         setDescription(e.target.value);
     };
 
-    const onImageChange = () => {
-        setImage(imageInputRef.current.files[0]);
+    const onImageChange = e => {
+        setImage(e.target.files[0]);
     };
 
     const onSubmit = async e => {
@@ -79,7 +78,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                     <div className="file-field input-field col s12 m12 l6">
                         <Button secondary>
                             <span>Image</span>
-                            <Input type="file" ref={imageInputRef} onChange={onImageChange}/>
+                            <Input type="file" onChange={onImageChange}/>
                         </Button>
                         <div className="file-path-wrapper">
                             <Input value={getImageName()} readOnly type="text"/>

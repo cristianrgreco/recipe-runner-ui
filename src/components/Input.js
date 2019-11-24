@@ -1,13 +1,11 @@
-import React, {forwardRef, useEffect} from "react";
+import React, {useEffect} from "react";
 
-const Input = forwardRef((props, ref) => {
+export default function Input(props) {
     useEffect(() => {
         window.M.updateTextFields();
     });
 
     return (
-        <input ref={ref} {...props}/>
+        <input {...props}/>
     );
-});
-
-export default Input;
+}
