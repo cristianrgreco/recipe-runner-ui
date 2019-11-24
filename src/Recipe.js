@@ -6,6 +6,7 @@ import RecipeRunner from "./RecipeRunner";
 import {Button} from "./components/Button";
 import {deleteRecipe, fetchRecipe} from "./api";
 import {Icon} from "./components/Icon";
+import Input from "./components/Input";
 
 export default function Recipe({loggedIn, recipe: recipeFromProps}) {
     const [recipe, setRecipe] = useState(undefined);
@@ -139,7 +140,7 @@ function RecipeEquipment({recipe}) {
                     {recipe.equipment.map(equipmentItem => (
                         <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
                             <label>
-                                <input type="checkbox"/>
+                                <Input type="checkbox"/>
                                 <span>{equipmentItem}</span>
                             </label>
                         </li>
@@ -161,7 +162,7 @@ function RecipeIngredients({recipe}) {
                     {recipe.ingredients.map(ingredient => (
                         <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
                             <label>
-                                <input type="checkbox"/>
+                                <Input type="checkbox"/>
                                 <span>{ingredient}</span>
                             </label>
                         </li>

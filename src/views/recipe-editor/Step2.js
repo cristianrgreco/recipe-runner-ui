@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
+import Input from "../../components/Input";
 
 export default function Step2({isEdit, equipment, setEquipment}) {
     const [equipmentItem, setEquipmentItem] = useState('');
     const history = useHistory();
-
-    useEffect(() => {
-        window.M.updateTextFields();
-    });
 
     const onEquipmentItemChange = e => {
         setEquipmentItem(e.target.value);
@@ -51,7 +48,7 @@ export default function Step2({isEdit, equipment, setEquipment}) {
                                 {equipment.map((equipmentItem, i) => (
                                     <li key={i} className={`${styles.Collection_Item} collection-item`}>
                                         <div className={styles.Collection_Item_Content}>
-                                            <input type="text" required value={equipmentItem} onChange={onEdit(equipmentItem)}/>
+                                            <Input type="text" required value={equipmentItem} onChange={onEdit(equipmentItem)}/>
                                         </div>
                                         <div className={styles.Collection_Item_Controls}>
                                             <Button danger floating onClick={onDelete(equipmentItem)}>
@@ -66,7 +63,7 @@ export default function Step2({isEdit, equipment, setEquipment}) {
                 )}
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="equipment-item" type="text" autoFocus={true} required value={equipmentItem} onChange={onEquipmentItemChange}/>
+                        <Input id="equipment-item" type="text" autoFocus={true} required value={equipmentItem} onChange={onEquipmentItemChange}/>
                         <label htmlFor="equipment-item">Equipment</label>
                     </div>
                 </div>

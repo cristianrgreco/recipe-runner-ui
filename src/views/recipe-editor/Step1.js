@@ -1,16 +1,13 @@
-import React, {createRef, useEffect} from 'react';
+import React, {createRef} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import Textarea from "../../components/Textarea";
+import Input from "../../components/Input";
 
 export default function Step1({isEdit, name, setName, description, setDescription, serves, setServes, image, setImage}) {
     const history = useHistory();
     const imageInputRef = createRef();
-
-    useEffect(() => {
-        window.M.updateTextFields();
-    });
 
     const onNameChange = e => {
         setName(e.target.value);
@@ -62,13 +59,13 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                 <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (1/5)</div>
                 <div className="row">
                     <div className="input-field col s12">
-                        <input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>
+                        <Input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>
                         <label htmlFor="name">Name</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="serves" type="number" required min="0" step="1" value={serves} onChange={onServesChange}/>
+                        <Input id="serves" type="number" required min="0" step="1" value={serves} onChange={onServesChange}/>
                         <label htmlFor="serves">Serves</label>
                     </div>
                 </div>
@@ -82,10 +79,10 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                     <div className="file-field input-field col s12 m12 l6">
                         <Button secondary>
                             <span>Image</span>
-                            <input type="file" ref={imageInputRef} onChange={onImageChange}/>
+                            <Input type="file" ref={imageInputRef} onChange={onImageChange}/>
                         </Button>
                         <div className="file-path-wrapper">
-                            <input value={getImageName()} readOnly type="text"/>
+                            <Input value={getImageName()} readOnly type="text"/>
                         </div>
                     </div>
                 </div>

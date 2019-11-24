@@ -7,6 +7,7 @@ import Badge from "../../components/Badge";
 import {formatTime} from "../../time";
 import {Icon} from "../../components/Icon";
 import Textarea from "../../components/Textarea";
+import Input from "../../components/Input";
 
 export default function Step4({isEdit, method, setMethod}) {
     const history = useHistory();
@@ -107,7 +108,6 @@ function MethodItemForm({method, setMethod, depth}) {
     const [durationUnit, setDurationUnit] = useState('minutes');
 
     useEffect(() => {
-        window.M.updateTextFields();
         window.M.FormSelect.init(document.querySelector(`#duration-unit-${elementId(depth)}`));
     });
 
@@ -170,7 +170,7 @@ function MethodItemForm({method, setMethod, depth}) {
                     <label htmlFor={`instruction-${elementId(depth)}`}>Step {depth}</label>
                 </div>
                 <div className="input-field col s12 m12 l6">
-                    <input id={`duration-${elementId(depth)}`} type="number" min="0" step=".1" value={duration} onChange={onDurationChange}/>
+                    <Input id={`duration-${elementId(depth)}`} type="number" min="0" step=".1" value={duration} onChange={onDurationChange}/>
                     <label htmlFor={`duration-${elementId(depth)}`}>Duration (optional)</label>
                 </div>
                 <div className="input-field col s12 m12 l6">

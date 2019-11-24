@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import styles from './Login.module.css';
 import {login} from "./auth";
 import {Button} from "./components/Button";
+import Input from "./components/Input";
 
 export default function Login({setLoggedIn}) {
     const [email, setEmail] = useState('');
@@ -41,13 +42,13 @@ export default function Login({setLoggedIn}) {
                 <div className={styles.Heading}>Log in</div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="email" type="email" autoFocus={true} required value={email} onChange={onEmailChange}/>
+                        <Input required id="email" type="email" autoFocus={true} value={email} onChange={onEmailChange}/>
                         <label htmlFor="email">Email</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange}/>
+                        <Input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange}/>
                         <label htmlFor="password">Password</label>
                     </div>
                 </div>

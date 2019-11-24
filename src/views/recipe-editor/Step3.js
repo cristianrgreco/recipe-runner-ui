@@ -1,16 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
+import Input from "../../components/Input";
 
 export default function Step3({isEdit, ingredients, setIngredients}) {
     const [ingredient, setIngredient] = useState('');
     const history = useHistory();
-
-    useEffect(() => {
-        window.M.updateTextFields();
-    });
 
     const onIngredientChange = e => {
         setIngredient(e.target.value);
@@ -51,7 +48,7 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                                 {ingredients.map((ingredient, i) => (
                                     <li key={i} className={`${styles.Collection_Item} collection-item`}>
                                         <div className={styles.Collection_Item_Content}>
-                                            <input type="text" required value={ingredient} onChange={onEdit(ingredient)}/>
+                                            <Input type="text" required value={ingredient} onChange={onEdit(ingredient)}/>
                                         </div>
                                         <div className={styles.Collection_Item_Controls}>
                                             <Button danger floating onClick={onDelete(ingredient)}>
@@ -66,7 +63,7 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                 )}
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="ingredient" type="text" autoFocus={true} required value={ingredient} onChange={onIngredientChange}/>
+                        <Input id="ingredient" type="text" autoFocus={true} required value={ingredient} onChange={onIngredientChange}/>
                         <label htmlFor="ingredient">Ingredients</label>
                     </div>
                 </div>

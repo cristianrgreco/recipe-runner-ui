@@ -3,6 +3,7 @@ import {Switch, Route, useHistory, Redirect} from 'react-router-dom';
 import styles from './Login.module.css';
 import {confirmRegistration, login, register} from "./auth";
 import {Button} from "./components/Button";
+import Input from "./components/Input";
 
 export default function Register({setLoggedIn}) {
     const [user, setUser] = useState(undefined);
@@ -99,25 +100,25 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
                 <div className={styles.Heading}>Register</div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange}/>
+                        <Input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange}/>
                         <label htmlFor="email">Email</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="confirm-email" type="email" required value={confirmEmail} onChange={onConfirmEmailChange}/>
+                        <Input id="confirm-email" type="email" required value={confirmEmail} onChange={onConfirmEmailChange}/>
                         <label htmlFor="confirm-email">Confirm Email</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange}/>
+                        <Input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange}/>
                         <label htmlFor="password">Password</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="confirm-password" type="password" required minLength={8} value={confirmPassword} onChange={onConfirmPasswordChange}/>
+                        <Input id="confirm-password" type="password" required minLength={8} value={confirmPassword} onChange={onConfirmPasswordChange}/>
                         <label htmlFor="confirm-password">Confirm Password</label>
                     </div>
                 </div>
@@ -169,8 +170,13 @@ function ConfirmRegistrationForm({user, email, password, setLoggedIn}) {
                 <div className={styles.Heading}>Register</div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
-                        <input id="confirmation-code" type="text" autoFocus={true} value={confirmationCode}
-                               onChange={onConfirmationCodeChange}/>
+                        <Input
+                            id="confirmation-code"
+                            type="text"
+                            autoFocus={true}
+                            value={confirmationCode}
+                            onChange={onConfirmationCodeChange}
+                        />
                         <label htmlFor="confirmation-code">Confirmation Code</label>
                     </div>
                 </div>
