@@ -2,6 +2,7 @@ import React, {createRef, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
+import Textarea from "../../components/Textarea";
 
 export default function Step1({isEdit, name, setName, description, setDescription, serves, setServes, image, setImage}) {
     const history = useHistory();
@@ -9,7 +10,6 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
 
     useEffect(() => {
         window.M.updateTextFields();
-        window.M.textareaAutoResize(document.querySelector('#description'));
     });
 
     const onNameChange = e => {
@@ -74,7 +74,7 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
                 </div>
                 <div className="row">
                     <div className="input-field col s12">
-                        <textarea id="description" className="materialize-textarea" required value={description} onChange={onDescriptionChange}/>
+                        <Textarea required id="description" value={description} onChange={onDescriptionChange}/>
                         <label htmlFor="description">Description</label>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import {Button} from "../../components/Button";
 import Badge from "../../components/Badge";
 import {formatTime} from "../../time";
 import {Icon} from "../../components/Icon";
+import Textarea from "../../components/Textarea";
 
 export default function Step4({isEdit, method, setMethod}) {
     const history = useHistory();
@@ -165,7 +166,7 @@ function MethodItemForm({method, setMethod, depth}) {
         <form onSubmit={onSubmit}>
             <div className={`row ${styles.NoMarginBottom}`}>
                 <div className="input-field col s12">
-                    <textarea id={`instruction-${elementId(depth)}`} autoFocus={true} className="materialize-textarea" required value={instruction} onChange={onInstructionChange}/>
+                    <Textarea required autoFocus={true} id={`instruction-${elementId(depth)}`} value={instruction} onChange={onInstructionChange}/>
                     <label htmlFor={`instruction-${elementId(depth)}`}>Step {depth}</label>
                 </div>
                 <div className="input-field col s12 m12 l6">
