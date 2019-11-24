@@ -4,6 +4,7 @@ import styles from './Login.module.css';
 import {login} from "./auth";
 import {Button} from "./components/Button";
 import Input from "./components/Input";
+import Heading from "./components/Heading";
 
 export default function Login({setLoggedIn}) {
     const [email, setEmail] = useState('');
@@ -39,7 +40,9 @@ export default function Login({setLoggedIn}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Log in</div>
+                <div className={styles.Heading}>
+                    <Heading>Log in</Heading>
+                </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <Input required id="email" type="email" autoFocus={true} value={email} onChange={onEmailChange}/>

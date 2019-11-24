@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {Icon} from "./components/Icon";
 import {Button} from "./components/Button";
 import {deleteRecipe} from "./api";
+import Heading from "./components/Heading";
 
 export default function RecipePreview({recipe, loggedIn, onDelete}) {
     const onClickDelete = async () => {
@@ -21,7 +22,7 @@ export default function RecipePreview({recipe, loggedIn, onDelete}) {
                 <div className={styles.RecipeDetails}>
                     <div className={styles.RecipeDetailsNameContainer}>
                         <div className={styles.RecipeDetailsNameContainer_Name}>
-                            {recipe.name}
+                            <Heading>{recipe.name}</Heading>
                         </div>
                         {loggedIn && recipe.isEditable && (
                             <div className={styles.RecipeDetailsNameContainer_Controls}>

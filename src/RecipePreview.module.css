@@ -39,9 +39,6 @@
 
 .RecipeDetailsNameContainer_Name {
     flex: 1;
-    color: primary;
-    font-size: 26px;
-    line-height: 30px;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
@@ -114,8 +111,6 @@
     }
 
     .RecipeDetailsNameContainer_Name {
-        font-size: 20px;
-        line-height: 24px;
         -webkit-line-clamp: 1;
     }
 

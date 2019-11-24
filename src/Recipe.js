@@ -7,6 +7,7 @@ import {Button} from "./components/Button";
 import {deleteRecipe, fetchRecipe} from "./api";
 import {Icon} from "./components/Icon";
 import Input from "./components/Input";
+import Heading from "./components/Heading";
 
 export default function Recipe({loggedIn, recipe: recipeFromProps}) {
     const [recipe, setRecipe] = useState(undefined);
@@ -76,7 +77,7 @@ function RecipeHeader({recipe, loggedIn}) {
             <div className={styles.RecipeHeader_Info}>
                 <div className={styles.RecipeHeader_Info_NameContainer}>
                     <div className={styles.RecipeHeader_Info_NameContainer_Name}>
-                        {recipe.name}
+                        <Heading>{recipe.name}</Heading>
                     </div>
                     {loggedIn && recipe.isEditable && (
                         <div className={styles.RecipeHeader_Info_NameContainer_Controls}>

@@ -7,6 +7,7 @@ import styles from "./Step5.module.css";
 import RecipePreview from "../../RecipePreview";
 import Recipe from "../../Recipe";
 import {Button} from "../../components/Button";
+import Heading from "../../components/Heading";
 
 export default function Review({isEdit, id, name, description, serves, image, equipment, ingredients, method}) {
     const [isPublishing, setIsPublishing] = useState(false);
@@ -55,7 +56,11 @@ export default function Review({isEdit, id, name, description, serves, image, eq
 
     return (
         <div className={baseStyles.Container}>
-            <div className={baseStyles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (5/5)</div>
+            <div className={baseStyles.Heading}>
+                <Heading>
+                    {isEdit ? 'Edit Recipe' : 'Create Recipe'} (5/5)
+                </Heading>
+            </div>
             <div className="row">
                 <div className="input-field col s12">
                     <div className={baseStyles.SubHeading}>Snippet</div>

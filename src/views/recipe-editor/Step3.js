@@ -4,6 +4,7 @@ import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
 import Input from "../../components/Input";
+import Heading from "../../components/Heading";
 
 export default function Step3({isEdit, ingredients, setIngredients}) {
     const [ingredient, setIngredient] = useState('');
@@ -40,7 +41,11 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (3/5)</div>
+                <div className={styles.Heading}>
+                    <Heading>
+                        {isEdit ? 'Edit Recipe' : 'Create Recipe'} (3/5)
+                    </Heading>
+                </div>
                 {ingredients.length > 0 && (
                     <div className="row">
                         <div className="input-field col s12 m12 l6">

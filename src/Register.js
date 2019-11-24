@@ -4,6 +4,7 @@ import styles from './Login.module.css';
 import {confirmRegistration, login, register} from "./auth";
 import {Button} from "./components/Button";
 import Input from "./components/Input";
+import Heading from "./components/Heading";
 
 export default function Register({setLoggedIn}) {
     const [user, setUser] = useState(undefined);
@@ -97,7 +98,9 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Register</div>
+                <div className={styles.Heading}>
+                    <Heading>Register</Heading>
+                </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <Input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange}/>
@@ -167,7 +170,9 @@ function ConfirmRegistrationForm({user, email, password, setLoggedIn}) {
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>Register</div>
+                <div className={styles.Heading}>
+                    <Heading>Register</Heading>
+                </div>
                 <div className="row">
                     <div className="input-field col s12 m12 l6">
                         <Input

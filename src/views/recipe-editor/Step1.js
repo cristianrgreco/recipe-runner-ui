@@ -4,6 +4,7 @@ import styles from "./RecipeEditor.module.css";
 import {Button} from "../../components/Button";
 import Textarea from "../../components/Textarea";
 import Input from "../../components/Input";
+import Heading from "../../components/Heading";
 
 export default function Step1({isEdit, name, setName, description, setDescription, serves, setServes, image, setImage}) {
     const history = useHistory();
@@ -55,7 +56,11 @@ export default function Step1({isEdit, name, setName, description, setDescriptio
     return (
         <div className={styles.Container}>
             <form onSubmit={onSubmit}>
-                <div className={styles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (1/5)</div>
+                <div className={styles.Heading}>
+                    <Heading>
+                        {isEdit ? 'Edit Recipe' : 'Create Recipe'} (1/5)
+                    </Heading>
+                </div>
                 <div className="row">
                     <div className="input-field col s12">
                         <Input id="name" type="text" autoFocus={true} required value={name} onChange={onNameChange}/>

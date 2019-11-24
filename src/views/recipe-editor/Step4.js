@@ -9,6 +9,7 @@ import {Icon} from "../../components/Icon";
 import Textarea from "../../components/Textarea";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
+import Heading from "../../components/Heading";
 
 export default function Step4({isEdit, method, setMethod}) {
     const history = useHistory();
@@ -23,7 +24,11 @@ export default function Step4({isEdit, method, setMethod}) {
 
     return (
         <div className={baseStyles.Container}>
-            <div className={baseStyles.Heading}>{isEdit ? 'Edit Recipe' : 'Create Recipe'} (4/5)</div>
+            <div className={baseStyles.Heading}>
+                <Heading>
+                    {isEdit ? 'Edit Recipe' : 'Create Recipe'} (4/5)
+                </Heading>
+            </div>
             {method.length === 0
                 ? (
                     <div className="row">
