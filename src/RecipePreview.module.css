@@ -4,8 +4,8 @@
 .Recipe {
     display: flex;
     border: 1px solid secondaryBackground;
-    height: 265px;
-    max-height: 265px;
+    height: 255px;
+    max-height: 255px;
     margin: 20px 0;
 }
 
