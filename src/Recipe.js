@@ -19,7 +19,7 @@ export default function Recipe({loggedIn, recipe: recipeFromProps}) {
         } else {
             fetchRecipe(recipeId).then(recipe => setRecipe(recipe));
         }
-    }, [recipeFromProps, recipeId]);
+    }, []);
 
     return (
         <Fragment>
