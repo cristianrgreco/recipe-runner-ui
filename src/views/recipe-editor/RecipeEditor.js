@@ -7,9 +7,7 @@ import Step3 from "./Step3";
 import Step4 from "./Step4";
 import Step5 from "./Step5";
 
-export default function RecipeEditor(props) {
-    const recipe = (props.location.state && props.location.state.recipe) || undefined;
-
+export default function RecipeEditor({location: {state = {}}}) {
     const [isEdit, setIsEdit] = useState(false);
     const [id, setId] = useState(undefined);
     const [name, setName] = useState('');
@@ -21,18 +19,18 @@ export default function RecipeEditor(props) {
     const [method, setMethod] = useState([]);
 
     useEffect(() => {
-        if (recipe) {
+        if (state.recipe) {
             setIsEdit(true);
-            setId(recipe.id);
-            setName(recipe.name);
-            setDescription(recipe.description);
-            setServes(recipe.serves);
-            setImage(recipe.image);
-            setEquipment(recipe.equipment);
-            setIngredients(recipe.ingredients);
-            setMethod(recipe.method);
+            setId(state.recipe.id);
+            setName(state.recipe.name);
+            setDescription(state.recipe.description);
+            setServes(state.recipe.serves);
+            setImage(state.recipe.image);
+            setEquipment(state.recipe.equipment);
+            setIngredients(state.recipe.ingredients);
+            setMethod(state.recipe.method);
         }
-    }, [recipe]);
+    }, [state.recipe]);
 
     const hasCompletedRequiredSteps = () => {
         return name !== ''
