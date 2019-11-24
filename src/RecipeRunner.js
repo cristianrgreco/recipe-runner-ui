@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
+import ReactDOMServer from 'react-dom/server';
 import moment from 'moment';
 import {timeRemaining} from "./time";
 import {Button} from "./components/Button";
@@ -117,7 +118,10 @@ function NoAlarmAndInProgress({step, setSteps, setCompletedSteps, nextSteps}) {
 function AlarmAndComplete({step, setSteps, setCompletedSteps, nextSteps}) {
     const alertOnCompletion = () => {
         window.M.toast({
-            html: `${step.instruction} DONE`,
+            html: ReactDOMServer.renderToStaticMarkup(
+                <span className={styles.ToastContainer}>DONE: {step.instruction}</span>
+            ),
+            classes: styles.Toast,
             displayLength: 60000
         });
 
