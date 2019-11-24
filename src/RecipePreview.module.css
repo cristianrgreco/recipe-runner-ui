@@ -126,6 +126,10 @@
         display: none;
     }
 
+    .RecipeDetailsInfoItemValue {
+        font-weight: 400;
+    }
+
     .RecipeDetailsLink {
         font-size: 14px;
         margin-top: 5px;

@@ -3,7 +3,14 @@
 
 .Heading {
     color: primary;
-    font-size: 26px;
-    line-height: 30px;
+    font-size: 24px;
+    line-height: 28px;
     text-transform: capitalize;
+}
+
+@media only screen and (max-width: 768px) {
+    .Heading {
+        font-size: 20px;
+        line-height: 24px;
+    }
 }

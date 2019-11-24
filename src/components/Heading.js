@@ -3,6 +3,6 @@ import styles from './Heading.module.css';
 
 export default function Heading({children}) {
     return (
-        <div className={styles.Heading}>{children}</div>
+        <h1 className={styles.Heading}>{children}</h1>
     );
 }

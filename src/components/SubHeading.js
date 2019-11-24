@@ -3,6 +3,6 @@ import styles from './SubHeading.module.css';
 
 export default function SubHeading({children}) {
     return (
-        <div className={styles.SubHeading}>{children}</div>
+        <h2 className={styles.SubHeading}>{children}</h2>
     );
 }

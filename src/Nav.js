@@ -46,7 +46,7 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
             {isMobile && (
                 <li className="logo">
                     <a href="/" className={`${styles.Nav_Wrapper_Sidenav_LogoContainer} brand-logo`}>
-                        <h1 className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>Hello, Diners</h1>
+                        <div className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>Hello, Diners</div>
                     </a>
                 </li>
             )}

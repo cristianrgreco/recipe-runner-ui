@@ -16,18 +16,6 @@ main {
 }
 
 h1, h2, h3 {
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.5rem;
+    margin: inherit;
+    font-weight: inherit;
 }
