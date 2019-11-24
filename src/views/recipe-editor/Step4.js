@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import baseStyles from "./RecipeEditor.module.css";
 import styles from "./Step4.module.css";
@@ -8,6 +8,7 @@ import {formatTime} from "../../time";
 import {Icon} from "../../components/Icon";
 import Textarea from "../../components/Textarea";
 import Input from "../../components/Input";
+import Select from "../../components/Select";
 
 export default function Step4({isEdit, method, setMethod}) {
     const history = useHistory();
@@ -107,10 +108,6 @@ function MethodItemForm({method, setMethod, depth}) {
     const [duration, setDuration] = useState('');
     const [durationUnit, setDurationUnit] = useState('minutes');
 
-    useEffect(() => {
-        window.M.FormSelect.init(document.querySelector(`#duration-unit-${elementId(depth)}`));
-    });
-
     const elementId = () => depth.replace(/\./g, '_');
 
     const onInstructionChange = e => {
@@ -174,11 +171,11 @@ function MethodItemForm({method, setMethod, depth}) {
                     <label htmlFor={`duration-${elementId(depth)}`}>Duration (optional)</label>
                 </div>
                 <div className="input-field col s12 m12 l6">
-                    <select id={`duration-unit-${elementId(depth)}`} disabled={duration === ''} value={durationUnit} onChange={onDurationUnitChange}>
+                    <Select id={`duration-unit-${elementId(depth)}`} disabled={duration === ''} value={durationUnit} onChange={onDurationUnitChange}>
                         <option value="seconds">Seconds</option>
                         <option value="minutes">Minutes</option>
                         <option value="hours">Hours</option>
-                    </select>
+                    </Select>
                 </div>
             </div>
             <div className={`row ${styles.NoMarginBottom}`}>
