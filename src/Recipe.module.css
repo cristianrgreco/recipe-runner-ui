@@ -51,9 +51,9 @@
 .RecipeHeader_Info_NameContainer_Name {
     flex: 1;
     color: primary;
-    font-size: 36px;
-    line-height: 40px;
-    font-weight: 400;
+    font-size: 26px;
+    line-height: 30px;
+    text-transform: capitalize;
 }
 
 .RecipeHeader_Info_NameContainer_Controls {
@@ -158,9 +158,8 @@
     }
 
     .RecipeHeader_Info_NameContainer_Name {
-        font-size: 26px;
-        line-height: 30px;
-        letter-spacing: 0;
+        font-size: 20px;
+        line-height: 24px;
     }
 
     .Recipe_Heading {
