@@ -5,6 +5,7 @@ import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
 import Input from "../../components/Input";
 import Heading from "../../components/Heading";
+import {List, ListItem} from "../../components/List";
 
 export default function Step3({isEdit, ingredients, setIngredients}) {
     const [ingredient, setIngredient] = useState('');
@@ -49,9 +50,9 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                 {ingredients.length > 0 && (
                     <div className="row">
                         <div className="input-field col s12 m12 l6">
-                            <ul className={`${styles.Collection} collection`}>
+                            <List>
                                 {ingredients.map((ingredient, i) => (
-                                    <li key={i} className={`${styles.Collection_Item} collection-item`}>
+                                    <ListItem key={i} className={styles.Collection_Item}>
                                         <div className={styles.Collection_Item_Content}>
                                             <Input type="text" required value={ingredient} onChange={onEdit(ingredient)}/>
                                         </div>
@@ -60,9 +61,9 @@ export default function Step3({isEdit, ingredients, setIngredients}) {
                                                 <Icon name="delete"/>
                                             </Button>
                                         </div>
-                                    </li>
+                                    </ListItem>
                                 ))}
-                            </ul>
+                            </List>
                         </div>
                     </div>
                 )}

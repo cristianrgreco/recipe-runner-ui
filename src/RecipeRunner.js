@@ -6,6 +6,7 @@ import {Button} from "./components/Button";
 import {Icon} from "./components/Icon";
 import styles from './RecipeRunner.module.css';
 import Badge from "./components/Badge";
+import {List, ListItem} from "./components/List";
 
 export default function RecipeRunner({recipe}) {
     const [timers, setTimers] = useState([]);
@@ -45,9 +46,9 @@ export default function RecipeRunner({recipe}) {
         <Fragment>
             <audio id="audio" src="/audio/beep.mp3" autoPlay={false}/>
             {steps.length > 0 && (
-                <ul className={`${styles.Collection} collection`}>
+                <List>
                     {steps.map(step => (
-                        <li key={step.instruction} className={`${styles.Collection_Item} collection-item`}>
+                        <ListItem key={step.instruction}>
                             <div className="section">
                                 {step.alarm === undefined && isStepCompleted(step) && (
                                     <NoAlarmAndComplete step={step}/>
@@ -79,10 +80,10 @@ export default function RecipeRunner({recipe}) {
                                     />
                                 )}
                             </div>
-                        </li>
+                        </ListItem>
                     ))}
-                </ul>)
-            }
+                </List>
+            )}
         </Fragment>
     );
 }

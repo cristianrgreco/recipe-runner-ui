@@ -1,22 +1,6 @@
 @value colors: "./colors.css";
 @value primary, secondary, secondaryBackground, dark from colors;
 
-.Collection {
-    border-color: secondaryBackground;
-}
-
-.Collection:last-child {
-    margin-bottom: 0;
-}
-
-.Collection_Item {
-    border-bottom-color: secondaryBackground !important;
-}
-
-.Collection_Item label {
-    color: dark;
-}
-
 .Container {
     margin: 40px 0;
 }

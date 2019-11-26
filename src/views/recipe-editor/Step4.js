@@ -10,6 +10,7 @@ import Textarea from "../../components/Textarea";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import Heading from "../../components/Heading";
+import {List, ListItem} from "../../components/List";
 
 export default function Step4({isEdit, method, setMethod}) {
     const history = useHistory();
@@ -70,9 +71,9 @@ function MethodItem({method, setMethod, depth}) {
 
     return (
         <div className={`${styles.Nested} ${depth === '1' ? styles.NestedFirst : ''}`}>
-            <ul className={`${styles.NoMargin} ${baseStyles.Collection} collection`}>
+            <List className={styles.NoMargin}>
                 {method.length > 0 && method.map((methodItem, methodItemIndex) => (
-                    <li key={methodItem.instruction} className={`${baseStyles.Collection_Item_Container} collection-item`}>
+                    <ListItem key={methodItem.instruction} className={baseStyles.Collection_Item_Container}>
                         <div className={`${baseStyles.Collection_Item}`}>
                             <div className={baseStyles.Collection_Item_Content}>
                                 <span className={styles.Collection_Item_Content_Depth}>
@@ -98,12 +99,12 @@ function MethodItem({method, setMethod, depth}) {
                         <div className={styles.Collection_Nested}>
                             <MethodItem method={methodItem.next} setMethod={setMethod} depth={incrementDepth(depth, methodItemIndex) + '.1'}/>
                         </div>
-                    </li>
+                    </ListItem>
                 ))}
-                <li className={`${baseStyles.Collection_Item_Container} collection-item`}>
+                <ListItem className={baseStyles.Collection_Item_Container}>
                     <MethodItemForm method={method} setMethod={setMethod} depth={incrementDepth(depth, method.length)}/>
-                </li>
-            </ul>
+                </ListItem>
+            </List>
         </div>
     );
 }

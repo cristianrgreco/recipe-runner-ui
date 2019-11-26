@@ -1,14 +1,6 @@
 @value colors: "./colors.css";
 @value primary, secondary, secondaryBackground, light, dark from colors;
 
-.Collection {
-    border-color: secondaryBackground;
-}
-
-.Collection_Item {
-    border-bottom-color: secondaryBackground !important;
-}
-
 .Complete {
     color: #9e9e9e !important;
     text-decoration: line-through;

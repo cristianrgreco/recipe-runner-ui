@@ -9,6 +9,7 @@ import {Icon} from "./components/Icon";
 import Input from "./components/Input";
 import Heading from "./components/Heading";
 import SubHeading from "./components/SubHeading";
+import {List, ListItem} from "./components/List";
 
 export default function Recipe({loggedIn, recipe: recipeFromProps}) {
     const [recipe, setRecipe] = useState(undefined);
@@ -144,16 +145,16 @@ function RecipeEquipment({recipe}) {
                 </SubHeading>
             </div>
             <div className={styles.RecipeBody_Requirements_Equipment_Body}>
-                <ul className={`${styles.Collection} collection`}>
+                <List>
                     {recipe.equipment.map(equipmentItem => (
-                        <li key={equipmentItem} className={`${styles.Collection_Item} collection-item`}>
+                        <ListItem key={equipmentItem}>
                             <label>
                                 <Input type="checkbox"/>
                                 <span>{equipmentItem}</span>
                             </label>
-                        </li>
+                        </ListItem>
                     ))}
-                </ul>
+                </List>
             </div>
         </div>
     );
@@ -168,16 +169,16 @@ function RecipeIngredients({recipe}) {
                 </SubHeading>
             </div>
             <div className={styles.RecipeBody_Requirements_Ingredients_Body}>
-                <ul className={`${styles.Collection} collection`}>
+                <List>
                     {recipe.ingredients.map(ingredient => (
-                        <li key={ingredient} className={`${styles.Collection_Item} collection-item`}>
+                        <ListItem key={ingredient}>
                             <label>
                                 <Input type="checkbox"/>
                                 <span>{ingredient}</span>
                             </label>
-                        </li>
+                        </ListItem>
                     ))}
-                </ul>
+                </List>
             </div>
         </div>
     );
@@ -185,9 +186,9 @@ function RecipeIngredients({recipe}) {
 
 function RecipeMethod({recipe}) {
     return (
-        <ul className={`${styles.Collection} collection`}>
+        <List>
             <RecipeMethodItem methodItem={recipe.method}/>
-        </ul>
+        </List>
     );
 }
 
@@ -195,9 +196,9 @@ function RecipeMethodItem({methodItem}) {
     return (
         (methodItem || []).map(aMethodItem => (
             <Fragment key={aMethodItem.instruction}>
-                <li className={`${styles.Collection_Item} collection-item`}>
+                <ListItem>
                     {aMethodItem.instruction}
-                </li>
+                </ListItem>
                 <RecipeMethodItem methodItem={aMethodItem.next}/>
             </Fragment>
         ))

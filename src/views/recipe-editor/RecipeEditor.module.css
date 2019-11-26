@@ -13,10 +13,6 @@
     margin-bottom: 20px;
 }
 
-.Collection {
-    border-color: secondaryBackground;
-}
-
 .Collection_Item_Container {
     margin-top: .75rem !important;
     background-color: inherit !important;

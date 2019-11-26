@@ -5,6 +5,7 @@ import {Button} from "../../components/Button";
 import {Icon} from "../../components/Icon";
 import Input from "../../components/Input";
 import Heading from "../../components/Heading";
+import {List, ListItem} from "../../components/List";
 
 export default function Step2({isEdit, equipment, setEquipment}) {
     const [equipmentItem, setEquipmentItem] = useState('');
@@ -49,9 +50,9 @@ export default function Step2({isEdit, equipment, setEquipment}) {
                 {equipment.length > 0 && (
                     <div className="row">
                         <div className="input-field col s12 m12 l6">
-                            <ul className={`${styles.Collection} collection`}>
+                            <List>
                                 {equipment.map((equipmentItem, i) => (
-                                    <li key={i} className={`${styles.Collection_Item} collection-item`}>
+                                    <ListItem key={i} className={styles.Collection_Item}>
                                         <div className={styles.Collection_Item_Content}>
                                             <Input type="text" required value={equipmentItem} onChange={onEdit(equipmentItem)}/>
                                         </div>
@@ -60,9 +61,9 @@ export default function Step2({isEdit, equipment, setEquipment}) {
                                                 <Icon name="delete"/>
                                             </Button>
                                         </div>
-                                    </li>
+                                    </ListItem>
                                 ))}
-                            </ul>
+                            </List>
                         </div>
                     </div>
                 )}
