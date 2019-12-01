@@ -23,50 +23,36 @@ export const fetchRecipes = async () => {
     return response.data;
 };
 
-export const saveRecipe = async (recipe, image) => {
-    const formData = new FormData();
-    formData.append('image', image);
-    formData.append('recipe', JSON.stringify(recipe));
+const uploadImage = async image => {
+    const uploadUrlResponse = await axios.get(`${URL}/upload-url`, {
+        headers: await headers(),
+        params: {contentType: image.type}
+    });
+    const uploadUrl = uploadUrlResponse.data.uploadUrl;
 
-    const response = await axios.post(`${URL}/recipes`, formData,
-        {
-            headers: {
-                ...(await headers()),
-                'content-type': 'multipart/form-data'
-            }
-        }
-    );
+    await axios.put(uploadUrl, image);
+
+    return uploadUrl.split('?')[0];
+};
+
+export const saveRecipe = async (recipe, image) => {
+    const imageUrl = await uploadImage(image);
+
+    const recipeWithImage = {...recipe, image: imageUrl};
+    const response = await axios.post(`${URL}/recipes`, recipeWithImage, {headers: await headers()});
 
     return response.headers.location;
 };
 
 export const updateRecipe = async (id, recipe, image) => {
-    let updatedRecipe = {...recipe};
+    const imageUrl = image instanceof File ? await uploadImage(image) : image;
 
-    const formData = new FormData();
-    if (image instanceof File) {
-        formData.append('image', image);
-    } else {
-        updatedRecipe.image = image;
-    }
-    formData.append('recipe', JSON.stringify(updatedRecipe));
-
-    const response = await axios.put(`${URL}/recipes/${id}`, formData,
-        {
-            headers: {
-                ...(await headers()),
-                'Content-Type': 'multipart/form-data'
-            }
-        }
-    );
+    const recipeWithImage = {...recipe, image: imageUrl};
+    const response = await axios.post(`${URL}/recipes/${id}`, recipeWithImage, {headers: await headers()});
 
     return response.headers.location;
 };
 
 export const deleteRecipe = async recipeId => {
-    await axios.delete(`${URL}/recipes/${recipeId}`,
-        {
-            headers: await headers()
-        }
-    );
+    await axios.delete(`${URL}/recipes/${recipeId}`, {headers: await headers()});
 };
