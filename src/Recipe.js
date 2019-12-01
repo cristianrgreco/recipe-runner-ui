@@ -15,12 +15,21 @@ export default function Recipe({loggedIn, recipe: recipeFromProps}) {
     const [recipe, setRecipe] = useState(undefined);
     const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
+    const history = useHistory();
 
     useEffect(() => {
         if (recipeFromProps) {
             setRecipe(recipeFromProps)
         } else {
-            fetchRecipe(recipeId).then(recipe => setRecipe(recipe));
+            fetchRecipe(recipeId)
+                .then(recipe => setRecipe(recipe))
+                .catch(err => {
+                    if (err.response.status === 404) {
+                        history.push('/');
+                    } else {
+                        console.error(`An error occurred when fetching recipe`, err.response);
+                    }
+                })
         }
     }, []);
 
