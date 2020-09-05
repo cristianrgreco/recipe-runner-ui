@@ -28,11 +28,22 @@ nav, .btn, .btn:hover, .btn-floating, .btn-floating:hover {
     /* todo set darker hover styles like navbar */
 }
 
-.input-field input:focus + label {
+.input-field input:focus + label,
+.input-field textarea:focus + label {
     color: rgb(161, 136, 127) !important;
 }
 
-.row .input-field input:focus {
+.row .input-field input:focus,
+.row .input-field textarea:focus{
     border-bottom: 1px solid rgb(161, 136, 127) !important;
     box-shadow: 0 1px 0 0 rgb(161, 136, 127) !important
+}
+
+.file-field .btn {
+    height: 36px;
+    line-height: 36px;
+}
+
+.file-field input[type=text] {
+    height: 36px;
 }

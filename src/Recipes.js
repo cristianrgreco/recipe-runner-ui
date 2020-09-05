@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Helmet} from "react-helmet";
 import styles from './Recipes.module.css';
 import RecipePreview from "./RecipePreview";
 import {fetchRecipes} from "./api";
@@ -16,6 +17,10 @@ export default function Recipes({loggedIn}) {
 
     return (
         <div className={styles.Recipes}>
+            <Helmet>
+                <title>La Cocina Leon</title>
+                <meta name="description" content="Create and run your own recipes right in your browser. Keep track of timers, manage notifications, and more. Works great on mobile." />
+            </Helmet>
             {recipes.map(recipe => (
                 <RecipePreview
                     key={recipe.id}

@@ -1,5 +1,5 @@
 @value colors: "../colors.css";
-@value primary, primaryLighter, light, error from colors;
+@value primary, primaryLighter, secondary, light, error from colors;
 
 .Button {
     display: inline-flex;
@@ -15,12 +15,12 @@
 }
 
 .Secondary {
-    color: primary !important;
-    background-color: light !important;
+    color: light !important;
+    background-color: secondary !important;
 }
 
 .Secondary:hover {
-    background-color: light !important;
+    /*background-color: light !important;*/
     /* todo should be darker like navbar */
 }
 
