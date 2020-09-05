@@ -25,7 +25,11 @@ h1, h2, h3 {
 
 nav, .btn, .btn:hover, .btn-floating, .btn-floating:hover {
     box-shadow: none;
-    /* todo set darker hover styles like navbar */
+}
+
+.input-field input,
+.input-field textarea {
+    color: rgba(0, 0, 0, .87);
 }
 
 .input-field input:focus + label,

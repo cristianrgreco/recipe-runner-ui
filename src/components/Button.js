@@ -30,11 +30,9 @@ export function Button(
 
     const btnTheme = () => {
         if (secondary) {
-            return `waves-effect waves-dark ${styles.Secondary}`;
+            return `${styles.Secondary}`;
         } else if (danger) {
-            return `waves-effect waves-dark ${styles.Danger}`;
-        } else {
-            return `waves-effect waves-light`;
+            return `${styles.Danger}`;
         }
     };
 
@@ -54,7 +52,7 @@ export function Button(
         <button
             type="button"
             onClick={modifiedOnClick}
-            className={`${styles.Button} ${btnType()} ${btnTheme()} ${spinner && styles.Spinner} ${position}`}
+            className={`${styles.Button} ${floating && styles.Floating} ${btnType()} ${btnTheme()} ${spinner && styles.Spinner} ${position}`}
             {...props}
         >
             <div>

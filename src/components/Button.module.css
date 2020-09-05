@@ -1,17 +1,25 @@
 @value colors: "../colors.css";
-@value primary, primaryLighter, secondary, light, error from colors;
+@value primary, primaryHover, primaryActive, primaryLighter, secondaryHover, secondaryActive, secondary, light, error, errorHover, errorActive from colors;
 
 .Button {
     display: inline-flex;
     justify-content: center;
+    align-items: center;
     font-weight: 600;
     background-color: primary !important;
     color: light !important;
 }
 
+.Floating {
+    align-items: normal;
+}
+
 .Button:hover {
-    /*background-color: primaryLighter !important;*/
-    /* todo should be darker like navbar */
+    background-color: primaryHover !important;
+}
+
+.Button:active {
+    background-color: primaryActive !important;
 }
 
 .Secondary {
@@ -20,8 +28,11 @@
 }
 
 .Secondary:hover {
-    /*background-color: light !important;*/
-    /* todo should be darker like navbar */
+    background-color: secondaryHover !important;
+}
+
+.Secondary:active {
+    background-color: secondaryActive !important;
 }
 
 .Danger {
@@ -30,8 +41,11 @@
 }
 
 .Danger:hover {
-    background-color: error !important;
-    /* todo should be darker like navbar */
+    background-color: errorHover !important;
+}
+
+.Danger:active {
+    background-color: errorActive !important;
 }
 
 .Spinner {
