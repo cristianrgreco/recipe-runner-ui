@@ -67,7 +67,7 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
                     break;
                 case 'InvalidPasswordException':
                 case 'InvalidParameterException':
-                    setError('Password must be at least 8 characters and contain numbers, special characters, and both upper and lower case letters');
+                    setError('Password must be at least 8 characters');
                     break;
                 default:
                     setError(`An unknown registration error occurred: ${err.code}`);

@@ -166,9 +166,29 @@ function AlarmAndReady({step, setTimers, timers}) {
         }
     ];
 
-    const onClick = () => {
+    const onClick = async () => {
+        await registerPushNotification();
         setTimers(addTimer(timers, step))
     };
+
+    async function registerPushNotification() {
+        // const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
+        //
+        // if (await Notification.requestPermission() === 'granted') {
+        //     const endTime = moment().add(step.alarm.duration, 'ms').unix();
+        //
+        //     await serviceWorkerRegistration.showNotification('La Cocina Leon', {
+        //         tag: `${Date.now()}`,
+        //         body: `DONE: ${step.instruction}`,
+        //         showTrigger: new TimestampTrigger(endTime), // todo TimestampTrigger not supported
+        //         data: {
+        //             url: window.location.href
+        //         },
+        //         badge: '/logo.png',
+        //         icon: '/logo.png',
+        //     });
+        // }
+    }
 
     return (
         <Fragment>
