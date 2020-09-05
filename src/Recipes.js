@@ -19,7 +19,7 @@ export default function Recipes({loggedIn}) {
         <div className={styles.Recipes}>
             <Helmet>
                 <title>La Cocina Leon</title>
-                <meta name="description" content="Create and run your own recipes right in your browser. Keep track of timers, manage notifications, and more. Works great on mobile." />
+                <meta name="description" content="Recetas de la familia Leon" />
             </Helmet>
             {recipes.map(recipe => (
                 <RecipePreview
