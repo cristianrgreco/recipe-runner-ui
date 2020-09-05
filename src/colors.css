@@ -2,17 +2,19 @@
 @value primary_g: 182;
 @value primary_b: 182;
 @value primary: rgb(primary_r, primary_g, primary_b);
-@value primaryLighter: rgba(primary_r, primary_g, primary_b, .8);
 @value primaryHover: rgb(69, 163, 163);
 @value primaryActive: rgb(62, 146, 146);
+@value primaryLighter: rgba(primary_r, primary_g, primary_b, .8);
 
 @value secondary_r: 161;
 @value secondary_g: 136;
 @value secondary_b: 127;
 @value secondary: rgb(secondary_r, secondary_g, secondary_b);
-@value secondaryBackground: rgba(secondary_r, secondary_g, secondary_b, .1);
 @value secondaryHover: rgb(148, 120, 110);
 @value secondaryActive: rgb(132, 106, 97);
+@value secondaryBackground: rgba(secondary_r, secondary_g, secondary_b, .1);
+@value secondaryBackgroundHover: rgb(234, 230, 228);
+@value secondaryBackgroundActive: rgb(223, 217, 214);
 
 @value error: rgb(229, 115, 115);
 @value errorHover: rgb(223, 85, 85);

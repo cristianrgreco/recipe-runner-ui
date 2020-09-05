@@ -1,5 +1,5 @@
 @value colors: "./colors.css";
-@value primary, dark, secondary, secondaryBackground from colors;
+@value primary, dark, secondary, secondaryBackground, secondaryBackgroundHover, secondaryBackgroundActive from colors;
 
 .Recipe {
     display: flex;
@@ -92,6 +92,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.RecipeDetailsLink:hover {
+    background-color: secondaryBackgroundHover;
+}
+
+.RecipeDetailsLink:active {
+    background-color: secondaryBackgroundActive;
 }
 
 @media only screen and (max-width: 768px) {

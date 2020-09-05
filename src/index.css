@@ -32,6 +32,15 @@ nav, .btn, .btn:hover, .btn-floating, .btn-floating:hover {
     color: rgba(0, 0, 0, .87);
 }
 
+label > input[type="checkbox"] + span:not(.lever)::before {
+    border: 2px solid rgb(161, 136, 127);
+}
+
+label > input[type="checkbox"]:checked + span:not(.lever)::before {
+    border-right-color: rgb(161, 136, 127);
+    border-bottom-color: rgb(161, 136, 127);
+}
+
 .input-field input:focus + label,
 .input-field textarea:focus + label {
     color: rgb(161, 136, 127) !important;
