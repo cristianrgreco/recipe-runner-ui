@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {Link, useHistory, useParams} from "react-router-dom";
+import {Helmet} from "react-helmet";
 import styles from './Recipe.module.css';
 import {formatTime} from "./time";
 import RecipeRunner from "./RecipeRunner";
@@ -12,15 +13,10 @@ import SubHeading from "./components/SubHeading";
 import {List, ListItem} from "./components/List";
 
 export default function Recipe({loggedIn, recipe: recipeFromProps}) {
-    const [recipe, _setRecipe] = useState(undefined);
+    const [recipe, setRecipe] = useState(undefined);
     const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
     const history = useHistory();
-
-    const setRecipe = recipe => {
-      _setRecipe(recipe);
-      document.title = recipe.name;
-    };
 
     useEffect(() => {
         if (recipeFromProps) {
@@ -42,6 +38,10 @@ export default function Recipe({loggedIn, recipe: recipeFromProps}) {
         <Fragment>
             {recipe && (
                 <div className={styles.Container}>
+                    <Helmet>
+                        <title>{recipe.name}</title>
+                        <meta name="description" content={recipe.description} />
+                    </Helmet>
                     <RecipeHeader loggedIn={loggedIn} recipe={recipe}/>
                     <RecipeDetails recipe={recipe}/>
                     <div className={styles.RecipeBody}>
