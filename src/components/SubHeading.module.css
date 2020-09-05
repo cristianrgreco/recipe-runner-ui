@@ -2,8 +2,9 @@
 @value secondary from colors;
 
 .SubHeading {
+    font-family: "Asul", sans-serif;
     color: secondary;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 18px;
     text-transform: uppercase;
     width: 100%;

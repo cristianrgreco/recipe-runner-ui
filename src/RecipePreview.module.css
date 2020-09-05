@@ -1,5 +1,5 @@
 @value colors: "./colors.css";
-@value primary, secondary, secondaryBackground from colors;
+@value primary, dark, secondary, secondaryBackground from colors;
 
 .Recipe {
     display: flex;
@@ -76,8 +76,7 @@
 }
 
 .RecipeDetailsInfoItemValue {
-    color: primary;
-    font-weight: 600;
+    color: dark;
 }
 
 .RecipeDetailsInfoItemLabel {
@@ -90,6 +89,9 @@
     padding: 15px 20px;
     color: secondary;
     background-color: secondaryBackground;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @media only screen and (max-width: 768px) {
@@ -97,7 +99,7 @@
         flex-direction: column;
         margin: 20px 0;
         height: 235px;
-        max-height: 235px;
+        max-height: 230px;
     }
 
     .RecipeImage {
@@ -109,11 +111,15 @@
     }
 
     .RecipeDetailsNameContainer {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .RecipeDetailsNameContainer_Name {
         -webkit-line-clamp: 1;
+    }
+
+    .RecipeDetailsNameContainer_Name h1 {
+        font-size: 24px;
     }
 
     .RecipeDetailsContainer {
@@ -121,7 +127,8 @@
     }
 
     .RecipeDetails {
-        padding: 0 20px 5px 20px;
+        text-align: center;
+        padding: 0 15px 5px 15px;
     }
 
     .RecipeDetailsDescription {
@@ -134,6 +141,6 @@
 
     .RecipeDetailsLink {
         font-size: 14px;
-        margin-top: 5px;
+        justify-content: center;
     }
 }

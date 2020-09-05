@@ -1,11 +1,13 @@
 @value colors: "../colors.css";
-@value primary from colors;
+@value secondary, dark from colors;
 
 .Heading {
-    color: primary;
-    font-family: 'Asul', sans-serif;
+    color: secondary;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -3px;
+    word-spacing: 3px;
     font-size: 28px;
-    line-height: 28px;
+    line-height: 32px;
     text-transform: capitalize;
     margin: 0;
 }
