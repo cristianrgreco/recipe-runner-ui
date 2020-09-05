@@ -3,7 +3,6 @@
 
 .Button {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
     font-weight: 600;
     background-color: primary !important;
@@ -11,7 +10,8 @@
 }
 
 .Button:hover {
-    background-color: primaryLighter !important;
+    /*background-color: primaryLighter !important;*/
+    /* todo should be darker like navbar */
 }
 
 .Secondary {
@@ -21,6 +21,7 @@
 
 .Secondary:hover {
     background-color: light !important;
+    /* todo should be darker like navbar */
 }
 
 .Danger {
@@ -30,6 +31,7 @@
 
 .Danger:hover {
     background-color: error !important;
+    /* todo should be darker like navbar */
 }
 
 .Spinner {

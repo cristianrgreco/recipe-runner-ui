@@ -4,6 +4,8 @@
 .Footer {
     background-color: white;
     padding-top: 0;
+    letter-spacing: -1px;
+    word-spacing: 1px;
 }
 
 .Footer .Footer_Copyright {

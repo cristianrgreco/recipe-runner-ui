@@ -30,7 +30,6 @@ export default function Register({setLoggedIn}) {
 
 function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
     const [email, setEmail] = useState('');
-    const [confirmEmail, setConfirmEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(undefined);
@@ -38,9 +37,7 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
     const history = useHistory();
 
     const getValidationError = () => {
-        if (email !== confirmEmail) {
-            return 'Emails must match';
-        } else if (password !== confirmPassword) {
+        if (password !== confirmPassword) {
             return 'Passwords must match';
         }
     };
@@ -83,10 +80,6 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
         setEmail(e.target.value);
     };
 
-    const onConfirmEmailChange = e => {
-        setConfirmEmail(e.target.value);
-    };
-
     const onPasswordChange = e => {
         setPassword(e.target.value);
     };
@@ -105,12 +98,6 @@ function RegistrationForm({setUser, setConfirmedEmail, setConfirmedPassword}) {
                     <div className="input-field col s12 m12 l6">
                         <Input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange}/>
                         <label htmlFor="email">Email</label>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="input-field col s12 m12 l6">
-                        <Input id="confirm-email" type="email" required value={confirmEmail} onChange={onConfirmEmailChange}/>
-                        <label htmlFor="confirm-email">Confirm Email</label>
                     </div>
                 </div>
                 <div className="row">

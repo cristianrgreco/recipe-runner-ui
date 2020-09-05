@@ -22,3 +22,16 @@ h1, h2, h3 {
     margin: inherit;
     font-weight: inherit;
 }
+
+nav, .btn, .btn-floating, .btn-floating:hover {
+    box-shadow: none;
+}
+
+.input-field input:focus + label {
+    color: rgb(161, 136, 127) !important;
+}
+
+.row .input-field input:focus {
+    border-bottom: 1px solid rgb(161, 136, 127) !important;
+    box-shadow: 0 1px 0 0 rgb(161, 136, 127) !important
+}
