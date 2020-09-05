@@ -2,9 +2,9 @@
 @value primary, error from colors;
 
 .Container {
-    margin: 40px 0;
+  margin: 40px 0;
 }
 
 .ValidationError {
-    color: error;
+  color: error;
 }

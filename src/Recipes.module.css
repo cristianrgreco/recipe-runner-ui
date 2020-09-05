@@ -2,15 +2,15 @@
 @value primary, secondary, secondaryBackground from colors;
 
 .Recipes {
-    margin: 40px 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(768px, 1fr));
-    grid-gap: 20px;
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(768px, 1fr));
+  grid-gap: 20px;
 }
 
 @media only screen and (max-width: 768px) {
-    .Recipes {
-        margin: 40px 0;
-        grid-template-columns: 1fr;
-    }
+  .Recipes {
+    margin: 40px 0;
+    grid-template-columns: 1fr;
+  }
 }

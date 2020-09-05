@@ -2,66 +2,66 @@
 @value primary, primaryHover, primaryActive, primaryLighter, secondaryHover, secondaryActive, secondary, light, error, errorHover, errorActive from colors;
 
 .Button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    background-color: primary !important;
-    color: light !important;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: primary !important;
+  color: light !important;
 }
 
 .Floating {
-    align-items: normal;
+  align-items: normal;
 }
 
 .Button:hover {
-    background-color: primaryHover !important;
+  background-color: primaryHover !important;
 }
 
 .Button:active {
-    background-color: primaryActive !important;
+  background-color: primaryActive !important;
 }
 
 .Secondary {
-    color: light !important;
-    background-color: secondary !important;
+  color: light !important;
+  background-color: secondary !important;
 }
 
 .Secondary:hover {
-    background-color: secondaryHover !important;
+  background-color: secondaryHover !important;
 }
 
 .Secondary:active {
-    background-color: secondaryActive !important;
+  background-color: secondaryActive !important;
 }
 
 .Danger {
-    color: light !important;
-    background-color: error !important;
+  color: light !important;
+  background-color: error !important;
 }
 
 .Danger:hover {
-    background-color: errorHover !important;
+  background-color: errorHover !important;
 }
 
 .Danger:active {
-    background-color: errorActive !important;
+  background-color: errorActive !important;
 }
 
 .Spinner {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 .Loading {
-    align-items: center;
-    pointer-events: none;
+  align-items: center;
+  pointer-events: none;
 }
 
 .Loading .SpinnerContainer {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .SpinnerContainer {
-    display: flex;
-    margin-left: 10px;
+  display: flex;
+  margin-left: 10px;
 }

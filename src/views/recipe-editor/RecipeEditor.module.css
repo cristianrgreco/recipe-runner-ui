@@ -2,49 +2,49 @@
 @value primary, light, secondary_r, secondary_g, secondary_b, secondary, secondaryBackground from colors;
 
 .Container {
-    margin: 40px 0;
+  margin: 40px 0;
 }
 
 .Heading {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .SubHeading {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .Collection_Item_Container {
-    margin-top: .75rem !important;
-    background-color: inherit !important;
-    border-bottom: none !important;
+  margin-top: 0.75rem !important;
+  background-color: inherit !important;
+  border-bottom: none !important;
 }
 
 .Collection_Item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom-color: secondaryBackground !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-color: secondaryBackground !important;
 }
 
 .Collection_Item_Content {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .Collection_Item_Controls {
-    margin-left: 10px;
- }
+  margin-left: 10px;
+}
 
 .ButtonsContainer button {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 @media only screen and (max-width: 768px) {
-    .Collection_Item_Container {
-        padding: 0 !important;
-    }
+  .Collection_Item_Container {
+    padding: 0 !important;
+  }
 
-    .Collection_Item {
-        padding: 0 .75rem;
-    }
+  .Collection_Item {
+    padding: 0 0.75rem;
+  }
 }

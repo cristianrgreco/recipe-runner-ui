@@ -2,13 +2,13 @@
 @value secondary, secondaryBackground from colors;
 
 .Footer {
-    background-color: white;
-    padding-top: 0;
-    letter-spacing: -1px;
-    word-spacing: 1px;
+  background-color: white;
+  padding-top: 0;
+  letter-spacing: -1px;
+  word-spacing: 1px;
 }
 
 .Footer .Footer_Copyright {
-    background-color: secondaryBackground;
-    color: secondary;
+  background-color: secondaryBackground;
+  color: secondary;
 }

@@ -2,23 +2,23 @@
 @value secondary, secondaryBackground, dark from colors;
 
 .Collection {
-    border-color: secondaryBackground;
+  border-color: secondaryBackground;
 }
 
 .Collection:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .Collection_Item {
-    border-bottom-color: secondaryBackground !important;
+  border-bottom-color: secondaryBackground !important;
 }
 
 .Collection_Item label {
-    color: dark;
-    line-height: inherit;
+  color: dark;
+  line-height: inherit;
 }
 
 .Collection_Item label span {
-    line-height: inherit !important;
-    padding-top: 2px;
+  line-height: inherit !important;
+  padding-top: 2px;
 }

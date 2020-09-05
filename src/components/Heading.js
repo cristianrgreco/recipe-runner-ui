@@ -1,8 +1,6 @@
 import React from "react";
-import styles from './Heading.module.css';
+import styles from "./Heading.module.css";
 
-export default function Heading({children}) {
-    return (
-        <h1 className={styles.Heading}>{children}</h1>
-    );
+export default function Heading({ children }) {
+  return <h1 className={styles.Heading}>{children}</h1>;
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import Badge from "../components/Badge";
 
 export default {
-    title: 'Badge',
+  title: "Badge",
 };
 
 export const primary = () => <Badge>Primary</Badge>;

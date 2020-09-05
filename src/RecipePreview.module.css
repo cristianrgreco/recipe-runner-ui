@@ -2,152 +2,152 @@
 @value primary, dark, secondary, secondaryBackground, secondaryBackgroundHover, secondaryBackgroundActive from colors;
 
 .Recipe {
-    display: flex;
-    border: 1px solid secondaryBackground;
-    height: 256px;
-    max-height: 256px;
+  display: flex;
+  border: 1px solid secondaryBackground;
+  height: 256px;
+  max-height: 256px;
 }
 
 .RecipeImage {
-    flex: 2;
+  flex: 2;
 }
 
 .RecipeImage img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .RecipeDetailsContainer {
-    display: flex;
-    flex: 5;
-    flex-direction: column;
+  display: flex;
+  flex: 5;
+  flex-direction: column;
 }
 
 .RecipeDetails {
-    padding: 20px;
-    flex: 1;
+  padding: 20px;
+  flex: 1;
 }
 
 .RecipeDetailsNameContainer {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .RecipeDetailsNameContainer_Name {
-    flex: 1;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    display: -webkit-box;
-    text-transform: capitalize;
+  flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  text-transform: capitalize;
 }
 
 .RecipeDetailsNameContainer_Controls {
-    margin-left: 10px;
-    display: flex;
-    flex-direction: row;
-    height: 28px;
-    align-items: center;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  height: 28px;
+  align-items: center;
 }
 
 .RecipeDetailsNameContainer_Controls_Item {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .RecipeDetailsDescription {
-    margin-bottom: 20px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+  margin-bottom: 20px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .RecipeDetailsInfo {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .RecipeDetailsInfoItem {
-    flex: 1;
+  flex: 1;
 }
 
 .RecipeDetailsInfoItemValue {
-    color: dark;
+  color: dark;
 }
 
 .RecipeDetailsInfoItemLabel {
-    color: secondary;
+  color: secondary;
 }
 
 .RecipeDetailsLink {
-    font-size: 16px;
-    text-transform: uppercase;
-    padding: 15px 20px;
-    color: secondary;
-    background-color: secondaryBackground;
-    transition: background-color .3s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 15px 20px;
+  color: secondary;
+  background-color: secondaryBackground;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .RecipeDetailsLink:hover {
-    background-color: secondaryBackgroundHover;
+  background-color: secondaryBackgroundHover;
 }
 
 .RecipeDetailsLink:active {
-    background-color: secondaryBackgroundActive;
+  background-color: secondaryBackgroundActive;
 }
 
 @media only screen and (max-width: 768px) {
-    .Recipe {
-        flex-direction: column;
-        height: 235px;
-        max-height: 230px;
-    }
+  .Recipe {
+    flex-direction: column;
+    height: 235px;
+    max-height: 230px;
+  }
 
-    .RecipeImage {
-        flex: 1;
-    }
+  .RecipeImage {
+    flex: 1;
+  }
 
-    .RecipeImage img {
-        height: 75px;
-    }
+  .RecipeImage img {
+    height: 75px;
+  }
 
-    .RecipeDetailsNameContainer {
-        margin-bottom: 10px;
-    }
+  .RecipeDetailsNameContainer {
+    margin-bottom: 10px;
+  }
 
-    .RecipeDetailsNameContainer_Name {
-        -webkit-line-clamp: 1;
-    }
+  .RecipeDetailsNameContainer_Name {
+    -webkit-line-clamp: 1;
+  }
 
-    .RecipeDetailsNameContainer_Name h1 {
-        font-size: 24px;
-    }
+  .RecipeDetailsNameContainer_Name h1 {
+    font-size: 24px;
+  }
 
-    .RecipeDetailsContainer {
-        flex: 1;
-    }
+  .RecipeDetailsContainer {
+    flex: 1;
+  }
 
-    .RecipeDetails {
-        text-align: center;
-        padding: 0 15px 5px 15px;
-    }
+  .RecipeDetails {
+    text-align: center;
+    padding: 0 15px 5px 15px;
+  }
 
-    .RecipeDetailsDescription {
-        display: none;
-    }
+  .RecipeDetailsDescription {
+    display: none;
+  }
 
-    .RecipeDetailsInfoItemValue {
-        font-weight: 400;
-    }
+  .RecipeDetailsInfoItemValue {
+    font-weight: 400;
+  }
 
-    .RecipeDetailsLink {
-        font-size: 14px;
-        justify-content: center;
-    }
+  .RecipeDetailsLink {
+    font-size: 14px;
+    justify-content: center;
+  }
 }

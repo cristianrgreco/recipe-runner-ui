@@ -3,63 +3,63 @@
 @value primary, secondary, secondaryBackground, light from colors;
 
 .Nav {
-    color: light;
+  color: light;
 }
 
 .Nav_Wrapper {
-    background-color: primary;
+  background-color: primary;
 }
 
 .Nav_Wrapper_Logo {
-    white-space: nowrap;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: -3px;
-    word-spacing: 3px;
+  white-space: nowrap;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  word-spacing: 3px;
 }
 
 .Nav_Wrapper_SidenavTrigger {
-    color: light;
+  color: light;
 }
 
 .Nav_Wrapper_Sidenav_LogoContainer {
-    height: 70px !important;
-    padding-top: 10px !important;
-    margin-bottom: 10px;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
+  height: 70px !important;
+  padding-top: 10px !important;
+  margin-bottom: 10px;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
 }
 
 .Mobile .Nav_Wrapper_Sidenav_LogoContainer {
-    color: primary !important;
+  color: primary !important;
 }
 
 .Nav_Wrapper_Sidenav_LogoContainer_Logo {
-    margin: 0;
-    font-size: 30px;
-    font-weight: 100;
-    text-transform: uppercase;
-    letter-spacing: -3px;
-    word-spacing: 3px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  word-spacing: 3px;
 }
 
 .Nav_Wrapper_Sidenav_Link {
-    text-transform: uppercase;
-    font-weight: 600;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .Mobile .Nav_Wrapper_Sidenav_Link {
-    color: secondary !important;
+  color: secondary !important;
 }
 
 .Nav_Wrapper_Sidenav_Link:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .Nav_Wrapper_Sidenav_Link:active {
-    background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .Mobile .Nav_Wrapper_Sidenav_Link:hover {
-    background-color: secondaryBackground;
+  background-color: secondaryBackground;
 }

@@ -1,75 +1,82 @@
 body {
-    margin: 0;
+  margin: 0;
 }
 
-body, button {
-    font-family: "Montserrat", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+body,
+button {
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .container {
-    max-width: inherit;
-    width: calc(100% - 80px);
-    margin: 0 40px;
+  max-width: inherit;
+  width: calc(100% - 80px);
+  margin: 0 40px;
 }
 
 @media only screen and (max-width: 768px) {
-    .container {
-        width: calc(100% - 40px);
-        margin: 0 20px;
-    }
+  .container {
+    width: calc(100% - 40px);
+    margin: 0 20px;
+  }
 }
 
 main {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
-h1, h2, h3 {
-    margin: inherit;
-    font-weight: inherit;
+h1,
+h2,
+h3 {
+  margin: inherit;
+  font-weight: inherit;
 }
 
-nav, .btn, .btn:hover, .btn-floating, .btn-floating:hover {
-    box-shadow: none;
+nav,
+.btn,
+.btn:hover,
+.btn-floating,
+.btn-floating:hover {
+  box-shadow: none;
 }
 
 .input-field input,
 .input-field textarea {
-    color: rgba(0, 0, 0, .87);
+  color: rgba(0, 0, 0, 0.87);
 }
 
 label > input[type="checkbox"] + span:not(.lever)::before {
-    border: 2px solid rgb(161, 136, 127);
+  border: 2px solid rgb(161, 136, 127);
 }
 
 label > input[type="checkbox"]:checked + span:not(.lever)::before {
-    border-right-color: rgb(161, 136, 127);
-    border-bottom-color: rgb(161, 136, 127);
+  border-right-color: rgb(161, 136, 127);
+  border-bottom-color: rgb(161, 136, 127);
 }
 
 .input-field input:focus + label,
 .input-field textarea:focus + label {
-    color: rgb(161, 136, 127) !important;
+  color: rgb(161, 136, 127) !important;
 }
 
 .row .input-field input:focus,
-.row .input-field textarea:focus{
-    border-bottom: 1px solid rgb(161, 136, 127) !important;
-    box-shadow: 0 1px 0 0 rgb(161, 136, 127) !important
+.row .input-field textarea:focus {
+  border-bottom: 1px solid rgb(161, 136, 127) !important;
+  box-shadow: 0 1px 0 0 rgb(161, 136, 127) !important;
 }
 
 .file-field .btn {
-    height: 36px;
-    line-height: 36px;
+  height: 36px;
+  line-height: 36px;
 }
 
-.file-field input[type=text] {
-    height: 36px;
+.file-field input[type="text"] {
+  height: 36px;
 }

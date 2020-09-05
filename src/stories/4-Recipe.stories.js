@@ -1,19 +1,15 @@
 import React from "react";
-import {addDecorator} from "@storybook/react";
-import {routerDecorator} from "./decorators";
+import { addDecorator } from "@storybook/react";
+import { routerDecorator } from "./decorators";
 import Recipe from "../Recipe";
-import {recipe} from "./data";
+import { recipe } from "./data";
 
 export default {
-    title: 'Recipe'
+  title: "Recipe",
 };
 
 addDecorator(routerDecorator);
 
-export const standard = () => (
-    <Recipe recipe={recipe} />
-);
+export const standard = () => <Recipe recipe={recipe} />;
 
-export const isEditable = () => (
-    <Recipe loggedIn={true} recipe={recipe({isEditable: true})} />
-);
+export const isEditable = () => <Recipe loggedIn={true} recipe={recipe({ isEditable: true })} />;

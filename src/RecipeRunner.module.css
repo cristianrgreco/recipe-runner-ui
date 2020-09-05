@@ -2,24 +2,24 @@
 @value primary, secondary, secondaryBackground, light, dark from colors;
 
 .Complete {
-    color: #9e9e9e !important;
-    text-decoration: line-through;
+  color: #9e9e9e !important;
+  text-decoration: line-through;
 }
 
 .Toast {
-    color: light;
-    background-color: secondary;
+  color: light;
+  background-color: secondary;
 }
 
 .ToastContainer {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  display: -webkit-box;
 }
 
 @media only screen and (max-width: 768px) {
-    .Toast {
-        margin-top: 0;
-    }
+  .Toast {
+    margin-top: 0;
+  }
 }
