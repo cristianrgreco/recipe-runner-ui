@@ -52,6 +52,15 @@
     pointer-events: none;
 }
 
+.Loading {
+    align-items: center;
+    pointer-events: none;
+}
+
+.Loading .SpinnerContainer {
+    margin-left: 0;
+}
+
 .SpinnerContainer {
     display: flex;
     margin-left: 10px;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from "./RecipePreview.module.css";
 import {formatTime} from "./time";
 import {Link} from "react-router-dom";
@@ -8,7 +8,10 @@ import {deleteRecipe} from "./api";
 import Heading from "./components/Heading";
 
 export default function RecipePreview({recipe, loggedIn, onDelete}) {
+    const [isDeleting, setIsDeleting] = useState(false);
+
     const onClickDelete = async () => {
+        setIsDeleting(true);
         await deleteRecipe(recipe.id);
         onDelete();
     };
@@ -34,9 +37,10 @@ export default function RecipePreview({recipe, loggedIn, onDelete}) {
                                     </Link>
                                 </div>
                                 <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                                    <Button floating danger onClick={onClickDelete}>
-                                        <Icon name="delete"/>
-                                    </Button>
+                                    {isDeleting
+                                      ? <Button floating danger loading />
+                                      : <Button floating danger onClick={onClickDelete}><Icon name="delete"/></Button>
+                                    }
                                 </div>
                             </div>
                         )}

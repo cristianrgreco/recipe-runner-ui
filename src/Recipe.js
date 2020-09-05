@@ -81,8 +81,10 @@ export default function Recipe({loggedIn, recipe: recipeFromProps}) {
 
 function RecipeHeader({recipe, loggedIn}) {
     const history = useHistory();
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const onClickDelete = async () => {
+        setIsDeleting(true);
         await deleteRecipe(recipe.id);
         history.push('/');
     };
@@ -107,9 +109,10 @@ function RecipeHeader({recipe, loggedIn}) {
                                 </Link>
                             </div>
                             <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                                <Button floating danger onClick={onClickDelete}>
-                                    <Icon name="delete"/>
-                                </Button>
+                              {isDeleting
+                                ? <Button floating danger loading />
+                                : <Button floating danger onClick={onClickDelete}><Icon name="delete"/></Button>
+                              }
                             </div>
                         </div>
                     )}

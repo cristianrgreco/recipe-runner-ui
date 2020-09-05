@@ -11,6 +11,7 @@ export function Button(
         large,
         floating,
         spinner,
+        loading,
         position = '',
         onClick = () => {},
         ...props
@@ -52,13 +53,13 @@ export function Button(
         <button
             type="button"
             onClick={modifiedOnClick}
-            className={`${styles.Button} ${floating && styles.Floating} ${btnType()} ${btnTheme()} ${spinner && styles.Spinner} ${position}`}
+            className={`${styles.Button} ${floating && styles.Floating} ${btnType()} ${btnTheme()} ${loading && styles.Loading} ${spinner && styles.Spinner} ${position}`}
             {...props}
         >
             <div>
                 {isConfirm ? confirm : children}
             </div>
-            {spinner && (
+            {spinner || loading && (
                 <div className={styles.SpinnerContainer}>
                     <Spinner/>
                 </div>
