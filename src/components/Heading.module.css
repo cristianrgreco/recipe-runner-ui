@@ -3,7 +3,8 @@
 
 .Heading {
     color: primary;
-    font-size: 24px;
+    font-family: 'Asul', sans-serif;
+    font-size: 28px;
     line-height: 28px;
     text-transform: capitalize;
     margin: 0;
@@ -11,7 +12,5 @@
 
 @media only screen and (max-width: 768px) {
     .Heading {
-        font-size: 20px;
-        line-height: 24px;
     }
 }

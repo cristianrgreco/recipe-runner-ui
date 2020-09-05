@@ -16,7 +16,7 @@ export default function Nav({loggedIn, setLoggedIn}) {
             <nav className={styles.Nav}>
                 <div className={`${styles.Nav_Wrapper} nav-wrapper`}>
                     <div className="container">
-                        <Link to="/" className={`${styles.Nav_Wrapper_Logo} brand-logo`}>Hello, Diners</Link>
+                        <Link to="/" className={`${styles.Nav_Wrapper_Logo} brand-logo`}>La Cocina Leon</Link>
                         <a href="#" data-target="mobile" className={`${styles.Nav_Wrapper_SidenavTrigger} sidenav-trigger`}>
                             <Icon name="menu"/>
                         </a>
@@ -41,11 +41,11 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
     };
 
     return (
-        <Fragment>
+        <div className={isMobile && styles.Mobile}>
             {isMobile && (
                 <li className="logo">
                     <a href="/" className={`${styles.Nav_Wrapper_Sidenav_LogoContainer} brand-logo`}>
-                        <div className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>Hello, Diners</div>
+                        <div className={styles.Nav_Wrapper_Sidenav_LogoContainer_Logo}>La Cocina Leon</div>
                     </a>
                 </li>
             )}
@@ -61,6 +61,6 @@ function NavLinks({history, isMobile, loggedIn, setLoggedIn, logout}) {
                     <li><Link to="/register" className={styles.Nav_Wrapper_Sidenav_Link}>Register</Link></li>
                 </Fragment>
             )}
-        </Fragment>
+        </div>
     );
 }

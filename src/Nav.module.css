@@ -1,27 +1,28 @@
 @value colors: "./colors.css";
+
 @value primary, secondary, secondaryBackground, light from colors;
 
 .Nav {
-    color: primary;
+    color: light;
 }
 
 .Nav_Wrapper {
-    background-color: light;
+    background-color: primary;
 }
 
 .Nav_Wrapper_Logo {
     white-space: nowrap;
-    color: primary !important;
     font-weight: 300;
     text-transform: uppercase;
+    letter-spacing: -3px;
+    word-spacing: 3px;
 }
 
 .Nav_Wrapper_SidenavTrigger {
-    color: secondary;
+    color: light;
 }
 
 .Nav_Wrapper_Sidenav_LogoContainer {
-    color: primary !important;
     height: 70px !important;
     padding-top: 10px !important;
     margin-bottom: 10px;
@@ -29,19 +30,36 @@
     border-bottom: 1px solid lightgrey;
 }
 
+.Mobile .Nav_Wrapper_Sidenav_LogoContainer {
+    color: primary !important;
+}
+
 .Nav_Wrapper_Sidenav_LogoContainer_Logo {
     margin: 0;
     font-size: 30px;
     font-weight: 100;
     text-transform: uppercase;
+    letter-spacing: -3px;
+    word-spacing: 3px;
 }
 
 .Nav_Wrapper_Sidenav_Link {
-    color: secondary !important;
     text-transform: uppercase;
     font-weight: 600;
 }
 
+.Mobile .Nav_Wrapper_Sidenav_Link {
+    color: secondary !important;
+}
+
 .Nav_Wrapper_Sidenav_Link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.Nav_Wrapper_Sidenav_Link:active {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.Mobile .Nav_Wrapper_Sidenav_Link:hover {
     background-color: secondaryBackground;
 }
