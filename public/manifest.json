@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "La Cocina Leon",
+  "name": "La Cocina Leon",
   "icons": [
     {
       "src": "logo.png",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#a1887f",
   "background_color": "#ffffff"
 }
