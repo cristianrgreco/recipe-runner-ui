@@ -15,30 +15,30 @@ describe('duration', () => {
     });
 
     it('should return duration of recipe when one step', () => {
-        const method = [{alarm: {duration: 10000}}];
+        const method = [{alarm: {duration: 1, durationUnit: 'seconds'}}];
 
-        expect(methodDuration(method)).toBe(10000);
+        expect(methodDuration(method)).toBe(1000);
     });
 
     it('should return highest duration in path', () => {
         const method = [
-            {alarm: {duration: 5000}},
-            {alarm: {duration: 10000}},
+            {alarm: {duration: 1, durationUnit: 'seconds'}},
+            {alarm: {duration: 2, durationUnit: 'seconds'}},
         ];
 
-        expect(methodDuration(method)).toBe(10000);
+        expect(methodDuration(method)).toBe(2000);
     });
 
     it('should return highest duration in path with two layers', () => {
         const method = [{
-            alarm: {duration: 5000},
+            alarm: {duration: 5, durationUnit: 'seconds'},
             next: [{
-                alarm: {duration: 1000}
+                alarm: {duration: 1, durationUnit: 'seconds'}
             }]
         }, {
-            alarm: {duration: 5000},
+            alarm: {duration: 5, durationUnit: 'seconds'},
             next: [{
-                alarm: {duration: 2000}
+                alarm: {duration: 2, durationUnit: 'seconds'}
             }]
         }];
 

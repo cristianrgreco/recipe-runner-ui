@@ -162,7 +162,7 @@ function AlarmAndReady({step, setTimers, timers}) {
     const addTimer = (timers, step) => [
         ...timers, {
             name: step.instruction,
-            endTime: moment().add(step.alarm.duration, 'ms'),
+            endTime: moment().add(step.alarm.duration, step.alarm.durationUnit || 'ms'),
         }
     ];
 

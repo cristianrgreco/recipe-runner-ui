@@ -33,7 +33,7 @@
 }
 
 .Nested {
-    margin: 1rem .75rem;
+    margin: 1rem 0;
     background-color: rgba(secondary_r, secondary_g, secondary_b, 0.05);
 }
 
