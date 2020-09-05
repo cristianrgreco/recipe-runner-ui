@@ -22,7 +22,8 @@
     "deploy:sync": "aws s3 sync --delete build/ s3://recipe-runner",
     "deploy": "npm run deploy:build && npm run deploy:sync",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "format": "prettier --write src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,6 +44,22 @@
     "@storybook/addon-actions": "^5.2.6",
     "@storybook/addon-links": "^5.2.6",
     "@storybook/addons": "^5.2.6",
-    "@storybook/react": "^5.2.6"
+    "@storybook/react": "^5.2.6",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.3.0",
+    "prettier": "^2.1.1"
+  },
+  "prettier": {
+    "printWidth": 120
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
