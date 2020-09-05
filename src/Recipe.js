@@ -12,10 +12,15 @@ import SubHeading from "./components/SubHeading";
 import {List, ListItem} from "./components/List";
 
 export default function Recipe({loggedIn, recipe: recipeFromProps}) {
-    const [recipe, setRecipe] = useState(undefined);
+    const [recipe, _setRecipe] = useState(undefined);
     const [started, setStarted] = useState(false);
     const {recipeId} = useParams();
     const history = useHistory();
+
+    const setRecipe = recipe => {
+      _setRecipe(recipe);
+      document.title = recipe.name;
+    };
 
     useEffect(() => {
         if (recipeFromProps) {
