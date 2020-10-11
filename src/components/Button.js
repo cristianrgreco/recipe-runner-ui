@@ -57,12 +57,11 @@ export function Button({
       {...props}
     >
       <div>{isConfirm ? confirm : children}</div>
-      {spinner ||
-        (loading && (
-          <div className={styles.SpinnerContainer}>
-            <Spinner />
-          </div>
-        ))}
+      {(spinner || loading) && (
+        <div className={styles.SpinnerContainer}>
+          <Spinner />
+        </div>
+      )}
     </button>
   );
 }
