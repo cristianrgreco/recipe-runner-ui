@@ -13,7 +13,9 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [serves, setServes] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(
+    "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/55994ba0-ef85-11ea-9b02-1f1d8760d3d2.png"
+  );
   const [equipment, setEquipment] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [method, setMethod] = useState([]);
