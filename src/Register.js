@@ -109,19 +109,19 @@ function RegistrationForm({ setUser, setConfirmedEmail, setConfirmedPassword }) 
           <Heading>Register</Heading>
         </div>
         <div className="row">
-          <div className="input-field col s12 m12 l6">
+          <div className="input-field col s12 m12 l3">
             <Input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange} />
             <label htmlFor="email">Email</label>
           </div>
         </div>
         <div className="row">
-          <div className="input-field col s12 m12 l6">
+          <div className="input-field col s12 m12 l3">
             <Input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange} />
             <label htmlFor="password">Password</label>
           </div>
         </div>
         <div className="row">
-          <div className="input-field col s12 m12 l6">
+          <div className="input-field col s12 m12 l3">
             <Input
               id="confirm-password"
               type="password"
@@ -134,14 +134,14 @@ function RegistrationForm({ setUser, setConfirmedEmail, setConfirmedPassword }) 
           </div>
         </div>
         <div className="row">
-          <div className="input-field col s12 m12 l6">
+          <div className="input-field col s12 m12 l3">
             <Button type="submit" spinner={isLoading}>
               Register
             </Button>
           </div>
         </div>
         <div className="row">
-          <div className="col s12 m12 l6">{error && <div className={styles.ValidationError}>{error}</div>}</div>
+          <div className="col s12 m12 l3">{error && <div className={styles.ValidationError}>{error}</div>}</div>
         </div>
       </form>
     </div>
