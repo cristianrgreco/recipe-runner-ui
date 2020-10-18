@@ -25,7 +25,6 @@
 .Nav_Wrapper_Sidenav_LogoContainer {
   height: 70px !important;
   padding-top: 10px !important;
-  margin-bottom: 10px;
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
 }
@@ -46,6 +45,11 @@
 .Nav_Wrapper_Sidenav_Link {
   text-transform: uppercase;
   font-weight: 600;
+}
+
+.Nav_Wrapper_Sidenav_Link.Active {
+  background-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
 .Mobile .Nav_Wrapper_Sidenav_Link {
