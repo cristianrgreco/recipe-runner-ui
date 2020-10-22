@@ -97,7 +97,6 @@ export default function Review({ isEdit, id, name, description, serves, image, e
           </div>
         </div>
       </div>
-      <div className="row"></div>
     </div>
   );
 }
