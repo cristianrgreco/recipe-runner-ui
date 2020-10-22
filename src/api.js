@@ -36,7 +36,7 @@ const uploadImage = async (image) => {
 };
 
 export const saveRecipe = async (recipe, image) => {
-  const imageUrl = await uploadImage(image);
+  const imageUrl = image instanceof File ? await uploadImage(image) : image;
 
   const recipeWithImage = { ...recipe, image: imageUrl };
   const response = await axios.post(`${URL}/recipes`, recipeWithImage, { headers: await headers() });
