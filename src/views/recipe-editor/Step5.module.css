@@ -1,3 +1,10 @@
+@value colors: "../../colors.css";
+@value primary, error from colors;
+
 .RecipePreview_Container a {
   pointer-events: none;
+}
+
+.ValidationError {
+  color: error;
 }

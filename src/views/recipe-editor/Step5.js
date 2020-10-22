@@ -12,6 +12,7 @@ import SubHeading from "../../components/SubHeading";
 
 export default function Review({ isEdit, id, name, description, serves, image, equipment, ingredients, method }) {
   const [isPublishing, setIsPublishing] = useState(false);
+  const [error, setError] = useState(null);
   const history = useHistory();
 
   const recipe = {
@@ -42,13 +43,18 @@ export default function Review({ isEdit, id, name, description, serves, image, e
   };
 
   const onClickPublish = async () => {
+    setError(null);
     setIsPublishing(true);
 
     let location;
-    if (isEdit) {
-      location = await updateRecipe(id, recipe, image);
-    } else {
-      location = await saveRecipe(recipe, image);
+    try {
+      if (isEdit) {
+        location = await updateRecipe(id, recipe, image);
+      } else {
+        location = await saveRecipe(recipe, image);
+      }
+    } catch (e) {
+      setError("An error occurred, please try again later");
     }
 
     setIsPublishing(false);
@@ -87,9 +93,11 @@ export default function Review({ isEdit, id, name, description, serves, image, e
             <Button onClick={onClickPublish} spinner={isPublishing}>
               {isEdit ? "Update" : "Publish"}
             </Button>
+            {error && <span className={styles.ValidationError}>{error}</span>}
           </div>
         </div>
       </div>
+      <div className="row"></div>
     </div>
   );
 }
