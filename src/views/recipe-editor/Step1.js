@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -23,11 +23,15 @@ export default function Step1({
   setServes,
   image,
   setImage,
-  setImageType,
+  setImageFile,
   crop,
   setCrop,
+  setCropScale,
+  loadedImage,
+  setLoadedImage,
 }) {
   const history = useHistory();
+  const [imageRef, setImageRef] = useState(undefined);
 
   const onNameChange = (e) => {
     setName(e.target.value);
@@ -45,13 +49,13 @@ export default function Step1({
     const image = e.target.files[0];
     if (image) {
       setImage(URL.createObjectURL(image));
-      setImageType(image.type);
+      setImageFile(image);
     }
   };
 
   const clearImage = () => {
     setImage(PLACEHOLDER_IMAGE);
-    setImageType("");
+    setImageFile(undefined);
   };
 
   const onSubmit = async (e) => {
@@ -63,17 +67,29 @@ export default function Step1({
     return name !== "" && description !== "" && serves !== "" && image !== "";
   };
 
-  const setNewCrop = (newCrop) => {
+  const setNewCrop = (newCrop, newImage) => {
+    const anImageRef = imageRef ? imageRef : newImage;
+    const scaleX = anImageRef.naturalWidth / anImageRef.width;
+    const scaleY = anImageRef.naturalHeight / anImageRef.height;
+
     if (newCrop.width > 0 && newCrop.height > 0) {
+      setCropScale({ x: scaleX, y: scaleY });
       setCrop(newCrop);
     }
   };
 
-  const onImageLoaded = (image) => {
-    const size = Math.min(image.width, image.height);
-    const x = (image.width - size) / 2;
-    const y = (image.height - size) / 2;
-    setCrop({ aspect: 1, x, y, width: size, height: size, keepSelection: true });
+  const onImageLoaded = (newImage) => {
+    setImageRef(newImage);
+
+    if (loadedImage !== newImage.src) {
+      const size = Math.min(newImage.width, newImage.height);
+      const x = (newImage.width - size) / 2;
+      const y = (newImage.height - size) / 2;
+      setNewCrop({ aspect: 1, x, y, width: size, height: size, keepSelection: true }, newImage);
+      setLoadedImage(newImage.src);
+    } else {
+      setNewCrop({ ...crop }, newImage);
+    }
     return false;
   };
 

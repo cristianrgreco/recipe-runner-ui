@@ -23,10 +23,10 @@ export const fetchRecipes = async () => {
   return response.data;
 };
 
-const uploadImage = async (image) => {
+const uploadImage = async (image, imageType) => {
   const uploadUrlResponse = await axios.get(`${URL}/upload-url`, {
     headers: await headers(),
-    params: { contentType: image.type },
+    params: { contentType: imageType },
   });
   const uploadUrl = uploadUrlResponse.data.uploadUrl;
 
@@ -37,7 +37,7 @@ const uploadImage = async (image) => {
 
 export const saveRecipe = async (recipe, imageType, requiresImageUpload) => {
   if (requiresImageUpload) {
-    await uploadImage(recipe.image);
+    await uploadImage(recipe.image, imageType);
   }
   const response = await axios.post(`${URL}/recipes`, recipe, { headers: await headers() });
   return response.headers.location;
@@ -45,7 +45,7 @@ export const saveRecipe = async (recipe, imageType, requiresImageUpload) => {
 
 export const updateRecipe = async (id, recipe, imageType, requiresImageUpload) => {
   if (requiresImageUpload) {
-    await uploadImage(recipe.image);
+    await uploadImage(recipe.image, imageType);
   }
   const response = await axios.post(`${URL}/recipes/${id}`, recipe, { headers: await headers() });
   return response.headers.location;

@@ -14,11 +14,13 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const [description, setDescription] = useState("");
   const [serves, setServes] = useState("");
   const [image, setImage] = useState(PLACEHOLDER_IMAGE);
-  const [imageType, setImageType] = useState("");
-  const [crop, setCrop] = useState({ aspect: 1, unit: "%", width: 100, height: 100, keepSelection: true }); // todo make placeholder image square
+  const [imageFile, setImageFile] = useState(undefined);
+  const [crop, setCrop] = useState(undefined);
+  const [cropScale, setCropScale] = useState(undefined);
   const [equipment, setEquipment] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [method, setMethod] = useState([]);
+  const [loadedImage, setLoadedImage] = useState(undefined);
 
   useEffect(() => {
     if (state.recipe) {
@@ -28,7 +30,6 @@ export default function RecipeEditor({ location: { state = {} } }) {
       setDescription(state.recipe.description);
       setServes(state.recipe.serves);
       setImage(state.recipe.image);
-      setCrop(state.recipe.crop);
       setEquipment(state.recipe.equipment);
       setIngredients(state.recipe.ingredients);
       setMethod(state.recipe.method);
@@ -38,6 +39,7 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const hasImageChanged = !state.recipe || state.recipe.image !== image;
   const hasCropChanged =
     !state.recipe ||
+    !state.recipe.crop ||
     state.recipe.crop.x !== crop.x ||
     state.recipe.crop.y !== crop.y ||
     state.recipe.crop.width !== crop.width ||
@@ -62,9 +64,12 @@ export default function RecipeEditor({ location: { state = {} } }) {
             setServes={setServes}
             image={image}
             setImage={setImage}
-            setImageType={setImageType}
+            setImageFile={setImageFile}
             crop={crop}
             setCrop={setCrop}
+            setCropScale={setCropScale}
+            loadedImage={loadedImage}
+            setLoadedImage={setLoadedImage}
           />
         )}
       />
@@ -101,8 +106,9 @@ export default function RecipeEditor({ location: { state = {} } }) {
             description={description}
             serves={serves}
             image={image}
-            imageType={imageType}
+            imageFile={imageFile}
             crop={crop}
+            cropScale={cropScale}
             equipment={equipment}
             ingredients={ingredients}
             method={method}

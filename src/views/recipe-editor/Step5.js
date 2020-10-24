@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { methodDuration } from "../../duration";
 import { saveRecipe, updateRecipe } from "../../api";
@@ -17,28 +17,65 @@ export default function Step5({
   description,
   serves,
   image,
-  imageType,
+  imageFile,
   crop,
+  cropScale,
   equipment,
   ingredients,
   method,
   requiresImageUpload,
 }) {
+  const [recipe, setRecipe] = useState(null);
   const [isPublishing, setIsPublishing] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
 
-  const recipe = {
-    name,
-    image,
-    crop,
-    description,
-    duration: methodDuration(method),
-    serves,
-    equipment,
-    ingredients,
-    method,
-  };
+  useEffect(() => {
+    if (requiresImageUpload) {
+      const imageObject = new Image();
+      imageObject.onload = () => {
+        setRecipe({
+          name,
+          image: getCroppedImage(imageObject, crop, cropScale),
+          crop,
+          description,
+          duration: methodDuration(method),
+          serves,
+          equipment,
+          ingredients,
+          method,
+        });
+      };
+      imageObject.src = image;
+    }
+  }, []);
+
+  if (!recipe) {
+    return <div />;
+  }
+
+  function getCroppedImage(image, crop, cropScale) {
+    const canvas = document.createElement("canvas");
+    const scaleX = cropScale.x;
+    const scaleY = cropScale.y;
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    return canvas.toDataURL("image/jpeg");
+  }
 
   const onClickBack = () => {
     history.push("/recipe-editor/step-4");
@@ -51,9 +88,9 @@ export default function Step5({
     let location;
     try {
       if (isEdit) {
-        location = await updateRecipe(id, recipe, imageType, requiresImageUpload);
+        location = await updateRecipe(id, recipe, imageFile.type, requiresImageUpload);
       } else {
-        location = await saveRecipe(recipe, imageType, requiresImageUpload);
+        location = await saveRecipe(recipe, imageFile.type, requiresImageUpload);
       }
     } catch (e) {
       setError("An error occurred, please try again later");
