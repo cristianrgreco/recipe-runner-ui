@@ -18,6 +18,7 @@ export default function Step5({
   serves,
   image,
   imageType,
+  crop,
   equipment,
   ingredients,
   method,
@@ -30,6 +31,7 @@ export default function Step5({
   const recipe = {
     name,
     image,
+    crop,
     description,
     duration: methodDuration(method),
     serves,

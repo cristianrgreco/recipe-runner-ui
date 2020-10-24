@@ -101,6 +101,7 @@ export default function RecipeEditor({ location: { state = {} } }) {
             description={description}
             serves={serves}
             image={image}
+            imageType={imageType}
             crop={crop}
             equipment={equipment}
             ingredients={ingredients}
