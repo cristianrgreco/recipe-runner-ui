@@ -23,7 +23,6 @@ export default function Step1({
   setServes,
   image,
   setImage,
-  setImageFile,
   crop,
   setCrop,
   setCropScale,
@@ -49,13 +48,11 @@ export default function Step1({
     const image = e.target.files[0];
     if (image) {
       setImage(URL.createObjectURL(image));
-      setImageFile(image);
     }
   };
 
   const clearImage = () => {
     setImage(PLACEHOLDER_IMAGE);
-    setImageFile(undefined);
   };
 
   const onSubmit = async (e) => {

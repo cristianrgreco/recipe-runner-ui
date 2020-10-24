@@ -14,7 +14,6 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const [description, setDescription] = useState("");
   const [serves, setServes] = useState("");
   const [image, setImage] = useState(PLACEHOLDER_IMAGE);
-  const [imageFile, setImageFile] = useState(undefined);
   const [crop, setCrop] = useState(undefined);
   const [cropScale, setCropScale] = useState(undefined);
   const [equipment, setEquipment] = useState([]);
@@ -36,15 +35,7 @@ export default function RecipeEditor({ location: { state = {} } }) {
     }
   }, []);
 
-  const hasImageChanged = !state.recipe || state.recipe.image !== image;
-  const hasCropChanged =
-    !state.recipe ||
-    !state.recipe.crop ||
-    state.recipe.crop.x !== crop.x ||
-    state.recipe.crop.y !== crop.y ||
-    state.recipe.crop.width !== crop.width ||
-    state.recipe.crop.height !== crop.height;
-  const requiresImageUpload = hasImageChanged || hasCropChanged;
+  const requiresImageUpload = !state.recipe || state.recipe.image !== image; // todo not working
   const hasCompletedRequiredSteps = name !== "" && description !== "" && serves !== "" && image !== "";
 
   return (
@@ -64,7 +55,6 @@ export default function RecipeEditor({ location: { state = {} } }) {
             setServes={setServes}
             image={image}
             setImage={setImage}
-            setImageFile={setImageFile}
             crop={crop}
             setCrop={setCrop}
             setCropScale={setCropScale}
@@ -106,7 +96,6 @@ export default function RecipeEditor({ location: { state = {} } }) {
             description={description}
             serves={serves}
             image={image}
-            imageFile={imageFile}
             crop={crop}
             cropScale={cropScale}
             equipment={equipment}

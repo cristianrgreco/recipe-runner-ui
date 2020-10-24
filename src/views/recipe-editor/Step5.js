@@ -17,7 +17,6 @@ export default function Step5({
   description,
   serves,
   image,
-  imageFile,
   crop,
   cropScale,
   equipment,
@@ -88,11 +87,12 @@ export default function Step5({
     let location;
     try {
       if (isEdit) {
-        location = await updateRecipe(id, recipe, imageFile.type, requiresImageUpload);
+        location = await updateRecipe(id, recipe, "image/jpeg", requiresImageUpload);
       } else {
-        location = await saveRecipe(recipe, imageFile.type, requiresImageUpload);
+        location = await saveRecipe(recipe, "image/jpeg", requiresImageUpload);
       }
     } catch (e) {
+      console.error(e);
       setError("An error occurred, please try again later");
     }
 
