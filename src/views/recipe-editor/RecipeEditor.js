@@ -14,6 +14,7 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const [description, setDescription] = useState("");
   const [serves, setServes] = useState("");
   const [image, setImage] = useState(PLACEHOLDER_IMAGE);
+  const [imageType, setImageType] = useState("");
   const [crop, setCrop] = useState({ aspect: 1, unit: "%", width: 100, height: 100, keepSelection: true }); // todo make placeholder image square
   const [equipment, setEquipment] = useState([]);
   const [ingredients, setIngredients] = useState([]);
@@ -27,15 +28,22 @@ export default function RecipeEditor({ location: { state = {} } }) {
       setDescription(state.recipe.description);
       setServes(state.recipe.serves);
       setImage(state.recipe.image);
+      setCrop(state.recipe.crop);
       setEquipment(state.recipe.equipment);
       setIngredients(state.recipe.ingredients);
       setMethod(state.recipe.method);
     }
   }, []);
 
-  const hasCompletedRequiredSteps = () => {
-    return name !== "" && description !== "" && serves !== "" && image !== "";
-  };
+  const hasImageChanged = !state.recipe || state.recipe.image !== image;
+  const hasCropChanged =
+    !state.recipe ||
+    state.recipe.crop.x !== crop.x ||
+    state.recipe.crop.y !== crop.y ||
+    state.recipe.crop.width !== crop.width ||
+    state.recipe.crop.height !== crop.height;
+  const requiresImageUpload = hasImageChanged || hasCropChanged;
+  const hasCompletedRequiredSteps = name !== "" && description !== "" && serves !== "" && image !== "";
 
   return (
     <Switch>
@@ -54,6 +62,7 @@ export default function RecipeEditor({ location: { state = {} } }) {
             setServes={setServes}
             image={image}
             setImage={setImage}
+            setImageType={setImageType}
             crop={crop}
             setCrop={setCrop}
           />
@@ -62,28 +71,28 @@ export default function RecipeEditor({ location: { state = {} } }) {
       <ConditionalRoute
         exact
         path="/recipe-editor/step-2"
-        condition={hasCompletedRequiredSteps()}
+        condition={hasCompletedRequiredSteps}
         true={(props) => <Step2 isEdit={isEdit} equipment={equipment} setEquipment={setEquipment} {...props} />}
         false={(props) => <Redirect to="/recipe-editor/step-1" {...props} />}
       />
       <ConditionalRoute
         exact
         path="/recipe-editor/step-3"
-        condition={hasCompletedRequiredSteps()}
+        condition={hasCompletedRequiredSteps}
         true={(props) => <Step3 isEdit={isEdit} ingredients={ingredients} setIngredients={setIngredients} {...props} />}
         false={(props) => <Redirect to="/recipe-editor/step-1" {...props} />}
       />
       <ConditionalRoute
         exact
         path="/recipe-editor/step-4"
-        condition={hasCompletedRequiredSteps()}
+        condition={hasCompletedRequiredSteps}
         true={(props) => <Step4 isEdit={isEdit} method={method} setMethod={setMethod} {...props} />}
         false={(props) => <Redirect to="/recipe-editor/step-1" {...props} />}
       />
       <ConditionalRoute
         exact
         path="/recipe-editor/step-5"
-        condition={hasCompletedRequiredSteps()}
+        condition={hasCompletedRequiredSteps}
         true={(props) => (
           <Step5
             isEdit={isEdit}
@@ -92,9 +101,11 @@ export default function RecipeEditor({ location: { state = {} } }) {
             description={description}
             serves={serves}
             image={image}
+            crop={crop}
             equipment={equipment}
             ingredients={ingredients}
             method={method}
+            requiresImageUpload={requiresImageUpload}
             {...props}
           />
         )}

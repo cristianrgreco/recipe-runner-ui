@@ -10,32 +10,32 @@ import { Button } from "../../components/Button";
 import Heading from "../../components/Heading";
 import SubHeading from "../../components/SubHeading";
 
-export default function Review({ isEdit, id, name, description, serves, image, equipment, ingredients, method }) {
+export default function Step5({
+  isEdit,
+  id,
+  name,
+  description,
+  serves,
+  image,
+  imageType,
+  equipment,
+  ingredients,
+  method,
+  requiresImageUpload,
+}) {
   const [isPublishing, setIsPublishing] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
 
   const recipe = {
     name,
+    image,
     description,
     duration: methodDuration(method),
     serves,
     equipment,
     ingredients,
     method,
-  };
-
-  const getImage = () => {
-    if (image instanceof File) {
-      return URL.createObjectURL(image);
-    } else {
-      return image;
-    }
-  };
-
-  const recipeWithImagePreview = {
-    ...recipe,
-    image: getImage(),
   };
 
   const onClickBack = () => {
@@ -49,9 +49,9 @@ export default function Review({ isEdit, id, name, description, serves, image, e
     let location;
     try {
       if (isEdit) {
-        location = await updateRecipe(id, recipe, image);
+        location = await updateRecipe(id, recipe, imageType, requiresImageUpload);
       } else {
-        location = await saveRecipe(recipe, image);
+        location = await saveRecipe(recipe, imageType, requiresImageUpload);
       }
     } catch (e) {
       setError("An error occurred, please try again later");
@@ -72,7 +72,7 @@ export default function Review({ isEdit, id, name, description, serves, image, e
             <SubHeading>Preview</SubHeading>
           </div>
           <div className={styles.RecipePreview_Container}>
-            <RecipePreview recipe={recipeWithImagePreview} />
+            <RecipePreview recipe={recipe} />
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function Review({ isEdit, id, name, description, serves, image, e
           <div className={baseStyles.SubHeading}>
             <SubHeading>Full</SubHeading>
           </div>
-          <Recipe recipe={recipeWithImagePreview} />
+          <Recipe recipe={recipe} />
         </div>
       </div>
       <div className="row">

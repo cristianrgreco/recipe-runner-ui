@@ -35,21 +35,19 @@ const uploadImage = async (image) => {
   return uploadUrl.split("?")[0];
 };
 
-export const saveRecipe = async (recipe, image) => {
-  const imageUrl = image instanceof File ? await uploadImage(image) : image; // todo image is always a URL now, can we handle it or should we also set the image object?
-
-  const recipeWithImage = { ...recipe, image: imageUrl };
-  const response = await axios.post(`${URL}/recipes`, recipeWithImage, { headers: await headers() });
-
+export const saveRecipe = async (recipe, imageType, requiresImageUpload) => {
+  if (requiresImageUpload) {
+    await uploadImage(recipe.image);
+  }
+  const response = await axios.post(`${URL}/recipes`, recipe, { headers: await headers() });
   return response.headers.location;
 };
 
-export const updateRecipe = async (id, recipe, image) => {
-  const imageUrl = image instanceof File ? await uploadImage(image) : image;
-
-  const recipeWithImage = { ...recipe, image: imageUrl };
-  const response = await axios.post(`${URL}/recipes/${id}`, recipeWithImage, { headers: await headers() });
-
+export const updateRecipe = async (id, recipe, imageType, requiresImageUpload) => {
+  if (requiresImageUpload) {
+    await uploadImage(recipe.image);
+  }
+  const response = await axios.post(`${URL}/recipes/${id}`, recipe, { headers: await headers() });
   return response.headers.location;
 };
 

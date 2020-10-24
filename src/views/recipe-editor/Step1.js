@@ -23,6 +23,7 @@ export default function Step1({
   setServes,
   image,
   setImage,
+  setImageType,
   crop,
   setCrop,
 }) {
@@ -41,7 +42,16 @@ export default function Step1({
   };
 
   const onImageChange = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    const image = e.target.files[0];
+    if (image) {
+      setImage(URL.createObjectURL(image));
+      setImageType(image.type);
+    }
+  };
+
+  const clearImage = () => {
+    setImage(PLACEHOLDER_IMAGE);
+    setImageType("");
   };
 
   const onSubmit = async (e) => {
@@ -99,7 +109,7 @@ export default function Step1({
             </Button>
             {!image.startsWith(BUCKET_NAME) && (
               <span className={styles.DeleteImageButton}>
-                <Button floating danger onClick={() => setImage(PLACEHOLDER_IMAGE)}>
+                <Button floating danger onClick={clearImage}>
                   <Icon name="delete" />
                 </Button>
               </span>
