@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import ConditionalRoute from "../../components/ConditionalRoute";
-import Step1 from "./Step1";
+import Step1, { PLACEHOLDER_IMAGE } from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
 import Step4 from "./Step4";
@@ -13,9 +13,8 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [serves, setServes] = useState("");
-  const [image, setImage] = useState(
-    "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/55994ba0-ef85-11ea-9b02-1f1d8760d3d2.png"
-  );
+  const [image, setImage] = useState(PLACEHOLDER_IMAGE);
+  const [crop, setCrop] = useState({ aspect: 1, unit: "%", width: 100, height: 100, keepSelection: true }); // todo make placeholder image square
   const [equipment, setEquipment] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [method, setMethod] = useState([]);
@@ -55,6 +54,8 @@ export default function RecipeEditor({ location: { state = {} } }) {
             setServes={setServes}
             image={image}
             setImage={setImage}
+            crop={crop}
+            setCrop={setCrop}
           />
         )}
       />

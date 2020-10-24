@@ -1,10 +1,17 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import styles from "./RecipeEditor.module.css";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import baseStyles from "./RecipeEditor.module.css";
+import styles from "./Step1.module.css";
 import { Button } from "../../components/Button";
 import Textarea from "../../components/Textarea";
 import Input from "../../components/Input";
 import Heading from "../../components/Heading";
+import { Icon } from "../../components/Icon";
+
+export const BUCKET_NAME = "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com";
+export const PLACEHOLDER_IMAGE = `${BUCKET_NAME}/55994ba0-ef85-11ea-9b02-1f1d8760d3d2.png`;
 
 export default function Step1({
   isEdit,
@@ -16,6 +23,8 @@ export default function Step1({
   setServes,
   image,
   setImage,
+  crop,
+  setCrop,
 }) {
   const history = useHistory();
 
@@ -32,7 +41,7 @@ export default function Step1({
   };
 
   const onImageChange = (e) => {
-    setImage(e.target.files[0]);
+    setImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const onSubmit = async (e) => {
@@ -44,26 +53,24 @@ export default function Step1({
     return name !== "" && description !== "" && serves !== "" && image !== "";
   };
 
-  const getImageUrl = () => {
-    if (image instanceof File) {
-      return URL.createObjectURL(image);
-    } else {
-      return image;
+  const setNewCrop = (newCrop) => {
+    if (newCrop.width > 0 && newCrop.height > 0) {
+      setCrop(newCrop);
     }
   };
 
-  const getImageName = () => {
-    if (image instanceof File) {
-      return image.name;
-    } else {
-      return image;
-    }
+  const onImageLoaded = (image) => {
+    const size = Math.min(image.width, image.height);
+    const x = (image.width - size) / 2;
+    const y = (image.height - size) / 2;
+    setCrop({ aspect: 1, x, y, width: size, height: size, keepSelection: true });
+    return false;
   };
 
   return (
-    <div className={styles.Container}>
+    <div className={baseStyles.Container}>
       <form onSubmit={onSubmit}>
-        <div className={styles.Heading}>
+        <div className={baseStyles.Heading}>
           <Heading>{isEdit ? "Edit Recipe" : "Create Recipe"} (1/5)</Heading>
         </div>
         <div className="row">
@@ -90,15 +97,19 @@ export default function Step1({
               <span>Image</span>
               <Input type="file" onChange={onImageChange} />
             </Button>
-            <div className="file-path-wrapper">
-              <Input value={getImageName()} readOnly type="text" />
-            </div>
+            {!image.startsWith(BUCKET_NAME) && (
+              <span className={styles.DeleteImageButton}>
+                <Button floating danger onClick={() => setImage(PLACEHOLDER_IMAGE)}>
+                  <Icon name="delete" />
+                </Button>
+              </span>
+            )}
           </div>
         </div>
         {image !== "" && (
           <div className="row">
             <div className="col s12 m12 l6">
-              <img src={getImageUrl()} alt="recipe" className="responsive-img" />
+              <ReactCrop src={image} crop={crop} onChange={setNewCrop} onImageLoaded={onImageLoaded} />
             </div>
           </div>
         )}
