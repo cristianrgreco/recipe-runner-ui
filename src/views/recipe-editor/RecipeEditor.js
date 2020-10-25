@@ -16,10 +16,10 @@ export default function RecipeEditor({ location: { state = {} } }) {
   const [image, setImage] = useState(PLACEHOLDER_IMAGE);
   const [crop, setCrop] = useState(undefined);
   const [cropScale, setCropScale] = useState(undefined);
+  const [loadedImage, setLoadedImage] = useState(undefined);
   const [equipment, setEquipment] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [method, setMethod] = useState([]);
-  const [loadedImage, setLoadedImage] = useState(undefined);
 
   useEffect(() => {
     if (state.recipe) {
@@ -35,7 +35,6 @@ export default function RecipeEditor({ location: { state = {} } }) {
     }
   }, []);
 
-  const requiresImageUpload = !state.recipe || state.recipe.image !== image; // todo not working
   const hasCompletedRequiredSteps = name !== "" && description !== "" && serves !== "" && image !== "";
 
   return (
@@ -101,7 +100,6 @@ export default function RecipeEditor({ location: { state = {} } }) {
             equipment={equipment}
             ingredients={ingredients}
             method={method}
-            requiresImageUpload={requiresImageUpload}
             {...props}
           />
         )}

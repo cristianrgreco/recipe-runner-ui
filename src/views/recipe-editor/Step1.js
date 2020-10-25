@@ -11,7 +11,7 @@ import Heading from "../../components/Heading";
 import { Icon } from "../../components/Icon";
 
 export const BUCKET_NAME = "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com";
-export const PLACEHOLDER_IMAGE = `${BUCKET_NAME}/55994ba0-ef85-11ea-9b02-1f1d8760d3d2.png`;
+export const PLACEHOLDER_IMAGE = `${BUCKET_NAME}/ee9005b0-16e5-11eb-a45a-7d41540ef544.png`;
 
 export default function Step1({
   isEdit,
@@ -46,6 +46,7 @@ export default function Step1({
 
   const onImageChange = (e) => {
     const image = e.target.files[0];
+
     if (image) {
       setImage(URL.createObjectURL(image));
     }

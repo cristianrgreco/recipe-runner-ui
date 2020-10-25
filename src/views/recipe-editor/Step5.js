@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { methodDuration } from "../../duration";
 import { saveRecipe, updateRecipe } from "../../api";
 import baseStyles from "./RecipeEditor.module.css";
 import styles from "./Step5.module.css";
@@ -9,6 +8,8 @@ import Recipe from "../../Recipe";
 import { Button } from "../../components/Button";
 import Heading from "../../components/Heading";
 import SubHeading from "../../components/SubHeading";
+import { getCroppedImageBlob } from "./cropImage";
+import { methodDuration } from "../../duration";
 
 export default function Step5({
   isEdit,
@@ -22,58 +23,35 @@ export default function Step5({
   equipment,
   ingredients,
   method,
-  requiresImageUpload,
 }) {
   const [recipe, setRecipe] = useState(null);
+  const [recipeWithImage, setRecipeWithImage] = useState(null);
+  const [ready, setReady] = useState(false);
   const [isPublishing, setIsPublishing] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
-    if (requiresImageUpload) {
-      const imageObject = new Image();
-      imageObject.onload = () => {
-        setRecipe({
-          name,
-          image: getCroppedImage(imageObject, crop, cropScale),
-          crop,
-          description,
-          duration: methodDuration(method),
-          serves,
-          equipment,
-          ingredients,
-          method,
-        });
+    (async () => {
+      const recipe = {
+        name,
+        crop,
+        description,
+        duration: methodDuration(method),
+        serves,
+        equipment,
+        ingredients,
+        method,
       };
-      imageObject.src = image;
-    }
+      const croppedImageBlob = await getCroppedImageBlob(image, crop, cropScale);
+      setRecipe({ ...recipe, image: croppedImageBlob });
+      setRecipeWithImage({ ...recipe, image: URL.createObjectURL(croppedImageBlob) });
+      setReady(true);
+    })();
   }, []);
 
-  if (!recipe) {
+  if (!ready) {
     return <div />;
-  }
-
-  function getCroppedImage(image, crop, cropScale) {
-    const canvas = document.createElement("canvas");
-    const scaleX = cropScale.x;
-    const scaleY = cropScale.y;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
-    const ctx = canvas.getContext("2d");
-
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      crop.width,
-      crop.height
-    );
-
-    return canvas.toDataURL("image/jpeg");
   }
 
   const onClickBack = () => {
@@ -87,9 +65,9 @@ export default function Step5({
     let location;
     try {
       if (isEdit) {
-        location = await updateRecipe(id, recipe, "image/jpeg", requiresImageUpload);
+        location = await updateRecipe(id, recipe);
       } else {
-        location = await saveRecipe(recipe, "image/jpeg", requiresImageUpload);
+        location = await saveRecipe(recipe);
       }
     } catch (e) {
       console.error(e);
@@ -111,7 +89,7 @@ export default function Step5({
             <SubHeading>Preview</SubHeading>
           </div>
           <div className={styles.RecipePreview_Container}>
-            <RecipePreview recipe={recipe} />
+            <RecipePreview recipe={recipeWithImage} />
           </div>
         </div>
       </div>
@@ -120,7 +98,7 @@ export default function Step5({
           <div className={baseStyles.SubHeading}>
             <SubHeading>Full</SubHeading>
           </div>
-          <Recipe recipe={recipe} />
+          <Recipe recipe={recipeWithImage} />
         </div>
       </div>
       <div className="row">
