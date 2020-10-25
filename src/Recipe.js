@@ -11,67 +11,78 @@ import Input from "./components/Input";
 import Heading from "./components/Heading";
 import SubHeading from "./components/SubHeading";
 import { List, ListItem } from "./components/List";
+import PLACEHOLDER_RECIPE from "./recipePlaceholder";
 
 export default function Recipe({ loggedIn, recipe: recipeFromProps }) {
   const [recipe, setRecipe] = useState(undefined);
   const [started, setStarted] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [slow, setSlow] = useState(false);
   const { recipeId } = useParams();
-  const history = useHistory();
 
   useEffect(() => {
     if (recipeFromProps) {
       setRecipe(recipeFromProps);
     } else {
-      fetchRecipe(recipeId)
-        .then((recipe) => setRecipe(recipe))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            history.push("/");
-          } else {
-            console.error(`An error occurred when fetching recipe`, err.response);
-          }
-        });
+      const timeout = setTimeout(() => {
+        setRecipe(PLACEHOLDER_RECIPE);
+        setSlow(true);
+      }, 250);
+      fetchRecipe(recipeId).then((recipe) => {
+        clearTimeout(timeout);
+        setRecipe(recipe);
+        setReady(true);
+      });
     }
   }, []);
 
+  if (!recipe) {
+    return <div />;
+  }
+
+  let className = "";
+  if (!ready && slow) {
+    className = styles.Placeholder;
+  } else if (ready && slow) {
+    className = styles.FadeIn;
+  }
+
   return (
     <Fragment>
-      {recipe && (
-        <div className={styles.Container}>
-          <Helmet>
-            <title>{recipe.name}</title>
-            <meta name="description" content={recipe.description} />
-            <meta property="og:image" content={recipe.image} />
-            <meta property="og:image:type" content="image/png" />
-            <meta property="og:url" content={window.location.href} />
-            <meta property="og:title" content={recipe.name} />
-            <meta property="og:description" content={recipe.description} />
-          </Helmet>
-          <RecipeHeader loggedIn={loggedIn} recipe={recipe} />
-          <RecipeDetails recipe={recipe} />
-          <div className={styles.RecipeBody}>
-            <div className={styles.RecipeBody_Requirements}>
-              {recipe.equipment.length > 0 && <RecipeEquipment recipe={recipe} />}
-              {recipe.ingredients.length > 0 && <RecipeIngredients recipe={recipe} />}
+      <div className={`${className} ${styles.Container}`}>
+        <Helmet>
+          <title>{recipe.name}</title>
+          <meta name="description" content={recipe.description} />
+          <meta property="og:image" content={recipe.image} />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:url" content={window.location.href} />
+          <meta property="og:title" content={recipe.name} />
+          <meta property="og:description" content={recipe.description} />
+        </Helmet>
+        <RecipeHeader loggedIn={loggedIn} recipe={recipe} />
+        <RecipeDetails recipe={recipe} />
+        <div className={styles.RecipeBody}>
+          <div className={styles.RecipeBody_Requirements}>
+            {recipe.equipment.length > 0 && <RecipeEquipment recipe={recipe} />}
+            {recipe.ingredients.length > 0 && <RecipeIngredients recipe={recipe} />}
+          </div>
+          <div className={styles.RecipeBody_Method}>
+            <div className={styles.Recipe_Heading}>
+              <SubHeading>Method</SubHeading>
             </div>
-            <div className={styles.RecipeBody_Method}>
-              <div className={styles.Recipe_Heading}>
-                <SubHeading>Method</SubHeading>
-              </div>
-              <div className={styles.RecipeBody_Method_Body}>
-                {started ? (
-                  <RecipeRunner recipe={recipe} />
-                ) : (
-                  <Fragment>
-                    <RecipeMethod recipe={recipe} />
-                    <Button onClick={() => setStarted(true)}>Run</Button>
-                  </Fragment>
-                )}
-              </div>
+            <div className={styles.RecipeBody_Method_Body}>
+              {started ? (
+                <RecipeRunner recipe={recipe} />
+              ) : (
+                <Fragment>
+                  <RecipeMethod recipe={recipe} />
+                  <Button onClick={() => setStarted(true)}>Run</Button>
+                </Fragment>
+              )}
             </div>
           </div>
         </div>
-      )}
+      </div>
     </Fragment>
   );
 }
