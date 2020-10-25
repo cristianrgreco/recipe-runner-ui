@@ -83,7 +83,7 @@ export default function Step1({
       const size = Math.min(newImage.width, newImage.height);
       const x = (newImage.width - size) / 2;
       const y = (newImage.height - size) / 2;
-      setNewCrop({ aspect: 1, x, y, width: size, height: size, keepSelection: true }, newImage);
+      setNewCrop({ aspect: 1, x, y, width: size, height: size }, newImage);
       setLoadedImage(newImage.src);
     } else {
       setNewCrop({ ...crop }, newImage);
@@ -133,7 +133,13 @@ export default function Step1({
         {image !== "" && (
           <div className="row">
             <div className="col s12 m12 l6">
-              <ReactCrop src={image} crop={crop} onChange={setNewCrop} onImageLoaded={onImageLoaded} />
+              <ReactCrop
+                src={image}
+                crop={crop}
+                keepSelection={true}
+                onChange={setNewCrop}
+                onImageLoaded={onImageLoaded}
+              />
             </div>
           </div>
         )}
