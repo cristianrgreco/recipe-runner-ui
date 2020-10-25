@@ -104,7 +104,7 @@ function RecipeHeader({ recipe, loggedIn }) {
                 {isDeleting ? (
                   <Button floating danger loading />
                 ) : (
-                  <Button floating danger onClick={onClickDelete}>
+                  <Button floating danger confirm={<Icon name="check" />} onClick={onClickDelete}>
                     <Icon name="delete" />
                   </Button>
                 )}
