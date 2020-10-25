@@ -33,6 +33,12 @@ export const floating = () => (
   </Button>
 );
 
+export const floatingConfirm = () => (
+  <Button danger floating confirm={<Icon name="check" />} onClick={action("clicked")}>
+    <Icon name="delete" />
+  </Button>
+);
+
 export const spinner = () => (
   <Button spinner onClick={action("clicked")}>
     Spinner

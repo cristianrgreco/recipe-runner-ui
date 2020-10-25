@@ -40,7 +40,7 @@ export default function RecipePreview({ recipe, loggedIn, onDelete }) {
                   {isDeleting ? (
                     <Button floating danger loading />
                   ) : (
-                    <Button floating danger onClick={onClickDelete}>
+                    <Button floating danger confirm={<Icon name="check" />} onClick={onClickDelete}>
                       <Icon name="delete" />
                     </Button>
                   )}

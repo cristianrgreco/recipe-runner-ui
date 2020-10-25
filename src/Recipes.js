@@ -3,8 +3,6 @@ import { Helmet } from "react-helmet";
 import styles from "./Recipes.module.css";
 import RecipePreview from "./RecipePreview";
 import { fetchRecipes } from "./api";
-import { Button } from "./components/Button";
-import { Icon } from "./components/Icon";
 
 export default function Recipes({ loggedIn }) {
   const [recipes, setRecipes] = useState([]);

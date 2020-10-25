@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { methodDuration } from "../../duration";
 import { saveRecipe, updateRecipe } from "../../api";
 import baseStyles from "./RecipeEditor.module.css";
 import styles from "./Step5.module.css";
@@ -9,34 +8,51 @@ import Recipe from "../../Recipe";
 import { Button } from "../../components/Button";
 import Heading from "../../components/Heading";
 import SubHeading from "../../components/SubHeading";
+import { getCroppedImageBlob } from "./cropImage";
+import { methodDuration } from "../../duration";
 
-export default function Review({ isEdit, id, name, description, serves, image, equipment, ingredients, method }) {
+export default function Step5({
+  isEdit,
+  id,
+  name,
+  description,
+  serves,
+  image,
+  crop,
+  cropScale,
+  equipment,
+  ingredients,
+  method,
+}) {
+  const [recipe, setRecipe] = useState(null);
+  const [recipeWithImage, setRecipeWithImage] = useState(null);
+  const [ready, setReady] = useState(false);
   const [isPublishing, setIsPublishing] = useState(false);
   const [error, setError] = useState(null);
   const history = useHistory();
 
-  const recipe = {
-    name,
-    description,
-    duration: methodDuration(method),
-    serves,
-    equipment,
-    ingredients,
-    method,
-  };
+  useEffect(() => {
+    (async () => {
+      const recipe = {
+        name,
+        crop,
+        description,
+        duration: methodDuration(method),
+        serves,
+        equipment,
+        ingredients,
+        method,
+      };
+      const croppedImageBlob = await getCroppedImageBlob(image, crop, cropScale);
+      setRecipe({ ...recipe, image: croppedImageBlob });
+      setRecipeWithImage({ ...recipe, image: URL.createObjectURL(croppedImageBlob) });
+      setReady(true);
+    })();
+  }, []);
 
-  const getImage = () => {
-    if (image instanceof File) {
-      return URL.createObjectURL(image);
-    } else {
-      return image;
-    }
-  };
-
-  const recipeWithImagePreview = {
-    ...recipe,
-    image: getImage(),
-  };
+  if (!ready) {
+    return <div />;
+  }
 
   const onClickBack = () => {
     history.push("/recipe-editor/step-4");
@@ -49,11 +65,12 @@ export default function Review({ isEdit, id, name, description, serves, image, e
     let location;
     try {
       if (isEdit) {
-        location = await updateRecipe(id, recipe, image);
+        location = await updateRecipe(id, recipe);
       } else {
-        location = await saveRecipe(recipe, image);
+        location = await saveRecipe(recipe);
       }
     } catch (e) {
+      console.error(e);
       setError("An error occurred, please try again later");
     }
 
@@ -72,7 +89,7 @@ export default function Review({ isEdit, id, name, description, serves, image, e
             <SubHeading>Preview</SubHeading>
           </div>
           <div className={styles.RecipePreview_Container}>
-            <RecipePreview recipe={recipeWithImagePreview} />
+            <RecipePreview recipe={recipeWithImage} />
           </div>
         </div>
       </div>
@@ -81,7 +98,7 @@ export default function Review({ isEdit, id, name, description, serves, image, e
           <div className={baseStyles.SubHeading}>
             <SubHeading>Full</SubHeading>
           </div>
-          <Recipe recipe={recipeWithImagePreview} />
+          <Recipe recipe={recipeWithImage} />
         </div>
       </div>
       <div className="row">

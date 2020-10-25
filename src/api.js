@@ -35,21 +35,15 @@ const uploadImage = async (image) => {
   return uploadUrl.split("?")[0];
 };
 
-export const saveRecipe = async (recipe, image) => {
-  const imageUrl = image instanceof File ? await uploadImage(image) : image;
-
-  const recipeWithImage = { ...recipe, image: imageUrl };
-  const response = await axios.post(`${URL}/recipes`, recipeWithImage, { headers: await headers() });
-
+export const saveRecipe = async (recipe) => {
+  recipe.image = await uploadImage(recipe.image); // todo only upload if image or crop has changed
+  const response = await axios.post(`${URL}/recipes`, recipe, { headers: await headers() });
   return response.headers.location;
 };
 
-export const updateRecipe = async (id, recipe, image) => {
-  const imageUrl = image instanceof File ? await uploadImage(image) : image;
-
-  const recipeWithImage = { ...recipe, image: imageUrl };
-  const response = await axios.post(`${URL}/recipes/${id}`, recipeWithImage, { headers: await headers() });
-
+export const updateRecipe = async (id, recipe) => {
+  recipe.image = await uploadImage(recipe.image); // todo only upload if image or crop has changed
+  const response = await axios.post(`${URL}/recipes/${id}`, recipe, { headers: await headers() });
   return response.headers.location;
 };
 

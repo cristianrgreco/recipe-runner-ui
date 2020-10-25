@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import styles from "./RecipeEditor.module.css";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import baseStyles from "./RecipeEditor.module.css";
+import styles from "./Step1.module.css";
 import { Button } from "../../components/Button";
 import Textarea from "../../components/Textarea";
 import Input from "../../components/Input";
 import Heading from "../../components/Heading";
+import { Icon } from "../../components/Icon";
+
+export const BUCKET_NAME = "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com";
+export const PLACEHOLDER_IMAGE = `${BUCKET_NAME}/ee9005b0-16e5-11eb-a45a-7d41540ef544.png`;
 
 export default function Step1({
   isEdit,
@@ -16,8 +23,14 @@ export default function Step1({
   setServes,
   image,
   setImage,
+  crop,
+  setCrop,
+  setCropScale,
+  loadedImage,
+  setLoadedImage,
 }) {
   const history = useHistory();
+  const [imageRef, setImageRef] = useState(undefined);
 
   const onNameChange = (e) => {
     setName(e.target.value);
@@ -32,7 +45,15 @@ export default function Step1({
   };
 
   const onImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const image = e.target.files[0];
+
+    if (image) {
+      setImage(URL.createObjectURL(image));
+    }
+  };
+
+  const clearImage = () => {
+    setImage(PLACEHOLDER_IMAGE);
   };
 
   const onSubmit = async (e) => {
@@ -44,26 +65,36 @@ export default function Step1({
     return name !== "" && description !== "" && serves !== "" && image !== "";
   };
 
-  const getImageUrl = () => {
-    if (image instanceof File) {
-      return URL.createObjectURL(image);
-    } else {
-      return image;
+  const setNewCrop = (newCrop, newImage) => {
+    const anImageRef = imageRef ? imageRef : newImage;
+    const scaleX = anImageRef.naturalWidth / anImageRef.width;
+    const scaleY = anImageRef.naturalHeight / anImageRef.height;
+
+    if (newCrop.width > 0 && newCrop.height > 0) {
+      setCropScale({ x: scaleX, y: scaleY });
+      setCrop(newCrop);
     }
   };
 
-  const getImageName = () => {
-    if (image instanceof File) {
-      return image.name;
+  const onImageLoaded = (newImage) => {
+    setImageRef(newImage);
+
+    if (loadedImage !== newImage.src) {
+      const size = Math.min(newImage.width, newImage.height);
+      const x = (newImage.width - size) / 2;
+      const y = (newImage.height - size) / 2;
+      setNewCrop({ aspect: 1, x, y, width: size, height: size, keepSelection: true }, newImage);
+      setLoadedImage(newImage.src);
     } else {
-      return image;
+      setNewCrop({ ...crop }, newImage);
     }
+    return false;
   };
 
   return (
-    <div className={styles.Container}>
+    <div className={baseStyles.Container}>
       <form onSubmit={onSubmit}>
-        <div className={styles.Heading}>
+        <div className={baseStyles.Heading}>
           <Heading>{isEdit ? "Edit Recipe" : "Create Recipe"} (1/5)</Heading>
         </div>
         <div className="row">
@@ -90,15 +121,19 @@ export default function Step1({
               <span>Image</span>
               <Input type="file" onChange={onImageChange} />
             </Button>
-            <div className="file-path-wrapper">
-              <Input value={getImageName()} readOnly type="text" />
-            </div>
+            {!image.startsWith(BUCKET_NAME) && (
+              <span className={styles.DeleteImageButton}>
+                <Button floating danger onClick={clearImage}>
+                  <Icon name="delete" />
+                </Button>
+              </span>
+            )}
           </div>
         </div>
         {image !== "" && (
           <div className="row">
             <div className="col s12 m12 l6">
-              <img src={getImageUrl()} alt="recipe" className="responsive-img" />
+              <ReactCrop src={image} crop={crop} onChange={setNewCrop} onImageLoaded={onImageLoaded} />
             </div>
           </div>
         )}
