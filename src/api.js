@@ -30,7 +30,7 @@ const uploadImage = async (image) => {
   });
   const uploadUrl = uploadUrlResponse.data.uploadUrl;
 
-  await axios.put(uploadUrl, new File([image], uploadUrlResponse.data.filename));
+  await axios.put(uploadUrl, image);
 
   return uploadUrl.split("?")[0];
 };
