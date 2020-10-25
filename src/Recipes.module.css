@@ -1,5 +1,51 @@
 @value colors: "./colors.css";
-@value primary, secondary, secondaryBackground from colors;
+@value primary, secondary, secondaryBackground, placeholder from colors;
+
+.FadeIn {
+  animation: fadeIn ease 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Placeholder {
+  animation: fadeIn linear 0.5s, flickerAnimation linear 1s infinite 0.5s;
+}
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Placeholder .RecipePreview {
+  border: none !important;
+  color: transparent !important;
+  background-color: placeholder !important;
+}
+
+.Placeholder img,
+.Placeholder label {
+  visibility: hidden;
+}
+
+.Placeholder .RecipePreview * {
+  border: none !important;
+  color: transparent !important;
+  background-color: transparent !important;
+}
 
 .Recipes {
   margin: 40px 0;
