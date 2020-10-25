@@ -41,6 +41,11 @@ export default function Recipe({ loggedIn, recipe: recipeFromProps }) {
           <Helmet>
             <title>{recipe.name}</title>
             <meta name="description" content={recipe.description} />
+            <meta property="og:image" content={recipe.image} />
+            <meta property="og:image:type" content="image/png" />
+            <meta property="og:url" content={window.location.href} />
+            <meta property="og:title" content={recipe.name} />
+            <meta property="og:description" content={recipe.description} />
           </Helmet>
           <RecipeHeader loggedIn={loggedIn} recipe={recipe} />
           <RecipeDetails recipe={recipe} />
