@@ -9,7 +9,8 @@ export default function Nav({ loggedIn, setLoggedIn }) {
   const location = useLocation();
 
   useEffect(() => {
-    window.M.Sidenav.init(document.querySelectorAll(".sidenav"));
+    const sideNavs = document.querySelectorAll(".sidenav");
+    window.M.Sidenav.init(sideNavs, { draggable: false });
   }, [loggedIn]);
 
   return (
