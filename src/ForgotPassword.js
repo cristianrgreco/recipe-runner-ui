@@ -1,40 +1,28 @@
 import React, { useState } from "react";
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import styles from "./Login.module.css";
-import { confirmRegistration, login, register } from "./auth";
+import { confirmResetPassword, login, resetPassword } from "./auth";
 import { Button } from "./components/Button";
 import Input from "./components/Input";
 import Heading from "./components/Heading";
 
-export default function Register({ setLoggedIn }) {
+export default function ForgotPassword({ setLoggedIn }) {
   const [user, setUser] = useState(undefined);
   const [confirmedEmail, setConfirmedEmail] = useState("");
-  const [confirmedPassword, setConfirmedPassword] = useState("");
 
   return (
     <Switch>
-      <Route exact path="/account/register">
-        <RegistrationForm
-          setUser={setUser}
-          setConfirmedEmail={setConfirmedEmail}
-          setConfirmedPassword={setConfirmedPassword}
-        />
+      <Route exact path="/account/forgot-password">
+        <EnterEmailForm setUser={setUser} setConfirmedEmail={setConfirmedEmail} />
       </Route>
       <Route
         exact
-        path="/account/register/confirm"
+        path="/account/forgot-password/reset"
         render={() => {
           if (user) {
-            return (
-              <ConfirmRegistrationForm
-                user={user}
-                email={confirmedEmail}
-                password={confirmedPassword}
-                setLoggedIn={setLoggedIn}
-              />
-            );
+            return <ConfirmResetForm email={confirmedEmail} setLoggedIn={setLoggedIn} />;
           } else {
-            return <Redirect to="/account/register" />;
+            return <Redirect to="/account/forgot-password" />;
           }
         }}
       />
@@ -42,10 +30,68 @@ export default function Register({ setLoggedIn }) {
   );
 }
 
-function RegistrationForm({ setUser, setConfirmedEmail, setConfirmedPassword }) {
+function EnterEmailForm({ setUser, setConfirmedEmail }) {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setIsLoading(true);
+      const user = await resetPassword(email);
+      setUser(user);
+      setConfirmedEmail(email);
+      history.push("/account/forgot-password/reset");
+    } catch (err) {
+      if (err.message) {
+        setError(err.message);
+      } else {
+        setError("Unable to reset password.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  return (
+    <div className={styles.Container}>
+      <form onSubmit={onSubmit}>
+        <div className={styles.Heading}>
+          <Heading>Password Reset</Heading>
+        </div>
+        <div className="row">
+          <div className="input-field col s12 m12 l3">
+            <Input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange} />
+            <label htmlFor="email">Email</label>
+          </div>
+        </div>
+        <div className="row">
+          <div className="input-field col s12 m12 l3">
+            <Button type="submit" spinner={isLoading}>
+              Reset
+            </Button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">{error && <div className={styles.ValidationError}>{error}</div>}</div>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function ConfirmResetForm({ email, setLoggedIn }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmationCode, setConfirmationCode] = useState("");
   const [error, setError] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -68,30 +114,19 @@ function RegistrationForm({ setUser, setConfirmedEmail, setConfirmedPassword }) 
     try {
       setError("");
       setIsLoading(true);
-      const user = await register(email, password);
-      setUser(user);
-      setConfirmedEmail(email);
-      setConfirmedPassword(password);
-      history.push("/account/register/confirm");
+      console.log("Confirm password");
+      await confirmResetPassword(email, password, confirmationCode);
+      console.log("Login");
+      await login(email, password);
+      setLoggedIn(true);
+      console.log("Redirect");
+      history.push("/");
     } catch (err) {
-      switch (err.code) {
-        case "UsernameExistsException":
-          setError("User already exists.");
-          break;
-        case "InvalidPasswordException":
-        case "InvalidParameterException":
-          setError("Password must be at least 8 characters.");
-          break;
-        default:
-          setError(`An unknown registration error occurred: ${err.code}.`);
-      }
+      console.log(err);
+      setError("Invalid confirmation code.");
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
   };
 
   const onPasswordChange = (e) => {
@@ -102,22 +137,33 @@ function RegistrationForm({ setUser, setConfirmedEmail, setConfirmedPassword }) 
     setConfirmPassword(e.target.value);
   };
 
+  const onConfirmationCodeChange = (e) => {
+    setConfirmationCode(e.target.value);
+  };
+
   return (
     <div className={styles.Container}>
       <form onSubmit={onSubmit}>
         <div className={styles.Heading}>
-          <Heading>Register</Heading>
+          <Heading>Password Reset</Heading>
         </div>
         <div className="row">
-          <div className="input-field col s12 m12 l3">
-            <Input id="email" type="email" required autoFocus={true} value={email} onChange={onEmailChange} />
-            <label htmlFor="email">Email</label>
+          <div className="col s12 m12 l3">
+            <span>A confirmation code has been sent to your email.</span>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12 m12 l3">
-            <Input id="password" type="password" required minLength={8} value={password} onChange={onPasswordChange} />
-            <label htmlFor="password">Password</label>
+            <Input
+              id="password"
+              type="password"
+              required
+              minLength={8}
+              value={password}
+              onChange={onPasswordChange}
+              autoFocus={true}
+            />
+            <label htmlFor="password">New Password</label>
           </div>
         </div>
         <div className="row">
@@ -130,66 +176,12 @@ function RegistrationForm({ setUser, setConfirmedEmail, setConfirmedPassword }) 
               value={confirmPassword}
               onChange={onConfirmPasswordChange}
             />
-            <label htmlFor="confirm-password">Confirm Password</label>
+            <label htmlFor="confirm-password">Confirm New Password</label>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12 m12 l3">
-            <Button type="submit" spinner={isLoading}>
-              Register
-            </Button>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s12">{error && <div className={styles.ValidationError}>{error}</div>}</div>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-function ConfirmRegistrationForm({ user, email, password, setLoggedIn }) {
-  const [confirmationCode, setConfirmationCode] = useState("");
-  const [error, setError] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory();
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setError("");
-      setIsLoading(true);
-      await confirmRegistration(user, confirmationCode);
-      await login(email, password);
-      setLoggedIn(true);
-      history.push("/");
-    } catch (err) {
-      setError("Invalid confirmation code.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const onConfirmationCodeChange = (e) => {
-    setConfirmationCode(e.target.value);
-  };
-
-  return (
-    <div className={styles.Container}>
-      <form onSubmit={onSubmit}>
-        <div className={styles.Heading}>
-          <Heading>Register</Heading>
-        </div>
-        <div className="row">
-          <div className="input-field col s12 m12 l3">
-            <Input
-              id="confirmation-code"
-              type="text"
-              autoFocus={true}
-              value={confirmationCode}
-              onChange={onConfirmationCodeChange}
-            />
+            <Input id="confirmation-code" type="text" value={confirmationCode} onChange={onConfirmationCodeChange} />
             <label htmlFor="confirmation-code">Confirmation Code</label>
           </div>
         </div>

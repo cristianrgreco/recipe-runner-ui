@@ -90,13 +90,16 @@ function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout }
       ) : (
         <Fragment>
           <li>
-            <Link to="/login" className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/login") && styles.Active}`}>
+            <Link
+              to="/account/login"
+              className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/login") && styles.Active}`}
+            >
               Login
             </Link>
           </li>
           <li>
             <Link
-              to="/register"
+              to="/account/register"
               className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/register") && styles.Active}`}
             >
               Register

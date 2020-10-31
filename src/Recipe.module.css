@@ -177,15 +177,13 @@
     flex-direction: column;
   }
 
-  .RecipeHeader_Image {
-    margin-bottom: 20px;
-  }
-
   .RecipeHeader_Image img {
   }
 
   .RecipeHeader_Info {
     padding: 0;
+    margin-bottom: 20px;
+    order: -1;
   }
 
   .RecipeHeader_Info_NameContainer {
@@ -193,7 +191,7 @@
   }
 
   .RecipeDetails {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 40px;
     padding: 5px 0;
   }

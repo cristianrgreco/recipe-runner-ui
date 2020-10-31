@@ -1,0 +1,16 @@
+@value colors: "./colors.css";
+@value secondary, secondaryHover, secondaryActive from colors;
+
+.Link a {
+  color: secondary;
+  transition: color 0.3s;
+  text-decoration: underline;
+}
+
+.Link a:hover {
+  color: secondaryHover;
+}
+
+.Link a:active {
+  color: secondaryActive;
+}

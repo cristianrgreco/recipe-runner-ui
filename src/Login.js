@@ -5,6 +5,7 @@ import { login } from "./auth";
 import { Button } from "./components/Button";
 import Input from "./components/Input";
 import Heading from "./components/Heading";
+import { StyledLink } from "./StyledLink";
 
 export default function Login({ setLoggedIn }) {
   const [email, setEmail] = useState("");
@@ -21,10 +22,10 @@ export default function Login({ setLoggedIn }) {
       setIsLoading(true);
       await login(email, password);
       setLoggedIn(true);
-      setIsLoading(false);
       history.push("/");
     } catch (err) {
-      setError("Invalid username or password");
+      setError("Invalid username or password.");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -57,13 +58,16 @@ export default function Login({ setLoggedIn }) {
         </div>
         <div className="row">
           <div className="input-field col s12 m12 l3">
-            <Button type="submit" spinner={isLoading}>
-              Log in
-            </Button>
+            <div className={styles.LoginButtonContainer}>
+              <Button type="submit" spinner={isLoading}>
+                Log in
+              </Button>
+            </div>
+            <StyledLink to={{ pathname: "/account/forgot-password" }}>Forgot your password</StyledLink>
           </div>
         </div>
         <div className="row">
-          <div className="col s12 m12 l3">{error && <div className={styles.ValidationError}>{error}</div>}</div>
+          <div className="col s12">{error && <div className={styles.ValidationError}>{error}</div>}</div>
         </div>
       </form>
     </div>

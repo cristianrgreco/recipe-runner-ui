@@ -76,7 +76,7 @@ export default function Step5({
       }
     } catch (e) {
       console.error(e);
-      setError("An error occurred, please try again later");
+      setError("An error occurred, please try again later.");
     }
 
     setIsPublishing(false);

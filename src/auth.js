@@ -1,4 +1,4 @@
-import { AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserAttribute } from "amazon-cognito-identity-js";
+import { AuthenticationDetails, CognitoUser, CognitoUserAttribute, CognitoUserPool } from "amazon-cognito-identity-js";
 
 const USER_POOL_ID = process.env.REACT_APP_COGNITO_USER_POOL_ID;
 const CLIENT_ID = process.env.REACT_APP_COGNITO_CLIENT_ID;
@@ -112,3 +112,20 @@ export const confirmRegistration = (user, confirmationCode) =>
       }
     });
   });
+
+export const resetPassword = (username) =>
+  new Promise((resolve, reject) => {
+    const user = cognitoUser(username);
+    user.forgotPassword({
+      onSuccess: () => resolve(user),
+      onFailure: (err) => reject(err),
+    });
+  });
+
+export const confirmResetPassword = (username, newPassword, verificationCode) =>
+  new Promise((resolve, reject) =>
+    cognitoUser(username).confirmPassword(verificationCode, newPassword, {
+      onSuccess: () => resolve(),
+      onFailure: (err) => reject(err),
+    })
+  );
