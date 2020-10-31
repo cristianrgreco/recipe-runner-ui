@@ -105,8 +105,8 @@
 @media only screen and (max-width: 768px) {
   .Recipe {
     flex-direction: column;
-    height: 235px;
-    max-height: 230px;
+    height: 305px;
+    max-height: 305px;
   }
 
   .RecipeImage {
@@ -114,7 +114,7 @@
   }
 
   .RecipeImage img {
-    height: 75px;
+    height: 140px;
   }
 
   .RecipeDetailsNameContainer {
