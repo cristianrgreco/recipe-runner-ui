@@ -114,12 +114,9 @@ function ConfirmResetForm({ email, setLoggedIn }) {
     try {
       setError("");
       setIsLoading(true);
-      console.log("Confirm password");
       await confirmResetPassword(email, password, confirmationCode);
-      console.log("Login");
       await login(email, password);
       setLoggedIn(true);
-      console.log("Redirect");
       history.push("/");
     } catch (err) {
       console.log(err);
