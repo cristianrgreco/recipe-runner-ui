@@ -19,7 +19,7 @@ export default function RecipePreview({ recipe, loggedIn, onDelete }) {
   return (
     <div className={styles.Recipe}>
       <div className={styles.RecipeImage}>
-        <img src={recipe.imageThumbnail} alt="" />
+        <img src={recipe.imageThumbnail} alt="" crossOrigin="anonymous" />
       </div>
       <div className={styles.RecipeDetailsContainer}>
         <div className={styles.RecipeDetails}>

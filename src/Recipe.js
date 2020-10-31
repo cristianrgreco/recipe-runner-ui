@@ -100,7 +100,7 @@ function RecipeHeader({ recipe, loggedIn }) {
   return (
     <div className={styles.RecipeHeader}>
       <div className={styles.RecipeHeader_Image}>
-        <img src={recipe.image} alt="" />
+        <img src={recipe.image} alt="" crossOrigin="anonymous" />
       </div>
       <div className={styles.RecipeHeader_Info}>
         <div className={styles.RecipeHeader_Info_NameContainer}>
