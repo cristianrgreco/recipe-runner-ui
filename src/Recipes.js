@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import styles from "./Recipes.module.css";
 import RecipePreview from "./RecipePreview";
 import { fetchRecipes } from "./api";
@@ -38,6 +39,10 @@ export default function Recipes({ loggedIn }) {
 
   return (
     <div className={`${className} ${styles.Recipes}`}>
+      <Helmet>
+        <title>La Cocina Leon</title>
+        <meta name="description" content="Recetas de la familia Leon" />
+      </Helmet>
       {recipes.map((recipe) => (
         <div key={recipe.id} className={styles.RecipePreview}>
           <RecipePreview recipe={recipe} loggedIn={loggedIn} onDelete={onDeleteRecipe(recipe)} />

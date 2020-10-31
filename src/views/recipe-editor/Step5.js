@@ -8,7 +8,7 @@ import Recipe from "../../Recipe";
 import { Button } from "../../components/Button";
 import Heading from "../../components/Heading";
 import SubHeading from "../../components/SubHeading";
-import { getCroppedImageBlob } from "./cropImage";
+import { getCroppedImageBlob, getCroppedImageThumbnailBlob } from "./cropImage";
 import { methodDuration } from "../../duration";
 
 export default function Step5({
@@ -43,9 +43,14 @@ export default function Step5({
         ingredients,
         method,
       };
-      const croppedImageBlob = await getCroppedImageBlob(image, crop, cropScale);
-      setRecipe({ ...recipe, image: croppedImageBlob });
-      setRecipeWithImage({ ...recipe, image: URL.createObjectURL(croppedImageBlob) });
+      const croppedImage = await getCroppedImageBlob(image, crop, cropScale);
+      const croppedImageThumbnail = await getCroppedImageThumbnailBlob(image, crop, cropScale);
+      setRecipe({ ...recipe, image: croppedImage, imageThumbnail: croppedImageThumbnail });
+      setRecipeWithImage({
+        ...recipe,
+        image: URL.createObjectURL(croppedImage),
+        imageThumbnail: URL.createObjectURL(croppedImageThumbnail),
+      });
       setReady(true);
     })();
   }, []);
