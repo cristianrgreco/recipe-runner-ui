@@ -6,6 +6,7 @@ export function Button({
   children,
   confirm,
   secondary,
+  warn,
   danger,
   large,
   floating,
@@ -32,6 +33,8 @@ export function Button({
       return `${styles.Secondary}`;
     } else if (danger) {
       return `${styles.Danger}`;
+    } else if (warn) {
+      return `${styles.Warn}`;
     }
   };
 

@@ -18,6 +18,21 @@
   display: -webkit-box;
 }
 
+.AlarmContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AlarmControlsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.AlarmControlsButtonContainer {
+  margin-right: 20px;
+}
+
 @media only screen and (max-width: 768px) {
   .Toast {
     margin-top: 0;

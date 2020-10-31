@@ -39,9 +39,40 @@ export default function RecipeRunner({ recipe }) {
     return timers.some((timer) => timer.name === step.instruction);
   };
 
+  const isTimerPausedForStep = (step) => {
+    const timer = getTimerForStep(step);
+    return timer.paused === true;
+  };
+
   const isTimerCompleteForStep = (step) => {
     const timer = getTimerForStep(step);
-    return moment().isSameOrAfter(timer.endTime);
+    return !timer.paused && moment().isSameOrAfter(timer.endTime);
+  };
+
+  const pauseTimer = (timer) => {
+    setTimers((timers) => {
+      const timersWithoutTimer = timers.filter((aTimer) => aTimer !== timer);
+      timersWithoutTimer.push({
+        ...timer,
+        paused: true,
+        pausedAt: moment(),
+      });
+      return timersWithoutTimer;
+    });
+  };
+
+  const resumeTimer = (timer) => {
+    setTimers((timers) => {
+      const timersWithoutTimer = timers.filter((aTimer) => aTimer !== timer);
+      const timeElapsedMs = moment().diff(timer.pausedAt, "ms");
+      timersWithoutTimer.push({
+        ...timer,
+        paused: false,
+        pausedAt: undefined,
+        endTime: timer.endTime.add(timeElapsedMs, "ms"),
+      });
+      return timersWithoutTimer;
+    });
   };
 
   return (
@@ -64,9 +95,18 @@ export default function RecipeRunner({ recipe }) {
                 {step.alarm !== undefined && !isTimerSetForStep(step) && (
                   <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />
                 )}
-                {step.alarm !== undefined && isTimerSetForStep(step) && !isTimerCompleteForStep(step) && (
-                  <AlarmAndInProgress step={step} timer={getTimerForStep(step)} />
-                )}
+                {step.alarm !== undefined &&
+                  isTimerSetForStep(step) &&
+                  !isTimerPausedForStep(step) &&
+                  !isTimerCompleteForStep(step) && (
+                    <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer} />
+                  )}
+                {step.alarm !== undefined &&
+                  isTimerSetForStep(step) &&
+                  isTimerPausedForStep(step) &&
+                  !isTimerCompleteForStep(step) && (
+                    <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer} />
+                  )}
                 {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
                   <AlarmAndComplete
                     step={step}
@@ -142,12 +182,35 @@ function AlarmAndComplete({ step, setSteps, setCompletedSteps, nextSteps }) {
   );
 }
 
-function AlarmAndInProgress({ step, timer }) {
+function AlarmAndInProgress({ step, timer, pauseTimer }) {
   return (
-    <Fragment>
+    <div className={styles.AlarmContainer}>
+      <div className={styles.AlarmControlsContainer}>
+        <div className={styles.AlarmControlsButtonContainer}>
+          <Button warn floating onClick={() => pauseTimer(timer)}>
+            <Icon name="pause" />
+          </Button>
+        </div>
+        <div>{step.instruction}</div>
+      </div>
       <Badge orange>{timeRemaining(moment(), timer.endTime)}</Badge>
-      <div>{step.instruction}</div>
-    </Fragment>
+    </div>
+  );
+}
+
+function AlarmAndPaused({ step, timer, resumeTimer }) {
+  return (
+    <div className={styles.AlarmContainer}>
+      <div className={styles.AlarmControlsContainer}>
+        <div className={styles.AlarmControlsButtonContainer}>
+          <Button floating onClick={() => resumeTimer(timer)}>
+            <Icon name="play_arrow" />
+          </Button>
+        </div>
+        <div>{step.instruction}</div>
+      </div>
+      <Badge orange>{timeRemaining(timer.pausedAt, timer.endTime)}</Badge>
+    </div>
   );
 }
 
@@ -161,28 +224,28 @@ function AlarmAndReady({ step, setTimers, timers }) {
   ];
 
   const onClick = async () => {
-    await registerPushNotification();
+    // await registerPushNotification();
     setTimers(addTimer(timers, step));
   };
 
-  async function registerPushNotification() {
-    // const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
-    //
-    // if (await Notification.requestPermission() === 'granted') {
-    //     const endTime = moment().add(step.alarm.duration, 'ms').unix();
-    //
-    //     await serviceWorkerRegistration.showNotification('La Cocina Leon', {
-    //         tag: `${Date.now()}`,
-    //         body: `DONE: ${step.instruction}`,
-    //         showTrigger: new TimestampTrigger(endTime), // todo TimestampTrigger not supported
-    //         data: {
-    //             url: window.location.href
-    //         },
-    //         badge: '/logo.png',
-    //         icon: '/logo.png',
-    //     });
-    // }
-  }
+  // async function registerPushNotification() {
+  //   const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
+  //
+  //   if (await Notification.requestPermission() === "granted") {
+  //     const endTime = moment().add(step.alarm.duration, "ms").unix();
+  //
+  //     await serviceWorkerRegistration.showNotification("La Cocina Leon", {
+  //       tag: `${Date.now()}`,
+  //       body: `DONE: ${step.instruction}`,
+  //       showTrigger: new TimestampTrigger(endTime), // todo TimestampTrigger not supported
+  //       data: {
+  //         url: window.location.href
+  //       },
+  //       badge: "/logo.png",
+  //       icon: "/logo.png"
+  //     });
+  //   }
+  // }
 
   return (
     <Fragment>

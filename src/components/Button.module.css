@@ -48,6 +48,19 @@
   background-color: errorActive !important;
 }
 
+.Warn {
+  color: light !important;
+  background-color: rgb(255, 183, 77) !important;
+}
+
+.Warn:hover {
+  background-color: rgb(242, 170, 64) !important; /* 5% darker */
+}
+
+.Warn:active {
+  background-color: rgb(230, 158, 52) !important;
+}
+
 .Spinner {
   pointer-events: none;
 }
