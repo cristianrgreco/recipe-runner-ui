@@ -75,46 +75,69 @@ export default function RecipeRunner({ recipe }) {
     });
   };
 
+  const noAlarmAndCompleteSteps = [];
+  const alarmAndCompleteSteps = [];
+
   return (
     <Fragment>
       <audio id="audio" src="/audio/beep.mp3" autoPlay={false} />
       {steps.length > 0 && (
         <List>
-          {steps.map((step) => (
+          {steps.map((step) => {
+            if (step.alarm === undefined && isStepCompleted(step)) {
+              noAlarmAndCompleteSteps.push(step);
+              return;
+            } else if (step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step)) {
+              alarmAndCompleteSteps.push(step);
+              return;
+            }
+
+            return (
+              <ListItem key={step.instruction}>
+                <div className="section">
+                  {step.alarm === undefined && !isStepCompleted(step) && (
+                    <NoAlarmAndInProgress
+                      step={step}
+                      setSteps={setSteps}
+                      setCompletedSteps={setCompletedSteps}
+                      nextSteps={nextSteps}
+                    />
+                  )}
+                  {step.alarm !== undefined && !isTimerSetForStep(step) && (
+                    <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />
+                  )}
+                  {step.alarm !== undefined &&
+                    isTimerSetForStep(step) &&
+                    !isTimerPausedForStep(step) &&
+                    !isTimerCompleteForStep(step) && (
+                      <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer} />
+                    )}
+                  {step.alarm !== undefined &&
+                    isTimerSetForStep(step) &&
+                    isTimerPausedForStep(step) &&
+                    !isTimerCompleteForStep(step) && (
+                      <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer} />
+                    )}
+                </div>
+              </ListItem>
+            );
+          })}
+          {noAlarmAndCompleteSteps.map((step) => (
             <ListItem key={step.instruction}>
               <div className="section">
-                {step.alarm === undefined && isStepCompleted(step) && <NoAlarmAndComplete step={step} />}
-                {step.alarm === undefined && !isStepCompleted(step) && (
-                  <NoAlarmAndInProgress
-                    step={step}
-                    setSteps={setSteps}
-                    setCompletedSteps={setCompletedSteps}
-                    nextSteps={nextSteps}
-                  />
-                )}
-                {step.alarm !== undefined && !isTimerSetForStep(step) && (
-                  <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />
-                )}
-                {step.alarm !== undefined &&
-                  isTimerSetForStep(step) &&
-                  !isTimerPausedForStep(step) &&
-                  !isTimerCompleteForStep(step) && (
-                    <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer} />
-                  )}
-                {step.alarm !== undefined &&
-                  isTimerSetForStep(step) &&
-                  isTimerPausedForStep(step) &&
-                  !isTimerCompleteForStep(step) && (
-                    <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer} />
-                  )}
-                {step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step) && (
-                  <AlarmAndComplete
-                    step={step}
-                    setSteps={setSteps}
-                    setCompletedSteps={setCompletedSteps}
-                    nextSteps={nextSteps}
-                  />
-                )}
+                <NoAlarmAndComplete step={step} />
+              </div>
+            </ListItem>
+          ))}
+          {alarmAndCompleteSteps.map((step) => (
+            <ListItem key={step.instruction}>
+              <div className="section">
+                <AlarmAndComplete
+                  step={step}
+                  setSteps={setSteps}
+                  setCompletedSteps={setCompletedSteps}
+                  nextSteps={nextSteps}
+                />
               </div>
             </ListItem>
           ))}
