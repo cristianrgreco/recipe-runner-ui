@@ -53,6 +53,7 @@ export default function Nav({ loggedIn, setLoggedIn }) {
 
 function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout }) {
   const isActive = (pathname) => location.pathname === pathname;
+  const isActiveIncludeSubRoutes = (pathname) => location.pathname.startsWith(pathname);
 
   const onLogout = () => {
     logout();
@@ -92,7 +93,9 @@ function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout }
           <li>
             <Link
               to="/account/login"
-              className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/login") && styles.Active}`}
+              className={`${styles.Nav_Wrapper_Sidenav_Link} ${
+                isActiveIncludeSubRoutes("/account/login") && styles.Active
+              }`}
             >
               Login
             </Link>
@@ -100,7 +103,9 @@ function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout }
           <li>
             <Link
               to="/account/register"
-              className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/register") && styles.Active}`}
+              className={`${styles.Nav_Wrapper_Sidenav_Link} ${
+                isActiveIncludeSubRoutes("/account/register") && styles.Active
+              }`}
             >
               Register
             </Link>
