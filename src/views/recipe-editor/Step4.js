@@ -64,7 +64,12 @@ function MethodItem({ method, setMethod, depth }) {
         {method.length > 0 &&
           method.map((methodItem, methodItemIndex) => (
             <ListItem key={methodItemIndex} className={baseStyles.Collection_Item_Container}>
-              <EditMethodItemForm method={method} setMethod={setMethod} methodIndex={methodItemIndex} depth={depth} />
+              <EditMethodItemForm
+                method={method}
+                setMethod={setMethod}
+                methodIndex={methodItemIndex}
+                depth={incrementDepth(depth, methodItemIndex)}
+              />
               <div className={styles.Collection_Nested}>
                 <MethodItem
                   method={methodItem.next}
@@ -140,7 +145,7 @@ function MethodItemForm({ method, setMethod, depth }) {
           />
           <label htmlFor={`instruction-${elementId(depth)}`}>Step {depth}</label>
         </div>
-        <div className="input-field col s12 m12 l6">
+        <div className="input-field col s12 m12 l3">
           <Input
             id={`duration-${elementId(depth)}`}
             type="number"
@@ -151,7 +156,7 @@ function MethodItemForm({ method, setMethod, depth }) {
           />
           <label htmlFor={`duration-${elementId(depth)}`}>Duration (optional)</label>
         </div>
-        <div className="input-field col s12 m12 l6">
+        <div className="input-field col s12 m12 l3">
           <Select
             id={`duration-unit-${elementId(depth)}`}
             disabled={duration === ""}
@@ -176,9 +181,13 @@ function MethodItemForm({ method, setMethod, depth }) {
 function EditMethodItemForm({ method, setMethod, methodIndex, depth }) {
   const alarm = method[methodIndex].alarm ? method[methodIndex].alarm : {};
 
-  const [instruction, setInstruction] = useState(method[methodIndex].instruction);
-  const [duration, setDuration] = useState(alarm.duration || "");
-  const [durationUnit, setDurationUnit] = useState(alarm.durationUnit || "minutes");
+  const initialInstructionState = () => method[methodIndex].instruction;
+  const initialDurationState = () => alarm.duration || "";
+  const initialDurationUnitState = () => alarm.durationUnit || "minutes";
+
+  const [instruction, setInstruction] = useState(initialInstructionState());
+  const [duration, setDuration] = useState(initialDurationState());
+  const [durationUnit, setDurationUnit] = useState(initialDurationUnitState());
 
   const elementId = () => depth.replace(/\./g, "_");
 
@@ -208,12 +217,17 @@ function EditMethodItemForm({ method, setMethod, methodIndex, depth }) {
   const onDelete = () => {
     method.splice(methodIndex, 1);
     setMethod((currentMethod) => [...currentMethod]);
+    if (method[methodIndex]) {
+      setInstruction(initialInstructionState());
+      setDuration(initialDurationState());
+      setDurationUnit(initialDurationUnitState());
+    }
   };
 
   return (
     <Fragment>
       <div className={`row ${styles.NoMarginBottom}`}>
-        <div className="input-field col s12 m12 l11">
+        <div className="input-field col s10">
           <Textarea
             required
             id={`instruction-${elementId(depth)}`}
@@ -222,14 +236,14 @@ function EditMethodItemForm({ method, setMethod, methodIndex, depth }) {
           />
           <label htmlFor={`instruction-${elementId(depth)}`}>Step {depth}</label>
         </div>
-        <div className="input-field col s12 m12 l1 right" style={{ textAlign: "right" }}>
+        <div className="input-field col s2">
           <Button danger floating onClick={onDelete}>
             <Icon name="delete" />
           </Button>
         </div>
       </div>
       <div className={`row ${styles.NoMarginBottom}`}>
-        <div className="input-field col s12 m12 l6">
+        <div className="input-field col s12 m12 l3">
           <Input
             id={`duration-${elementId(depth)}`}
             type="number"
@@ -240,7 +254,7 @@ function EditMethodItemForm({ method, setMethod, methodIndex, depth }) {
           />
           <label htmlFor={`duration-${elementId(depth)}`}>Duration (optional)</label>
         </div>
-        <div className="input-field col s12 m12 l6">
+        <div className="input-field col s12 m12 l3">
           <Select
             id={`duration-unit-${elementId(depth)}`}
             disabled={!duration}
