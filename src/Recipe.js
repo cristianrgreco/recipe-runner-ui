@@ -230,9 +230,7 @@ function RecipeMethodItem({ methodItem, depth }) {
 
   return (methodItem || []).map((aMethodItem, methodItemIndex) => (
     <Fragment key={aMethodItem.instruction}>
-      <ListItem>
-        {incrementDepth(depth, methodItemIndex)}) {aMethodItem.instruction}
-      </ListItem>
+      <ListItem>{aMethodItem.instruction}</ListItem>
       <RecipeMethodItem methodItem={aMethodItem.next} depth={incrementDepth(depth, methodItemIndex) + ".1"} />
     </Fragment>
   ));
