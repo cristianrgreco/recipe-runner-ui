@@ -97,6 +97,14 @@ function RecipeHeader({ recipe, loggedIn }) {
     history.push("/");
   };
 
+  const share = async () => {
+    await navigator.share({
+      text: recipe.description,
+      title: recipe.name,
+      url: window.location.href,
+    });
+  };
+
   return (
     <div className={styles.RecipeHeader}>
       <div className={styles.RecipeHeader_Image}>
@@ -106,6 +114,13 @@ function RecipeHeader({ recipe, loggedIn }) {
         <div className={styles.RecipeHeader_Info_NameContainer}>
           <div className={styles.RecipeHeader_Info_NameContainer_Name}>
             <Heading>{recipe.name}</Heading>
+            {navigator.share && (
+              <div className={`${styles.Recipe_Share}`}>
+                <Button floating secondary onClick={share}>
+                  <Icon name="share" />
+                </Button>
+              </div>
+            )}
           </div>
           {loggedIn && recipe.isEditable && (
             <div className={styles.RecipeHeader_Info_NameContainer_Controls}>

@@ -93,6 +93,9 @@
 }
 
 .RecipeHeader_Info_NameContainer_Name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex: 1;
 }
 
@@ -110,6 +113,11 @@
 
 .Recipe_Heading {
   margin-bottom: 20px;
+}
+
+.Recipe_Share {
+  flex-shrink: 0;
+  margin-left: 20px;
 }
 
 .RecipeHeader_Info_Description {
