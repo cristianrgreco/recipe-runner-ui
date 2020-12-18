@@ -241,7 +241,9 @@ function AlarmAndInProgress({ step, timer, pauseTimer }) {
         </div>
         <div>{step.instruction}</div>
       </div>
-      <Badge orange>{timeRemaining(moment(), timer.endTime)}</Badge>
+      <div className={styles.AlarmControlsBadgeContainer}>
+        <Badge orange>{timeRemaining(moment(), timer.endTime)}</Badge>
+      </div>
     </div>
   );
 }
@@ -257,7 +259,9 @@ function AlarmAndPaused({ step, timer, resumeTimer }) {
         </div>
         <div>{step.instruction}</div>
       </div>
-      <Badge orange>{timeRemaining(timer.pausedAt, timer.endTime)}</Badge>
+      <div className={styles.AlarmControlsBadgeContainer}>
+        <Badge orange>{timeRemaining(timer.pausedAt, timer.endTime)}</Badge>
+      </div>
     </div>
   );
 }
