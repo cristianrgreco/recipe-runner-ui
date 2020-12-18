@@ -260,37 +260,42 @@ function AlarmAndPaused({ step, timer, resumeTimer }) {
 }
 
 function AlarmAndReady({ step, setTimers, timers }) {
+  const calculateEndTime = (step) => moment().add(step.alarm.duration, step.alarm.durationUnit || "ms");
+
   const addTimer = (timers, step) => [
     ...timers,
     {
       name: step.instruction,
-      endTime: moment().add(step.alarm.duration, step.alarm.durationUnit || "ms"),
+      endTime: calculateEndTime(step),
     },
   ];
 
   const onClick = async () => {
-    // await registerPushNotification();
+    await registerPushNotification();
     setTimers(addTimer(timers, step));
   };
 
-  // async function registerPushNotification() {
-  //   const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
-  //
-  //   if (await Notification.requestPermission() === "granted") {
-  //     const endTime = moment().add(step.alarm.duration, "ms").unix();
-  //
-  //     await serviceWorkerRegistration.showNotification("La Cocina Leon", {
-  //       tag: `${Date.now()}`,
-  //       body: `DONE: ${step.instruction}`,
-  //       showTrigger: new TimestampTrigger(endTime), // todo TimestampTrigger not supported
-  //       data: {
-  //         url: window.location.href
-  //       },
-  //       badge: "/logo.png",
-  //       icon: "/logo.png"
-  //     });
-  //   }
-  // }
+  async function registerPushNotification() {
+    if ("showTrigger" in Notification.prototype) {
+      const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
+
+      if ((await Notification.requestPermission()) === "granted") {
+        const endTime = calculateEndTime(step);
+
+        await serviceWorkerRegistration.showNotification("La Cocina Leon", {
+          tag: step.instruction,
+          body: `DONE: ${step.instruction}`,
+          // eslint-disable-next-line
+          showTrigger: new TimestampTrigger(endTime.unix()),
+          // data: {
+          //   url: window.location.href
+          // },
+          badge: "/logo.png",
+          icon: "/logo.png",
+        });
+      }
+    }
+  }
 
   return (
     <Fragment>
