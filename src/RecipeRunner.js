@@ -281,12 +281,13 @@ function AlarmAndReady({ step, setTimers, timers }) {
 
       if ((await Notification.requestPermission()) === "granted") {
         const endTime = calculateEndTime(step);
+        const triggerDate = Date.now() + endTime.diff(moment(), "ms");
 
         await serviceWorkerRegistration.showNotification("La Cocina Leon", {
           tag: step.instruction,
-          body: `DONE: ${step.instruction}`,
+          body: `⏰ ${step.instruction}`,
           // eslint-disable-next-line
-          showTrigger: new TimestampTrigger(Date.now() + 5 * 1000),
+          showTrigger: new TimestampTrigger(triggerDate),
           // data: {
           //   url: window.location.href
           // },
