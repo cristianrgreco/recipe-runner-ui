@@ -75,8 +75,8 @@ export default function RecipeRunner({ recipe }) {
     });
   };
 
-  const noAlarmAndCompleteSteps = [];
-  const alarmAndCompleteSteps = [];
+  const stepsCompleted = [];
+  const stepsToDo = [];
 
   return (
     <Fragment>
@@ -85,15 +85,40 @@ export default function RecipeRunner({ recipe }) {
         <List>
           {steps.map((step) => {
             if (step.alarm === undefined && isStepCompleted(step)) {
-              noAlarmAndCompleteSteps.push(step);
-              return;
+              stepsCompleted.unshift({ alarm: false, step });
             } else if (step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step)) {
-              alarmAndCompleteSteps.push(step);
-              return;
+              stepsCompleted.unshift({ alarm: true, step });
+            } else {
+              stepsToDo.push(step);
             }
-
-            return (
-              <ListItem key={step.instruction}>
+          })}
+          {stepsCompleted.map(({ alarm, step }) => {
+            if (alarm) {
+              return (
+                <ListItem key={step.instruction}>
+                  <div className="section">
+                    <AlarmAndComplete
+                      step={step}
+                      setSteps={setSteps}
+                      setCompletedSteps={setCompletedSteps}
+                      nextSteps={nextSteps}
+                    />
+                  </div>
+                </ListItem>
+              );
+            } else {
+              return (
+                <ListItem key={step.instruction}>
+                  <div className="section">
+                    <NoAlarmAndComplete step={step} />
+                  </div>
+                </ListItem>
+              );
+            }
+          })}
+          {stepsToDo.map((step) => (
+            <Fragment key={step.instruction}>
+              <ListItem>
                 <div className="section">
                   {step.alarm === undefined && !isStepCompleted(step) && (
                     <NoAlarmAndInProgress
@@ -120,29 +145,26 @@ export default function RecipeRunner({ recipe }) {
                     )}
                 </div>
               </ListItem>
-            );
-          })}
-          {noAlarmAndCompleteSteps.map((step) => (
-            <ListItem key={step.instruction}>
-              <div className="section">
-                <NoAlarmAndComplete step={step} />
-              </div>
-            </ListItem>
-          ))}
-          {alarmAndCompleteSteps.map((step) => (
-            <ListItem key={step.instruction}>
-              <div className="section">
-                <AlarmAndComplete
-                  step={step}
-                  setSteps={setSteps}
-                  setCompletedSteps={setCompletedSteps}
-                  nextSteps={nextSteps}
-                />
-              </div>
-            </ListItem>
+              {step.next.map((nextStep) => (
+                <ListItem key={nextStep.instruction}>
+                  <div className="section">
+                    <NextStep step={nextStep} />
+                  </div>
+                </ListItem>
+              ))}
+            </Fragment>
           ))}
         </List>
       )}
+    </Fragment>
+  );
+}
+
+function NextStep({ step }) {
+  return (
+    <Fragment>
+      <Badge>NEXT</Badge>
+      <div className={styles.Next}>{step.instruction}</div>
     </Fragment>
   );
 }

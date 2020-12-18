@@ -1,8 +1,12 @@
 @value colors: "./colors.css";
 @value primary, secondary, secondaryBackground, light, dark from colors;
 
+.Next,
 .Complete {
   color: #9e9e9e !important;
+}
+
+.Complete {
   text-decoration: line-through;
 }
 
