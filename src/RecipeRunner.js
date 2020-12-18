@@ -49,7 +49,7 @@ export default function RecipeRunner({ recipe }) {
     return !timer.paused && moment().isSameOrAfter(timer.endTime);
   };
 
-  const pauseTimer = (timer) => {
+  const pauseTimer = (step) => async (timer) => {
     setTimers((timers) => {
       const timersWithoutTimer = timers.filter((aTimer) => aTimer !== timer);
       timersWithoutTimer.push({
@@ -59,20 +59,23 @@ export default function RecipeRunner({ recipe }) {
       });
       return timersWithoutTimer;
     });
+    await cancelPushNotification(step);
   };
 
-  const resumeTimer = (timer) => {
+  const resumeTimer = (step) => async (timer) => {
+    const timeElapsedMs = moment().diff(timer.pausedAt, "ms");
+    const newTimer = {
+      ...timer,
+      paused: false,
+      pausedAt: undefined,
+      endTime: timer.endTime.add(timeElapsedMs, "ms"),
+    };
     setTimers((timers) => {
       const timersWithoutTimer = timers.filter((aTimer) => aTimer !== timer);
-      const timeElapsedMs = moment().diff(timer.pausedAt, "ms");
-      timersWithoutTimer.push({
-        ...timer,
-        paused: false,
-        pausedAt: undefined,
-        endTime: timer.endTime.add(timeElapsedMs, "ms"),
-      });
+      timersWithoutTimer.push(newTimer);
       return timersWithoutTimer;
     });
+    await registerPushNotification(step, newTimer.endTime);
   };
 
   const stepsCompleted = [];
@@ -135,13 +138,13 @@ export default function RecipeRunner({ recipe }) {
                     isTimerSetForStep(step) &&
                     !isTimerPausedForStep(step) &&
                     !isTimerCompleteForStep(step) && (
-                      <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer} />
+                      <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer(step)} />
                     )}
                   {step.alarm !== undefined &&
                     isTimerSetForStep(step) &&
                     isTimerPausedForStep(step) &&
                     !isTimerCompleteForStep(step) && (
-                      <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer} />
+                      <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer(step)} />
                     )}
                 </div>
               </ListItem>
@@ -261,6 +264,7 @@ function AlarmAndPaused({ step, timer, resumeTimer }) {
 
 function AlarmAndReady({ step, setTimers, timers }) {
   const calculateEndTime = (step) => moment().add(step.alarm.duration, step.alarm.durationUnit || "ms");
+  const endTime = calculateEndTime(step);
 
   const addTimer = (timers, step) => [
     ...timers,
@@ -271,32 +275,9 @@ function AlarmAndReady({ step, setTimers, timers }) {
   ];
 
   const onClick = async () => {
-    await registerPushNotification();
+    await registerPushNotification(step, endTime);
     setTimers(addTimer(timers, step));
   };
-
-  async function registerPushNotification() {
-    if ("showTrigger" in Notification.prototype) {
-      const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
-
-      if ((await Notification.requestPermission()) === "granted") {
-        const endTime = calculateEndTime(step);
-        const triggerDate = Date.now() + endTime.diff(moment(), "ms");
-
-        await serviceWorkerRegistration.showNotification("La Cocina Leon", {
-          tag: step.instruction,
-          body: `⏰ ${step.instruction}`,
-          // eslint-disable-next-line
-          showTrigger: new TimestampTrigger(triggerDate),
-          // data: {
-          //   url: window.location.href
-          // },
-          badge: "/logo.png",
-          icon: "/logo.png",
-        });
-      }
-    }
-  }
 
   return (
     <Fragment>
@@ -308,4 +289,29 @@ function AlarmAndReady({ step, setTimers, timers }) {
       </Button>
     </Fragment>
   );
+}
+
+async function registerPushNotification(step, endTime) {
+  if ("showTrigger" in Notification.prototype) {
+    const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
+
+    if ((await Notification.requestPermission()) === "granted") {
+      const triggerDate = Date.now() + endTime.diff(moment(), "ms");
+
+      await serviceWorkerRegistration.showNotification("La Cocina Leon", {
+        tag: step.instruction,
+        body: `⏰ ${step.instruction}`,
+        // eslint-disable-next-line
+        showTrigger: new TimestampTrigger(triggerDate),
+        badge: "/logo.png",
+        icon: "/logo.png",
+      });
+    }
+  }
+}
+
+async function cancelPushNotification(step) {
+  const registration = await navigator.serviceWorker.getRegistration();
+  const notifications = await registration.getNotifications({ tag: step.instruction, includeTriggered: true });
+  notifications.forEach((notification) => notification.close());
 }
