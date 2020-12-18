@@ -286,7 +286,7 @@ function AlarmAndReady({ step, setTimers, timers }) {
           tag: step.instruction,
           body: `DONE: ${step.instruction}`,
           // eslint-disable-next-line
-          showTrigger: new TimestampTrigger(endTime.unix()),
+          showTrigger: new TimestampTrigger(Date.now() + 5 * 1000),
           // data: {
           //   url: window.location.href
           // },
