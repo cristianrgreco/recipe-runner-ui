@@ -81,72 +81,80 @@ export default function RecipeRunner({ recipe }) {
   const stepsCompleted = [];
   const stepsToDo = [];
 
+  steps.map((step) => {
+    if (step.alarm === undefined && isStepCompleted(step)) {
+      stepsCompleted.push({
+        step,
+        component: <NoAlarmAndComplete step={step} />,
+      });
+    } else if (step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step)) {
+      stepsCompleted.push({
+        step,
+        component: (
+          <AlarmAndComplete
+            step={step}
+            setSteps={setSteps}
+            setCompletedSteps={setCompletedSteps}
+            nextSteps={nextSteps}
+          />
+        ),
+      });
+    } else {
+      if (step.alarm === undefined && !isStepCompleted(step)) {
+        stepsToDo.push({
+          step,
+          component: (
+            <NoAlarmAndInProgress
+              step={step}
+              setSteps={setSteps}
+              setCompletedSteps={setCompletedSteps}
+              nextSteps={nextSteps}
+            />
+          ),
+        });
+      } else if (step.alarm !== undefined && !isTimerSetForStep(step)) {
+        stepsToDo.push({
+          step,
+          component: <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />,
+        });
+      } else if (
+        step.alarm !== undefined &&
+        isTimerSetForStep(step) &&
+        !isTimerPausedForStep(step) &&
+        !isTimerCompleteForStep(step)
+      ) {
+        stepsToDo.push({
+          step,
+          component: <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer(step)} />,
+        });
+      } else if (
+        step.alarm !== undefined &&
+        isTimerSetForStep(step) &&
+        isTimerPausedForStep(step) &&
+        !isTimerCompleteForStep(step)
+      ) {
+        stepsToDo.push({
+          step,
+          component: <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer(step)} />,
+        });
+      }
+    }
+  });
+
   return (
     <Fragment>
       <audio id="audio" src="/audio/beep.mp3" autoPlay={false} />
       {steps.length > 0 && (
         <List>
-          {steps.map((step) => {
-            if (step.alarm === undefined && isStepCompleted(step)) {
-              stepsCompleted.unshift({ alarm: false, step });
-            } else if (step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step)) {
-              stepsCompleted.unshift({ alarm: true, step });
-            } else {
-              stepsToDo.push(step);
-            }
-          })}
-          {stepsCompleted.map(({ alarm, step }) => {
-            if (alarm) {
-              return (
-                <ListItem key={step.instruction}>
-                  <div className="section">
-                    <AlarmAndComplete
-                      step={step}
-                      setSteps={setSteps}
-                      setCompletedSteps={setCompletedSteps}
-                      nextSteps={nextSteps}
-                    />
-                  </div>
-                </ListItem>
-              );
-            } else {
-              return (
-                <ListItem key={step.instruction}>
-                  <div className="section">
-                    <NoAlarmAndComplete step={step} />
-                  </div>
-                </ListItem>
-              );
-            }
-          })}
-          {stepsToDo.map((step) => (
+          {stepsCompleted.map(({ step, component }) => (
+            <ListItem key={step.instruction}>
+              <div className="section">{component}</div>
+            </ListItem>
+          ))}
+          {stepsToDo.map(({ step, component }) => (
             <Fragment key={step.instruction}>
               <ListItem>
-                <div className="section">
-                  {step.alarm === undefined && !isStepCompleted(step) && (
-                    <NoAlarmAndInProgress
-                      step={step}
-                      setSteps={setSteps}
-                      setCompletedSteps={setCompletedSteps}
-                      nextSteps={nextSteps}
-                    />
-                  )}
-                  {step.alarm !== undefined && !isTimerSetForStep(step) && (
-                    <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />
-                  )}
-                  {step.alarm !== undefined &&
-                    isTimerSetForStep(step) &&
-                    !isTimerPausedForStep(step) &&
-                    !isTimerCompleteForStep(step) && (
-                      <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer(step)} />
-                    )}
-                  {step.alarm !== undefined &&
-                    isTimerSetForStep(step) &&
-                    isTimerPausedForStep(step) &&
-                    !isTimerCompleteForStep(step) && (
-                      <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer(step)} />
-                    )}
-                </div>
+                <div className="section">{component}</div>
               </ListItem>
               {step.next.map((nextStep) => (
                 <ListItem key={nextStep.instruction}>
