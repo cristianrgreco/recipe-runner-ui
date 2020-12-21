@@ -12,6 +12,7 @@ import Heading from "./components/Heading";
 import SubHeading from "./components/SubHeading";
 import { List, ListItem } from "./components/List";
 import PLACEHOLDER_RECIPE from "./recipePlaceholder";
+import ShareButton from "./components/ShareButton";
 
 export default function Recipe({ loggedIn, recipe: recipeFromProps }) {
   const [recipe, setRecipe] = useState(undefined);
@@ -97,14 +98,6 @@ function RecipeHeader({ recipe, loggedIn }) {
     history.push("/");
   };
 
-  const share = async () => {
-    await navigator.share({
-      text: recipe.description,
-      title: recipe.name,
-      url: window.location.href,
-    });
-  };
-
   return (
     <div className={styles.RecipeHeader}>
       <div className={styles.RecipeHeader_Image}>
@@ -114,34 +107,30 @@ function RecipeHeader({ recipe, loggedIn }) {
         <div className={styles.RecipeHeader_Info_NameContainer}>
           <div className={styles.RecipeHeader_Info_NameContainer_Name}>
             <Heading>{recipe.name}</Heading>
-            {navigator.share && (
-              <div className={`${styles.Recipe_Share}`}>
-                <Button floating secondary onClick={share}>
-                  <Icon name="share" />
-                </Button>
-              </div>
-            )}
-          </div>
-          {loggedIn && recipe.isEditable && (
             <div className={styles.RecipeHeader_Info_NameContainer_Controls}>
-              <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                <Link to={{ pathname: `/recipe-editor`, state: { recipe } }}>
-                  <Button floating>
-                    <Icon name="edit" />
-                  </Button>
-                </Link>
-              </div>
-              <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                {isDeleting ? (
-                  <Button floating danger loading />
-                ) : (
-                  <Button floating danger confirm={<Icon name="check" />} onClick={onClickDelete}>
-                    <Icon name="delete" />
-                  </Button>
-                )}
-              </div>
+              <ShareButton recipe={recipe} />
+              {loggedIn && recipe.isEditable && (
+                <Fragment>
+                  <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
+                    <Link to={{ pathname: `/recipe-editor`, state: { recipe } }}>
+                      <Button floating>
+                        <Icon name="edit" />
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
+                    {isDeleting ? (
+                      <Button floating danger loading />
+                    ) : (
+                      <Button floating danger confirm={<Icon name="check" />} onClick={onClickDelete}>
+                        <Icon name="delete" />
+                      </Button>
+                    )}
+                  </div>
+                </Fragment>
+              )}
             </div>
-          )}
+          </div>
         </div>
         <div className={`${styles.Recipe_Heading}`}>
           <SubHeading>About this recipe</SubHeading>

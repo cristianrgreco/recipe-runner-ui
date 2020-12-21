@@ -100,24 +100,18 @@
 }
 
 .RecipeHeader_Info_NameContainer_Controls {
-  margin-left: 10px;
   display: flex;
   flex-direction: row;
-  height: 28px;
-  align-items: center;
+  flex-shrink: 0;
+  margin-left: 20px;
 }
 
 .RecipeDetailsNameContainer_Controls_Item {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .Recipe_Heading {
   margin-bottom: 20px;
-}
-
-.Recipe_Share {
-  flex-shrink: 0;
-  margin-left: 20px;
 }
 
 .RecipeHeader_Info_Description {
