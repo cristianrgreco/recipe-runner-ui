@@ -1,18 +1,19 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import styles from "./Recipe.module.css";
 import { formatTime } from "./time";
 import RecipeRunner from "./RecipeRunner";
 import { Button } from "./components/Button";
-import { deleteRecipe, fetchRecipe } from "./api";
-import { Icon } from "./components/Icon";
+import { fetchRecipe } from "./api";
 import Input from "./components/Input";
 import Heading from "./components/Heading";
 import SubHeading from "./components/SubHeading";
 import { List, ListItem } from "./components/List";
 import PLACEHOLDER_RECIPE from "./recipePlaceholder";
 import ShareButton from "./components/ShareButton";
+import EditRecipeButton from "./EditRecipeButton";
+import DeleteRecipeButton from "./DeleteRecipeButton";
 
 export default function Recipe({ loggedIn, recipe: recipeFromProps }) {
   const [recipe, setRecipe] = useState(undefined);
@@ -90,11 +91,8 @@ export default function Recipe({ loggedIn, recipe: recipeFromProps }) {
 
 function RecipeHeader({ recipe, loggedIn }) {
   const history = useHistory();
-  const [isDeleting, setIsDeleting] = useState(false);
 
-  const onClickDelete = async () => {
-    setIsDeleting(true);
-    await deleteRecipe(recipe.id);
+  const onDelete = async () => {
     history.push("/");
   };
 
@@ -112,20 +110,10 @@ function RecipeHeader({ recipe, loggedIn }) {
               {loggedIn && recipe.isEditable && (
                 <Fragment>
                   <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                    <Link to={{ pathname: `/recipe-editor`, state: { recipe } }}>
-                      <Button floating>
-                        <Icon name="edit" />
-                      </Button>
-                    </Link>
+                    <EditRecipeButton recipe={recipe} />
                   </div>
                   <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                    {isDeleting ? (
-                      <Button floating danger loading />
-                    ) : (
-                      <Button floating danger confirm={<Icon name="check" />} onClick={onClickDelete}>
-                        <Icon name="delete" />
-                      </Button>
-                    )}
+                    <DeleteRecipeButton recipe={recipe} onDelete={onDelete} />
                   </div>
                 </Fragment>
               )}

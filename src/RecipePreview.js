@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./RecipePreview.module.css";
 import { formatTime } from "./time";
 import { Link } from "react-router-dom";
 import { Icon } from "./components/Icon";
-import { Button } from "./components/Button";
-import { deleteRecipe } from "./api";
 import Heading from "./components/Heading";
+import EditRecipeButton from "./EditRecipeButton";
+import DeleteRecipeButton from "./DeleteRecipeButton";
 
 export default function RecipePreview({ recipe, loggedIn, onDelete }) {
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const onClickDelete = async () => {
-    setIsDeleting(true);
-    await deleteRecipe(recipe.id);
-    onDelete();
-  };
-
   return (
     <div className={styles.Recipe}>
       <div className={styles.RecipeImage}>
@@ -30,20 +22,10 @@ export default function RecipePreview({ recipe, loggedIn, onDelete }) {
             {loggedIn && recipe.isEditable && (
               <div className={styles.RecipeDetailsNameContainer_Controls}>
                 <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                  <Link to={{ pathname: `/recipe-editor`, state: { recipe } }}>
-                    <Button floating>
-                      <Icon name="edit" />
-                    </Button>
-                  </Link>
+                  <EditRecipeButton recipe={recipe} />
                 </div>
                 <div className={styles.RecipeDetailsNameContainer_Controls_Item}>
-                  {isDeleting ? (
-                    <Button floating danger loading />
-                  ) : (
-                    <Button floating danger confirm={<Icon name="check" />} onClick={onClickDelete}>
-                      <Icon name="delete" />
-                    </Button>
-                  )}
+                  <DeleteRecipeButton recipe={recipe} onDelete={onDelete} />
                 </div>
               </div>
             )}
