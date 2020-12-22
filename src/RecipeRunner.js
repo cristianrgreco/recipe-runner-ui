@@ -184,7 +184,9 @@ function NoAlarmAndComplete({ step }) {
   return (
     <Fragment>
       <Badge green>DONE</Badge>
-      <div className={styles.Complete}>{step.instruction}</div>
+      <div data-qa="no-alarm-and-complete" className={styles.Complete}>
+        {step.instruction}
+      </div>
     </Fragment>
   );
 }
@@ -197,7 +199,7 @@ function NoAlarmAndInProgress({ step, setSteps, setCompletedSteps, nextSteps }) 
 
   return (
     <Fragment>
-      <div>{step.instruction}</div>
+      <div data-qa="no-alarm-and-in-progress">{step.instruction}</div>
       <p className="caption" />
       <Button onClick={onClick}>
         <Icon name="check" position="left" />
@@ -233,7 +235,9 @@ function AlarmAndComplete({ step, setSteps, setCompletedSteps, nextSteps }) {
   return (
     <Fragment>
       <Badge green>DONE</Badge>
-      <div className={styles.Complete}>{step.instruction}</div>
+      <div data-qa="alarm-and-complete" className={styles.Complete}>
+        {step.instruction}
+      </div>
     </Fragment>
   );
 }
@@ -247,7 +251,7 @@ function AlarmAndInProgress({ step, timer, pauseTimer }) {
             <Icon name="pause" />
           </Button>
         </div>
-        <div>{step.instruction}</div>
+        <div data-qa="alarm-and-in-progress">{step.instruction}</div>
       </div>
       <div className={styles.AlarmControlsBadgeContainer}>
         <Badge orange>{timeRemaining(moment(), timer.endTime)}</Badge>
@@ -265,7 +269,7 @@ function AlarmAndPaused({ step, timer, resumeTimer }) {
             <Icon name="play_arrow" />
           </Button>
         </div>
-        <div>{step.instruction}</div>
+        <div data-qa="alarm-and-paused">{step.instruction}</div>
       </div>
       <div className={styles.AlarmControlsBadgeContainer}>
         <Badge orange>{timeRemaining(timer.pausedAt, timer.endTime)}</Badge>
@@ -293,7 +297,7 @@ function AlarmAndReady({ step, setTimers, timers }) {
 
   return (
     <Fragment>
-      <div>{step.instruction}</div>
+      <div data-qa="alarm-and-ready">{step.instruction}</div>
       <p className="caption" />
       <Button onClick={onClick}>
         <Icon name="timer" position="left" />
@@ -304,7 +308,7 @@ function AlarmAndReady({ step, setTimers, timers }) {
 }
 
 async function registerPushNotification(step, endTime) {
-  if ("showTrigger" in Notification.prototype) {
+  if (typeof Notification !== "undefined" && "showTrigger" in Notification.prototype) {
     const serviceWorkerRegistration = await navigator.serviceWorker.getRegistration();
 
     if ((await Notification.requestPermission()) === "granted") {
@@ -323,7 +327,9 @@ async function registerPushNotification(step, endTime) {
 }
 
 async function cancelPushNotification(step) {
-  const registration = await navigator.serviceWorker.getRegistration();
-  const notifications = await registration.getNotifications({ tag: step.instruction, includeTriggered: true });
-  notifications.forEach((notification) => notification.close());
+  if (navigator.serviceWorker) {
+    const registration = await navigator.serviceWorker.getRegistration();
+    const notifications = await registration.getNotifications({ tag: step.instruction, includeTriggered: true });
+    notifications.forEach((notification) => notification.close());
+  }
 }
