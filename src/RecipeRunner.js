@@ -82,25 +82,46 @@ export default function RecipeRunner({ recipe }) {
   const stepsToDo = [];
 
   steps.map((step) => {
-    if (step.alarm === undefined && isStepCompleted(step)) {
-      stepsCompleted.push({
-        step,
-        component: <NoAlarmAndComplete step={step} />,
-      });
-    } else if (step.alarm !== undefined && isTimerSetForStep(step) && isTimerCompleteForStep(step)) {
-      stepsCompleted.push({
-        step,
-        component: (
-          <AlarmAndComplete
-            step={step}
-            setSteps={setSteps}
-            setCompletedSteps={setCompletedSteps}
-            nextSteps={nextSteps}
-          />
-        ),
-      });
+    if (isStepCompleted(step) || (isTimerSetForStep(step) && isTimerCompleteForStep(step))) {
+      if (step.alarm) {
+        stepsCompleted.push({
+          step,
+          component: (
+            <AlarmAndComplete
+              step={step}
+              setSteps={setSteps}
+              setCompletedSteps={setCompletedSteps}
+              nextSteps={nextSteps}
+            />
+          ),
+        });
+      } else {
+        stepsCompleted.push({
+          step,
+          component: <NoAlarmAndComplete step={step} />,
+        });
+      }
     } else {
-      if (step.alarm === undefined && !isStepCompleted(step)) {
+      if (step.alarm) {
+        if (!isTimerSetForStep(step)) {
+          stepsToDo.push({
+            step,
+            component: <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />,
+          });
+        } else {
+          if (isTimerPausedForStep(step)) {
+            stepsToDo.push({
+              step,
+              component: <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer(step)} />,
+            });
+          } else {
+            stepsToDo.push({
+              step,
+              component: <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer(step)} />,
+            });
+          }
+        }
+      } else {
         stepsToDo.push({
           step,
           component: (
@@ -111,31 +132,6 @@ export default function RecipeRunner({ recipe }) {
               nextSteps={nextSteps}
             />
           ),
-        });
-      } else if (step.alarm !== undefined && !isTimerSetForStep(step)) {
-        stepsToDo.push({
-          step,
-          component: <AlarmAndReady step={step} timers={timers} setTimers={setTimers} />,
-        });
-      } else if (
-        step.alarm !== undefined &&
-        isTimerSetForStep(step) &&
-        !isTimerPausedForStep(step) &&
-        !isTimerCompleteForStep(step)
-      ) {
-        stepsToDo.push({
-          step,
-          component: <AlarmAndInProgress step={step} timer={getTimerForStep(step)} pauseTimer={pauseTimer(step)} />,
-        });
-      } else if (
-        step.alarm !== undefined &&
-        isTimerSetForStep(step) &&
-        isTimerPausedForStep(step) &&
-        !isTimerCompleteForStep(step)
-      ) {
-        stepsToDo.push({
-          step,
-          component: <AlarmAndPaused step={step} timer={getTimerForStep(step)} resumeTimer={resumeTimer(step)} />,
         });
       }
     }
