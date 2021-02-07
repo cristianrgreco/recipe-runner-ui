@@ -22,9 +22,6 @@ export default ({ meal, setMeal }) => {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.Heading_Spacing}>
-        <Heading>Meal</Heading>
-      </div>
       {meal.length === 0 ? (
         <EmptyMeal />
       ) : (
@@ -66,6 +63,9 @@ function Meal({ meal, setMeal, viewMode, setViewMode }) {
 function EmptyMeal() {
   return (
     <Fragment>
+      <div className={styles.Heading_Spacing}>
+        <Heading>Meal</Heading>
+      </div>
       <p>Create a meal to plan and execute multiple recipes at once.</p>
       <p>Simply click the {<AddToMealButtonExample />} button when you find a recipe you like.</p>
       <div className={styles.GetStarted}>
@@ -120,7 +120,7 @@ function MealItem({ mealItem, onDelete }) {
   return (
     <div key={mealItem.id}>
       <div className={styles.MealItem_SubHeading}>
-        <SubHeading>{mealItem.name}</SubHeading>
+        <Heading>{mealItem.name}</Heading>
         <DeleteMealItemButton onDelete={onDelete} />
       </div>
 
@@ -146,8 +146,10 @@ function MealItem({ mealItem, onDelete }) {
 
 function DeleteMealItemButton({ onDelete }) {
   return (
-    <Button floating danger confirm={<Icon name="check" />} onClick={onDelete}>
-      <Icon name="delete" />
-    </Button>
+    <div className={styles.DeleteMealItemButton}>
+      <Button floating danger confirm={<Icon name="check" />} onClick={onDelete}>
+        <Icon name="delete" />
+      </Button>
+    </div>
   );
 }

@@ -42,6 +42,10 @@
   margin-left: 0;
 }
 
+.DeleteMealItemButton {
+  margin-left: 5px;
+}
+
 .Recipe_Heading {
   margin-bottom: 20px;
 }
