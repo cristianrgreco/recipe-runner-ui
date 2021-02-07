@@ -1,0 +1,14 @@
+@value colors: "../colors.css";
+
+@value error, light from colors;
+
+.NotificationBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: light;
+  background-color: error;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}

@@ -1,0 +1,20 @@
+@value colors: "../colors.css";
+@value primary, primaryHover, primaryActive, primaryLighter, secondaryHover, secondaryActive, secondary, light, error, errorHover, errorActive from colors;
+
+.ToggleButton button {
+  box-shadow: none !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 1px solid primaryActive;
+}
+
+.ToggleButton button:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-left: none;
+}
+
+.ToggleButton_Selected button {
+  pointer-events: none;
+  background-color: primaryActive !important;
+}

@@ -20,6 +20,14 @@
 
 .Nav_Wrapper_SidenavTrigger {
   color: light;
+  display: flex;
+}
+
+.Nav_Wrapper_SidenavTrigger_NotificationBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(50%) translateY(-18.75%);
 }
 
 .Nav_Wrapper_Sidenav_LogoContainer {

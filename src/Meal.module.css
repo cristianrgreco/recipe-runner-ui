@@ -1,0 +1,162 @@
+@value colors: "./colors.css";
+@value primary, secondary, secondary_r, secondary_g, secondary_b, secondaryBackground, dark, placeholder from colors;
+
+.Container {
+  margin: 40px 0;
+}
+
+.NoPointerEvents {
+  pointer-events: none;
+}
+
+.Heading_Spacing {
+  margin-bottom: 40px;
+}
+
+.GetStarted {
+  margin-top: 40px;
+}
+
+.ViewToggle {
+  margin-bottom: 40px;
+}
+
+.MealItem_Spacing {
+  margin-bottom: 40px;
+}
+
+.MealItem_SubHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.ActionButtons button,
+.ActionButtons a {
+  margin-left: 15px;
+}
+
+.ActionButtons button:first-child,
+.ActionButtons a:first-child {
+  margin-left: 0;
+}
+
+.Recipe_Heading {
+  margin-bottom: 20px;
+}
+
+.RecipeBody {
+  display: flex;
+}
+
+.RecipeBody_Requirements {
+  flex: 2;
+  padding: 20px;
+  background-color: secondaryBackground;
+}
+
+.RecipeBody_Requirements ul {
+  list-style: square;
+}
+
+.RecipeBody_Requirements_Equipment {
+  margin-bottom: 40px;
+}
+
+.RecipeBody_Requirements_Equipment_Body {
+}
+
+.RecipeBody_Requirements_Ingredients {
+}
+
+.RecipeBody_Requirements_Ingredients_Body {
+}
+
+.RecipeBody {
+  display: flex;
+}
+
+.RecipeBody_Requirements {
+  flex: 2;
+  padding: 20px;
+  background-color: secondaryBackground;
+}
+
+.RecipeBody_Requirements ul {
+  list-style: square;
+}
+
+.RecipeBody_Requirements_Equipment {
+  margin-bottom: 40px;
+}
+
+.RecipeBody_Requirements_Equipment_Body {
+}
+
+.RecipeBody_Requirements_Ingredients {
+}
+
+.RecipeBody_Requirements_Ingredients_Body {
+}
+
+.RecipeBody_Method {
+  flex: 3;
+  padding-top: 20px;
+  margin-left: 20px;
+}
+
+.RecipeBody_Method_Body {
+}
+
+.RecipeRunner button {
+  margin-right: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .RecipeHeader {
+    flex-direction: column;
+  }
+
+  .RecipeHeader_Image img {
+  }
+
+  .RecipeHeader_Info {
+    padding: 0;
+    margin-bottom: 20px;
+    order: -1;
+  }
+
+  .RecipeHeader_Info_NameContainer {
+    margin-bottom: 40px;
+  }
+
+  .RecipeDetails {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 5px 0;
+  }
+
+  .RecipeBody {
+    flex-direction: column;
+  }
+
+  .RecipeBody_Requirements {
+    background-color: inherit;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .RecipeBody_Requirements_Ingredients {
+    margin-bottom: 20px;
+  }
+
+  .RecipeBody_Method {
+    padding: 0;
+    margin: 0;
+  }
+
+  .RecipeDetails_InfoItem_Value {
+    font-weight: 400;
+  }
+}

@@ -11,9 +11,11 @@ import { isLoggedIn } from "./auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ConditionalRoute from "./components/ConditionalRoute";
 import ForgotPassword from "./ForgotPassword";
+import Meal from "./Meal";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(undefined);
+  const [meal, setMeal] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -26,11 +28,12 @@ export default function App() {
     <Router>
       {loggedIn !== undefined && (
         <Fragment>
-          <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Nav loggedIn={loggedIn} setLoggedIn={setLoggedIn} meal={meal} />
           <main>
             <div className="container">
               <Switch>
                 <Route exact path="/" render={(props) => <Recipes loggedIn={loggedIn} {...props} />} />
+                <Route exact path="/meal" render={(props) => <Meal meal={meal} setMeal={setMeal} {...props} />} />
                 <ConditionalRoute
                   path="/account/login"
                   condition={loggedIn}
@@ -54,7 +57,10 @@ export default function App() {
                   loggedIn={loggedIn}
                   component={(props) => <RecipeEditor {...props} />}
                 />
-                <Route path="/recipes/:recipeId" render={(props) => <Recipe loggedIn={loggedIn} {...props} />} />
+                <Route
+                  path="/recipes/:recipeId"
+                  render={(props) => <Recipe loggedIn={loggedIn} meal={meal} setMeal={setMeal} {...props} />}
+                />
                 <Redirect to="/" />
               </Switch>
             </div>
