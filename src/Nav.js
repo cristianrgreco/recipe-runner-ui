@@ -79,7 +79,7 @@ function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout, 
       </li>
       <li>
         <Link to="/meal" className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/meal") && styles.Active}`}>
-          Meal ({meal.length})
+          Meal {meal.length > 0 ? `(${meal.length})` : ""}
         </Link>
       </li>
       {loggedIn ? (

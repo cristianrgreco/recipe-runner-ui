@@ -10,6 +10,6 @@ export default {
 
 addDecorator(routerDecorator);
 
-export const standard = () => <Recipe recipe={recipe} />;
+export const standard = () => <Recipe recipe={recipe} meal={[]} />;
 
-export const isEditable = () => <Recipe loggedIn={true} recipe={recipe({ isEditable: true })} />;
+export const isEditable = () => <Recipe loggedIn={true} recipe={recipe({ isEditable: true })} meal={[]} />;

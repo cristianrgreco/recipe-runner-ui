@@ -33,7 +33,7 @@ export default function App() {
             <div className="container">
               <Switch>
                 <Route exact path="/" render={(props) => <Recipes loggedIn={loggedIn} {...props} />} />
-                <Route exact path="/meal" render={(props) => <Meal meal={meal} {...props} />} />
+                <Route exact path="/meal" render={(props) => <Meal meal={meal} setMeal={setMeal} {...props} />} />
                 <ConditionalRoute
                   path="/account/login"
                   condition={loggedIn}

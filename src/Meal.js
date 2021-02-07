@@ -9,13 +9,14 @@ import ToggleButton from "./components/ToggleButton";
 import { Button } from "./components/Button";
 import { Link } from "react-router-dom";
 import AddToMealButton from "./AddToMealButton";
+import { Icon } from "./components/Icon";
 
 const VIEW_MODES = {
   SPLIT: "SPLIT",
   UNIFIED: "UNIFIED",
 };
 
-export default ({ meal }) => {
+export default ({ meal, setMeal }) => {
   const [viewMode, setViewMode] = useState("SPLIT");
   const [started, setStarted] = useState(false);
 
@@ -24,14 +25,16 @@ export default ({ meal }) => {
       <div className={styles.Heading_Spacing}>
         <Heading>Meal</Heading>
       </div>
-      {meal.length === 0 ? <EmptyMeal /> : <Meal meal={meal} viewMode={viewMode} setViewMode={setViewMode} />}
+      {meal.length === 0 ? (
+        <EmptyMeal />
+      ) : (
+        <Meal meal={meal} setMeal={setMeal} viewMode={viewMode} setViewMode={setViewMode} />
+      )}
     </div>
   );
 };
 
-function Meal({ meal, viewMode, setViewMode }) {
-  const combinedRecipe = combineRecipe(meal);
-
+function Meal({ meal, setMeal, viewMode, setViewMode }) {
   return (
     <Fragment>
       <div className={styles.ViewToggle}>
@@ -43,7 +46,19 @@ function Meal({ meal, viewMode, setViewMode }) {
           onOption2={() => setViewMode(VIEW_MODES.UNIFIED)}
         />
       </div>
-      {viewMode === VIEW_MODES.SPLIT ? <SplitView meal={meal} /> : <MealItem mealItem={combinedRecipe} />}
+
+      {viewMode === VIEW_MODES.SPLIT ? (
+        <SplitView meal={meal} setMeal={setMeal} />
+      ) : (
+        <UnifiedView meal={meal} setMeal={setMeal} />
+      )}
+
+      <div className={styles.ActionButtons}>
+        <Button>Run</Button>
+        <Link to="/">
+          <Button secondary>Add more</Button>
+        </Link>
+      </div>
     </Fragment>
   );
 }
@@ -52,15 +67,7 @@ function EmptyMeal() {
   return (
     <Fragment>
       <p>Create a meal to plan and execute multiple recipes at once.</p>
-      <p>
-        Click the{" "}
-        {
-          <span className={styles.NoPointerEvents}>
-            <AddToMealButton meal={[]} />
-          </span>
-        }{" "}
-        button when you find a recipe you like.
-      </p>
+      <p>Simply click the {<AddToMealButtonExample />} button when you find a recipe you like.</p>
       <div className={styles.GetStarted}>
         <Link to="/">
           <Button>Get Started</Button>
@@ -70,27 +77,51 @@ function EmptyMeal() {
   );
 }
 
+function AddToMealButtonExample() {
+  return (
+    <span className={styles.NoPointerEvents}>
+      <AddToMealButton meal={[]} />
+    </span>
+  );
+}
+
 function combineRecipe(meal) {
   return {
+    name: meal.map((mealItem) => mealItem.name).join(", "),
     equipment: meal.flatMap((mealItem) => mealItem.equipment),
     ingredients: meal.flatMap((mealItem) => mealItem.ingredients),
     method: meal.flatMap((mealItem) => mealItem.method),
   };
 }
 
-function SplitView({ meal }) {
+function SplitView({ meal, setMeal }) {
+  const onDelete = (mealItem) => setMeal((mealItems) => mealItems.filter((aMealItem) => aMealItem.id !== mealItem.id));
+
   return meal.map((mealItem) => (
     <div className={styles.MealItem_Spacing}>
-      <MealItem mealItem={mealItem} />
+      <MealItem mealItem={mealItem} onDelete={() => onDelete(mealItem)} />
     </div>
   ));
 }
 
-function MealItem({ mealItem }) {
+function UnifiedView({ meal, setMeal }) {
+  const combinedRecipe = combineRecipe(meal);
+
+  const onDelete = () => setMeal([]);
+
+  return (
+    <div className={styles.MealItem_Spacing}>
+      <MealItem mealItem={combinedRecipe} onDelete={onDelete} />
+    </div>
+  );
+}
+
+function MealItem({ mealItem, onDelete }) {
   return (
     <div key={mealItem.id}>
-      <div className={styles.MealItem_SubHeading_Spacing}>
+      <div className={styles.MealItem_SubHeading}>
         <SubHeading>{mealItem.name}</SubHeading>
+        <DeleteMealItemButton onDelete={onDelete} />
       </div>
 
       <div className={styles.RecipeBody}>
@@ -110,5 +141,13 @@ function MealItem({ mealItem }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function DeleteMealItemButton({ onDelete }) {
+  return (
+    <Button floating danger confirm={<Icon name="check" />} onClick={onDelete}>
+      <Icon name="delete" />
+    </Button>
   );
 }

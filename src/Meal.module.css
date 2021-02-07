@@ -25,8 +25,21 @@
   margin-bottom: 40px;
 }
 
-.MealItem_SubHeading_Spacing {
+.MealItem_SubHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.ActionButtons button,
+.ActionButtons a {
+  margin-left: 15px;
+}
+
+.ActionButtons button:first-child,
+.ActionButtons a:first-child {
+  margin-left: 0;
 }
 
 .Recipe_Heading {
