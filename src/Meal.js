@@ -146,10 +146,8 @@ function MealItem({ mealItem, onDelete }) {
 
 function DeleteMealItemButton({ onDelete }) {
   return (
-    <div className={styles.DeleteMealItemButton}>
-      <Button floating danger confirm={<Icon name="check" />} onClick={onDelete}>
-        <Icon name="delete" />
-      </Button>
-    </div>
+    <Button floating danger confirm={<Icon name="check" />} onClick={onDelete}>
+      <Icon name="delete" />
+    </Button>
   );
 }
