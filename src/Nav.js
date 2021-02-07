@@ -4,7 +4,7 @@ import styles from "./Nav.module.css";
 import { Icon } from "./components/Icon";
 import { logout } from "./auth";
 
-export default function Nav({ loggedIn, setLoggedIn }) {
+export default function Nav({ loggedIn, setLoggedIn, meal }) {
   const history = useHistory();
   const location = useLocation();
 
@@ -32,6 +32,7 @@ export default function Nav({ loggedIn, setLoggedIn }) {
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
                 logout={logout}
+                meal={meal}
               />
             </ul>
           </div>
@@ -45,13 +46,14 @@ export default function Nav({ loggedIn, setLoggedIn }) {
           loggedIn={loggedIn}
           setLoggedIn={setLoggedIn}
           logout={logout}
+          meal={meal}
         />
       </ul>
     </header>
   );
 }
 
-function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout }) {
+function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout, meal }) {
   const isActive = (pathname) => location.pathname === pathname;
   const isActiveIncludeSubRoutes = (pathname) => location.pathname.startsWith(pathname);
 
@@ -73,6 +75,11 @@ function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout }
       <li>
         <Link to="/" className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/") && styles.Active}`}>
           Home
+        </Link>
+      </li>
+      <li>
+        <Link to="/meal" className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/meal") && styles.Active}`}>
+          Meal ({meal.length})
         </Link>
       </li>
       {loggedIn ? (
