@@ -27,7 +27,7 @@ export default ({ meal, setMeal }) => {
   if (meal.length === 0) {
     view = <EmptyMeal />;
   } else if (started) {
-    view = <RecipeRunner recipe={combinedRecipe} />;
+    view = <Runner meal={meal} />;
   } else {
     view = (
       <Meal
@@ -43,6 +43,29 @@ export default ({ meal, setMeal }) => {
 
   return <div className={styles.Container}>{view}</div>;
 };
+
+function Runner({ meal }) {
+  return meal.map((mealItem) => (
+    <div key={mealItem.id} className={styles.MealItem_Spacing}>
+      <div className={styles.MealItem_SubHeading}>
+        <Heading>{mealItem.name}</Heading>
+      </div>
+      <div className={styles.RecipeBody}>
+        <div className={styles.RecipeBody_Requirements}>
+          {mealItem.ingredients.length > 0 && <RecipeIngredients recipe={mealItem} />}
+        </div>
+        <div className={styles.RecipeBody_Method}>
+          <div className={styles.Recipe_Heading}>
+            <SubHeading>Method</SubHeading>
+          </div>
+          <div className={styles.RecipeBody_Method_Body}>
+            <RecipeRunner recipe={mealItem} />
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+}
 
 function Meal({ meal, setMeal, combinedRecipe, viewMode, setViewMode, setStarted }) {
   return (
@@ -113,7 +136,7 @@ function SplitView({ meal, setMeal }) {
   const onDelete = (mealItem) => setMeal((mealItems) => mealItems.filter((aMealItem) => aMealItem.id !== mealItem.id));
 
   return meal.map((mealItem) => (
-    <div className={styles.MealItem_Spacing}>
+    <div key={mealItem.id} className={styles.MealItem_Spacing}>
       <MealItem mealItem={mealItem} onDelete={() => onDelete(mealItem)} />
     </div>
   ));
@@ -131,7 +154,7 @@ function UnifiedView({ combinedRecipe, setMeal }) {
 
 function MealItem({ mealItem, onDelete }) {
   return (
-    <div key={mealItem.id}>
+    <Fragment>
       <div className={styles.MealItem_SubHeading}>
         <Heading>{mealItem.name}</Heading>
         <DeleteMealItemButton onDelete={onDelete} />
@@ -153,7 +176,7 @@ function MealItem({ mealItem, onDelete }) {
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 
