@@ -12,4 +12,6 @@ addDecorator(routerDecorator);
 
 const meal = [recipe({ name: "Recipe 1" }), recipe({ name: "Recipe 2" })];
 
+export const empty = () => <Meal meal={[]} />;
+
 export const standard = () => <Meal meal={meal} />;

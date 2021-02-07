@@ -5,8 +5,16 @@
   margin: 40px 0;
 }
 
+.NoPointerEvents {
+  pointer-events: none;
+}
+
 .Heading_Spacing {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.GetStarted {
+  margin-top: 40px;
 }
 
 .ViewToggle {

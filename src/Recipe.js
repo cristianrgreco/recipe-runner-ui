@@ -15,6 +15,7 @@ import DeleteRecipeButton from "./DeleteRecipeButton";
 import RecipeEquipment from "./RecipeEquipment";
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeMethod from "./RecipeMethod";
+import AddToMealButton from "./AddToMealButton";
 
 export default function Recipe({ loggedIn, recipe: recipeFromProps, meal, setMeal }) {
   const [recipe, setRecipe] = useState(undefined);
@@ -22,7 +23,6 @@ export default function Recipe({ loggedIn, recipe: recipeFromProps, meal, setMea
   const [ready, setReady] = useState(false);
   const [slow, setSlow] = useState(false);
   const { recipeId } = useParams();
-  const history = useHistory();
 
   useEffect(() => {
     if (recipeFromProps) {
@@ -50,13 +50,6 @@ export default function Recipe({ loggedIn, recipe: recipeFromProps, meal, setMea
   } else if (ready && slow) {
     className = styles.FadeIn;
   }
-
-  const isRecipeInMeal = meal.some((mealItem) => mealItem.id === recipe.id);
-
-  const addToMeal = () => {
-    setMeal((meal) => [...meal, recipe]);
-    history.push("/meal");
-  };
 
   return (
     <div className={`${className} ${styles.Container}`}>
@@ -88,11 +81,7 @@ export default function Recipe({ loggedIn, recipe: recipeFromProps, meal, setMea
                 <RecipeMethod recipe={recipe} />
                 <div className={styles.RecipeBody_Method_Actions}>
                   <Button onClick={() => setStarted(true)}>Run</Button>
-                  {!isRecipeInMeal && (
-                    <Button secondary onClick={addToMeal}>
-                      Add to meal
-                    </Button>
-                  )}
+                  <AddToMealButton meal={meal} setMeal={setMeal} recipe={recipe} />
                 </div>
               </Fragment>
             )}

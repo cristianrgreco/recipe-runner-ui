@@ -5,26 +5,70 @@ import RecipeEquipment from "./RecipeEquipment";
 import RecipeIngredients from "./RecipeIngredients";
 import SubHeading from "./components/SubHeading";
 import RecipeMethod from "./RecipeMethod";
-import Input from "./components/Input";
+import ToggleButton from "./components/ToggleButton";
+import { Button } from "./components/Button";
+import { Link } from "react-router-dom";
+import AddToMealButton from "./AddToMealButton";
+
+const VIEW_MODES = {
+  SPLIT: "SPLIT",
+  UNIFIED: "UNIFIED",
+};
 
 export default ({ meal }) => {
-  const [isSplit, setIsSplit] = useState(true);
+  const [viewMode, setViewMode] = useState("SPLIT");
   const [started, setStarted] = useState(false);
-
-  const combinedRecipe = combineRecipe(meal);
 
   return (
     <div className={styles.Container}>
       <div className={styles.Heading_Spacing}>
         <Heading>Meal</Heading>
       </div>
-      <div className={styles.ViewToggle}>
-        <ViewToggle isSplit={isSplit} setIsSplit={setIsSplit} />
-      </div>
-      {isSplit ? <SplitView meal={meal} /> : <MealItem mealItem={combinedRecipe} />}
+      {meal.length === 0 ? <EmptyMeal /> : <Meal meal={meal} viewMode={viewMode} setViewMode={setViewMode} />}
     </div>
   );
 };
+
+function Meal({ meal, viewMode, setViewMode }) {
+  const combinedRecipe = combineRecipe(meal);
+
+  return (
+    <Fragment>
+      <div className={styles.ViewToggle}>
+        <ToggleButton
+          selected={viewMode}
+          option1={VIEW_MODES.SPLIT}
+          onOption1={() => setViewMode(VIEW_MODES.SPLIT)}
+          option2={VIEW_MODES.UNIFIED}
+          onOption2={() => setViewMode(VIEW_MODES.UNIFIED)}
+        />
+      </div>
+      {viewMode === VIEW_MODES.SPLIT ? <SplitView meal={meal} /> : <MealItem mealItem={combinedRecipe} />}
+    </Fragment>
+  );
+}
+
+function EmptyMeal() {
+  return (
+    <Fragment>
+      <p>Create a meal to plan and execute multiple recipes at once.</p>
+      <p>
+        Click the{" "}
+        {
+          <span className={styles.NoPointerEvents}>
+            <AddToMealButton meal={[]} />
+          </span>
+        }{" "}
+        button when you find a recipe you like.
+      </p>
+      <div className={styles.GetStarted}>
+        <Link to="/">
+          <Button>Get Started</Button>
+        </Link>
+      </div>
+    </Fragment>
+  );
+}
 
 function combineRecipe(meal) {
   return {
@@ -32,15 +76,6 @@ function combineRecipe(meal) {
     ingredients: meal.flatMap((mealItem) => mealItem.ingredients),
     method: meal.flatMap((mealItem) => mealItem.method),
   };
-}
-
-function ViewToggle({ isSplit, setIsSplit }) {
-  return (
-    <label>
-      <Input type="checkbox" checked={isSplit} onClick={() => setIsSplit(!isSplit)} />
-      <span>Split view</span>
-    </label>
-  );
 }
 
 function SplitView({ meal }) {
