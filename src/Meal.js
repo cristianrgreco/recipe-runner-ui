@@ -10,6 +10,7 @@ import { Button } from "./components/Button";
 import { Link } from "react-router-dom";
 import AddToMealButton from "./AddToMealButton";
 import { Icon } from "./components/Icon";
+import RecipeRunner from "./RecipeRunner";
 
 const VIEW_MODES = {
   SPLIT: "SPLIT",
@@ -20,18 +21,30 @@ export default ({ meal, setMeal }) => {
   const [viewMode, setViewMode] = useState("SPLIT");
   const [started, setStarted] = useState(false);
 
-  return (
-    <div className={styles.Container}>
-      {meal.length === 0 ? (
-        <EmptyMeal />
-      ) : (
-        <Meal meal={meal} setMeal={setMeal} viewMode={viewMode} setViewMode={setViewMode} />
-      )}
-    </div>
-  );
+  const combinedRecipe = combineRecipe(meal);
+
+  let view;
+  if (meal.length === 0) {
+    view = <EmptyMeal />;
+  } else if (started) {
+    view = <RecipeRunner recipe={combinedRecipe} />;
+  } else {
+    view = (
+      <Meal
+        meal={meal}
+        setMeal={setMeal}
+        combinedRecipe={combinedRecipe}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        setStarted={setStarted}
+      />
+    );
+  }
+
+  return <div className={styles.Container}>{view}</div>;
 };
 
-function Meal({ meal, setMeal, viewMode, setViewMode }) {
+function Meal({ meal, setMeal, combinedRecipe, viewMode, setViewMode, setStarted }) {
   return (
     <Fragment>
       <div className={styles.ViewToggle}>
@@ -47,11 +60,11 @@ function Meal({ meal, setMeal, viewMode, setViewMode }) {
       {viewMode === VIEW_MODES.SPLIT ? (
         <SplitView meal={meal} setMeal={setMeal} />
       ) : (
-        <UnifiedView meal={meal} setMeal={setMeal} />
+        <UnifiedView combinedRecipe={combinedRecipe} setMeal={setMeal} />
       )}
 
       <div className={styles.ActionButtons}>
-        <Button>Run</Button>
+        <Button onClick={() => setStarted(true)}>Run</Button>
         <Link to="/">
           <Button secondary>Add more</Button>
         </Link>
@@ -79,14 +92,6 @@ function EmptyMeal() {
   );
 }
 
-function AddToMealButtonExample() {
-  return (
-    <span className={styles.NoPointerEvents}>
-      <AddToMealButton meal={[]} />
-    </span>
-  );
-}
-
 function combineRecipe(meal) {
   return {
     name: meal.map((mealItem) => mealItem.name).join(", "),
@@ -94,6 +99,14 @@ function combineRecipe(meal) {
     ingredients: meal.flatMap((mealItem) => mealItem.ingredients),
     method: meal.flatMap((mealItem) => mealItem.method),
   };
+}
+
+function AddToMealButtonExample() {
+  return (
+    <span className={styles.NoPointerEvents}>
+      <AddToMealButton meal={[]} />
+    </span>
+  );
 }
 
 function SplitView({ meal, setMeal }) {
@@ -106,9 +119,7 @@ function SplitView({ meal, setMeal }) {
   ));
 }
 
-function UnifiedView({ meal, setMeal }) {
-  const combinedRecipe = combineRecipe(meal);
-
+function UnifiedView({ combinedRecipe, setMeal }) {
   const onDelete = () => setMeal([]);
 
   return (
