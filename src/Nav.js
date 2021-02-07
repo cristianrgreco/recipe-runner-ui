@@ -14,6 +14,8 @@ export default function Nav({ loggedIn, setLoggedIn, meal }) {
     window.M.Sidenav.init(sideNavs, { draggable: false });
   }, [loggedIn]);
 
+  let totalNotifications = meal.length;
+
   return (
     <header>
       <nav className={styles.Nav}>
@@ -25,7 +27,7 @@ export default function Nav({ loggedIn, setLoggedIn, meal }) {
             <a href="#" data-target="mobile" className={`${styles.Nav_Wrapper_SidenavTrigger} sidenav-trigger`}>
               <Icon name="menu" />
               <div className={styles.Nav_Wrapper_SidenavTrigger_NotificationBadge}>
-                {meal.length > 0 ? <NotificationBadge value={meal.length} /> : ""}
+                {totalNotifications > 0 && <NotificationBadge value={totalNotifications} />}
               </div>
             </a>
             <ul className="right hide-on-med-and-down">

@@ -7,6 +7,9 @@ export default ({ meal, setMeal, recipe }) => {
   const history = useHistory();
 
   const isRecipeInMeal = meal.some((mealItem) => mealItem.id === recipe.id);
+  if (isRecipeInMeal) {
+    return null;
+  }
 
   const addToMeal = () => {
     setMeal((meal) => [...meal, recipe]);
