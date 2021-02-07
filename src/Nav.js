@@ -3,6 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import styles from "./Nav.module.css";
 import { Icon } from "./components/Icon";
 import { logout } from "./auth";
+import NotificationBadge from "./components/NotificationBadge";
 
 export default function Nav({ loggedIn, setLoggedIn, meal }) {
   const history = useHistory();
@@ -79,7 +80,7 @@ function NavLinks({ history, location, isMobile, loggedIn, setLoggedIn, logout, 
       </li>
       <li>
         <Link to="/meal" className={`${styles.Nav_Wrapper_Sidenav_Link} ${isActive("/meal") && styles.Active}`}>
-          Meal {meal.length > 0 ? `(${meal.length})` : ""}
+          Meal {meal.length > 0 ? <NotificationBadge value={meal.length} /> : ""}
         </Link>
       </li>
       {loggedIn ? (
