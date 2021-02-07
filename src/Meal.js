@@ -66,8 +66,10 @@ function EmptyMeal() {
       <div className={styles.Heading_Spacing}>
         <Heading>Meal</Heading>
       </div>
-      <p>Create a meal to plan and execute multiple recipes at once.</p>
-      <p>Simply click the {<AddToMealButtonExample />} button when you find a recipe you like.</p>
+      <p>
+        Create a meal to plan and execute multiple recipes at once. Simply click the {<AddToMealButtonExample />} button
+        when you find a recipe you like.
+      </p>
       <div className={styles.GetStarted}>
         <Link to="/">
           <Button>Get Started</Button>

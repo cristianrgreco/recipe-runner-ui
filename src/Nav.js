@@ -24,6 +24,9 @@ export default function Nav({ loggedIn, setLoggedIn, meal }) {
             </Link>
             <a href="#" data-target="mobile" className={`${styles.Nav_Wrapper_SidenavTrigger} sidenav-trigger`}>
               <Icon name="menu" />
+              <div className={styles.Nav_Wrapper_SidenavTrigger_NotificationBadge}>
+                {meal.length > 0 ? <NotificationBadge value={meal.length} /> : ""}
+              </div>
             </a>
             <ul className="right hide-on-med-and-down">
               <NavLinks
