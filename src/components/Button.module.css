@@ -12,6 +12,7 @@
 
 .Floating {
   align-items: normal;
+  flex-shrink: 0;
 }
 
 .Button:hover {
