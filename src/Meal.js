@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import AddToMealButton from "./AddToMealButton";
 import { Icon } from "./components/Icon";
 import RecipeRunner from "./RecipeRunner";
+import { Helmet } from "react-helmet";
 
 const VIEW_MODES = {
   SPLIT: "SPLIT",
@@ -41,8 +42,22 @@ export default ({ meal, setMeal }) => {
     );
   }
 
-  return <div className={styles.Container}>{view}</div>;
+  return (
+    <Fragment>
+      <Meta />
+      <div className={styles.Container}>{view}</div>
+    </Fragment>
+  );
 };
+
+function Meta() {
+  return (
+    <Helmet>
+      <title>Create a Meal</title>
+      <meta name="description" content="Recetas de la familia Leon" />
+    </Helmet>
+  );
+}
 
 function Runner({ meal }) {
   return meal.map((mealItem) => (
