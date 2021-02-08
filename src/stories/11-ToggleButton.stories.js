@@ -7,11 +7,13 @@ export default {
 };
 
 export const standard = () => (
-  <ToggleButton
-    selected="Option 1"
-    option1="Option 1"
-    onOption1={action("Option 1 selected")}
-    option2="Option 2"
-    onOption2={action("Option 2 selected")}
-  />
+  <div style={{ padding: "10px" }}>
+    <ToggleButton
+      selected="Option 1"
+      option1="Option 1"
+      onOption1={action("Option 1 selected")}
+      option2="Option 2"
+      onOption2={action("Option 2 selected")}
+    />
+  </div>
 );
