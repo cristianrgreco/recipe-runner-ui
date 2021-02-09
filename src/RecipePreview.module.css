@@ -2,7 +2,7 @@
 @value primary, dark, secondary, secondaryBackground, secondaryBackgroundHover, secondaryBackgroundActive from colors;
 
 .Recipe {
-  display: flex;
+  display: inline-flex;
   border: 1px solid secondaryBackground;
   height: 256px;
   max-height: 256px;
@@ -102,7 +102,7 @@
   background-color: secondaryBackgroundActive;
 }
 
-@media only screen and (max-width: 768px) {
+/*@media only screen and (max-width: 768px) {*/
   .Recipe {
     flex-direction: column;
     height: 305px;
@@ -150,4 +150,4 @@
     font-size: 14px;
     justify-content: center;
   }
-}
+/*}*/
