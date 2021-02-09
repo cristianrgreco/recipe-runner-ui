@@ -1,6 +1,6 @@
 @value colors: "./colors.css";
 
-@value primary, secondary, secondaryBackground, light, error from colors;
+@value primary, secondary, secondaryBackground, light, primaryActive from colors;
 
 .Nav {
   color: light;
@@ -62,17 +62,17 @@
 .Nav_Wrapper_Sidenav_Link.Active {
   background-color: rgba(0, 0, 0, 0.1);
   pointer-events: none;
-  box-shadow: inset 0 -5px 0 0 rgb(229, 115, 115);
+  box-shadow: inset 0 -5px 0 0 primaryActive;
 }
 
 .Nav_Wrapper_Sidenav_Link:hover {
   background-color: rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 -5px 0 0 rgb(229, 115, 115);
+  box-shadow: inset 0 -5px 0 0 primaryActive;
 }
 
 .Nav_Wrapper_Sidenav_Link:active {
   background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 -5px 0 0 rgb(229, 115, 115);
+  box-shadow: inset 0 -5px 0 0 primaryActive;
 }
 
 .Mobile .Nav_Wrapper_Sidenav_Link:hover {
