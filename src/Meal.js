@@ -67,7 +67,7 @@ function Runner({ meal }) {
       </div>
       <div className={styles.RecipeBody}>
         <div className={styles.RecipeBody_Requirements}>
-          {mealItem.ingredients.length > 0 && <RecipeIngredients recipe={mealItem} />}
+          {mealItem.ingredients.length > 0 && <RecipeIngredients recipe={mealItem} showCheckboxes={false} />}
         </div>
         <div className={styles.RecipeBody_Method}>
           <div className={styles.Recipe_Heading}>
@@ -177,8 +177,8 @@ function MealItem({ mealItem, onDelete }) {
 
       <div className={styles.RecipeBody}>
         <div className={styles.RecipeBody_Requirements}>
-          {mealItem.equipment.length > 0 && <RecipeEquipment recipe={mealItem} />}
-          {mealItem.ingredients.length > 0 && <RecipeIngredients recipe={mealItem} />}
+          {mealItem.equipment.length > 0 && <RecipeEquipment recipe={mealItem} showCheckboxes={false} />}
+          {mealItem.ingredients.length > 0 && <RecipeIngredients recipe={mealItem} showCheckboxes={false} />}
         </div>
         <div className={styles.RecipeBody_Method}>
           <div className={styles.Recipe_Heading}>

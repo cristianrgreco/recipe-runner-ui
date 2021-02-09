@@ -4,7 +4,7 @@ import { List, ListItem } from "./components/List";
 import Input from "./components/Input";
 import React from "react";
 
-export default ({ recipe }) => {
+export default ({ recipe, showCheckboxes = true }) => {
   return (
     <div className={styles.RecipeBody_Requirements_Equipment}>
       <div className={styles.Recipe_Heading}>
@@ -14,10 +14,14 @@ export default ({ recipe }) => {
         <List>
           {recipe.equipment.map((equipmentItem) => (
             <ListItem key={equipmentItem}>
-              <label>
-                <Input type="checkbox" />
+              {showCheckboxes ? (
+                <label>
+                  <Input type="checkbox" />
+                  <span>{equipmentItem}</span>
+                </label>
+              ) : (
                 <span>{equipmentItem}</span>
-              </label>
+              )}
             </ListItem>
           ))}
         </List>
