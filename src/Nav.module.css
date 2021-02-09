@@ -1,6 +1,6 @@
 @value colors: "./colors.css";
 
-@value primary, secondary, secondaryBackground, light from colors;
+@value primary, secondary, secondaryBackground, light, error from colors;
 
 .Nav {
   color: light;
@@ -55,23 +55,39 @@
   font-weight: 600;
 }
 
-.Nav_Wrapper_Sidenav_Link.Active {
-  background-color: rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-}
-
 .Mobile .Nav_Wrapper_Sidenav_Link {
   color: secondary !important;
 }
 
+.Nav_Wrapper_Sidenav_Link.Active {
+  background-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  box-shadow: inset 0 -5px 0 0 rgb(229, 115, 115);
+}
+
 .Nav_Wrapper_Sidenav_Link:hover {
   background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -5px 0 0 rgb(229, 115, 115);
 }
 
 .Nav_Wrapper_Sidenav_Link:active {
   background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 -5px 0 0 rgb(229, 115, 115);
 }
 
 .Mobile .Nav_Wrapper_Sidenav_Link:hover {
   background-color: secondaryBackground;
+}
+
+.Mobile .Nav_Wrapper_Sidenav_Link.Active {
+  box-shadow: none;
+}
+
+.Mobile .Nav_Wrapper_Sidenav_Link:hover {
+  background-color: secondaryBackground;
+  box-shadow: none;
+}
+
+.Mobile .Nav_Wrapper_Sidenav_Link:active {
+  box-shadow: none;
 }
