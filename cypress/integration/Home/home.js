@@ -15,3 +15,7 @@ Then("I see {} as the meta description", (description) => {
 Then("I see {} as the meta keywords", (keywords) => {
   cy.get("meta[name=keywords]").should("have.attr", "content").and("deep.equal", keywords);
 });
+
+Then("I see the {} button in the navbar is active", (button) => {
+  cy.get("nav").contains(button).should("have.attr", "class").and("include", "Active");
+});
