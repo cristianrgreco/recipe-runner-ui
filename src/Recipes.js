@@ -44,7 +44,7 @@ export default function Recipes({ loggedIn }) {
         <meta name="description" content="Recetas de la familia Leon" />
       </Helmet>
       {recipes.map((recipe) => (
-        <div key={recipe.id} className={styles.RecipePreview}>
+        <div key={recipe.id} className={styles.RecipePreview} data-test="recipe-preview">
           <RecipePreview recipe={recipe} loggedIn={loggedIn} onDelete={onDeleteRecipe(recipe)} />
         </div>
       ))}

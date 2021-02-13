@@ -12,3 +12,6 @@ Feature: Home Page
 
   Scenario: I want the Home button in the navbar to be active
     Then I see the Home button in the navbar is active
+
+  Scenario: I want to see recipes
+    Then I see recipes

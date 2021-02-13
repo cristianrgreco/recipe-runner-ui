@@ -19,3 +19,7 @@ Then("I see {} as the meta keywords", (keywords) => {
 Then("I see the {} button in the navbar is active", (button) => {
   cy.get("nav").contains(button).should("have.attr", "class").and("include", "Active");
 });
+
+Then("I see recipes", () => {
+  cy.getBySel("recipe-preview").its("length").should("be.gte", 1);
+});
