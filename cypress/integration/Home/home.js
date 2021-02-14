@@ -1,7 +1,7 @@
 import { Given, Then } from "cypress-cucumber-preprocessor/steps";
 
-Given("I open the App", () => {
-  cy.visit("http://localhost:3000");
+Given("I open the Home page", () => {
+  cy.visit("/");
 });
 
 Then("I see {} in the title", (title) => {

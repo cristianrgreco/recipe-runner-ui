@@ -1,7 +1,7 @@
 Feature: Home Page
 
   Background:
-    Given I open the App
+    Given I open the Home page
 
   Scenario: I want to see the title
     Then I see La Cocina Leon in the title
