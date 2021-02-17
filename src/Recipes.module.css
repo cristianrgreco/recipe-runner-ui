@@ -54,9 +54,3 @@
   grid-gap: 40px;
   justify-items: center;
 }
-
-@media only screen and (max-width: 768px) {
-  .Recipes {
-    grid-gap: 20px 0;
-  }
-}
