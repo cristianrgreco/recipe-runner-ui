@@ -103,7 +103,7 @@ export default function Step5({
           <div className={baseStyles.SubHeading}>
             <SubHeading>Full</SubHeading>
           </div>
-          <Recipe recipe={recipeWithImage} />
+          <Recipe recipe={recipeWithImage} meal={[]} setMeal={() => {}} />
         </div>
       </div>
       <div className="row">
