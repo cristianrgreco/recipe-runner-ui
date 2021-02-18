@@ -1,0 +1,44 @@
+{
+  "id": "pancakes-1610794424429",
+  "name": "Pancakes",
+  "image": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/8a33f020-7164-11eb-8da9-ad2544d5d2a6.jpeg",
+  "imageThumbnail": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/8ab1f9c0-7164-11eb-8da9-ad2544d5d2a6.jpeg",
+  "description": "Receta de la Emilyta",
+  "serves": 2,
+  "duration": 240000,
+  "equipment": [],
+  "ingredients": ["30g unsalted butter", "1 egg", "2 tbsp sugar", "100ml milk", "100g self raising flour"],
+  "method": [
+    {
+      "instruction": "Melt the butter in a pan in low heat",
+      "alarm": {
+        "duration": 2,
+        "durationUnit": "minutes"
+      },
+      "next": [
+        {
+          "instruction": "Add to batter and whisk",
+          "next": [
+            {
+              "instruction": "On a medium heat, add portions of batter and fry until golden brown",
+              "alarm": {
+                "duration": 2,
+                "durationUnit": "minutes"
+              },
+              "next": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "instruction": "Add the egg and sugar to a mixing bowl and whisk",
+      "next": [
+        {
+          "instruction": "Add self raising flour and milk and whisk until slightly more viscous than water",
+          "next": []
+        }
+      ]
+    }
+  ]
+}

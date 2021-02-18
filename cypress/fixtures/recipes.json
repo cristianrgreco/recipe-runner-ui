@@ -1,0 +1,378 @@
+[
+  {
+    "id": "pancakes-1610794424429",
+    "name": "Pancakes",
+    "image": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/8a33f020-7164-11eb-8da9-ad2544d5d2a6.jpeg",
+    "imageThumbnail": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/8ab1f9c0-7164-11eb-8da9-ad2544d5d2a6.jpeg",
+    "description": "Receta de la Emilyta",
+    "serves": 2,
+    "duration": 240000,
+    "equipment": [],
+    "ingredients": ["30g unsalted butter", "1 egg", "2 tbsp sugar", "100ml milk", "100g self raising flour"],
+    "method": [
+      {
+        "instruction": "Melt the butter in a pan in low heat",
+        "alarm": {
+          "duration": 2,
+          "durationUnit": "minutes"
+        },
+        "next": [
+          {
+            "instruction": "Add to batter and whisk",
+            "next": [
+              {
+                "instruction": "On a medium heat, add portions of batter and fry until golden brown",
+                "alarm": {
+                  "duration": 2,
+                  "durationUnit": "minutes"
+                },
+                "next": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "instruction": "Add the egg and sugar to a mixing bowl and whisk",
+        "next": [
+          {
+            "instruction": "Add self raising flour and milk and whisk until slightly more viscous than water",
+            "next": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "chicken-korma-curry-1607257628357",
+    "name": "Chicken Korma Curry",
+    "image": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/d8294fb0-439b-11eb-9e0f-c393353b171c.jpeg",
+    "imageThumbnail": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/d8be63c0-439b-11eb-9e0f-c393353b171c.jpeg",
+    "description": "Classic chicken korma. Serve with basmati rice. ",
+    "serves": 4,
+    "duration": 1980000,
+    "equipment": [],
+    "ingredients": [
+      "1 tbsp vegetable oil",
+      "1/2 onion, chopped",
+      "1 tsp ginger purée",
+      "1 clove garlic, crushed",
+      "200g chicken korma curry paste",
+      "400g chicken, diced",
+      "1/2 can tomatoes, chopped",
+      "100ml double cream / 100ml crème fraiche",
+      "100ml coconut milk"
+    ],
+    "method": [
+      {
+        "instruction": "In a medium sized frying pan, add 1tbsp vegetable oil",
+        "next": [
+          {
+            "instruction": "Over a medium heat, sauté 1/2 an onion in the oil until soft",
+            "next": [
+              {
+                "instruction": "Add 1tsp ginger purée and 1 clove of crushed garlic and fry for 3 minutes",
+                "alarm": {
+                  "duration": 3,
+                  "durationUnit": "minutes"
+                },
+                "next": [
+                  {
+                    "instruction": "Stir in 200g of curry paste and fry for 1 minute",
+                    "alarm": {
+                      "duration": 1,
+                      "durationUnit": "minutes"
+                    },
+                    "next": [
+                      {
+                        "instruction": "Add 400g diced chicken into the sauce and fry for 6 minutes",
+                        "alarm": {
+                          "duration": 6,
+                          "durationUnit": "minutes"
+                        },
+                        "next": [
+                          {
+                            "instruction": "Add 1/2 can chopped tomatoes and cook for 3 minutes",
+                            "alarm": {
+                              "duration": 3,
+                              "durationUnit": "minutes"
+                            },
+                            "next": [
+                              {
+                                "instruction": "Add 100ml double cream and 100ml coconut milk and simmer for 15 minutes",
+                                "alarm": {
+                                  "duration": 15,
+                                  "durationUnit": "minutes"
+                                },
+                                "next": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "alarm": {
+              "duration": 5,
+              "durationUnit": "minutes"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pan-dulce-1605113877015",
+    "name": "Pan dulce",
+    "image": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/c6e336b0-245d-11eb-8fae-e7cba889ee7f.jpeg",
+    "imageThumbnail": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/c7affc90-245d-11eb-8fae-e7cba889ee7f.jpeg",
+    "description": "Un pan dulce",
+    "serves": 30,
+    "duration": 9300000,
+    "equipment": [],
+    "ingredients": [
+      "800g of bread flour",
+      "640ml warm milk",
+      "1 1/2 tblsp active dry yeast or 2oz/57g fresh cake yeast",
+      "2 eggs",
+      "115g softened butter",
+      "115g sugar",
+      "1 1/2 TSP salt",
+      "1 egg",
+      "50g melted butter",
+      "Extra sugar for dusting"
+    ],
+    "method": [
+      {
+        "instruction": "Preheat oven to 180c. Add the yeast to the warm milk and leave until the yeast is bubbling",
+        "alarm": {
+          "duration": 5,
+          "durationUnit": "minutes"
+        },
+        "next": [
+          {
+            "instruction": "Add the sugar, 2 cups of the flour, 2 eggs, butter and salt. Knead until well incorporated",
+            "next": [
+              {
+                "instruction": "Add the remaining flour little by little and knead until the dough is soft, smooth and elastic.",
+                "next": [
+                  {
+                    "instruction": "Place the dough in a lightly oiled bowl and cover. Let it sit in a warm place to rise",
+                    "alarm": {
+                      "duration": 90,
+                      "durationUnit": "minutes"
+                    },
+                    "next": [
+                      {
+                        "instruction": "Divide the dough into small balls and place them on a backing tray evenly spaced apart\n",
+                        "next": [
+                          {
+                            "instruction": "Lightly beat the egg and brush the balls with the egg wash",
+                            "next": [
+                              {
+                                "instruction": "cover the dough balls and allow to rise for a second time until doubled in size",
+                                "alarm": {
+                                  "duration": 30,
+                                  "durationUnit": "minutes"
+                                },
+                                "next": [
+                                  {
+                                    "instruction": "Bake for 30-40 mins until brown. As soon as they come out of the oven, brush them with the melted butter and sprinkle with sugar.",
+                                    "alarm": {
+                                      "duration": 30,
+                                      "durationUnit": "minutes"
+                                    },
+                                    "next": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cheesy-spinach-1603540876374",
+    "name": "Cheesy spinach",
+    "image": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/0a79b630-1b7e-11eb-bfc7-65077e9844fe.jpeg",
+    "imageThumbnail": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/0d991ea0-1b7e-11eb-bfc7-65077e9844fe.jpeg",
+    "description": "A cheesy side",
+    "serves": 4,
+    "duration": 660000,
+    "equipment": [],
+    "ingredients": [
+      "400g baby spinach",
+      "1 tbsp garlic paste",
+      "1 small onion",
+      "Salt and pepper to taste",
+      "1/2 TSP nutmeg",
+      "50g butter",
+      "200 ml double cream",
+      "Olive oil",
+      "200g cheese (mix of cheddar, mozzarella and gruyère)"
+    ],
+    "method": [
+      {
+        "instruction": "Heat a saucepan with olive oil and add the onion. ",
+        "next": []
+      },
+      {
+        "instruction": "Once the onion is translucent add the garlic paste and fry ",
+        "alarm": {
+          "duration": 1,
+          "durationUnit": "minutes"
+        },
+        "next": [
+          {
+            "instruction": "Add the spinach in stages so as not to over crowd the pan and cook while stirring until it's all wilted",
+            "alarm": {
+              "duration": 10,
+              "durationUnit": "minutes"
+            },
+            "next": [
+              {
+                "instruction": "Add the butter in chunks. Add the salt and pepper to taste along with the nutmeg. ",
+                "next": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "instruction": "Add the double cream and cheese, lowering the heat, until it's combined. ",
+        "next": []
+      }
+    ]
+  },
+  {
+    "id": "locro-de-papa-1603389841296",
+    "name": "Locro de Papa",
+    "image": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/f4fdae60-1b7d-11eb-bfc7-65077e9844fe.jpeg",
+    "imageThumbnail": "https://recipe-runner-uploads.s3.eu-west-2.amazonaws.com/f5bfc5e0-1b7d-11eb-bfc7-65077e9844fe.jpeg",
+    "description": "Receta de la abuelita",
+    "serves": 6,
+    "duration": 2100000,
+    "equipment": [],
+    "ingredients": [
+      "6 large potatoes (Maris Piper)",
+      "1/2 white onion",
+      "1 tsp achiote",
+      "1 tbsp butter",
+      "1/4 tsp cumin",
+      "1/2 tsp pepper",
+      "1 1/2 tsp salt",
+      "2 large bunches of Coriander",
+      "1/2 tbsp garlic paste",
+      "1/2 cup milk",
+      "2 handfulls of grated cheddar cheese",
+      "1 tomato"
+    ],
+    "method": [
+      {
+        "instruction": "Bring a large pot of water to boil with the salt",
+        "next": [
+          {
+            "instruction": "As the water is boiling, add the tomato until the skin has torn",
+            "alarm": {
+              "duration": 2,
+              "durationUnit": "minutes"
+            },
+            "next": [
+              {
+                "instruction": "remove the tomato and peel the skin off. Chop very finely and set aside",
+                "next": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "instruction": "Peel potatoes and cut them into 1cm chunks",
+        "next": [
+          {
+            "instruction": "Once the tomato has been removed from the pot of water, add the potato chunks",
+            "next": []
+          }
+        ]
+      },
+      {
+        "instruction": "Finely chop the onion",
+        "next": [
+          {
+            "instruction": "In a small saucepan, make the refrito: add the butter, achiote, and onion. Fry until the onion is translucent.",
+            "alarm": {
+              "duration": 3,
+              "durationUnit": "minutes"
+            },
+            "next": [
+              {
+                "instruction": "Add the tomato, cumin, black pepper and garlic. ",
+                "next": [
+                  {
+                    "instruction": "Add the refrito to the pot of boiling potatoes",
+                    "next": []
+                  }
+                ],
+                "alarm": {
+                  "duration": 1,
+                  "durationUnit": "minutes"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "instruction": "Allow the potatoes to cook",
+        "alarm": {
+          "duration": 15,
+          "durationUnit": "minutes"
+        },
+        "next": [
+          {
+            "instruction": "Once the potato is almost cooked through and soft, add the 2 bunches of coriander (or 1 tbsp of frozen chopped coriander)",
+            "alarm": {
+              "duration": 10,
+              "durationUnit": "minutes"
+            },
+            "next": [
+              {
+                "instruction": "With a potato masher, mash the potatoes so that the majority of them disintegrate. Lower the heat and add the milk.",
+                "alarm": {
+                  "duration": 5,
+                  "durationUnit": "minutes"
+                },
+                "next": [
+                  {
+                    "instruction": "Taste and adjust the salt. Add the cheese, stirring for one minute and taste to adjust the salt again. Cover with a lid and let is boil one last time.",
+                    "next": [],
+                    "alarm": {
+                      "duration": 5,
+                      "durationUnit": "minutes"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "instruction": "Serve with sliced avocado and chicharron ",
+        "next": []
+      }
+    ]
+  }
+]

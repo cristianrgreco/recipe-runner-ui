@@ -16,7 +16,7 @@ export default function RecipePreview({ recipe, loggedIn, onDelete }) {
       <div className={styles.RecipeDetailsContainer}>
         <div className={styles.RecipeDetails}>
           <div className={styles.RecipeDetailsNameContainer}>
-            <div className={styles.RecipeDetailsNameContainer_Name}>
+            <div className={styles.RecipeDetailsNameContainer_Name} data-test="recipe-preview-heading">
               <Heading>{recipe.name}</Heading>
             </div>
             {loggedIn && recipe.isEditable && (
@@ -31,7 +31,7 @@ export default function RecipePreview({ recipe, loggedIn, onDelete }) {
             )}
           </div>
           <div className={styles.RecipeDetailsDescription}>{recipe.description}</div>
-          <div className={styles.RecipeDetailsInfo}>
+          <div className={styles.RecipeDetailsInfo} data-test="recipe-preview-details">
             <RecipeDetail value={recipe.serves} label="Serves" />
             <RecipeDetail value={formatTime(recipe.duration)} label="Duration" />
             <RecipeDetail value={recipe.ingredients.length} label="Ingredients" />
