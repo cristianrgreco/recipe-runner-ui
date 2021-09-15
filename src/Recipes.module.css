@@ -34,7 +34,6 @@
   border: none !important;
   color: transparent !important;
   background-color: placeholder !important;
-  width: 100%;
 }
 
 .Placeholder img,
@@ -54,4 +53,8 @@
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   grid-gap: 20px;
   justify-items: center;
+}
+
+.RecipePreview {
+  width: 100%;
 }
